@@ -1,12 +1,8 @@
 import React from 'react'
-import './App.css'
 import { Layout } from './Components/Layout'
 
 function App() {
-    return (
-        <Layout/>
-
-    )
+    return <Layout />
 }
 
 export default App

@@ -20,14 +20,21 @@ const StyledBannerInfo = styled.div`
     line-height: 24px;
     letter-spacing: 0.1px;
     font-weight: 100;
-
-    & h3 {
-        font-size: 18px;
-        font-weight: 400;
-    }
-    & span {
-        color: #92929d;
-    }
 `
 
-export { StyledBanner, StyledBannerIcon, StyledBannerInfo }
+const StyledBannerTitle = styled.h3`
+    font-size: 18px;
+    font-weight: 400;
+`
+
+const StyledBannerSubtitle = styled.span`
+    color: #92929d;
+`
+
+export {
+    StyledBanner,
+    StyledBannerIcon,
+    StyledBannerInfo,
+    StyledBannerTitle,
+    StyledBannerSubtitle,
+}

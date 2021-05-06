@@ -11,7 +11,7 @@ const Layout = () => {
                 title={'Paprika'}
                 image={paprika}
                 shop={'Vegshop'}
-                price={'4.99'}
+                price={4.99}
                 details={
                     'Paprika is a fruit-producing plant that tastes sweet and slightly spicy from the eggplant or Solanaceae tribe. Its green, yellow, red, or purple fruit.'
                 }

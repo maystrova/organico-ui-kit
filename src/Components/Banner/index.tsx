@@ -1,6 +1,12 @@
 import React from 'react'
 import { Icon, ICON_SIZE } from '../Icon'
-import { StyledBanner, StyledBannerIcon, StyledBannerInfo } from './style'
+import {
+    StyledBanner,
+    StyledBannerIcon,
+    StyledBannerInfo,
+    StyledBannerTitle,
+    StyledBannerSubtitle,
+} from './style'
 
 interface BannerProps {
     title: string
@@ -23,8 +29,8 @@ const Banner = ({
                 <Icon size={ICON_SIZE.MEDIUM} src={icon} />
             </StyledBannerIcon>
             <StyledBannerInfo>
-                <h3>{title}</h3>
-                <span>{subtitle}</span>
+                <StyledBannerTitle>{title}</StyledBannerTitle>
+                <StyledBannerSubtitle>{subtitle}</StyledBannerSubtitle>
             </StyledBannerInfo>
         </StyledBanner>
     )

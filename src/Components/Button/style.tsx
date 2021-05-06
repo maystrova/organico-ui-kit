@@ -31,26 +31,6 @@ const StyledButton = styled.button`
             border-radius: 100px;
             background-color: rgba(46, 204, 113, 1);
         `}
-
-    ${(props: StyledButtonProps) =>
-        props.selfType === BUTTON_TYPE.ADD_TO_WISHLIST &&
-        css`
-            background-image: url(${wish});
-            background-repeat: no-repeat;
-            width: 20px;
-            height: 20px;
-            background-color: transparent;
-        `}
-
-        ${(props: StyledButtonProps) =>
-        props.selfType === BUTTON_TYPE.BACK_TO_PREVIOUS_PAGE &&
-        css`
-            background-image: url(${back});
-            background-repeat: no-repeat;
-            width: 15px;
-            height: 15px;
-            background-color: transparent;
-        `}
 `
 
 export { StyledButton }

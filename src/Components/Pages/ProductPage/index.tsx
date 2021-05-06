@@ -9,6 +9,8 @@ import {
     StyledProductPageMain,
     StyledProductPagePicture,
     StyledProductShop,
+    StyledProductPageInfo,
+    StyledProductPageTitles,
 } from './style'
 import { Button, BUTTON_TYPE } from '../../Button'
 import { Banner } from '../../Banner'
@@ -16,16 +18,18 @@ import { Banner } from '../../Banner'
 import time from './pics/time-icon.svg'
 import category from './pics/category-icon.svg'
 import chat from '../../Layout/pics/chat.svg'
-import wish from '../../Button/pics/wishlist.svg'
 
 import { Icon, ICON_SIZE } from '../../Icon'
+import { BackToPreviousPage } from '../../BackToPreviousPage'
+import { AddToWishlist } from '../../AddToWishlist'
+import { Count } from '../../Count'
 
 interface ProductPageProps {
-    title?: string
-    image?: string
-    shop?: string
-    price?: string
-    details?: string
+    title: string
+    image: string
+    shop: string
+    price: number
+    details: string
     backButton: () => void
     wishButton: () => void
 }
@@ -42,22 +46,27 @@ const ProductPage = ({
     return (
         <StyledProductPage>
             <StyledProductPageHeader>
-                <Button
-                    type={BUTTON_TYPE.BACK_TO_PREVIOUS_PAGE}
-                    onClick={backButton}
-                />
-                <Button
-                    type={BUTTON_TYPE.ADD_TO_WISHLIST}
-                    onClick={wishButton}
-                />
+                <BackToPreviousPage onClick={backButton} />
+                <AddToWishlist onClick={wishButton} />
             </StyledProductPageHeader>
             <StyledProductPageMain>
                 <StyledProductPagePicture>
                     <img src={image} alt='Product Picture' />
                 </StyledProductPagePicture>
-                <h2>{title}</h2>
-                <StyledProductShop>{shop}</StyledProductShop>
-                <h2>${price} /Kg</h2>
+                <StyledProductPageInfo>
+                    <StyledProductPageTitles>
+                        <h2>{title}</h2>
+                        <StyledProductShop>{shop}</StyledProductShop>
+                        <h2>${price} /Kg</h2>
+                    </StyledProductPageTitles>
+                    <div>
+                        <Count
+                            onAddClick={() => {}}
+                            onRemoveClick={() => {}}
+                            count={1}
+                        />
+                    </div>
+                </StyledProductPageInfo>
             </StyledProductPageMain>
             <StyledProductFooter>
                 <StyledProductDetails>

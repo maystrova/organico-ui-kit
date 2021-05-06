@@ -7,7 +7,6 @@ const StyledProductPage = styled.div`
 
 const StyledProductPageHeader = styled.div`
     height: 64px;
-    padding: 0 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -23,6 +22,17 @@ const StyledProductPagePicture = styled.div`
     & img {
         width: 70%;
     }
+`
+
+const StyledProductPageInfo = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`
+
+const StyledProductPageTitles = styled.div`
+    display: grid;
+    grid-row-gap: 10px;
 `
 
 const StyledProductShop = styled.div`
@@ -75,4 +85,6 @@ export {
     StyledProductDetails,
     StyledChatButton,
     StyledProductFooterButtons,
+    StyledProductPageInfo,
+    StyledProductPageTitles,
 }

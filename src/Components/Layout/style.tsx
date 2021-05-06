@@ -3,7 +3,6 @@ import styled, { createGlobalStyle } from 'styled-components'
 const GlobalStyle = createGlobalStyle`
 body {
     margin: 0;
-    padding: 20px;
     background-color: #fff;
 }
 
@@ -16,6 +15,8 @@ body {
 }
 `
 
-const StyledLayout = styled.div``
+const StyledLayout = styled.div`
+    padding: 20px;
+`
 
 export { StyledLayout, GlobalStyle }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     StyledChatButton,
     StyledProductDetails,
@@ -43,11 +43,16 @@ const ProductPage = ({
     backButton,
     wishButton,
 }: ProductPageProps) => {
+    const [isAddedToWishList, setAddToWishList] = useState<boolean>(false)
+
     return (
         <StyledProductPage>
             <StyledProductPageHeader>
                 <BackToPreviousPage onClick={backButton} />
-                <AddToWishlist onClick={wishButton} />
+                <AddToWishlist
+                    isAdded={isAddedToWishList}
+                    onClick={() => setAddToWishList(!isAddedToWishList)}
+                />
             </StyledProductPageHeader>
             <StyledProductPageMain>
                 <StyledProductPagePicture>

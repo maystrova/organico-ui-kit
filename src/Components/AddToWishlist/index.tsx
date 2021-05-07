@@ -1,16 +1,21 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { StyledAddToWishlist } from './style'
-import { Icon, ICON_SIZE } from '../Icon'
-import wish from '../Button/pics/wishlist.svg'
+
+import { ReactComponent as WishLogo } from './wishlist.svg'
 
 interface AddToWishlistProps {
     onClick: () => void
+    isAdded: boolean
 }
 
-const AddToWishlist = ({ onClick }: AddToWishlistProps) => {
+const AddToWishlist = ({ onClick, isAdded }: AddToWishlistProps) => {
     return (
         <StyledAddToWishlist onClick={onClick}>
-            <Icon size={ICON_SIZE.SMALL} src={wish} />
+            <WishLogo
+                fill={isAdded ? '#FB4141' : 'transparent'}
+                stroke={isAdded ? '#FB4141' : '#171725'}
+                width={'18px'}
+            />
         </StyledAddToWishlist>
     )
 }

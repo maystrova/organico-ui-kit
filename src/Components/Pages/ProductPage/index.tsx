@@ -23,26 +23,17 @@ import { Icon, ICON_SIZE } from '../../Icon'
 import { BackToPreviousPage } from '../../BackToPreviousPage'
 import { AddToWishlist } from '../../AddToWishlist'
 import { Count } from '../../Count'
+import { ProductType } from './types'
 
-interface ProductPageProps {
-    title: string
-    image: string
-    shop: string
-    price: number
-    details: string
+interface ProductPageProps extends ProductType {
     backButton: () => void
     wishButton: () => void
 }
 
-const ProductPage = ({
-    title,
-    details,
-    image,
-    price,
-    shop,
-    backButton,
-    wishButton,
-}: ProductPageProps) => {
+const ProductPage = (
+    { backButton, wishButton }: ProductPageProps,
+    { title, category, details, image, price, shop }: ProductType,
+) => {
     const [isAddedToWishList, setAddToWishList] = useState<boolean>(false)
 
     return (
@@ -65,11 +56,7 @@ const ProductPage = ({
                         <h2>${price} /Kg</h2>
                     </StyledProductPageTitles>
                     <div>
-                        <Count
-                            onAddClick={() => {}}
-                            onRemoveClick={() => {}}
-                            count={1}
-                        />
+                        <Count />
                     </div>
                 </StyledProductPageInfo>
             </StyledProductPageMain>

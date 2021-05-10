@@ -57,8 +57,8 @@ const StyledProductDetails = styled.div`
 `
 
 const StyledProductFooterButtons = styled.div`
-    display: grid;
-    grid-template-columns: 4fr 1fr;
+    display: flex;
+    //grid-template-columns: 1fr;
     grid-column-gap: 24px;
 `
 

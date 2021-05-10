@@ -30,6 +30,7 @@ const StyledButton = styled.button`
             height: 52px;
             border-radius: 100px;
             background-color: rgba(46, 204, 113, 1);
+            width: 90%;
         `}
 `
 

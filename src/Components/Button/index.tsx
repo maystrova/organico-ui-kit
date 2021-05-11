@@ -2,7 +2,7 @@ import React from 'react'
 import { StyledButton } from './style'
 
 export enum BUTTON_TYPE {
-    ADD_TO_CART = 'addToCart',
+    PRIMARY = 'Primary',
     ADD_ITEM = 'addItem',
     REMOVE_ITEM = 'removeItem',
 }

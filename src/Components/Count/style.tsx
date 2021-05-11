@@ -1,12 +1,9 @@
 import styled from 'styled-components'
 
 const StyledCount = styled.div`
-    //display: flex;
-    //justify-content: space-between;
-    //align-items: center;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-column-gap: 5px;
+    grid-column-gap: 10px;
 `
 
 const StyledCountNumber = styled.div`

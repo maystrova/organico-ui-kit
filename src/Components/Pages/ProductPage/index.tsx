@@ -82,7 +82,7 @@ const ProductPage = (
                 />
                 <StyledProductFooterButtons>
                     <Button
-                        type={BUTTON_TYPE.ADD_TO_CART}
+                        type={BUTTON_TYPE.PRIMARY}
                         onClick={() => {}}
                         title={'Add to cart'}
                     />

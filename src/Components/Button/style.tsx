@@ -24,10 +24,12 @@ const StyledButton = styled.button`
         props.selfType === BUTTON_TYPE.REMOVE_ITEM && css``}
 
     ${(props: StyledButtonProps) =>
-        props.selfType === BUTTON_TYPE.ADD_TO_CART &&
+        props.selfType === BUTTON_TYPE.PRIMARY &&
         css`
             color: white;
             height: 52px;
+            font-size: 16px;
+            font-weight: 700;
             border-radius: 100px;
             background-color: rgba(46, 204, 113, 1);
             width: 90%;

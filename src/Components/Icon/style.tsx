@@ -31,6 +31,11 @@ const StyledIcon = styled.img`
         css`
             width: 40px;
         `}
+    ${(props: StyledIconProps) =>
+        props.size === ICON_SIZE.X_LARGE &&
+        css`
+            width: 64px;
+        `}
 `
 
 export { StyledIcon }

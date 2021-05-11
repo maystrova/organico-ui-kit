@@ -5,7 +5,7 @@ export enum PRODUCTS_CATEGORY {
 
 export type ProductType = {
     title: string
-    details: string
+    details?: string
     image: string
     price: number
     shop: string

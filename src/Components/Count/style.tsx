@@ -17,6 +17,12 @@ const StyledCountNumber = styled.div`
     font-weight: 600;
 `
 
+const StyledCountButtonArea = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+
 const StyledCountButton = styled.button`
     cursor: pointer;
     border: none;
@@ -30,4 +36,9 @@ const StyledCountButton = styled.button`
     align-items: center;
 `
 
-export { StyledCount, StyledCountButton, StyledCountNumber }
+export {
+    StyledCount,
+    StyledCountButton,
+    StyledCountNumber,
+    StyledCountButtonArea,
+}

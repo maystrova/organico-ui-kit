@@ -2,4 +2,8 @@ import styled from 'styled-components'
 
 const StyledCartPage = styled.div``
 
-export { StyledCartPage }
+const StyledCartPageHeader = styled.header`
+    height: 65px;
+`
+
+export { StyledCartPage, StyledCartPageHeader }

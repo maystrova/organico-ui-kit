@@ -6,11 +6,11 @@ import {
     StyledProductFooterButtons,
     StyledProductPage,
     StyledProductPageHeader,
+    StyledProductPageInfo,
     StyledProductPageMain,
     StyledProductPagePicture,
-    StyledProductShop,
-    StyledProductPageInfo,
     StyledProductPageTitles,
+    StyledProductShop,
 } from './style'
 import { Button, BUTTON_TYPE } from '../../Button'
 import { Banner } from '../../Banner'
@@ -22,9 +22,9 @@ import chat from '../../Layout/pics/chat.svg'
 import { Icon, ICON_SIZE } from '../../Icon'
 import { BackToPreviousPage } from '../../BackToPreviousPage'
 import { AddToWishlist } from '../../AddToWishlist'
-import { Count } from '../../Count'
+import { Count, COUNT_FONTSIZE, COUNTING_SIZE } from '../../Count'
 import { ProductType } from './types'
-import { paprika, products } from '../../../sevices/products/products'
+import { paprika } from '../../../sevices/products/products'
 
 interface ProductPageProps extends ProductType {
     backButton: () => void
@@ -57,7 +57,11 @@ const ProductPage = (
                         <h2>${paprika.price} /Kg</h2>
                     </StyledProductPageTitles>
                     <div>
-                        <Count />
+                        <Count
+                            fontSize={COUNT_FONTSIZE.PRODUCT_PAGE}
+                            width={COUNTING_SIZE.PRODUCT_PAGE}
+                            height={COUNTING_SIZE.PRODUCT_PAGE}
+                        />
                     </div>
                 </StyledProductPageInfo>
             </StyledProductPageMain>

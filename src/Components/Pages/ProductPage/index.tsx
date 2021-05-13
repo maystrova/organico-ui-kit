@@ -24,16 +24,18 @@ import { BackToPreviousPage } from '../../BackToPreviousPage'
 import { AddToWishlist } from '../../AddToWishlist'
 import { Count, COUNT_FONTSIZE, COUNTING_SIZE } from '../../Count'
 import { ProductType } from './types'
-import { paprika } from '../../../sevices/products/products'
+import { paprika, products } from '../../../sevices/products/products'
 
 interface ProductPageProps extends ProductType {
     backButton: () => void
     wishButton: () => void
+    onAddToCartClick: (productId: string) => void
+    product: ProductType[]
 }
 
 const ProductPage = (
-    { backButton, wishButton }: ProductPageProps,
-    { title, category, details, image, price, shop }: ProductType,
+    { backButton, wishButton, onAddToCartClick, product }: ProductPageProps,
+    { title, category, details, image, price, shop, id }: ProductType,
 ) => {
     const [isAddedToWishList, setAddToWishList] = useState<boolean>(false)
 
@@ -83,7 +85,7 @@ const ProductPage = (
                 <StyledProductFooterButtons>
                     <Button
                         type={BUTTON_TYPE.PRIMARY}
-                        onClick={() => {}}
+                        onClick={() => onAddToCartClick(id)}
                         title={'Add to cart'}
                     />
                     <StyledChatButton onClick={() => {}}>

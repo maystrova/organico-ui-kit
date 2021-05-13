@@ -10,4 +10,5 @@ export type ProductType = {
     price: number
     shop: string
     category: PRODUCTS_CATEGORY
+    id: string
 }

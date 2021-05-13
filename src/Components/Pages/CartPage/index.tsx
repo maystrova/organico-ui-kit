@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     StyledCardPageShop,
     StyledCardPageShopIcon,
@@ -9,14 +9,19 @@ import {
     StyledCartPageTotal,
 } from './style'
 import { ProductCard } from '../../ProductCard'
-import { broccoli, carrot } from '../../../sevices/products/products'
+import { broccoli, carrot, products } from '../../../sevices/products/products'
 import { Icon, ICON_SIZE } from '../../Icon'
 import shopIcon from './pics/shop-icon.svg'
 import { Button, BUTTON_TYPE } from '../../Button'
+import { ProductType } from '../ProductPage/types'
 
-interface CartPageProps {}
+interface CartPageProps {
+    products: ProductType[]
+}
 
-const CartPage = ({}: CartPageProps) => {
+const CartPage = ({ products }: CartPageProps) => {
+    const [productCards, setProductCards] = useState<ProductType[]>([])
+
     return (
         <StyledCartPage>
             <StyledCartPageHeader>My Cart</StyledCartPageHeader>
@@ -28,7 +33,22 @@ const CartPage = ({}: CartPageProps) => {
 
                     <h3>{broccoli.shop}</h3>
                 </StyledCardPageShop>
+
+                {products.map(product => {
+                    return (
+                        <ProductCard
+                            id={product.id}
+                            title={product.title}
+                            image={product.image}
+                            price={product.price}
+                            shop={product.shop}
+                            category={product.category}
+                        />
+                    )
+                })}
+
                 <ProductCard
+                    id={broccoli.id}
                     title={broccoli.title}
                     image={broccoli.image}
                     price={broccoli.price}
@@ -36,6 +56,7 @@ const CartPage = ({}: CartPageProps) => {
                     category={broccoli.category}
                 />
                 <ProductCard
+                    id={carrot.id}
                     title={carrot.title}
                     image={carrot.image}
                     price={carrot.price}

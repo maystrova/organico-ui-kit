@@ -1,13 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { GlobalStyle, StyledLayout } from './style'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import { ProductPage } from '../Pages/ProductPage'
 import { ROUTES } from '../../sevices/route'
 import { CartPage } from '../Pages/CartPage'
-import { PRODUCTS_CATEGORY } from '../Pages/ProductPage/types'
+import { PRODUCTS_CATEGORY, ProductType } from '../Pages/ProductPage/types'
 
 const Layout = () => {
+    const [cart, setCart] = useState<ProductType[]>([])
+
+    // const onCartUpdate = (productId: ProductType,) => {
+    //     const newCart = [
+    //         ...cart,
+    //     ]
+    // }
+
     return (
         <BrowserRouter>
             <StyledLayout>
@@ -15,6 +23,7 @@ const Layout = () => {
                 <Switch>
                     <Route path={ROUTES.DETAIL} exact>
                         <ProductPage
+                            id={''}
                             category={PRODUCTS_CATEGORY.VEGETABLES}
                             title={'Paprika'}
                             image={''}
@@ -25,10 +34,11 @@ const Layout = () => {
                             }
                             backButton={() => {}}
                             wishButton={() => {}}
+                            onAddToCartClick={productId => setCart([])}
                         />
                     </Route>
                     <Route path={ROUTES.MY_CART} exact>
-                        <CartPage />
+                        <CartPage products={cart} />
                     </Route>
                 </Switch>
             </StyledLayout>

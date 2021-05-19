@@ -8,12 +8,13 @@ import {
     StyledCartPageInfo,
     StyledCartPageTotal,
 } from './style'
-import { ProductCard } from '../../ProductCard'
-import { broccoli, carrot, products } from '../../../sevices/products/products'
+import { ProductSticker } from '../../ProductSticker'
+import { broccoli, carrot } from '../../../sevices/products/products'
 import { Icon, ICON_SIZE } from '../../Icon'
 import shopIcon from './pics/shop-icon.svg'
 import { Button, BUTTON_TYPE } from '../../Button'
 import { ProductType } from '../ProductPage/types'
+import { BACKGROUND_COLOR_TYPE } from '../../ProductCard'
 
 interface CartPageProps {
     products: ProductType[]
@@ -34,34 +35,22 @@ const CartPage = ({ products }: CartPageProps) => {
                     <h3>{broccoli.shop}</h3>
                 </StyledCardPageShop>
 
-                {products.map(product => {
-                    return (
-                        <ProductCard
-                            id={product.id}
-                            title={product.title}
-                            image={product.image}
-                            price={product.price}
-                            shop={product.shop}
-                            category={product.category}
-                        />
-                    )
-                })}
+                {/*{products.map(product => {*/}
+                {/*    return (*/}
+                {/*        // <ProductSticker*/}
+                {/*        //    product={product}*/}
+                {/*        //    backgroundColor={BACKGROUND_COLOR_TYPE.WHITE}*/}
+                {/*        // />*/}
+                {/*    )*/}
+                {/*})}*/}
 
-                <ProductCard
-                    id={broccoli.id}
-                    title={broccoli.title}
-                    image={broccoli.image}
-                    price={broccoli.price}
-                    shop={broccoli.shop}
-                    category={broccoli.category}
+                <ProductSticker
+                    product={broccoli}
+                    backgroundColor={BACKGROUND_COLOR_TYPE.GREEN}
                 />
-                <ProductCard
-                    id={carrot.id}
-                    title={carrot.title}
-                    image={carrot.image}
-                    price={carrot.price}
-                    shop={carrot.shop}
-                    category={carrot.category}
+                <ProductSticker
+                    product={carrot}
+                    backgroundColor={BACKGROUND_COLOR_TYPE.ORANGE}
                 />
             </StyledCartPageInfo>
             <StyledCartPageFooter>

@@ -30,7 +30,7 @@ const StyledProductPageInfo = styled.div`
     align-items: center;
 `
 
-const StyledProductPageTitles = styled.div`
+const StyledProductTitles = styled.div`
     display: grid;
     grid-row-gap: 10px;
 `
@@ -86,5 +86,5 @@ export {
     StyledChatButton,
     StyledProductFooterButtons,
     StyledProductPageInfo,
-    StyledProductPageTitles,
+    StyledProductTitles,
 }

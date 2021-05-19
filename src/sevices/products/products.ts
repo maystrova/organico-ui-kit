@@ -60,7 +60,6 @@ const products: ProductType[] = [
         shop: 'Popey shop',
         category: PRODUCTS_CATEGORY.VEGETABLES,
         id: `${Date.now().toString()}`,
-
         details:
             'The carrot (Daucus carota subsp. sativus) is a root vegetable, usually orange in color, though purple, black, red, white, and yellow cultivars exist.[2][3][4] They are a domesticated form of the wild carrot, Daucus carota, native to Europe and Southwestern Asia. The plant probably originated in Persia and was originally cultivated for its leaves and seeds. The most commonly eaten part of the plant is the taproot, although the stems and leaves are also eaten. The domestic carrot has been selectively bred for its greatly enlarged, more palatable, less woody-textured taproot.',
         image: carrotPic,
@@ -70,6 +69,7 @@ const products: ProductType[] = [
         shop: 'Vegytail',
         price: 4.3,
         category: PRODUCTS_CATEGORY.VEGETABLES,
+
         id: `${Date.now().toString()}`,
 
         details:
@@ -81,6 +81,7 @@ const products: ProductType[] = [
         shop: 'Fruitmarket',
         price: 4.68,
         category: PRODUCTS_CATEGORY.FRUITS,
+
         id: `${Date.now().toString()}`,
 
         details:
@@ -97,4 +98,13 @@ let carrot = products[4]
 let redOnion = products[5]
 let banana = products[6]
 
-export { products, paprika, carrot, broccoli, lettuce, redOnion, potato }
+export {
+    products,
+    paprika,
+    carrot,
+    broccoli,
+    lettuce,
+    redOnion,
+    potato,
+    banana,
+}

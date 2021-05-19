@@ -1,46 +1,72 @@
-import React from 'react'
-import { ProductType } from '../Pages/ProductPage/types'
+import React, { useState } from 'react'
 import {
+    StyledCardAction,
     StyledProductCard,
-    StyledProductCardCount,
-    StyledProductCardIcon,
-    StyledProductCardInfo,
+    StyledProductCardHeader,
 } from './style'
-import { Count, COUNT_FONTSIZE, COUNTING_SIZE } from '../Count'
 import { Icon, ICON_SIZE } from '../Icon'
-import { StyledProductPageTitles } from '../Pages/ProductPage/style'
+import { AddToWishlist } from '../AddToWishlist'
+import { ProductType } from '../Pages/ProductPage/types'
+import { StyledCountButton } from '../Count/style'
+import plus from '../Count/pics/plus.svg'
+import { COUNTING_SIZE } from '../Count'
+import {
+    StyledProductShop,
+    StyledProductTitles,
+} from '../Pages/ProductPage/style'
 
-interface ProductCardProps extends ProductType {
-    image: string
-    title: string
-    price: number
-    shop: string
-    count: number
-    backgroundColor: string
+export enum BACKGROUND_COLOR_TYPE {
+    GREEN = 'rgba(118, 178, 38, 0.15)',
+    PINK = 'rgba(227, 85, 63, 0.15)',
+    YELLOW = 'rgba(243, 162, 12, 0.15)',
+    ORANGE = 'rgba(234, 129, 47, 0.15)',
+    RED = 'rgba(151, 3, 29, 0.15)',
+    SALAD = 'rgba(63, 125, 60, 0.15)',
+    BEIGE = 'rgba(233, 176, 79, 0.15)',
+    WHITE = '#FFF',
 }
 
-const ProductCard = (
-    { image, title, price, shop }: ProductType,
-    {
-        count = 1,
-        backgroundColor = 'rgba(118, 178, 38, 0.15)',
-    }: ProductCardProps,
-) => {
+interface ProductCardProps {
+    product: ProductType
+    backgroundColor: BACKGROUND_COLOR_TYPE
+    isShowAction: boolean
+    onWishClick: () => void
+}
+
+const ProductCard = ({
+    backgroundColor = BACKGROUND_COLOR_TYPE.WHITE,
+    product,
+    isShowAction,
+    onWishClick,
+}: ProductCardProps) => {
     return (
         <StyledProductCard style={{ backgroundColor: backgroundColor }}>
-            <StyledProductCardIcon>
-                <Icon size={ICON_SIZE.X_LARGE} src={image} />
-            </StyledProductCardIcon>
-            <StyledProductCardInfo>
-                <h4>{title}</h4>
-                <StyledProductCardCount>1 Kilogram</StyledProductCardCount>
-                <h4>${price}</h4>
-            </StyledProductCardInfo>
-            <Count
-                fontSize={COUNT_FONTSIZE.PRODUCT_CARD}
-                width={COUNTING_SIZE.PRODUCT_CARD}
-                height={COUNTING_SIZE.PRODUCT_CARD}
-            />
+            <StyledProductCardHeader>
+                <Icon size={ICON_SIZE.XX_LARGE} src={product.image} />
+                <AddToWishlist onClick={onWishClick} isAdded={true} />
+            </StyledProductCardHeader>
+            <StyledProductTitles>
+                <h3>{product.title}</h3>
+                {isShowAction ? (
+                    <StyledProductShop>{product.shop}</StyledProductShop>
+                ) : (
+                    <StyledProductShop>1 Kilogram</StyledProductShop>
+                )}
+            </StyledProductTitles>
+
+            {isShowAction && (
+                <StyledCardAction>
+                    <h3>{product.price} /Kg</h3>
+                    <StyledCountButton
+                        style={{
+                            width: COUNTING_SIZE.PRODUCT_PAGE,
+                            height: COUNTING_SIZE.PRODUCT_PAGE,
+                        }}
+                    >
+                        <Icon size={ICON_SIZE.MEDIUM} src={plus} />
+                    </StyledCountButton>
+                </StyledCardAction>
+            )}
         </StyledProductCard>
     )
 }

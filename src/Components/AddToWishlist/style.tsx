@@ -2,9 +2,10 @@ import styled from 'styled-components'
 
 const StyledAddToWishlist = styled.button`
     border: none;
-    width: 52px;
-    height: 52px;
+    width: 36px;
+    height: 36px;
     outline: none;
+    border-radius: 10px;
     background-color: transparent;
     cursor: pointer;
     display: flex;

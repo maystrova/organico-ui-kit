@@ -9,7 +9,7 @@ import {
     StyledProductPageInfo,
     StyledProductPageMain,
     StyledProductPagePicture,
-    StyledProductPageTitles,
+    StyledProductTitles,
     StyledProductShop,
 } from './style'
 import { Button, BUTTON_TYPE } from '../../Button'
@@ -26,17 +26,19 @@ import { Count, COUNT_FONTSIZE, COUNTING_SIZE } from '../../Count'
 import { ProductType } from './types'
 import { paprika, products } from '../../../sevices/products/products'
 
-interface ProductPageProps extends ProductType {
+interface ProductPageProps {
     backButton: () => void
-    wishButton: () => void
+    onWishButtonClicked: (product: ProductType) => void
     onAddToCartClick: (productId: string) => void
-    product: ProductType[]
+    product: ProductType
 }
 
-const ProductPage = (
-    { backButton, wishButton, onAddToCartClick, product }: ProductPageProps,
-    { title, category, details, image, price, shop, id }: ProductType,
-) => {
+const ProductPage = ({
+    backButton,
+    onWishButtonClicked,
+    onAddToCartClick,
+    product,
+}: ProductPageProps) => {
     const [isAddedToWishList, setAddToWishList] = useState<boolean>(false)
 
     return (
@@ -45,19 +47,22 @@ const ProductPage = (
                 <BackToPreviousPage onClick={backButton} />
                 <AddToWishlist
                     isAdded={isAddedToWishList}
-                    onClick={() => setAddToWishList(!isAddedToWishList)}
+                    onClick={() => {
+                        setAddToWishList(!isAddedToWishList)
+                        onWishButtonClicked(product)
+                    }}
                 />
             </StyledProductPageHeader>
             <StyledProductPageMain>
                 <StyledProductPagePicture>
-                    <img src={paprika.image} alt='Product Picture' />
+                    <img src={product.image} alt='Product Picture' />
                 </StyledProductPagePicture>
                 <StyledProductPageInfo>
-                    <StyledProductPageTitles>
-                        <h2>{paprika.title}</h2>
-                        <StyledProductShop>{paprika.shop}</StyledProductShop>
-                        <h2>${paprika.price} /Kg</h2>
-                    </StyledProductPageTitles>
+                    <StyledProductTitles>
+                        <h2>{product.title}</h2>
+                        <StyledProductShop>{product.shop}</StyledProductShop>
+                        <h2>${product.price} /Kg</h2>
+                    </StyledProductTitles>
                     <div>
                         <Count
                             fontSize={COUNT_FONTSIZE.PRODUCT_PAGE}
@@ -70,7 +75,7 @@ const ProductPage = (
             <StyledProductFooter>
                 <StyledProductDetails>
                     <h4>Details</h4>
-                    <p>{paprika.details}</p>
+                    <p>{product.details}</p>
                 </StyledProductDetails>
                 <Banner
                     title={'Time Delivery'}
@@ -85,7 +90,7 @@ const ProductPage = (
                 <StyledProductFooterButtons>
                     <Button
                         type={BUTTON_TYPE.PRIMARY}
-                        onClick={() => onAddToCartClick(id)}
+                        onClick={() => onAddToCartClick(product.id)}
                         title={'Add to cart'}
                     />
                     <StyledChatButton onClick={() => {}}>

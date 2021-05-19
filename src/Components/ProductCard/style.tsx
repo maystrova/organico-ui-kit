@@ -1,35 +1,25 @@
 import styled from 'styled-components'
 
 const StyledProductCard = styled.div`
-    height: 114px;
-    max-width: 342px;
-    padding: 20px;
-    border-radius: 12px;
-    //display: grid;
-    //grid-template-columns: 1fr 1fr 1fr;
-    //grid-column-gap: 10px;
+    width: 180px;
+    min-height: 179px;
+    padding: 16px;
+    border-radius: 20px;
+    display: grid;
+    grid-row-gap: 20px;
+    letter-spacing: 0.1px;
+`
+
+const StyledCardAction = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
 `
 
-const StyledProductCardInfo = styled.div`
-    line-height: 24px;
-`
-
-const StyledProductCardIcon = styled.div`
+const StyledProductCardHeader = styled.div`
     display: flex;
-    justify-content: left;
-    align-items: center;
-`
-const StyledProductCardCount = styled.span`
-    color: #92929d;
-    font-size: 14px;
+    justify-content: space-between;
+    height: 80px;
 `
 
-export {
-    StyledProductCard,
-    StyledProductCardIcon,
-    StyledProductCardCount,
-    StyledProductCardInfo,
-}
+export { StyledCardAction, StyledProductCard, StyledProductCardHeader }

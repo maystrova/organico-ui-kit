@@ -10,10 +10,13 @@ interface AddToWishlistProps {
 
 const AddToWishlist = ({ onClick, isAdded }: AddToWishlistProps) => {
     return (
-        <StyledAddToWishlist onClick={onClick}>
+        <StyledAddToWishlist
+            style={{ backgroundColor: isAdded ? '#FB4141' : 'transparent' }}
+            onClick={onClick}
+        >
             <WishLogo
                 fill={isAdded ? '#FB4141' : 'transparent'}
-                stroke={isAdded ? '#FB4141' : '#171725'}
+                stroke={isAdded ? '#FFF' : '#171725'}
                 width={'18px'}
             />
         </StyledAddToWishlist>

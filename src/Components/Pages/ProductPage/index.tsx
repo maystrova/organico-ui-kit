@@ -29,7 +29,7 @@ import { paprika, products } from '../../../sevices/products/products'
 interface ProductPageProps {
     backButton: () => void
     onWishButtonClicked: (product: ProductType) => void
-    onAddToCartClick: (productId: string) => void
+    onAddToCartClick: (product: ProductType) => void
     product: ProductType
 }
 
@@ -90,7 +90,7 @@ const ProductPage = ({
                 <StyledProductFooterButtons>
                     <Button
                         type={BUTTON_TYPE.PRIMARY}
-                        onClick={() => onAddToCartClick(product.id)}
+                        onClick={() => onAddToCartClick(product)}
                         title={'Add to cart'}
                     />
                     <StyledChatButton onClick={() => {}}>

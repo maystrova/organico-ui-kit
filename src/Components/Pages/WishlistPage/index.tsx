@@ -12,7 +12,7 @@ import { ProductType } from '../ProductPage/types'
 interface WishlistPageProps {
     onBackButtonClicked: () => void
     backgroundColor: BACKGROUND_COLOR_TYPE
-    onWishClicked: (product: ProductType) => void
+    onWishClicked: (productId: string) => void
     products: ProductType[]
 }
 
@@ -32,10 +32,11 @@ const WishlistPage = ({
                 {products.map(product => {
                     return (
                         <ProductCard
+                            key={product.title}
                             product={product}
                             backgroundColor={backgroundColor}
                             isShowAction={false}
-                            onWishClick={() => onWishClicked(product)}
+                            onWishClick={() => onWishClicked(product.id)}
                         />
                     )
                 })}

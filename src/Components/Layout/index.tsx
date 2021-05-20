@@ -14,21 +14,20 @@ const Layout = () => {
     const [cart, setCart] = useState<ProductType[]>([])
     const [wishlist, setWishlist] = useState<ProductType[]>(products)
 
-    // const onCartUpdate = (productId: ProductType,) => {
-    //     const newCart = [
-    //         ...cart,
-    //     ]
-    // }
-
     const addToWishlist = (product: ProductType): void => {
         const newWishlist = [product, ...wishlist]
         setWishlist(newWishlist)
     }
 
-    const deleteFromWishlist = (product: ProductType): void => {
-        const newWishlist: ProductType[] = {
-            ...wishlist,
-        }
+    const addToCart = (product: ProductType): void => {
+        const newCart = [product, ...cart]
+        setCart(newCart)
+    }
+
+    const deleteFromWishlist = (productIdForDelete: string): void => {
+        const newWishlist: ProductType[] = wishlist.filter(
+            product => product.id !== productIdForDelete,
+        )
         setWishlist(newWishlist)
     }
 
@@ -41,7 +40,7 @@ const Layout = () => {
                         <ProductPage
                             product={paprika}
                             backButton={() => {}}
-                            onAddToCartClick={productId => setCart([])}
+                            onAddToCartClick={product => addToCart(product)}
                             onWishButtonClicked={product =>
                                 addToWishlist(product)
                             }

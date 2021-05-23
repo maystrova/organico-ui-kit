@@ -27,6 +27,7 @@ const Layout = () => {
         const newWishlist: ProductType[] = wishlist.filter(
             product => product.id !== productIdForDelete,
         )
+
         setWishlist(newWishlist)
     }
 

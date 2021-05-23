@@ -17,11 +17,7 @@ interface IconProps {
 }
 
 const Icon = ({ size, alt = 'icon', src }: IconProps) => {
-    return (
-        <div>
-            <StyledIcon size={size} alt={alt} src={src} />
-        </div>
-    )
+    return <StyledIcon size={size} alt={alt} src={src} />
 }
 
 export { Icon }

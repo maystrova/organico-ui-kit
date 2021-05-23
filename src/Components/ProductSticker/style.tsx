@@ -1,16 +1,11 @@
 import styled from 'styled-components'
 
 const StyledProductSticker = styled.div`
-    height: 114px;
-    max-width: 342px;
     padding: 20px;
     border-radius: 12px;
-    //display: grid;
-    //grid-template-columns: 1fr 1fr 1fr;
-    //grid-column-gap: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 64px 1fr 120px;
+    grid-gap: 20px;
 `
 
 const StyledProductStickerInfo = styled.div`

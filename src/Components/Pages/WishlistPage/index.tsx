@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
     StyledWishlistPage,
     StyledWishlistPageCards,
@@ -10,22 +10,36 @@ import { BACKGROUND_COLOR_TYPE, ProductCard } from '../../ProductCard'
 import { ProductType } from '../ProductPage/types'
 
 interface WishlistPageProps {
-    onBackButtonClicked: () => void
-    backgroundColor: BACKGROUND_COLOR_TYPE
-    onWishClicked: (productId: string) => void
+    onBackButtonClick: () => void
+    onWishClick: (productId: string) => void
     products: ProductType[]
 }
 
+const getBackgroundColorForProduct = (title: string): BACKGROUND_COLOR_TYPE => {
+    switch (title) {
+        case 'Banana':
+            return BACKGROUND_COLOR_TYPE.YELLOW
+        case 'Broccoli':
+            return BACKGROUND_COLOR_TYPE.GREEN
+        case 'Meat':
+        case 'Paprika':
+            return BACKGROUND_COLOR_TYPE.PINK
+        case 'Lettuce':
+            return BACKGROUND_COLOR_TYPE.SALAD
+        default:
+            return BACKGROUND_COLOR_TYPE.WHITE
+    }
+}
+
 const WishlistPage = ({
-    onBackButtonClicked,
-    backgroundColor,
-    onWishClicked,
+    onBackButtonClick,
+    onWishClick,
     products,
 }: WishlistPageProps) => {
     return (
         <StyledWishlistPage>
             <StyledWishlistPageHeader>
-                <BackToPreviousPage onClick={onBackButtonClicked} />
+                <BackToPreviousPage onClick={onBackButtonClick} />
                 <span>My Wishlist</span>
             </StyledWishlistPageHeader>
             <StyledWishlistPageCards>
@@ -34,9 +48,11 @@ const WishlistPage = ({
                         <ProductCard
                             key={product.title}
                             product={product}
-                            backgroundColor={backgroundColor}
+                            backgroundColor={getBackgroundColorForProduct(
+                                product.title,
+                            )}
                             isShowAction={false}
-                            onWishClick={() => onWishClicked(product.id)}
+                            onWishClick={() => onWishClick(product.id)}
                         />
                     )
                 })}

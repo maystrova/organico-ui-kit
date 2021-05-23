@@ -28,14 +28,13 @@ const StyledCardPageShopIcon = styled.div`
 `
 
 const StyledCartPageFooter = styled.footer`
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-gap: 40px;
 `
 
 const StyledCartPageTotal = styled.div`
     line-height: 1.5;
-    width: 68px;
-    margin-right: 40px;
     & span {
         color: #92929d;
     }

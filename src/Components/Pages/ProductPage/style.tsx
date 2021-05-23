@@ -56,10 +56,10 @@ const StyledProductDetails = styled.div`
     }
 `
 
-const StyledProductFooterButtons = styled.div`
-    display: flex;
-    //grid-template-columns: 1fr;
-    grid-column-gap: 24px;
+const StyledProductAddToCard = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 52px;
+    grid-gap: 24px;
 `
 
 const StyledChatButton = styled.button`
@@ -84,7 +84,7 @@ export {
     StyledProductFooter,
     StyledProductDetails,
     StyledChatButton,
-    StyledProductFooterButtons,
+    StyledProductAddToCard,
     StyledProductPageInfo,
     StyledProductTitles,
 }

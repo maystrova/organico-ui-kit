@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
     StyledCardAction,
     StyledProductCard,
@@ -43,7 +43,7 @@ const ProductCard = ({
         <StyledProductCard style={{ backgroundColor: backgroundColor }}>
             <StyledProductCardHeader>
                 <Icon size={ICON_SIZE.XX_LARGE} src={product.image} />
-                <AddToWishlist onClick={onWishClick} isAdded={true} />
+                <AddToWishlist onClick={onWishClick} isAdded />
             </StyledProductCardHeader>
             <StyledProductTitles>
                 <h3>{product.title}</h3>

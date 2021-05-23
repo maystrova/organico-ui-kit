@@ -7,7 +7,6 @@ import { ROUTES } from '../../sevices/route'
 import { CartPage } from '../Pages/CartPage'
 import { ProductType } from '../Pages/ProductPage/types'
 import { WishlistPage } from '../Pages/WishlistPage'
-import { BACKGROUND_COLOR_TYPE } from '../ProductCard'
 import { paprika, products } from '../../sevices/products/products'
 
 const Layout = () => {
@@ -52,9 +51,8 @@ const Layout = () => {
                     <Route path={ROUTES.MY_WISHLIST} exact>
                         <WishlistPage
                             products={wishlist}
-                            onWishClicked={deleteFromWishlist}
-                            backgroundColor={BACKGROUND_COLOR_TYPE.PINK}
-                            onBackButtonClicked={() => {}}
+                            onWishClick={deleteFromWishlist}
+                            onBackButtonClick={() => {}}
                         />
                     </Route>
                 </Switch>

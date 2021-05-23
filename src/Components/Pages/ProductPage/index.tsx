@@ -3,7 +3,7 @@ import {
     StyledChatButton,
     StyledProductDetails,
     StyledProductFooter,
-    StyledProductFooterButtons,
+    StyledProductAddToCard,
     StyledProductPage,
     StyledProductPageHeader,
     StyledProductPageInfo,
@@ -87,7 +87,7 @@ const ProductPage = ({
                     icon={categoryIcon}
                     subtitle={'Vegetable'}
                 />
-                <StyledProductFooterButtons>
+                <StyledProductAddToCard>
                     <Button
                         type={BUTTON_TYPE.PRIMARY}
                         onClick={() => onAddToCartClick(product)}
@@ -96,7 +96,7 @@ const ProductPage = ({
                     <StyledChatButton onClick={() => {}}>
                         <Icon size={ICON_SIZE.MEDIUM} src={chat} alt={'Chat'} />
                     </StyledChatButton>
-                </StyledProductFooterButtons>
+                </StyledProductAddToCard>
             </StyledProductFooter>
         </StyledProductPage>
     )

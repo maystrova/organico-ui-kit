@@ -32,7 +32,6 @@ const StyledButton = styled.button`
             font-weight: 700;
             border-radius: 100px;
             background-color: rgba(46, 204, 113, 1);
-            width: 90%;
         `}
 `
 

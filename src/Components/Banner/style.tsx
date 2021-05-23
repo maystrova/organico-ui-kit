@@ -23,8 +23,11 @@ const StyledBannerInfo = styled.div`
 `
 
 const StyledBannerTitle = styled.h3`
+    font-style: normal;
+    font-weight: bold;
     font-size: 18px;
-    font-weight: 400;
+    line-height: 25px;
+    letter-spacing: 0.1px;
 `
 
 const StyledBannerSubtitle = styled.span`

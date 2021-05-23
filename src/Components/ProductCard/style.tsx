@@ -1,8 +1,7 @@
 import styled from 'styled-components'
 
 const StyledProductCard = styled.div`
-    width: 180px;
-    min-height: 179px;
+    min-height: 180px;
     padding: 16px;
     border-radius: 20px;
     display: grid;

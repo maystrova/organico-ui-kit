@@ -8,13 +8,13 @@ import {
     StyledCartPageInfo,
     StyledCartPageTotal,
 } from './style'
-import { ProductSticker } from '../../ProductSticker'
-import { broccoli, carrot } from '../../../sevices/products/products'
-import { Icon, ICON_SIZE } from '../../Icon'
+import { ProductSticker } from 'Components/ProductSticker'
+import { broccoli, carrot } from 'sevices/products/products'
+import { Icon, ICON_SIZE } from 'Components/Icon'
 import shopIcon from './pics/shop-icon.svg'
-import { Button, BUTTON_TYPE } from '../../Button'
+import { Button, BUTTON_TYPE } from 'Components/Button'
 import { ProductType } from '../ProductPage/types'
-import { BACKGROUND_COLOR_TYPE } from '../../ProductCard'
+import { BACKGROUND_COLOR_TYPE } from 'Components/ProductCard'
 
 interface CartPageProps {
     products: ProductType[]

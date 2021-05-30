@@ -14,7 +14,7 @@ import {
     StyledProductFooter,
     StyledProductAddToCard,
     StyledProductPage,
-    StyledProductPageHeader,
+    StyledHeader,
     StyledProductPageInfo,
     StyledProductPageMain,
     StyledProductPagePicture,
@@ -25,8 +25,6 @@ import {
 import time from './pics/time-icon.svg'
 import categoryIcon from './pics/category-icon.svg'
 import chat from 'Components/Layout/pics/chat.svg'
-
-
 
 interface ProductPageProps {
     backButton: () => void
@@ -45,7 +43,7 @@ const ProductPage = ({
 
     return (
         <StyledProductPage>
-            <StyledProductPageHeader>
+            <StyledHeader>
                 <BackToPreviousPage onClick={backButton} />
                 <AddToWishlist
                     isAdded={isAddedToWishList}
@@ -54,7 +52,7 @@ const ProductPage = ({
                         onWishButtonClicked(product)
                     }}
                 />
-            </StyledProductPageHeader>
+            </StyledHeader>
             <StyledProductPageMain>
                 <StyledProductPagePicture>
                     <img src={product.image} alt='Product Picture' />

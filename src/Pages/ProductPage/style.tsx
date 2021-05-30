@@ -5,7 +5,7 @@ const StyledProductPage = styled.div`
     grid-row-gap: 30px;
 `
 
-const StyledProductPageHeader = styled.div`
+const StyledHeader = styled.div`
     height: 64px;
     display: flex;
     justify-content: space-between;
@@ -77,7 +77,7 @@ const StyledChatButton = styled.button`
 
 export {
     StyledProductPage,
-    StyledProductPageHeader,
+    StyledHeader,
     StyledProductPageMain,
     StyledProductPagePicture,
     StyledProductShop,

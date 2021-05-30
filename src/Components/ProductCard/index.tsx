@@ -32,7 +32,7 @@ const ProductCard = ({
     return (
         <StyledProductCard type={type}>
             <StyledProductCardHeader>
-                <Icon size={ICON_SIZE.XX_LARGE} src={product.image} />
+                <Icon size={ICON_SIZE.XXX_LARGE} src={product.image} />
                 <AddToWishlist onClick={onWishClick} isAdded />
             </StyledProductCardHeader>
             <StyledProductTitles>

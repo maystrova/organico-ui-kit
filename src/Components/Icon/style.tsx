@@ -36,8 +36,14 @@ const StyledIcon = styled.img`
         css`
             width: 64px;
         `}
-     ${(props: StyledIconProps) =>
+    ${(props: StyledIconProps) =>
         props.size === ICON_SIZE.XX_LARGE &&
+        css`
+            width: 72px;
+        `}
+    
+     ${(props: StyledIconProps) =>
+        props.size === ICON_SIZE.XXX_LARGE &&
         css`
             width: 92px;
         `}

@@ -8,7 +8,11 @@ const ROUTES = {
     MY_CART: '/cart',
     HOME_SCREEN: '/home-screen',
     MY_WISHLIST: '/wishlist',
-    CATEGORY_VEGETABLES: '/category-vegetables',
+    CATEGORIES: '/categories',
+    CATEGORY_VEGETABLES: '/category/vegetables',
+    CATEGORY_FRUITS: '/category/fruits',
+    CATEGORY_MEAT: '/category/meat',
+
     MY_COUPON: '/coupon',
     SEARCH_VIEW: '/search-view',
     SEARCH_RESULT: '/search-result',

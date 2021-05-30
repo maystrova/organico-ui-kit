@@ -6,8 +6,8 @@ import { ProductType } from 'Pages/ProductPage/types'
 
 import {
     StyledWishlistPage,
-    StyledWishlistPageCards,
-    StyledWishlistPageHeader,
+    StyledCardsList,
+    StyledTitledHeader,
 } from './style'
 import { PRODUCT_TYPE } from '../../services/products/products'
 
@@ -47,11 +47,11 @@ const WishlistPage = ({
 }: WishlistPageProps) => {
     return (
         <StyledWishlistPage>
-            <StyledWishlistPageHeader>
+            <StyledTitledHeader>
                 <BackToPreviousPage onClick={onBackButtonClick} />
                 <span>My Wishlist</span>
-            </StyledWishlistPageHeader>
-            <StyledWishlistPageCards>
+            </StyledTitledHeader>
+            <StyledCardsList>
                 {products.map(product => {
                     return (
                         <ProductCard
@@ -63,7 +63,7 @@ const WishlistPage = ({
                         />
                     )
                 })}
-            </StyledWishlistPageCards>
+            </StyledCardsList>
         </StyledWishlistPage>
     )
 }

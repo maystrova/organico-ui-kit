@@ -9,6 +9,7 @@ import { WishlistPage } from 'Pages/WishlistPage'
 
 import { paprika, products } from 'services/products/products'
 import { ROUTES } from 'services/route'
+import { CategoriesPage } from '../../Pages/CategoriesPage'
 
 const Layout = () => {
     const [cart, setCart] = useState<ProductType[]>([])
@@ -55,6 +56,12 @@ const Layout = () => {
                             products={wishlist}
                             onWishClick={deleteFromWishlist}
                             onBackButtonClick={() => {}}
+                        />
+                    </Route>
+                    <Route path={ROUTES.CATEGORIES} exact>
+                        <CategoriesPage
+                            products={products}
+                            onBackToPreviousPageClicked={() => {}}
                         />
                     </Route>
                 </Switch>

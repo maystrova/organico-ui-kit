@@ -1,7 +1,4 @@
-import {
-    PRODUCTS_CATEGORY,
-    ProductType,
-} from '../../Components/Pages/ProductPage/types'
+import { PRODUCTS_CATEGORY, ProductType } from 'Pages/ProductPage/types'
 import paprikaPic from './pics/paprika.png'
 import broccoliPic from './pics/broccoli.png'
 import potatoPic from './pics/potato.png'
@@ -9,6 +6,17 @@ import lettucePic from './pics/lettuce.png'
 import carrotPic from './pics/carrot.png'
 import onionPic from './pics/onion.png'
 import bananaPic from './pics/banana.png'
+
+export enum PRODUCT_TYPE {
+    BANANA = 'banana',
+    PAPRIKA = 'paprika',
+    BROCCOLI = 'broccoli',
+    POTATO = 'potato',
+    RED_ONION = 'red_onion',
+    CARROT = 'carrot',
+    LETTUCE = 'lettuce',
+    DEFAULT = 'default',
+}
 
 const products: ProductType[] = [
     {

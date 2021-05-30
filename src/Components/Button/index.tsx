@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { StyledButton } from './style'
 
 export enum BUTTON_TYPE {

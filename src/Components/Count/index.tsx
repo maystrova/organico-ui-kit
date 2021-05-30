@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
+
+import { Icon, ICON_SIZE } from 'Components/Icon'
+
 import {
     StyledCount,
     StyledCountButton,
     StyledCountNumber,
     StyledCountButtonArea,
 } from './style'
-import { Icon, ICON_SIZE } from '../Icon'
+
 import minus from './pics/minus.svg'
 import plus from './pics/plus.svg'
 
@@ -26,7 +29,7 @@ interface CountProps {
 }
 
 const Count = ({ width, height, fontSize }: CountProps) => {
-    const [amount, setAmount] = useState<number>(0)
+    const [amount, setAmount] = useState<number>(1)
 
     const addProduct = () => {
         let productAmount = amount
@@ -36,20 +39,20 @@ const Count = ({ width, height, fontSize }: CountProps) => {
     const removeProduct = () => {
         let productAmount = amount
 
-        setAmount(--productAmount)
+        if (amount > 1) {
+            setAmount(--productAmount)
+        }
     }
 
     return (
         <StyledCount>
             <StyledCountButtonArea>
-                {amount > 0 && (
-                    <StyledCountButton
-                        style={{ width: width, height: height }}
-                        onClick={removeProduct}
-                    >
-                        <Icon size={ICON_SIZE.MEDIUM} src={minus} />
-                    </StyledCountButton>
-                )}
+                <StyledCountButton
+                    style={{ width: width, height: height }}
+                    onClick={removeProduct}
+                >
+                    <Icon size={ICON_SIZE.MEDIUM} src={minus} />
+                </StyledCountButton>
             </StyledCountButtonArea>
 
             <StyledCountNumber style={{ fontSize: fontSize }}>

@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import { GlobalStyle, StyledLayout } from './style'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-import { ProductPage } from '../Pages/ProductPage'
-import { ROUTES } from '../../sevices/route'
-import { CartPage } from '../Pages/CartPage'
-import { ProductType } from '../Pages/ProductPage/types'
-import { WishlistPage } from '../Pages/WishlistPage'
-import { paprika, products } from '../../sevices/products/products'
+import { ProductPage } from 'Pages/ProductPage'
+import { CartPage } from 'Pages/CartPage'
+import { ProductType } from 'Pages/ProductPage/types'
+import { WishlistPage } from 'Pages/WishlistPage'
+
+import { paprika, products } from 'services/products/products'
+import { ROUTES } from 'services/route'
 
 const Layout = () => {
     const [cart, setCart] = useState<ProductType[]>([])
@@ -36,7 +37,7 @@ const Layout = () => {
             <StyledLayout>
                 <GlobalStyle />
                 <Switch>
-                    <Route path={ROUTES.DETAIL} exact>
+                    <Route path={[ROUTES.DETAIL, '/']} exact>
                         <ProductPage
                             product={paprika}
                             backButton={() => {}}

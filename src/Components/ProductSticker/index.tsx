@@ -1,23 +1,25 @@
 import React from 'react'
-import { ProductType } from '../Pages/ProductPage/types'
+
+import { ProductType } from 'Pages/ProductPage/types'
+import { Count, COUNT_FONTSIZE, COUNTING_SIZE } from 'Components/Count'
+import { Icon, ICON_SIZE } from 'Components/Icon'
+
 import {
     StyledProductStickerIcon,
     StyledProductStickerInfo,
     StyledProductStickerCount,
     StyledProductSticker,
 } from './style'
-import { Count, COUNT_FONTSIZE, COUNTING_SIZE } from '../Count'
-import { Icon, ICON_SIZE } from '../Icon'
-import { BACKGROUND_COLOR_TYPE } from '../ProductCard'
+import { PRODUCT_TYPE } from 'services/products/products'
 
 interface ProductStickerProps {
     product: ProductType
-    backgroundColor: BACKGROUND_COLOR_TYPE
+    type: PRODUCT_TYPE
 }
 
-const ProductSticker = ({ product, backgroundColor }: ProductStickerProps) => {
+const ProductSticker = ({ product, type }: ProductStickerProps) => {
     return (
-        <StyledProductSticker style={{ backgroundColor: backgroundColor }}>
+        <StyledProductSticker type={type}>
             <StyledProductStickerIcon>
                 <Icon size={ICON_SIZE.X_LARGE} src={product.image} />
             </StyledProductStickerIcon>

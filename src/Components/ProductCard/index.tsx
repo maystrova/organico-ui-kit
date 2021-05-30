@@ -1,46 +1,36 @@
 import React from 'react'
+
+import { Icon, ICON_SIZE } from 'Components/Icon'
+import { AddToWishlist } from 'Components/AddToWishlist'
+import { ProductType } from 'Pages/ProductPage/types'
+import { COUNTING_SIZE } from 'Components/Count'
+import { PRODUCT_TYPE } from 'services/products/products'
+
+import { StyledProductShop, StyledProductTitles } from 'Pages/ProductPage/style'
+import { StyledCountButton } from 'Components/Count/style'
 import {
     StyledCardAction,
     StyledProductCard,
     StyledProductCardHeader,
 } from './style'
-import { Icon, ICON_SIZE } from '../Icon'
-import { AddToWishlist } from '../AddToWishlist'
-import { ProductType } from '../Pages/ProductPage/types'
-import { StyledCountButton } from '../Count/style'
-import plus from '../Count/pics/plus.svg'
-import { COUNTING_SIZE } from '../Count'
-import {
-    StyledProductShop,
-    StyledProductTitles,
-} from '../Pages/ProductPage/style'
 
-export enum BACKGROUND_COLOR_TYPE {
-    GREEN = 'rgba(118, 178, 38, 0.15)',
-    PINK = 'rgba(227, 85, 63, 0.15)',
-    YELLOW = 'rgba(243, 162, 12, 0.15)',
-    ORANGE = 'rgba(234, 129, 47, 0.15)',
-    RED = 'rgba(151, 3, 29, 0.15)',
-    SALAD = 'rgba(63, 125, 60, 0.15)',
-    BEIGE = 'rgba(233, 176, 79, 0.15)',
-    WHITE = '#FFF',
-}
+import plus from 'Components/Count/pics/plus.svg'
 
 interface ProductCardProps {
     product: ProductType
-    backgroundColor: BACKGROUND_COLOR_TYPE
+    type: PRODUCT_TYPE
     isShowAction: boolean
     onWishClick: () => void
 }
 
 const ProductCard = ({
-    backgroundColor = BACKGROUND_COLOR_TYPE.WHITE,
+    type,
     product,
     isShowAction,
     onWishClick,
 }: ProductCardProps) => {
     return (
-        <StyledProductCard style={{ backgroundColor: backgroundColor }}>
+        <StyledProductCard type={type}>
             <StyledProductCardHeader>
                 <Icon size={ICON_SIZE.XX_LARGE} src={product.image} />
                 <AddToWishlist onClick={onWishClick} isAdded />

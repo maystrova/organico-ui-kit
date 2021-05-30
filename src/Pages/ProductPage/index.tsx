@@ -1,4 +1,13 @@
 import React, { useState } from 'react'
+
+import { Button, BUTTON_TYPE } from 'Components/Button'
+import { Banner } from 'Components/Banner'
+import { Icon, ICON_SIZE } from 'Components/Icon'
+import { BackToPreviousPage } from 'Components/BackToPreviousPage'
+import { AddToWishlist } from 'Components/AddToWishlist'
+import { Count, COUNT_FONTSIZE, COUNTING_SIZE } from 'Components/Count'
+import { ProductType } from './types'
+
 import {
     StyledChatButton,
     StyledProductDetails,
@@ -12,19 +21,12 @@ import {
     StyledProductTitles,
     StyledProductShop,
 } from './style'
-import { Button, BUTTON_TYPE } from '../../Button'
-import { Banner } from '../../Banner'
 
 import time from './pics/time-icon.svg'
 import categoryIcon from './pics/category-icon.svg'
-import chat from '../../Layout/pics/chat.svg'
+import chat from 'Components/Layout/pics/chat.svg'
 
-import { Icon, ICON_SIZE } from '../../Icon'
-import { BackToPreviousPage } from '../../BackToPreviousPage'
-import { AddToWishlist } from '../../AddToWishlist'
-import { Count, COUNT_FONTSIZE, COUNTING_SIZE } from '../../Count'
-import { ProductType } from './types'
-import { paprika, products } from '../../../sevices/products/products'
+
 
 interface ProductPageProps {
     backButton: () => void

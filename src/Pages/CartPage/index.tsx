@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 
-import { broccoli, carrot } from 'sevices/products/products'
+import { broccoli, carrot, PRODUCT_TYPE } from 'services/products/products'
 
 import { ProductSticker } from 'Components/ProductSticker'
-import { BACKGROUND_COLOR_TYPE } from 'Components/ProductCard'
 import { Icon, ICON_SIZE } from 'Components/Icon'
 import { Button, BUTTON_TYPE } from 'Components/Button'
-import { ProductType } from '../ProductPage/types'
+import { ProductType } from 'Pages/ProductPage/types'
 
 import shopIcon from './pics/shop-icon.svg'
 
@@ -39,23 +38,11 @@ const CartPage = ({ products }: CartPageProps) => {
                     <h3>{broccoli.shop}</h3>
                 </StyledCardPageShop>
 
-                {/*{products.map(product => {*/}
-                {/*    return (*/}
-                {/*        // <ProductSticker*/}
-                {/*        //    product={product}*/}
-                {/*        //    backgroundColor={BACKGROUND_COLOR_TYPE.WHITE}*/}
-                {/*        // />*/}
-                {/*    )*/}
-                {/*})}*/}
-
                 <ProductSticker
                     product={broccoli}
-                    backgroundColor={BACKGROUND_COLOR_TYPE.GREEN}
+                    type={PRODUCT_TYPE.BROCCOLI}
                 />
-                <ProductSticker
-                    product={carrot}
-                    backgroundColor={BACKGROUND_COLOR_TYPE.ORANGE}
-                />
+                <ProductSticker product={carrot} type={PRODUCT_TYPE.CARROT} />
             </StyledCartPageInfo>
             <StyledCartPageFooter>
                 <StyledCartPageTotal>

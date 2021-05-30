@@ -1,13 +1,15 @@
 import React from 'react'
+
+import { BackToPreviousPage } from 'Components/BackToPreviousPage'
+import { ProductCard } from 'Components/ProductCard'
+import { ProductType } from 'Pages/ProductPage/types'
+
 import {
     StyledWishlistPage,
     StyledWishlistPageCards,
     StyledWishlistPageHeader,
 } from './style'
-import { BackToPreviousPage } from '../../BackToPreviousPage'
-import { BACKGROUND_COLOR_TYPE, ProductCard } from '../../ProductCard'
-
-import { ProductType } from '../ProductPage/types'
+import { PRODUCT_TYPE } from '../../services/products/products'
 
 interface WishlistPageProps {
     onBackButtonClick: () => void
@@ -15,19 +17,26 @@ interface WishlistPageProps {
     products: ProductType[]
 }
 
-const getBackgroundColorForProduct = (title: string): BACKGROUND_COLOR_TYPE => {
+const getBackgroundColorForProduct = (title: string): PRODUCT_TYPE => {
     switch (title) {
         case 'Banana':
-            return BACKGROUND_COLOR_TYPE.YELLOW
+            return PRODUCT_TYPE.BANANA
         case 'Broccoli':
-            return BACKGROUND_COLOR_TYPE.GREEN
+            return PRODUCT_TYPE.BROCCOLI
         case 'Meat':
         case 'Paprika':
-            return BACKGROUND_COLOR_TYPE.PINK
+            return PRODUCT_TYPE.PAPRIKA
         case 'Lettuce':
-            return BACKGROUND_COLOR_TYPE.SALAD
+            return PRODUCT_TYPE.LETTUCE
+        case 'Red Onion':
+            return PRODUCT_TYPE.RED_ONION
+        case 'Potato':
+            return PRODUCT_TYPE.POTATO
+        case 'Carrot':
+            return PRODUCT_TYPE.CARROT
+
         default:
-            return BACKGROUND_COLOR_TYPE.WHITE
+            return PRODUCT_TYPE.DEFAULT
     }
 }
 
@@ -48,9 +57,7 @@ const WishlistPage = ({
                         <ProductCard
                             key={product.title}
                             product={product}
-                            backgroundColor={getBackgroundColorForProduct(
-                                product.title,
-                            )}
+                            type={getBackgroundColorForProduct(product.title)}
                             isShowAction={false}
                             onWishClick={() => onWishClick(product.id)}
                         />

@@ -1,5 +1,7 @@
 import React from 'react'
-import { Icon, ICON_SIZE } from '../Icon'
+
+import { Icon, ICON_SIZE } from 'Components/Icon'
+
 import {
     StyledBanner,
     StyledBannerIcon,

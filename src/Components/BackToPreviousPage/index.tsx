@@ -1,7 +1,10 @@
 import React from 'react'
+
+import { Icon, ICON_SIZE } from 'Components/Icon'
+
 import { StyledBackToPreviousPage } from './style'
-import { Icon, ICON_SIZE } from '../Icon'
-import back from '../Button/pics/back.svg'
+
+import back from 'Components/Button/pics/back.svg'
 
 interface BackToPreviousPageProps {
     onClick: () => void

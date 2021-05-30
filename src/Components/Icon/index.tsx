@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { StyledIcon } from './style'
 
 export enum ICON_SIZE {

@@ -11,8 +11,7 @@ const StyledTitledHeader = styled.header`
 const StyledCardsList = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-column-gap: 18px;
-    grid-row-gap: 18px;
+    grid-gap: 18px;
 `
 
 export { StyledWishlistPage, StyledTitledHeader, StyledCardsList }

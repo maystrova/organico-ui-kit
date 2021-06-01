@@ -1,23 +1,23 @@
 import React from 'react'
 
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
+import { CategoryCard } from '../../Components/CategoryCard'
 
 import { StyledCardsList, StyledTitledHeader } from 'Pages/WishlistPage/style'
 import { StyledCategoriesPage } from './style'
-import { ProductType } from '../ProductPage/types'
 
 import vegetables from 'services/products/pics/broccoli.png'
-import { CategoryCard } from '../../Components/CategoryCard'
-import { PRODUCT_TYPE } from '../../services/products/products'
+import fruits from 'services/products/pics/banana.png'
+import meats from 'services/products/pics/meat.png'
 
 interface CategoriesPageProps {
     onBackToPreviousPageClicked: () => void
-    products: ProductType[]
+    onCardClicked: () => void
 }
 
 const CategoriesPage = ({
     onBackToPreviousPageClicked,
-    products,
+    onCardClicked,
 }: CategoriesPageProps) => {
     return (
         <StyledCategoriesPage>
@@ -27,9 +27,22 @@ const CategoriesPage = ({
             </StyledTitledHeader>
             <StyledCardsList>
                 <CategoryCard
+                    onClick={onCardClicked}
                     title={'Vegetables'}
                     icon={vegetables}
-                    backgroundColor={PRODUCT_TYPE.BROCCOLI}
+                    backgroundColor={'rgba(118, 178, 38, 0.15)'}
+                />
+                <CategoryCard
+                    onClick={onCardClicked}
+                    title={'Fruits'}
+                    icon={fruits}
+                    backgroundColor={'rgba(243, 162, 12, 0.15)'}
+                />
+                <CategoryCard
+                    onClick={onCardClicked}
+                    title={'Meats'}
+                    icon={meats}
+                    backgroundColor={'rgba(227, 85, 63, 0.15)'}
                 />
             </StyledCardsList>
         </StyledCategoriesPage>

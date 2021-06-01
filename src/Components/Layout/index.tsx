@@ -60,8 +60,8 @@ const Layout = () => {
                     </Route>
                     <Route path={ROUTES.CATEGORIES} exact>
                         <CategoriesPage
-                            products={products}
                             onBackToPreviousPageClicked={() => {}}
+                            onCardClicked={() => {}}
                         />
                     </Route>
                 </Switch>

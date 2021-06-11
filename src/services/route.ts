@@ -10,10 +10,7 @@ const ROUTES = {
     MY_WISHLIST: '/wishlist',
     CATEGORIES: '/categories',
     CATEGORY: '/categories/:category',
-    // CATEGORY_VEGETABLES: '/category/vegetables',
-    // CATEGORY_FRUITS: '/category/fruits',
-    // CATEGORY_MEAT: '/category/meat',
-
+    PRODUCT: '/product/:productId',
     MY_COUPON: '/coupon',
     SEARCH_VIEW: '/search-view',
     SEARCH_RESULT: '/search-result',

@@ -4,14 +4,15 @@ import { Link } from 'react-router-dom'
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
 import { CategoryCard } from '../../Components/CategoryCard'
 
+import { CategoryType } from '../../Components/CategoryCard/types'
+import { PRODUCTS_CATEGORY } from '../ProductPage/types'
+
 import { StyledCardsList, StyledTitledHeader } from 'Pages/WishlistPage/style'
 import { StyledCategoriesPage } from './style'
 
 import vegetables from 'services/products/pics/broccoli.png'
 import fruits from 'services/products/pics/banana.png'
 import meats from 'services/products/pics/meat.png'
-import { CategoryType } from '../../Components/CategoryCard/types'
-import { PRODUCTS_CATEGORY } from '../ProductPage/types'
 
 interface CategoriesPageProps {
     onBackToPreviousPageClicked: () => void
@@ -41,7 +42,6 @@ const categories: CategoryType[] = [
 
 const CategoriesPage = ({
     onBackToPreviousPageClicked,
-    onCardClicked,
 }: CategoriesPageProps) => {
     return (
         <StyledCategoriesPage>

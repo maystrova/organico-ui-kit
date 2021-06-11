@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const StyledCategoryCard = styled.button`
-    width: 120px;
+    width: 100%;
     height: 130px;
     padding: 20px;
     border-radius: 20px;
@@ -14,4 +14,10 @@ const StyledCategoryCard = styled.button`
     cursor: pointer;
 `
 
-export { StyledCategoryCard }
+const StyledCategoryCardImage = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+
+export { StyledCategoryCard, StyledCategoryCardImage }

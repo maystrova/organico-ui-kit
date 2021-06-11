@@ -21,6 +21,7 @@ interface ProductCardProps {
     type: PRODUCT_TYPE
     isShowAction: boolean
     onWishClick: () => void
+    isAdded: boolean
 }
 
 const ProductCard = ({
@@ -28,12 +29,13 @@ const ProductCard = ({
     product,
     isShowAction,
     onWishClick,
+    isAdded,
 }: ProductCardProps) => {
     return (
         <StyledProductCard type={type}>
             <StyledProductCardHeader>
                 <Icon size={ICON_SIZE.XXX_LARGE} src={product.image} />
-                <AddToWishlist onClick={onWishClick} isAdded />
+                <AddToWishlist onClick={onWishClick} isAdded={isAdded} />
             </StyledProductCardHeader>
             <StyledProductTitles>
                 <h3>{product.title}</h3>

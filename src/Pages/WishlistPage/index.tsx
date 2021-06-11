@@ -17,13 +17,19 @@ interface WishlistPageProps {
     products: ProductType[]
 }
 
-const getBackgroundColorForProduct = (title: string): PRODUCT_TYPE => {
+export const getBackgroundColorForProduct = (title: string): PRODUCT_TYPE => {
     switch (title) {
         case 'Banana':
+        case 'Pineapple':
             return PRODUCT_TYPE.BANANA
         case 'Broccoli':
+        case 'Apple':
+        case 'Kiwi':
             return PRODUCT_TYPE.BROCCOLI
-        case 'Meat':
+        case 'Chicken':
+        case 'Veal':
+        case 'Beef':
+        case 'Pork':
         case 'Paprika':
             return PRODUCT_TYPE.PAPRIKA
         case 'Lettuce':
@@ -33,6 +39,7 @@ const getBackgroundColorForProduct = (title: string): PRODUCT_TYPE => {
         case 'Potato':
             return PRODUCT_TYPE.POTATO
         case 'Carrot':
+        case 'Orange':
             return PRODUCT_TYPE.CARROT
 
         default:
@@ -55,6 +62,7 @@ const WishlistPage = ({
                 {products.map(product => {
                     return (
                         <ProductCard
+                            isAdded={true}
                             key={product.title}
                             product={product}
                             type={getBackgroundColorForProduct(product.title)}

@@ -1,25 +1,36 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
+
 import { products } from '../../services/products/products'
 import { ProductType } from '../ProductPage/types'
+import { ProductCard } from '../../Components/ProductCard'
+import { getBackgroundColorForProduct } from '../WishlistPage'
+
+import { StyledCategoryPage } from './style'
 
 interface CategoryPageProps {}
 
 const CategoryPage = ({}: CategoryPageProps) => {
     let params = useParams<{ category: string }>()
-    console.log(params)
 
     const goods: ProductType[] = products.filter(
         product => product.category === params.category,
     )
-    console.log(goods)
 
     return (
-        <div>
+        <StyledCategoryPage>
             {goods.map(product => {
-                return <div>{product.title}</div>
+                return (
+                    <ProductCard
+                        isAdded={false}
+                        type={getBackgroundColorForProduct(product.title)}
+                        product={product}
+                        isShowAction={true}
+                        onWishClick={() => {}}
+                    />
+                )
             })}
-        </div>
+        </StyledCategoryPage>
     )
 }
 

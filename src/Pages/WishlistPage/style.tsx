@@ -12,6 +12,10 @@ const StyledCardsList = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 18px;
+
+    a {
+        text-decoration: none;
+    }
 `
 
 export { StyledWishlistPage, StyledTitledHeader, StyledCardsList }

@@ -6,6 +6,14 @@ import lettucePic from './pics/lettuce.png'
 import carrotPic from './pics/carrot.png'
 import onionPic from './pics/onion.png'
 import bananaPic from './pics/banana.png'
+import chickenPic from 'services/products/pics/chicken.png'
+import beefPic from 'services/products/pics/beef.png'
+import vealPic from 'services/products/pics/veal.png'
+import porkpic from 'services/products/pics/pork.png'
+import applePic from 'services/products/pics/apple.png'
+import orangePic from 'services/products/pics/orange.png'
+import pineapplePic from 'services/products/pics/pineapple.png'
+import kiwiPic from 'services/products/pics/kiwi.png'
 
 export enum PRODUCT_TYPE {
     BANANA = 'banana',
@@ -16,6 +24,15 @@ export enum PRODUCT_TYPE {
     CARROT = 'carrot',
     LETTUCE = 'lettuce',
     DEFAULT = 'default',
+    MEAT = 'meat',
+    KIWI = 'kiwi',
+    PINEAPPLE = 'pineapple',
+    APPLE = 'apple',
+    ORANGE = 'orange',
+    VEAL = 'veal',
+    BEEF = 'beef',
+    PORK = 'pork',
+    CHICKEN = 'chicken',
 }
 
 const products: ProductType[] = [
@@ -29,6 +46,43 @@ const products: ProductType[] = [
             '    Its green, yellow, red, or purple fruit',
         category: PRODUCTS_CATEGORY.VEGETABLES,
         id: `${Math.random()}`,
+    },
+    {
+        title: 'Apple',
+        shop: 'Vegshop',
+        price: 3.99,
+        image: applePic,
+        details: '',
+        category: PRODUCTS_CATEGORY.FRUITS,
+        id: `${Math.random()}`,
+    },
+    {
+        title: 'Orange',
+        id: `${Math.random()}`,
+        details: '',
+        category: PRODUCTS_CATEGORY.FRUITS,
+        shop: 'FruitShop',
+        price: 2.44,
+        image: orangePic,
+    },
+
+    {
+        title: 'Pineapple',
+        id: `${Math.random()}`,
+        details: '',
+        category: PRODUCTS_CATEGORY.FRUITS,
+        shop: 'FruitShop',
+        price: 5.44,
+        image: pineapplePic,
+    },
+    {
+        title: 'Kiwi',
+        id: `${Math.random()}`,
+        details: '',
+        category: PRODUCTS_CATEGORY.FRUITS,
+        shop: 'VegShop',
+        price: 4.11,
+        image: kiwiPic,
     },
     {
         title: 'Broccoli',
@@ -96,6 +150,43 @@ const products: ProductType[] = [
             'A banana is an elongated, edible fruit – botanically a berry[1][2] – produced by several kinds of large herbaceous flowering plants in the genus Musa.[3] In some countries, bananas used for cooking may be called "plantains", distinguishing them from dessert bananas. The fruit is variable in size, color, and firmness, but is usually elongated and curved, with soft flesh rich in starch covered with a rind, which may be green, yellow, red, purple, or brown when ripe. The fruits grow in clusters hanging from the top of the plant. Almost all modern edible seedless (parthenocarp) bananas come from two wild species – Musa acuminata and Musa balbisiana. The scientific names of most cultivated bananas are Musa acuminata, Musa balbisiana, and Musa × paradisiaca for the hybrid Musa acuminata × M. balbisiana, depending on their genomic constitution. The old scientific name for this hybrid, Musa sapientum, is no longer used.',
         image: bananaPic,
     },
+    {
+        title: 'Chicken',
+        shop: 'OrganicMeats',
+        price: 5.34,
+        category: PRODUCTS_CATEGORY.MEATS,
+        id: `${Math.random()}`,
+        details:
+            'Chicken is the most common type of poultry in the world. Owing to the relative ease and low cost of raising them in comparison to animals such as cattle or hogs, chickens have become prevalent in numerous cuisines.Chicken can be prepared in a vast range of ways, including baking, grilling, barbecuing, frying, and boiling. Since the latter half of the 20th century, prepared chicken has become a staple of fast food. Chicken is sometimes cited as being more healthful than red meat, with lower concentrations of cholesterol and saturated fat.',
+        image: chickenPic,
+    },
+    {
+        title: 'Beef',
+        shop: 'OrganicMeats',
+        price: 6.32,
+        category: PRODUCTS_CATEGORY.MEATS,
+        id: `${Math.random()}`,
+        details: '',
+        image: beefPic,
+    },
+    {
+        title: 'Veal',
+        shop: 'OrganicMeats',
+        price: 10.23,
+        category: PRODUCTS_CATEGORY.MEATS,
+        id: `${Math.random()}`,
+        details: '',
+        image: vealPic,
+    },
+    {
+        title: 'Pork',
+        shop: 'OrganicMeats',
+        price: 7.41,
+        category: PRODUCTS_CATEGORY.MEATS,
+        id: `${Math.random()}`,
+        details: '',
+        image: porkpic,
+    },
 ]
 
 let paprika = products[0]
@@ -105,6 +196,10 @@ let lettuce = products[3]
 let carrot = products[4]
 let redOnion = products[5]
 let banana = products[6]
+
+// for (const product of products) {
+//
+// }
 
 export {
     products,

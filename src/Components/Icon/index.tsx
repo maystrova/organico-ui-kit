@@ -9,6 +9,7 @@ export enum ICON_SIZE {
     LARGE = 'large',
     X_LARGE = 'x-large',
     XX_LARGE = 'xx-large',
+    XXX_LARGE = 'xxx-large',
 }
 
 interface IconProps {

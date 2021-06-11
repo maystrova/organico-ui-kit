@@ -1,6 +1,7 @@
 export enum PRODUCTS_CATEGORY {
-    VEGETABLES = 'Vegetables',
-    FRUITS = 'Fruits',
+    VEGETABLES = 'vegetables',
+    FRUITS = 'fruits',
+    MEATS = 'meats',
 }
 
 export type ProductType = {

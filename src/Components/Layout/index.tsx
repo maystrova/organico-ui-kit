@@ -4,12 +4,13 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import { ProductPage } from 'Pages/ProductPage'
 import { CartPage } from 'Pages/CartPage'
-import { ProductType } from 'Pages/ProductPage/types'
+import { PRODUCTS_CATEGORY, ProductType } from 'Pages/ProductPage/types'
 import { WishlistPage } from 'Pages/WishlistPage'
 
 import { paprika, products } from 'services/products/products'
 import { ROUTES } from 'services/route'
 import { CategoriesPage } from '../../Pages/CategoriesPage'
+import { CategoryPage } from '../../Pages/CategoryPage'
 
 const Layout = () => {
     const [cart, setCart] = useState<ProductType[]>([])
@@ -32,6 +33,11 @@ const Layout = () => {
 
         setWishlist(newWishlist)
     }
+
+    const goToCategoryPage = (
+        productCategory: PRODUCTS_CATEGORY,
+        product: ProductType,
+    ): void => {}
 
     return (
         <BrowserRouter>
@@ -63,6 +69,10 @@ const Layout = () => {
                             onBackToPreviousPageClicked={() => {}}
                             onCardClicked={() => {}}
                         />
+                    </Route>
+
+                    <Route path={ROUTES.CATEGORY} exact>
+                        <CategoryPage />
                     </Route>
                 </Switch>
             </StyledLayout>

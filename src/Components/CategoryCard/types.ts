@@ -1,6 +1,8 @@
+import { PRODUCTS_CATEGORY } from '../../Pages/ProductPage/types'
+
 export type CategoryType = {
     title: string
     icon: string
     backgroundColor: string
-    onClick: () => void
+    path?: PRODUCTS_CATEGORY
 }

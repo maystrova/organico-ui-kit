@@ -9,9 +9,10 @@ const ROUTES = {
     HOME_SCREEN: '/home-screen',
     MY_WISHLIST: '/wishlist',
     CATEGORIES: '/categories',
-    CATEGORY_VEGETABLES: '/category/vegetables',
-    CATEGORY_FRUITS: '/category/fruits',
-    CATEGORY_MEAT: '/category/meat',
+    CATEGORY: '/categories/:category',
+    // CATEGORY_VEGETABLES: '/category/vegetables',
+    // CATEGORY_FRUITS: '/category/fruits',
+    // CATEGORY_MEAT: '/category/meat',
 
     MY_COUPON: '/coupon',
     SEARCH_VIEW: '/search-view',

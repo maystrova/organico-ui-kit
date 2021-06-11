@@ -7,17 +7,9 @@ import { StyledCategoryCard } from './style'
 
 interface CategoryCardProps extends CategoryType {}
 
-const CategoryCard = ({
-    title,
-    icon,
-    backgroundColor,
-    onClick,
-}: CategoryType) => {
+const CategoryCard = ({ title, icon, backgroundColor }: CategoryType) => {
     return (
-        <StyledCategoryCard
-            style={{ backgroundColor: backgroundColor }}
-            onClick={onClick}
-        >
+        <StyledCategoryCard style={{ backgroundColor: backgroundColor }}>
             <Icon size={ICON_SIZE.XX_LARGE} src={icon} />
             <span>{title}</span>
         </StyledCategoryCard>

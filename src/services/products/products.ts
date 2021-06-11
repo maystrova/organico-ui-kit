@@ -106,6 +106,10 @@ let carrot = products[4]
 let redOnion = products[5]
 let banana = products[6]
 
+// for (const product of products) {
+//
+// }
+
 export {
     products,
     paprika,

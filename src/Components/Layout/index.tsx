@@ -62,7 +62,6 @@ const Layout = () => {
                     <Route path={ROUTES.CATEGORIES} exact>
                         <CategoriesPage
                             onBackToPreviousPageClicked={() => {}}
-                            onCardClicked={() => {}}
                         />
                     </Route>
 

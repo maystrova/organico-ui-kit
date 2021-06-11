@@ -16,7 +16,6 @@ import meats from 'services/products/pics/meat.png'
 
 interface CategoriesPageProps {
     onBackToPreviousPageClicked: () => void
-    onCardClicked: () => void
 }
 
 const categories: CategoryType[] = [

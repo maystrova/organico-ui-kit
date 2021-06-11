@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const StyledCategoryCard = styled.button`
+const StyledCategoryCard = styled.div`
     width: 100%;
     height: 130px;
     padding: 20px;
@@ -9,8 +9,6 @@ const StyledCategoryCard = styled.button`
     font-size: 14px;
     display: grid;
     grid-row-gap: 20px;
-    outline: none;
-    border: none;
     cursor: pointer;
 `
 

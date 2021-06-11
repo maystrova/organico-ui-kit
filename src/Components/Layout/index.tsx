@@ -34,11 +34,6 @@ const Layout = () => {
         setWishlist(newWishlist)
     }
 
-    const goToCategoryPage = (
-        productCategory: PRODUCTS_CATEGORY,
-        product: ProductType,
-    ): void => {}
-
     return (
         <BrowserRouter>
             <StyledLayout>

@@ -18,4 +18,10 @@ const StyledCategoryCardImage = styled.div`
     align-items: center;
 `
 
-export { StyledCategoryCard, StyledCategoryCardImage }
+const StyledCategoryCardTitle = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+
+export { StyledCategoryCard, StyledCategoryCardImage, StyledCategoryCardTitle }

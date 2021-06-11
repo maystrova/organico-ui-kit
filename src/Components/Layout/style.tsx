@@ -4,7 +4,7 @@ const GlobalStyle = createGlobalStyle`
 body {
     margin: 0;
     background-color: #fff;
-  letter-spacing: 0.1px;
+    letter-spacing: 0.1px;
 }
 
 *,

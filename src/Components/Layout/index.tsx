@@ -4,13 +4,14 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import { ProductPage } from 'Pages/ProductPage'
 import { CartPage } from 'Pages/CartPage'
-import { PRODUCTS_CATEGORY, ProductType } from 'Pages/ProductPage/types'
+import { ProductType } from 'Pages/ProductPage/types'
 import { WishlistPage } from 'Pages/WishlistPage'
 
 import { paprika, products } from 'services/products/products'
 import { ROUTES } from 'services/route'
-import { CategoriesPage } from '../../Pages/CategoriesPage'
-import { CategoryPage } from '../../Pages/CategoryPage'
+import { CategoriesPage } from 'Pages/CategoriesPage'
+import { CategoryPage } from 'Pages/CategoryPage'
+import { Menu } from 'Components/Menu'
 
 const Layout = () => {
     const [cart, setCart] = useState<ProductType[]>([])
@@ -69,6 +70,7 @@ const Layout = () => {
                         <CategoryPage />
                     </Route>
                 </Switch>
+                <Menu />
             </StyledLayout>
         </BrowserRouter>
     )

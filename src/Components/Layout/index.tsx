@@ -16,7 +16,6 @@ import { Menu } from 'Components/Menu'
 const Layout = () => {
     const [cart, setCart] = useState<ProductType[]>([])
     const [wishlist, setWishlist] = useState<ProductType[]>(products)
-    const [isActive, setIsActive] = useState<boolean>(false)
 
     const addToWishlist = (product: ProductType): void => {
         const newWishlist = [product, ...wishlist]
@@ -63,8 +62,6 @@ const Layout = () => {
                     </Route>
                     <Route path={ROUTES.CATEGORIES} exact>
                         <CategoriesPage
-                            itemColor={isActive ? '#00D066' : '#696975'}
-                            onMenuActionClicked={() => setIsActive(true)}
                             onBackToPreviousPageClicked={() => {}}
                         />
                     </Route>

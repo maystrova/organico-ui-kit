@@ -16,8 +16,6 @@ import meats from 'services/products/pics/meat.png'
 
 interface CategoriesPageProps {
     onBackToPreviousPageClicked: () => void
-    itemColor: string
-    onMenuActionClicked: () => void
 }
 
 const categories: CategoryType[] = [
@@ -43,8 +41,6 @@ const categories: CategoryType[] = [
 
 const CategoriesPage = ({
     onBackToPreviousPageClicked,
-    onMenuActionClicked,
-    itemColor,
 }: CategoriesPageProps) => {
     return (
         <StyledCategoriesPage>

@@ -44,8 +44,6 @@ const StyledMenu = styled.div`
     }
 `
 
-const StyledMenuAction = styled.div``
-
 const StyledMenuItem = styled.div`
     display: flex;
     justify-content: center;
@@ -53,4 +51,4 @@ const StyledMenuItem = styled.div`
     margin-bottom: 10px;
 `
 
-export { StyledMenu, StyledMenuItem, StyledMenuContainer, StyledMenuAction }
+export { StyledMenu, StyledMenuItem, StyledMenuContainer }

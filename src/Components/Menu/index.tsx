@@ -8,12 +8,7 @@ import { ReactComponent as ProfileIcon } from 'Components/Menu/pics/profile-icon
 
 import { ROUTES } from 'services/route'
 
-import {
-    StyledMenu,
-    StyledMenuItem,
-    StyledMenuContainer,
-    StyledMenuAction,
-} from './style'
+import { StyledMenu, StyledMenuItem, StyledMenuContainer } from './style'
 
 interface MenuType {
     title: string
@@ -34,10 +29,8 @@ const Menu = () => {
             <StyledMenu>
                 {MENU_ITEMS.map(menuItem => (
                     <NavLink to={menuItem.path} activeClassName='active' exact>
-                        <StyledMenuAction>
-                            <StyledMenuItem>{menuItem.icon}</StyledMenuItem>
-                            <StyledMenuItem>{menuItem.title}</StyledMenuItem>
-                        </StyledMenuAction>
+                        <StyledMenuItem>{menuItem.icon}</StyledMenuItem>
+                        <StyledMenuItem>{menuItem.title}</StyledMenuItem>
                     </NavLink>
                 ))}
             </StyledMenu>

@@ -4,17 +4,19 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import { ProductPage } from 'Pages/ProductPage'
 import { CartPage } from 'Pages/CartPage'
-import { PRODUCTS_CATEGORY, ProductType } from 'Pages/ProductPage/types'
+import { ProductType } from 'Pages/ProductPage/types'
 import { WishlistPage } from 'Pages/WishlistPage'
 
 import { paprika, products } from 'services/products/products'
 import { ROUTES } from 'services/route'
-import { CategoriesPage } from '../../Pages/CategoriesPage'
-import { CategoryPage } from '../../Pages/CategoryPage'
+import { CategoriesPage } from 'Pages/CategoriesPage'
+import { CategoryPage } from 'Pages/CategoryPage'
+import { Menu } from 'Components/Menu'
 
 const Layout = () => {
     const [cart, setCart] = useState<ProductType[]>([])
     const [wishlist, setWishlist] = useState<ProductType[]>(products)
+    const [isActive, setIsActive] = useState<boolean>(false)
 
     const addToWishlist = (product: ProductType): void => {
         const newWishlist = [product, ...wishlist]
@@ -61,6 +63,8 @@ const Layout = () => {
                     </Route>
                     <Route path={ROUTES.CATEGORIES} exact>
                         <CategoriesPage
+                            itemColor={isActive ? '#00D066' : '#696975'}
+                            onMenuActionClicked={() => setIsActive(true)}
                             onBackToPreviousPageClicked={() => {}}
                         />
                     </Route>
@@ -69,6 +73,7 @@ const Layout = () => {
                         <CategoryPage />
                     </Route>
                 </Switch>
+                <Menu />
             </StyledLayout>
         </BrowserRouter>
     )

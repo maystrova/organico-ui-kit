@@ -2,10 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
-import { CategoryCard } from '../../Components/CategoryCard'
+import { CategoryCard } from 'Components/CategoryCard'
 
-import { CategoryType } from '../../Components/CategoryCard/types'
-import { PRODUCTS_CATEGORY } from '../ProductPage/types'
+import { CategoryType } from 'Components/CategoryCard/types'
+import { PRODUCTS_CATEGORY } from 'Pages/ProductPage/types'
 
 import { StyledCardsList, StyledTitledHeader } from 'Pages/WishlistPage/style'
 import { StyledCategoriesPage } from './style'
@@ -16,6 +16,8 @@ import meats from 'services/products/pics/meat.png'
 
 interface CategoriesPageProps {
     onBackToPreviousPageClicked: () => void
+    itemColor: string
+    onMenuActionClicked: () => void
 }
 
 const categories: CategoryType[] = [
@@ -41,6 +43,8 @@ const categories: CategoryType[] = [
 
 const CategoriesPage = ({
     onBackToPreviousPageClicked,
+    onMenuActionClicked,
+    itemColor,
 }: CategoriesPageProps) => {
     return (
         <StyledCategoriesPage>

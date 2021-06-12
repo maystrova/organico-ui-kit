@@ -4,7 +4,6 @@ import { ReactComponent as WishLogo } from './wishlist.svg'
 
 import { StyledAddToWishlist } from './style'
 
-
 interface AddToWishlistProps {
     onClick: () => void
     isAdded: boolean

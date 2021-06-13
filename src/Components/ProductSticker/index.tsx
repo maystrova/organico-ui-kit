@@ -9,6 +9,7 @@ import {
     StyledProductStickerInfo,
 } from './style'
 import { PRODUCT_TYPE } from 'services/products/products'
+import { getBackgroundColorForProduct } from 'Pages/WishlistPage'
 
 interface ProductStickerProps {
     image: string
@@ -18,7 +19,7 @@ interface ProductStickerProps {
 
 const ProductSticker = ({ image, price, title }: ProductStickerProps) => {
     return (
-        <StyledProductSticker type={PRODUCT_TYPE.DEFAULT}>
+        <StyledProductSticker type={getBackgroundColorForProduct(title)}>
             <StyledProductStickerIcon>
                 <Icon size={ICON_SIZE.X_LARGE} src={image} />
             </StyledProductStickerIcon>

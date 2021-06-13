@@ -33,7 +33,7 @@ const getTotalPrice = (products: ProductType[]): number => {
 }
 
 const CartPage = ({}: CartPageProps) => {
-    const store = useContext(OrganicContext)
+    const { store, dispatch } = useContext(OrganicContext)
 
     return (
         <StyledCartPage>

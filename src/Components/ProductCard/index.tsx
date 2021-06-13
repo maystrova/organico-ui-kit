@@ -20,7 +20,7 @@ interface ProductCardProps {
     product: ProductType
     type: PRODUCT_TYPE
     isShowAction: boolean
-    onWishClick: () => void
+    onWishClick: (productId: string) => void
     isAdded: boolean
 }
 
@@ -35,7 +35,10 @@ const ProductCard = ({
         <StyledProductCard type={type}>
             <StyledProductCardHeader>
                 <Icon size={ICON_SIZE.XXX_LARGE} src={product.image} />
-                <AddToWishlist onClick={onWishClick} isAdded={isAdded} />
+                <AddToWishlist
+                    onClick={() => onWishClick(product.id)}
+                    isAdded={isAdded}
+                />
             </StyledProductCardHeader>
             <StyledProductTitles>
                 <h3>{product.title}</h3>

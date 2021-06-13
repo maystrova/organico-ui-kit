@@ -1,8 +1,10 @@
-import React, { createContext, ReactChild } from 'react'
+import React, { createContext, useReducer, ReactChild, Dispatch } from 'react'
 import { products } from 'services/products/products'
 import { ProductType } from '../Pages/ProductPage/types'
+import { reducer } from './reducer'
+import { ACTION } from './actions'
 
-interface StoreType {
+export interface StoreType {
     products: ProductType[]
     wishList: ProductType[]
     cart: ProductType[]
@@ -14,7 +16,13 @@ const INITIAL_STORE: StoreType = {
     wishList: [],
 }
 
-export const OrganicContext = createContext(INITIAL_STORE)
+export const OrganicContext = createContext<{
+    store: StoreType
+    dispatch: Dispatch<{ action: ACTION; data: any }>
+}>({
+    store: INITIAL_STORE,
+    dispatch: () => null,
+})
 
 interface OrganicProviderProps {
     children:
@@ -25,8 +33,10 @@ interface OrganicProviderProps {
 }
 
 export const OrganicProvider = ({ children }: OrganicProviderProps) => {
+    const [store, dispatch] = useReducer(reducer, INITIAL_STORE)
+
     return (
-        <OrganicContext.Provider value={INITIAL_STORE}>
+        <OrganicContext.Provider value={{ store, dispatch }}>
             {children}
         </OrganicContext.Provider>
     )

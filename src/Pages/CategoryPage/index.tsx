@@ -7,11 +7,12 @@ import { getBackgroundColorForProduct } from '../WishlistPage'
 import { OrganicContext } from 'context/storeContext'
 
 import { StyledCategoryPage } from './style'
+import { ACTION } from '../../context/actions'
 
 interface CategoryPageProps {}
 
 const CategoryPage = ({}: CategoryPageProps) => {
-    const store = useContext(OrganicContext)
+    const { store, dispatch } = useContext(OrganicContext)
 
     let params = useParams<{ category: string }>()
 
@@ -22,14 +23,23 @@ const CategoryPage = ({}: CategoryPageProps) => {
     return (
         <StyledCategoryPage>
             {goods.map(product => {
+                const isAddedToWishlist: boolean = store.wishList.some(
+                    wishlistProduct => wishlistProduct.id === product.id,
+                )
+
                 return (
                     <ProductCard
-                        isAdded={false}
+                        isAdded={isAddedToWishlist}
                         type={getBackgroundColorForProduct(product.title)}
                         key={product.id}
                         product={product}
                         isShowAction={true}
-                        onWishClick={() => {}}
+                        onWishClick={productId => {
+                            dispatch({
+                                action: ACTION.ADD_TO_WISHLIST,
+                                data: productId,
+                            })
+                        }}
                     />
                 )
             })}

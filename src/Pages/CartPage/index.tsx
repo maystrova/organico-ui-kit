@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 
 import { broccoli } from 'services/products/products'
+import { OrganicContext } from 'context/storeContext'
 
 import { ProductSticker } from 'Components/ProductSticker'
 import { Icon, ICON_SIZE } from 'Components/Icon'
 import { Button, BUTTON_TYPE } from 'Components/Button'
 import { ProductType } from 'Pages/ProductPage/types'
-import { products } from 'services/products/products'
 
 import shopIcon from './pics/shop-icon.svg'
 
@@ -22,8 +22,6 @@ import {
 
 interface CartPageProps {}
 
-const goods: ProductType[] = products
-
 const getTotalPrice = (products: ProductType[]): number => {
     let totalPrice: number = 0
 
@@ -35,6 +33,8 @@ const getTotalPrice = (products: ProductType[]): number => {
 }
 
 const CartPage = ({}: CartPageProps) => {
+    const store = useContext(OrganicContext)
+
     return (
         <StyledCartPage>
             <StyledCartPageHeader>My Cart</StyledCartPageHeader>
@@ -47,7 +47,7 @@ const CartPage = ({}: CartPageProps) => {
                     <h3>{broccoli.shop}</h3>
                 </StyledCardPageShop>
 
-                {goods.map(product => (
+                {store.products.map(product => (
                     <ProductSticker
                         image={product.image}
                         title={product.title}
@@ -59,7 +59,7 @@ const CartPage = ({}: CartPageProps) => {
             <StyledCartPageFooter>
                 <StyledCartPageTotal>
                     <span>Total</span>
-                    <h2>${getTotalPrice(products)}</h2>
+                    <h2>${getTotalPrice(store.products)}</h2>
                 </StyledCartPageTotal>
                 <Button
                     type={BUTTON_TYPE.PRIMARY}

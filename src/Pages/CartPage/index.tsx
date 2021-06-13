@@ -6,6 +6,7 @@ import { ProductSticker } from 'Components/ProductSticker'
 import { Icon, ICON_SIZE } from 'Components/Icon'
 import { Button, BUTTON_TYPE } from 'Components/Button'
 import { ProductType } from 'Pages/ProductPage/types'
+import { products } from 'services/products/products'
 
 import shopIcon from './pics/shop-icon.svg'
 
@@ -23,6 +24,8 @@ interface CartPageProps {
     products: ProductType[]
 }
 
+const goods: ProductType[] = products
+
 const CartPage = ({ products }: CartPageProps) => {
     const [productCards, setProductCards] = useState<ProductType[]>([])
 
@@ -38,11 +41,19 @@ const CartPage = ({ products }: CartPageProps) => {
                     <h3>{broccoli.shop}</h3>
                 </StyledCardPageShop>
 
-                <ProductSticker
-                    product={broccoli}
-                    type={PRODUCT_TYPE.BROCCOLI}
-                />
-                <ProductSticker product={carrot} type={PRODUCT_TYPE.CARROT} />
+                {goods.map(product => (
+                    <ProductSticker
+                        image={product.image}
+                        title={product.title}
+                        price={product.price}
+                    />
+                ))}
+
+                {/*<ProductSticker*/}
+                {/*    product={broccoli}*/}
+                {/*    type={PRODUCT_TYPE.BROCCOLI}*/}
+                {/*/>*/}
+                {/*<ProductSticker product={carrot} type={PRODUCT_TYPE.CARROT} />*/}
             </StyledCartPageInfo>
             <StyledCartPageFooter>
                 <StyledCartPageTotal>

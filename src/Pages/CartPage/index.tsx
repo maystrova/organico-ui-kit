@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 
-import { broccoli, carrot, PRODUCT_TYPE } from 'services/products/products'
+import { broccoli } from 'services/products/products'
 
 import { ProductSticker } from 'Components/ProductSticker'
 import { Icon, ICON_SIZE } from 'Components/Icon'
 import { Button, BUTTON_TYPE } from 'Components/Button'
 import { ProductType } from 'Pages/ProductPage/types'
+import { products } from 'services/products/products'
 
 import shopIcon from './pics/shop-icon.svg'
 
@@ -19,13 +20,21 @@ import {
     StyledCartPageTotal,
 } from './style'
 
-interface CartPageProps {
-    products: ProductType[]
+interface CartPageProps {}
+
+const goods: ProductType[] = products
+
+const getTotalPrice = (products: ProductType[]): number => {
+    let totalPrice: number = 0
+
+    for (const product of products) {
+        totalPrice = totalPrice + product.price
+    }
+
+    return totalPrice
 }
 
-const CartPage = ({ products }: CartPageProps) => {
-    const [productCards, setProductCards] = useState<ProductType[]>([])
-
+const CartPage = ({}: CartPageProps) => {
     return (
         <StyledCartPage>
             <StyledCartPageHeader>My Cart</StyledCartPageHeader>
@@ -38,16 +47,19 @@ const CartPage = ({ products }: CartPageProps) => {
                     <h3>{broccoli.shop}</h3>
                 </StyledCardPageShop>
 
-                <ProductSticker
-                    product={broccoli}
-                    type={PRODUCT_TYPE.BROCCOLI}
-                />
-                <ProductSticker product={carrot} type={PRODUCT_TYPE.CARROT} />
+                {goods.map(product => (
+                    <ProductSticker
+                        image={product.image}
+                        title={product.title}
+                        price={product.price}
+                        key={product.id}
+                    />
+                ))}
             </StyledCartPageInfo>
             <StyledCartPageFooter>
                 <StyledCartPageTotal>
                     <span>Total</span>
-                    <h2>$9.98</h2>
+                    <h2>${getTotalPrice(products)}</h2>
                 </StyledCartPageTotal>
                 <Button
                     type={BUTTON_TYPE.PRIMARY}

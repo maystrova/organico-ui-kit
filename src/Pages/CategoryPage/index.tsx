@@ -24,6 +24,7 @@ const CategoryPage = ({}: CategoryPageProps) => {
                     <ProductCard
                         isAdded={false}
                         type={getBackgroundColorForProduct(product.title)}
+                        key={product.id}
                         product={product}
                         isShowAction={true}
                         onWishClick={() => {}}

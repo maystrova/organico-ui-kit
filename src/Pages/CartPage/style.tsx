@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 
-const StyledCartPage = styled.div`
-    position: relative;
-`
+const StyledCartPage = styled.div``
 
 const StyledCartPageHeader = styled.header`
     height: 65px;
@@ -27,10 +25,11 @@ const StyledCardPageShopIcon = styled.div`
     margin-right: 16px;
 `
 
-const StyledCartPageFooter = styled.footer`
+const StyledCartPageFooter = styled.div`
     display: grid;
     grid-template-columns: max-content 1fr;
     grid-gap: 40px;
+    height: 150px;
 `
 
 const StyledCartPageTotal = styled.div`

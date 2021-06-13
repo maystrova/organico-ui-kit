@@ -28,7 +28,12 @@ const Menu = () => {
         <StyledMenuContainer>
             <StyledMenu>
                 {MENU_ITEMS.map(menuItem => (
-                    <NavLink to={menuItem.path} activeClassName='active' exact>
+                    <NavLink
+                        key={menuItem.title}
+                        to={menuItem.path}
+                        activeClassName='active'
+                        exact
+                    >
                         <StyledMenuItem>{menuItem.icon}</StyledMenuItem>
                         <StyledMenuItem>{menuItem.title}</StyledMenuItem>
                     </NavLink>

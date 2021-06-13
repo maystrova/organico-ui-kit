@@ -51,7 +51,7 @@ const Layout = () => {
                         />
                     </Route>
                     <Route path={ROUTES.MY_CART} exact>
-                        <CartPage products={cart} />
+                        <CartPage />
                     </Route>
                     <Route path={ROUTES.MY_WISHLIST} exact>
                         <WishlistPage

@@ -1,34 +1,33 @@
 import React from 'react'
-
-import { ProductType } from 'Pages/ProductPage/types'
 import { Count, COUNT_FONTSIZE, COUNTING_SIZE } from 'Components/Count'
 import { Icon, ICON_SIZE } from 'Components/Icon'
 
 import {
+    StyledProductSticker,
+    StyledProductStickerCount,
     StyledProductStickerIcon,
     StyledProductStickerInfo,
-    StyledProductStickerCount,
-    StyledProductSticker,
 } from './style'
-import { PRODUCT_TYPE } from 'services/products/products'
+import { getBackgroundColorForProduct } from 'Pages/WishlistPage'
 
 interface ProductStickerProps {
-    product: ProductType
-    type: PRODUCT_TYPE
+    image: string
+    title: string
+    price: number
 }
 
-const ProductSticker = ({ product, type }: ProductStickerProps) => {
+const ProductSticker = ({ image, price, title }: ProductStickerProps) => {
     return (
-        <StyledProductSticker type={type}>
+        <StyledProductSticker type={getBackgroundColorForProduct(title)}>
             <StyledProductStickerIcon>
-                <Icon size={ICON_SIZE.X_LARGE} src={product.image} />
+                <Icon size={ICON_SIZE.X_LARGE} src={image} />
             </StyledProductStickerIcon>
             <StyledProductStickerInfo>
-                <h4>{product.title}</h4>
+                <h4>{title}</h4>
                 <StyledProductStickerCount>
                     1 Kilogram
                 </StyledProductStickerCount>
-                <h4>${product.price}</h4>
+                <h4>${price}</h4>
             </StyledProductStickerInfo>
             <Count
                 fontSize={COUNT_FONTSIZE.PRODUCT_CARD}

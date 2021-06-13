@@ -8,7 +8,6 @@ import {
     StyledProductStickerIcon,
     StyledProductStickerInfo,
 } from './style'
-import { PRODUCT_TYPE } from 'services/products/products'
 import { getBackgroundColorForProduct } from 'Pages/WishlistPage'
 
 interface ProductStickerProps {

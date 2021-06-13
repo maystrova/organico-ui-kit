@@ -55,6 +55,7 @@ const CategoriesPage = ({
                             title={category.title}
                             icon={category.icon}
                             backgroundColor={category.backgroundColor}
+                            key={category.title}
                         />
                     </Link>
                 ))}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { broccoli, carrot, PRODUCT_TYPE } from 'services/products/products'
+import { broccoli } from 'services/products/products'
 
 import { ProductSticker } from 'Components/ProductSticker'
 import { Icon, ICON_SIZE } from 'Components/Icon'
@@ -20,15 +20,11 @@ import {
     StyledCartPageTotal,
 } from './style'
 
-interface CartPageProps {
-    products: ProductType[]
-}
+interface CartPageProps {}
 
 const goods: ProductType[] = products
 
-const CartPage = ({ products }: CartPageProps) => {
-    const [productCards, setProductCards] = useState<ProductType[]>([])
-
+const CartPage = ({}: CartPageProps) => {
     return (
         <StyledCartPage>
             <StyledCartPageHeader>My Cart</StyledCartPageHeader>
@@ -46,14 +42,9 @@ const CartPage = ({ products }: CartPageProps) => {
                         image={product.image}
                         title={product.title}
                         price={product.price}
+                        key={product.id}
                     />
                 ))}
-
-                {/*<ProductSticker*/}
-                {/*    product={broccoli}*/}
-                {/*    type={PRODUCT_TYPE.BROCCOLI}*/}
-                {/*/>*/}
-                {/*<ProductSticker product={carrot} type={PRODUCT_TYPE.CARROT} />*/}
             </StyledCartPageInfo>
             <StyledCartPageFooter>
                 <StyledCartPageTotal>

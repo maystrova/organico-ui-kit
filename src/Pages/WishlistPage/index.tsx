@@ -1,15 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
 import { ProductCard } from 'Components/ProductCard'
 import { ProductType } from 'Pages/ProductPage/types'
 
 import {
-    StyledWishlistPage,
     StyledCardsList,
     StyledTitledHeader,
+    StyledWishlistPage,
 } from './style'
 import { PRODUCT_TYPE } from '../../services/products/products'
+import { OrganicContext } from '../../context/storeContext'
+import { ACTION } from '../../context/actions'
 
 interface WishlistPageProps {
     onBackButtonClick: () => void
@@ -52,6 +54,8 @@ const WishlistPage = ({
     onWishClick,
     products,
 }: WishlistPageProps) => {
+    const { store, dispatch } = useContext(OrganicContext)
+
     return (
         <StyledWishlistPage>
             <StyledTitledHeader>
@@ -62,6 +66,12 @@ const WishlistPage = ({
                 {products.map(product => {
                     return (
                         <ProductCard
+                            onAddToCartClick={productId => {
+                                dispatch({
+                                    action: ACTION.ADD_TO_CART,
+                                    data: productId,
+                                })
+                            }}
                             isAdded={true}
                             key={product.title}
                             product={product}

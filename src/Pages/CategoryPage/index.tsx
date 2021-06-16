@@ -1,13 +1,13 @@
 import React, { useContext } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { ProductType } from '../ProductPage/types'
-import { ProductCard } from '../../Components/ProductCard'
-import { getBackgroundColorForProduct } from '../WishlistPage'
+import { ProductType } from 'Pages/ProductPage/types'
+import { ProductCard } from 'Components/ProductCard'
+import { getBackgroundColorForProduct } from 'Pages/WishlistPage'
 import { OrganicContext } from 'context/storeContext'
 
 import { StyledCategoryPage } from './style'
-import { ACTION } from '../../context/actions'
+import { ACTION } from 'context/actions'
 
 interface CategoryPageProps {}
 
@@ -29,6 +29,12 @@ const CategoryPage = ({}: CategoryPageProps) => {
 
                 return (
                     <ProductCard
+                        onAddToCartClick={productId => {
+                            dispatch({
+                                action: ACTION.ADD_TO_CART,
+                                data: productId,
+                            })
+                        }}
                         isAdded={isAddedToWishlist}
                         type={getBackgroundColorForProduct(product.title)}
                         key={product.id}

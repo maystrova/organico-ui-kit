@@ -22,6 +22,7 @@ interface ProductCardProps {
     isShowAction: boolean
     onWishClick: (productId: string) => void
     isAdded: boolean
+    onAddToCartClick: (productId: string) => void
 }
 
 const ProductCard = ({
@@ -30,6 +31,7 @@ const ProductCard = ({
     isShowAction,
     onWishClick,
     isAdded,
+    onAddToCartClick,
 }: ProductCardProps) => {
     return (
         <StyledProductCard type={type}>
@@ -53,6 +55,7 @@ const ProductCard = ({
                 <StyledCardAction>
                     <h3>{product.price} /Kg</h3>
                     <StyledCountButton
+                        onClick={() => onAddToCartClick(product.id)}
                         style={{
                             width: COUNTING_SIZE.PRODUCT_PAGE,
                             height: COUNTING_SIZE.PRODUCT_PAGE,

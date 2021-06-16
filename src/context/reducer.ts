@@ -17,6 +17,21 @@ const addToWishList = (currentState: StoreType, productId: string) => {
     return currentState
 }
 
+const addToCart = (currentState: StoreType, productId: string) => {
+    const foundProduct: ProductType | undefined = currentState.products.find(
+        product => product.id === productId,
+    )
+    if (foundProduct) {
+        const newCart = [foundProduct, ...currentState.cart]
+
+        return {
+            ...currentState,
+            cart: newCart,
+        }
+    }
+    return currentState
+}
+
 export const reducer = (
     currentState: StoreType,
     payload: { action: ACTION; data: any },
@@ -24,6 +39,8 @@ export const reducer = (
     switch (payload.action) {
         case ACTION.ADD_TO_WISHLIST:
             return addToWishList(currentState, payload.data)
+        case ACTION.ADD_TO_CART:
+            return addToCart(currentState, payload.data)
         default:
             return currentState
     }

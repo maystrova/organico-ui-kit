@@ -38,6 +38,7 @@ const ProductCard = ({
             <StyledProductCardHeader>
                 <Icon size={ICON_SIZE.XXX_LARGE} src={product.image} />
                 <AddToWishlist
+                    product={product}
                     onClick={() => onWishClick(product.id)}
                     isAdded={isAdded}
                 />

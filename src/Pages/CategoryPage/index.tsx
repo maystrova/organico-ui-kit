@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { ProductType } from 'Pages/ProductPage/types'
 import { ProductCard } from 'Components/ProductCard'
@@ -28,25 +29,26 @@ const CategoryPage = ({}: CategoryPageProps) => {
                 )
 
                 return (
-                    <ProductCard
-                        onAddToCartClick={productId => {
-                            dispatch({
-                                action: ACTION.ADD_TO_CART,
-                                data: productId,
-                            })
-                        }}
-                        isAdded={isAddedToWishlist}
-                        type={getBackgroundColorForProduct(product.title)}
-                        key={product.id}
-                        product={product}
-                        isShowAction={true}
-                        onWishClick={productId => {
-                            dispatch({
-                                action: ACTION.ADD_TO_WISHLIST,
-                                data: productId,
-                            })
-                        }}
-                    />
+                    <Link to={`/product/${product.alias}`} key={product.id}>
+                        <ProductCard
+                            onAddToCartClick={productId => {
+                                dispatch({
+                                    action: ACTION.ADD_TO_CART,
+                                    data: productId,
+                                })
+                            }}
+                            isAdded={isAddedToWishlist}
+                            type={getBackgroundColorForProduct(product.title)}
+                            product={product}
+                            isShowAction={true}
+                            onWishClick={productId => {
+                                dispatch({
+                                    action: ACTION.ADD_TO_WISHLIST,
+                                    data: productId,
+                                })
+                            }}
+                        />
+                    </Link>
                 )
             })}
         </StyledCategoryPage>

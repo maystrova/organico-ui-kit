@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 import { Button, BUTTON_TYPE } from 'Components/Button'
 import { Banner } from 'Components/Banner'
@@ -10,21 +10,24 @@ import { ProductType } from './types'
 
 import {
     StyledChatButton,
+    StyledHeader,
+    StyledProductAddToCard,
     StyledProductDetails,
     StyledProductFooter,
-    StyledProductAddToCard,
     StyledProductPage,
-    StyledHeader,
     StyledProductPageInfo,
     StyledProductPageMain,
     StyledProductPagePicture,
-    StyledProductTitles,
     StyledProductShop,
+    StyledProductTitles,
 } from './style'
 
 import time from './pics/time-icon.svg'
 import categoryIcon from './pics/category-icon.svg'
 import chat from 'Components/Layout/pics/chat.svg'
+import { OrganicContext } from '../../context/storeContext'
+import { ACTION } from '../../context/actions'
+import { useParams } from 'react-router-dom'
 
 interface ProductPageProps {
     backButton: () => void
@@ -40,14 +43,26 @@ const ProductPage = ({
     product,
 }: ProductPageProps) => {
     const [isAddedToWishList, setAddToWishList] = useState<boolean>(false)
+    const { store, dispatch } = useContext(OrganicContext)
+
+    let params = useParams<{ alias: string }>()
+
+    const goods: ProductType[] = store.products.filter(
+        product => product.alias === params.alias,
+    )
 
     return (
         <StyledProductPage>
             <StyledHeader>
                 <BackToPreviousPage onClick={backButton} />
                 <AddToWishlist
+                    product={product}
                     isAdded={isAddedToWishList}
-                    onClick={() => {
+                    onClick={productId => {
+                        dispatch({
+                            action: ACTION.ADD_TO_WISHLIST,
+                            data: productId,
+                        })
                         setAddToWishList(!isAddedToWishList)
                         onWishButtonClicked(product)
                     }}

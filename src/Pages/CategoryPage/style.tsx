@@ -6,6 +6,12 @@ const StyledCategoryPage = styled.div`
     grid-gap: 20px;
     overflow: scroll;
     margin-bottom: 100px;
+
+    a {
+        text-decoration: none;
+        cursor: pointer;
+        color: black;
+    }
 `
 
 export { StyledCategoryPage }

@@ -21,6 +21,7 @@ const MENU_ITEMS: MenuType[] = [
     { title: 'Explore', icon: <ExploreIcon />, path: ROUTES.CATEGORIES },
     { title: 'Cart', icon: <CartIcon />, path: ROUTES.MY_CART },
     { title: 'Profile', icon: <ProfileIcon />, path: ROUTES.PROFILE },
+    { title: 'MY_WISHLIST', icon: <ProfileIcon />, path: ROUTES.MY_WISHLIST },
 ]
 
 const Menu = () => {

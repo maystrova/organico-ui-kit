@@ -50,12 +50,14 @@ const CategoriesPage = ({
             </StyledTitledHeader>
             <StyledCardsList>
                 {categories.map(category => (
-                    <Link to={`/categories/${category.path}`}>
+                    <Link
+                        to={`/categories/${category.path}`}
+                        key={category.title}
+                    >
                         <CategoryCard
                             title={category.title}
                             icon={category.icon}
                             backgroundColor={category.backgroundColor}
-                            key={category.title}
                         />
                     </Link>
                 ))}

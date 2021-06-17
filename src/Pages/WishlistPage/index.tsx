@@ -2,21 +2,19 @@ import React, { useContext } from 'react'
 
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
 import { ProductCard } from 'Components/ProductCard'
-import { ProductType } from 'Pages/ProductPage/types'
+
+import { PRODUCT_TYPE } from 'services/products/products'
+import { OrganicContext } from 'context/storeContext'
+import { ACTION } from 'context/actions'
 
 import {
     StyledCardsList,
     StyledTitledHeader,
     StyledWishlistPage,
 } from './style'
-import { PRODUCT_TYPE } from '../../services/products/products'
-import { OrganicContext } from '../../context/storeContext'
-import { ACTION } from '../../context/actions'
 
 interface WishlistPageProps {
     onBackButtonClick: () => void
-    onWishClick: (productId: string) => void
-    products: ProductType[]
 }
 
 export const getBackgroundColorForProduct = (title: string): PRODUCT_TYPE => {
@@ -49,11 +47,7 @@ export const getBackgroundColorForProduct = (title: string): PRODUCT_TYPE => {
     }
 }
 
-const WishlistPage = ({
-    onBackButtonClick,
-    onWishClick,
-    products,
-}: WishlistPageProps) => {
+const WishlistPage = ({ onBackButtonClick }: WishlistPageProps) => {
     const { store, dispatch } = useContext(OrganicContext)
 
     return (
@@ -63,7 +57,7 @@ const WishlistPage = ({
                 <span>My Wishlist</span>
             </StyledTitledHeader>
             <StyledCardsList>
-                {products.map(product => {
+                {store.wishList.map(product => {
                     return (
                         <ProductCard
                             onAddToCartClick={productId => {
@@ -77,7 +71,12 @@ const WishlistPage = ({
                             product={product}
                             type={getBackgroundColorForProduct(product.title)}
                             isShowAction={false}
-                            onWishClick={() => onWishClick(product.id)}
+                            onWishClick={productId => {
+                                dispatch({
+                                    action: ACTION.DELETE_FROM_WISHLIST,
+                                    data: productId,
+                                })
+                            }}
                         />
                     )
                 })}

@@ -27,13 +27,13 @@ const Layout = () => {
         setCart(newCart)
     }
 
-    const deleteFromWishlist = (productIdForDelete: string): void => {
-        const newWishlist: ProductType[] = wishlist.filter(
-            product => product.id !== productIdForDelete,
-        )
-
-        setWishlist(newWishlist)
-    }
+    // const deleteFromWishlist = (productIdForDelete: string): void => {
+    //     const newWishlist: ProductType[] = wishlist.filter(
+    //         product => product.id !== productIdForDelete,
+    //     )
+    //
+    //     setWishlist(newWishlist)
+    // }
 
     return (
         <BrowserRouter>
@@ -54,11 +54,7 @@ const Layout = () => {
                         <CartPage />
                     </Route>
                     <Route path={ROUTES.MY_WISHLIST} exact>
-                        <WishlistPage
-                            products={wishlist}
-                            onWishClick={deleteFromWishlist}
-                            onBackButtonClick={() => {}}
-                        />
+                        <WishlistPage onBackButtonClick={() => {}} />
                     </Route>
                     <Route path={ROUTES.CATEGORIES} exact>
                         <CategoriesPage

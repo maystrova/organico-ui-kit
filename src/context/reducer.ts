@@ -17,6 +17,19 @@ const addToWishList = (currentState: StoreType, productId: string) => {
     return currentState
 }
 
+const deleteFromWishList = (currentState: StoreType, productId: string) => {
+    const filteredWishlist = currentState.wishList.filter(
+        product => product.id !== productId,
+    )
+    console.log('filteredWishlist', filteredWishlist)
+    console.log('currentState', currentState)
+    const newWishlist = {
+        ...currentState,
+        wishList: filteredWishlist,
+    }
+    return newWishlist
+}
+
 const addToCart = (currentState: StoreType, productId: string) => {
     const foundProduct: ProductType | undefined = currentState.products.find(
         product => product.id === productId,
@@ -41,6 +54,8 @@ export const reducer = (
             return addToWishList(currentState, payload.data)
         case ACTION.ADD_TO_CART:
             return addToCart(currentState, payload.data)
+        case ACTION.DELETE_FROM_WISHLIST:
+            return deleteFromWishList(currentState, payload.data)
         default:
             return currentState
     }

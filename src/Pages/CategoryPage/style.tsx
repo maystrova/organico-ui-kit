@@ -5,6 +5,7 @@ const StyledCategoryPage = styled.div`
     grid-template-columns: 1fr 1fr;
     grid-gap: 20px;
     overflow: scroll;
+    margin-bottom: 100px;
 `
 
 export { StyledCategoryPage }

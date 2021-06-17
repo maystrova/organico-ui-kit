@@ -12,6 +12,7 @@ const StyledCardsList = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 18px;
+    margin-bottom: 100px;
 
     a {
         text-decoration: none;

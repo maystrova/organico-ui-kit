@@ -2,6 +2,8 @@ import React from 'react'
 
 import { Icon, ICON_SIZE } from 'Components/Icon'
 import { AddToWishlist } from 'Components/AddToWishlist'
+import { Link } from 'react-router-dom'
+
 import { ProductType } from 'Pages/ProductPage/types'
 import { COUNTING_SIZE } from 'Components/Count'
 import { PRODUCT_TYPE } from 'services/products/products'
@@ -36,25 +38,32 @@ const ProductCard = ({
     return (
         <StyledProductCard type={type}>
             <StyledProductCardHeader>
-                <Icon size={ICON_SIZE.XXX_LARGE} src={product.image} />
+                <Link to={`/product/${product.alias}`} key={product.id}>
+                    <Icon size={ICON_SIZE.XXX_LARGE} src={product.image} />
+                </Link>
                 <AddToWishlist
                     product={product}
                     onClick={() => onWishClick(product.id)}
                     isAdded={isAdded}
                 />
             </StyledProductCardHeader>
-            <StyledProductTitles>
-                <h3>{product.title}</h3>
-                {isShowAction ? (
-                    <StyledProductShop>{product.shop}</StyledProductShop>
-                ) : (
-                    <StyledProductShop>1 Kilogram</StyledProductShop>
-                )}
-            </StyledProductTitles>
+            <Link to={`/product/${product.alias}`} key={product.id}>
+                <StyledProductTitles>
+                    <h3>{product.title}</h3>
+                    {isShowAction ? (
+                        <StyledProductShop>{product.shop}</StyledProductShop>
+                    ) : (
+                        <StyledProductShop>1 Kilogram</StyledProductShop>
+                    )}
+                </StyledProductTitles>
+            </Link>
 
             {isShowAction && (
                 <StyledCardAction>
-                    <h3>{product.price} /Kg</h3>
+                    <Link to={`/product/${product.alias}`} key={product.id}>
+                        <h3>{product.price} /Kg</h3>
+                    </Link>
+
                     <StyledCountButton
                         onClick={() => onAddToCartClick(product.id)}
                         style={{

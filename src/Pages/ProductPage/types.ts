@@ -12,4 +12,5 @@ export type ProductType = {
     shop: string
     category: PRODUCTS_CATEGORY
     id: string
+    alias: string
 }

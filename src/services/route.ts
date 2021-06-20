@@ -4,13 +4,12 @@ export type RouteType = {
 }
 
 const ROUTES = {
-    DETAIL: '/product',
     MY_CART: '/cart',
     HOME_SCREEN: '/home-screen',
     MY_WISHLIST: '/wishlist',
     CATEGORIES: '/categories',
     CATEGORY: '/categories/:category',
-    PRODUCT: '/product/:productId',
+    PRODUCT: '/product/:alias',
     MY_COUPON: '/coupon',
     SEARCH_VIEW: '/search-view',
     SEARCH_RESULT: '/search-result',

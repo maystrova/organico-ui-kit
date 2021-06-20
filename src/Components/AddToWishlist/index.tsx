@@ -1,19 +1,24 @@
-import React, { Component } from 'react'
+import React, { Component, useContext } from 'react'
 
 import { ReactComponent as WishLogo } from './wishlist.svg'
 
 import { StyledAddToWishlist } from './style'
+import { ProductType } from '../../Pages/ProductPage/types'
+import { OrganicContext } from '../../context/storeContext'
 
 interface AddToWishlistProps {
-    onClick: () => void
+    product: ProductType
+    onClick: (productId: string) => void
     isAdded: boolean
 }
 
-const AddToWishlist = ({ onClick, isAdded }: AddToWishlistProps) => {
+const AddToWishlist = ({ onClick, isAdded, product }: AddToWishlistProps) => {
+    const { store, dispatch } = useContext(OrganicContext)
+
     return (
         <StyledAddToWishlist
             style={{ backgroundColor: isAdded ? '#FB4141' : 'transparent' }}
-            onClick={onClick}
+            onClick={() => onClick(product.id)}
         >
             <WishLogo
                 fill={isAdded ? '#FB4141' : 'transparent'}

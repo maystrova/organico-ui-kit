@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { GlobalStyle, StyledLayout } from './style'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { ProductPage } from 'Pages/ProductPage'
 import { CartPage } from 'Pages/CartPage'
@@ -12,10 +13,13 @@ import { ROUTES } from 'services/route'
 import { CategoriesPage } from 'Pages/CategoriesPage'
 import { CategoryPage } from 'Pages/CategoryPage'
 import { Menu } from 'Components/Menu'
+import { OrganicContext } from 'context/storeContext'
+import { ACTION } from '../../context/actions'
 
 const Layout = () => {
     const [cart, setCart] = useState<ProductType[]>([])
     const [wishlist, setWishlist] = useState<ProductType[]>(products)
+    const { store, dispatch } = useContext(OrganicContext)
 
     const addToWishlist = (product: ProductType): void => {
         const newWishlist = [product, ...wishlist]
@@ -27,40 +31,35 @@ const Layout = () => {
         setCart(newCart)
     }
 
-    const deleteFromWishlist = (productIdForDelete: string): void => {
-        const newWishlist: ProductType[] = wishlist.filter(
-            product => product.id !== productIdForDelete,
-        )
-
-        setWishlist(newWishlist)
-    }
-
     return (
         <BrowserRouter>
             <StyledLayout>
                 <GlobalStyle />
                 <Switch>
-                    <Route path={[ROUTES.DETAIL, '/']} exact>
+                    <Route path={ROUTES.PRODUCT} exact>
                         <ProductPage
-                            product={paprika}
+                            onAddToWishlistClicked={productId => {
+                                dispatch({
+                                    action: ACTION.ADD_TO_WISHLIST,
+                                    data: productId,
+                                })
+                            }}
                             backButton={() => {}}
-                            onAddToCartClick={product => addToCart(product)}
-                            onWishButtonClicked={product =>
-                                addToWishlist(product)
-                            }
+                            onAddToCartClick={productId => {
+                                dispatch({
+                                    action: ACTION.ADD_TO_CART,
+                                    data: productId,
+                                })
+                            }}
                         />
                     </Route>
                     <Route path={ROUTES.MY_CART} exact>
                         <CartPage />
                     </Route>
                     <Route path={ROUTES.MY_WISHLIST} exact>
-                        <WishlistPage
-                            products={wishlist}
-                            onWishClick={deleteFromWishlist}
-                            onBackButtonClick={() => {}}
-                        />
+                        <WishlistPage onBackButtonClick={() => {}} />
                     </Route>
-                    <Route path={ROUTES.CATEGORIES} exact>
+                    <Route path={[ROUTES.CATEGORIES, '/']} exact>
                         <CategoriesPage
                             onBackToPreviousPageClicked={() => {}}
                         />

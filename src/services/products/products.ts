@@ -46,6 +46,7 @@ const products: ProductType[] = [
             '    Its green, yellow, red, or purple fruit',
         category: PRODUCTS_CATEGORY.VEGETABLES,
         id: `${Math.random()}`,
+        alias: 'paprika',
     },
     {
         title: 'Apple',
@@ -55,6 +56,7 @@ const products: ProductType[] = [
         details: '',
         category: PRODUCTS_CATEGORY.FRUITS,
         id: `${Math.random()}`,
+        alias: 'apple',
     },
     {
         title: 'Orange',
@@ -64,6 +66,7 @@ const products: ProductType[] = [
         shop: 'FruitShop',
         price: 2.44,
         image: orangePic,
+        alias: 'orange',
     },
 
     {
@@ -74,6 +77,7 @@ const products: ProductType[] = [
         shop: 'FruitShop',
         price: 5.44,
         image: pineapplePic,
+        alias: 'pineapple',
     },
     {
         title: 'Kiwi',
@@ -83,6 +87,7 @@ const products: ProductType[] = [
         shop: 'VegShop',
         price: 4.11,
         image: kiwiPic,
+        alias: 'kiwi',
     },
     {
         title: 'Broccoli',
@@ -93,6 +98,7 @@ const products: ProductType[] = [
         price: 4.99,
         shop: 'Popey shop',
         id: `${Math.random()}`,
+        alias: 'broccoli',
     },
     {
         title: 'Potato',
@@ -101,6 +107,7 @@ const products: ProductType[] = [
         image: potatoPic,
         category: PRODUCTS_CATEGORY.VEGETABLES,
         id: `${Math.random()}`,
+        alias: 'potato',
 
         details:
             'The potato is a root vegetable native to the Americas, a starchy tuber of the plant Solanum tuberosum, and the plant itself is a perennial in the nightshade family, Solanaceae.',
@@ -112,6 +119,7 @@ const products: ProductType[] = [
         image: lettucePic,
         price: 3.4,
         id: `${Math.random()}`,
+        alias: 'lettuce',
 
         details:
             'Lettuce (Lactuca sativa) is an annual plant of the daisy family, Asteraceae. It is most often grown as a leaf vegetable, but sometimes for its stem and seeds. Lettuce is most often used for salads, although it is also seen in other kinds of food, such as soups, sandwiches and wraps; it can also be grilled.',
@@ -121,6 +129,8 @@ const products: ProductType[] = [
         price: 2.5,
         shop: 'Popey shop',
         category: PRODUCTS_CATEGORY.VEGETABLES,
+        alias: 'carrot',
+
         id: `${Math.random()}`,
         details:
             'The carrot (Daucus carota subsp. sativus) is a root vegetable, usually orange in color, though purple, black, red, white, and yellow cultivars exist.[2][3][4] They are a domesticated form of the wild carrot, Daucus carota, native to Europe and Southwestern Asia. The plant probably originated in Persia and was originally cultivated for its leaves and seeds. The most commonly eaten part of the plant is the taproot, although the stems and leaves are also eaten. The domestic carrot has been selectively bred for its greatly enlarged, more palatable, less woody-textured taproot.',
@@ -131,6 +141,7 @@ const products: ProductType[] = [
         shop: 'Vegytail',
         price: 4.3,
         category: PRODUCTS_CATEGORY.VEGETABLES,
+        alias: 'red-onion',
 
         id: `${Math.random()}`,
 
@@ -145,6 +156,7 @@ const products: ProductType[] = [
         category: PRODUCTS_CATEGORY.FRUITS,
 
         id: `${Math.random()}`,
+        alias: 'banana',
 
         details:
             'A banana is an elongated, edible fruit – botanically a berry[1][2] – produced by several kinds of large herbaceous flowering plants in the genus Musa.[3] In some countries, bananas used for cooking may be called "plantains", distinguishing them from dessert bananas. The fruit is variable in size, color, and firmness, but is usually elongated and curved, with soft flesh rich in starch covered with a rind, which may be green, yellow, red, purple, or brown when ripe. The fruits grow in clusters hanging from the top of the plant. Almost all modern edible seedless (parthenocarp) bananas come from two wild species – Musa acuminata and Musa balbisiana. The scientific names of most cultivated bananas are Musa acuminata, Musa balbisiana, and Musa × paradisiaca for the hybrid Musa acuminata × M. balbisiana, depending on their genomic constitution. The old scientific name for this hybrid, Musa sapientum, is no longer used.',
@@ -155,6 +167,7 @@ const products: ProductType[] = [
         shop: 'OrganicMeats',
         price: 5.34,
         category: PRODUCTS_CATEGORY.MEATS,
+        alias: 'chicken',
         id: `${Math.random()}`,
         details:
             'Chicken is the most common type of poultry in the world. Owing to the relative ease and low cost of raising them in comparison to animals such as cattle or hogs, chickens have become prevalent in numerous cuisines.Chicken can be prepared in a vast range of ways, including baking, grilling, barbecuing, frying, and boiling. Since the latter half of the 20th century, prepared chicken has become a staple of fast food. Chicken is sometimes cited as being more healthful than red meat, with lower concentrations of cholesterol and saturated fat.',
@@ -165,6 +178,7 @@ const products: ProductType[] = [
         shop: 'OrganicMeats',
         price: 6.32,
         category: PRODUCTS_CATEGORY.MEATS,
+        alias: 'beef',
         id: `${Math.random()}`,
         details: '',
         image: beefPic,
@@ -174,6 +188,7 @@ const products: ProductType[] = [
         shop: 'OrganicMeats',
         price: 10.23,
         category: PRODUCTS_CATEGORY.MEATS,
+        alias: 'veal',
         id: `${Math.random()}`,
         details: '',
         image: vealPic,
@@ -183,6 +198,7 @@ const products: ProductType[] = [
         shop: 'OrganicMeats',
         price: 7.41,
         category: PRODUCTS_CATEGORY.MEATS,
+        alias: 'pork',
         id: `${Math.random()}`,
         details: '',
         image: porkpic,

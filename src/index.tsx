@@ -2,11 +2,15 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
+import { OrganicProvider } from 'context/storeContext'
+
 import reportWebVitals from './reportWebVitals'
 
 ReactDOM.render(
     <React.StrictMode>
-        <App />
+        <OrganicProvider>
+            <App />
+        </OrganicProvider>
     </React.StrictMode>,
     document.getElementById('root'),
 )

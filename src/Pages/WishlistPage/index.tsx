@@ -67,7 +67,7 @@ const WishlistPage = ({ onBackButtonClick }: WishlistPageProps) => {
                                 })
                             }}
                             isAdded={true}
-                            key={product.title}
+                            key={product.id}
                             product={product}
                             type={getBackgroundColorForProduct(product.title)}
                             isShowAction={false}

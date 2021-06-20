@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import { useParams } from 'react-router-dom'
-import { Link } from 'react-router-dom'
 
 import { ProductType } from 'Pages/ProductPage/types'
 import { ProductCard } from 'Components/ProductCard'
@@ -39,12 +38,18 @@ const CategoryPage = ({}: CategoryPageProps) => {
                         isAdded={isAddedToWishlist}
                         type={getBackgroundColorForProduct(product.title)}
                         product={product}
+                        key={product.id}
                         isShowAction={true}
                         onWishClick={productId => {
                             dispatch({
                                 action: ACTION.ADD_TO_WISHLIST,
                                 data: productId,
                             })
+                            isAddedToWishlist &&
+                                dispatch({
+                                    action: ACTION.DELETE_FROM_WISHLIST,
+                                    data: productId,
+                                })
                         }}
                     />
                 )

@@ -18,7 +18,7 @@ interface MenuType {
 }
 
 const MENU_ITEMS: MenuType[] = [
-    { title: 'Home', icon: <HomeIcon />, path: ROUTES.DETAIL },
+    { title: 'Home', icon: <HomeIcon />, path: ROUTES.PRODUCT },
     { title: 'Explore', icon: <ExploreIcon />, path: ROUTES.CATEGORIES },
     { title: 'Cart', icon: <CartIcon />, path: ROUTES.MY_CART },
     {

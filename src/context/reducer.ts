@@ -21,8 +21,6 @@ const deleteFromWishList = (currentState: StoreType, productId: string) => {
     const filteredWishlist = currentState.wishList.filter(
         product => product.id !== productId,
     )
-    console.log('filteredWishlist', filteredWishlist)
-    console.log('currentState', currentState)
     const newWishlist = {
         ...currentState,
         wishList: filteredWishlist,

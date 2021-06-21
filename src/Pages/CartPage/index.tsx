@@ -18,14 +18,14 @@ import {
     StyledCartPageInfo,
     StyledCartPageTotal,
 } from './style'
-import { StyledEmptySpace } from '../WishlistPage/style'
+import { StyledEmptySpace } from 'Pages/WishlistPage/style'
 
 interface CartPageProps {}
 
-const getTotalPrice = (products: ProductType[]): number => {
+const getTotalPrice = (cart: ProductType[]): number => {
     let totalPrice: number = 0
 
-    for (const product of products) {
+    for (const product of cart) {
         totalPrice = totalPrice + product.price
     }
 
@@ -64,7 +64,7 @@ const CartPage = ({}: CartPageProps) => {
             <StyledCartPageFooter>
                 <StyledCartPageTotal>
                     <span>Total</span>
-                    <h2>${getTotalPrice(store.products)}</h2>
+                    <h2>${store.cart.length && getTotalPrice(store.cart)}</h2>
                 </StyledCartPageTotal>
                 <Button
                     type={BUTTON_TYPE.PRIMARY}

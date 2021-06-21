@@ -5,11 +5,17 @@ export type RouteType = {
 
 const ROUTES = {
     MY_CART: '/cart',
+    EDIT_PROFILE: '/edit-profile',
+    PAYMENT_METHOD: 'Payment Method',
     HOME_SCREEN: '/home-screen',
     MY_WISHLIST: '/wishlist',
+    CUSTOMER_SERVICE: 'Customer Service',
+    CHANGE_PASSWORD: 'Change Password',
     CATEGORIES: '/categories',
+    ADDRESS: '/address',
     CATEGORY: '/categories/:category',
     PRODUCT: '/product/:alias',
+    LOGOUT: '/logout',
     MY_COUPON: '/coupon',
     SEARCH_VIEW: '/search-view',
     SEARCH_RESULT: '/search-result',

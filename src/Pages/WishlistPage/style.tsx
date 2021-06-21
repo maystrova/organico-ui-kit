@@ -20,4 +20,14 @@ const StyledCardsList = styled.div`
     }
 `
 
-export { StyledWishlistPage, StyledTitledHeader, StyledCardsList }
+const StyledEmptyWishlist = styled.div`
+    font-size: 50px;
+    color: grey;
+`
+
+export {
+    StyledWishlistPage,
+    StyledTitledHeader,
+    StyledCardsList,
+    StyledEmptyWishlist,
+}

@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 
 import { Button, BUTTON_TYPE } from 'Components/Button'
@@ -10,7 +9,6 @@ import { AddToWishlist } from 'Components/AddToWishlist'
 import { Count, COUNT_FONTSIZE, COUNTING_SIZE } from 'Components/Count'
 import { ProductType } from './types'
 import { OrganicContext } from 'context/storeContext'
-import { ACTION } from 'context/actions'
 
 import {
     StyledChatButton,

@@ -15,6 +15,7 @@ import { CategoryPage } from 'Pages/CategoryPage'
 import { Menu } from 'Components/Menu'
 import { OrganicContext } from 'context/storeContext'
 import { ACTION } from '../../context/actions'
+import { ProfilePage } from 'Pages/ProfilePage'
 
 const Layout = () => {
     const [cart, setCart] = useState<ProductType[]>([])
@@ -67,6 +68,9 @@ const Layout = () => {
 
                     <Route path={ROUTES.CATEGORY} exact>
                         <CategoryPage />
+                    </Route>
+                    <Route path={ROUTES.PROFILE}>
+                        <ProfilePage />
                     </Route>
                 </Switch>
                 <Menu />

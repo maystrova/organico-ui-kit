@@ -11,6 +11,7 @@ import {
     StyledCardsList,
     StyledTitledHeader,
     StyledWishlistPage,
+    StyledEmptyWishlist,
 } from './style'
 
 interface WishlistPageProps {
@@ -56,31 +57,39 @@ const WishlistPage = ({ onBackButtonClick }: WishlistPageProps) => {
                 <BackToPreviousPage onClick={onBackButtonClick} />
                 <span>My Wishlist</span>
             </StyledTitledHeader>
-            <StyledCardsList>
-                {store.wishList.map(product => {
-                    return (
-                        <ProductCard
-                            onAddToCartClick={productId => {
-                                dispatch({
-                                    action: ACTION.ADD_TO_CART,
-                                    data: productId,
-                                })
-                            }}
-                            isAdded={true}
-                            key={product.id}
-                            product={product}
-                            type={getBackgroundColorForProduct(product.title)}
-                            isShowAction={false}
-                            onWishClick={productId => {
-                                dispatch({
-                                    action: ACTION.DELETE_FROM_WISHLIST,
-                                    data: productId,
-                                })
-                            }}
-                        />
-                    )
-                })}
-            </StyledCardsList>
+            {store.wishList.length ? (
+                <StyledCardsList>
+                    {store.wishList.map(product => {
+                        return (
+                            <ProductCard
+                                onAddToCartClick={productId => {
+                                    dispatch({
+                                        action: ACTION.ADD_TO_CART,
+                                        data: productId,
+                                    })
+                                }}
+                                isAdded={true}
+                                key={product.id}
+                                product={product}
+                                type={getBackgroundColorForProduct(
+                                    product.title,
+                                )}
+                                isShowAction={false}
+                                onWishClick={productId => {
+                                    dispatch({
+                                        action: ACTION.DELETE_FROM_WISHLIST,
+                                        data: productId,
+                                    })
+                                }}
+                            />
+                        )
+                    })}
+                </StyledCardsList>
+            ) : (
+                <StyledEmptyWishlist>
+                    Your wishlist is empty :(
+                </StyledEmptyWishlist>
+            )}
         </StyledWishlistPage>
     )
 }

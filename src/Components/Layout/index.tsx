@@ -15,7 +15,7 @@ import { CategoryPage } from 'Pages/CategoryPage'
 import { Menu } from 'Components/Menu'
 import { OrganicContext } from 'context/storeContext'
 import { ACTION } from '../../context/actions'
-import { ProfilePage } from '../../Pages/ProfilePage'
+import { ProfilePage } from 'Pages/ProfilePage'
 
 const Layout = () => {
     const [cart, setCart] = useState<ProductType[]>([])

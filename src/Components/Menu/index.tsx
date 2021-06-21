@@ -5,7 +5,6 @@ import { ReactComponent as CartIcon } from 'Components/Menu/pics/cart-icon.svg'
 import { ReactComponent as HomeIcon } from 'Components/Menu/pics/home-icon.svg'
 import { ReactComponent as ExploreIcon } from 'Components/Menu/pics/explore-icon.svg'
 import { ReactComponent as ProfileIcon } from 'Components/Menu/pics/profile-icon.svg'
-import { ReactComponent as WishlistIcon } from 'Components/AddToWishlist/wishlist.svg'
 
 import { ROUTES } from 'services/route'
 
@@ -21,11 +20,11 @@ const MENU_ITEMS: MenuType[] = [
     { title: 'Home', icon: <HomeIcon />, path: ROUTES.PRODUCT },
     { title: 'Explore', icon: <ExploreIcon />, path: ROUTES.CATEGORIES },
     { title: 'Cart', icon: <CartIcon />, path: ROUTES.MY_CART },
-    {
-        title: 'Wishlist',
-        icon: <WishlistIcon width={'20px'} />,
-        path: ROUTES.MY_WISHLIST,
-    },
+    // {
+    //     title: 'Wishlist',
+    //     icon: <WishlistIcon width={'20px'} />,
+    //     path: ROUTES.MY_WISHLIST,
+    // },
     { title: 'Profile', icon: <ProfileIcon />, path: ROUTES.PROFILE },
 ]
 

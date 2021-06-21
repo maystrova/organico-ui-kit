@@ -3,7 +3,7 @@ import { Icon, ICON_SIZE } from 'Components/Icon'
 import {
     ProfileActionSticker,
     ProfileActionsType,
-} from '../../Components/ProfileActionSticker'
+} from 'Components/ProfileActionSticker'
 
 import {
     StyledProfileInfo,
@@ -11,6 +11,7 @@ import {
     StyledUserAvatar,
     StyledUserPhoneNumber,
     StyledUserName,
+    StyledProfileActions,
 } from './style'
 import { StyledHeader } from 'Pages/ProductPage/style'
 
@@ -25,7 +26,7 @@ import paymentMethod from 'Components/ProfileActionSticker/pics/payment-method.s
 import customerService from 'Components/ProfileActionSticker/pics/customer-service.svg'
 import changePassword from 'Components/ProfileActionSticker/pics/change-password.svg'
 import logout from 'Components/ProfileActionSticker/pics/logout.svg'
-import { StyledProfileActionSticker } from '../../Components/ProfileActionSticker/style'
+import { ROUTES } from '../../services/route'
 
 export const DEFAULT_USER: UserType = {
     name: 'Vasya',
@@ -35,21 +36,27 @@ export const DEFAULT_USER: UserType = {
 }
 
 const PROFILE_ACTIONS: ProfileActionsType[] = [
-    { title: 'Edit Profile', icon: editProfile, onButtonClick: () => {} },
-    { title: 'My Orders', icon: myOrders, onButtonClick: () => {} },
-    { title: 'My Wishlist', icon: myWishlist, onButtonClick: () => {} },
-    { title: 'My Address', icon: myAddress, onButtonClick: () => {} },
-    { title: 'Payment Method', icon: paymentMethod, onButtonClick: () => {} },
+    { title: 'Edit Profile', icon: editProfile, path: ROUTES.EDIT_PROFILE },
+    { title: 'My Orders', icon: myOrders, path: ROUTES.MY_ORDERS_ONGOING },
+    { title: 'My Wishlist', icon: myWishlist, path: ROUTES.MY_WISHLIST },
+    { title: 'My Address', icon: myAddress, path: ROUTES.ADDRESS },
+    {
+        title: 'Payment Method',
+        icon: paymentMethod,
+        path: ROUTES.PAYMENT_METHOD,
+    },
     {
         title: 'Customer Service',
         icon: customerService,
-        onButtonClick: () => {},
+        path: ROUTES.CUSTOMER_SERVICE,
     },
-    { title: 'Change Password', icon: changePassword, onButtonClick: () => {} },
-    { title: 'Logout', icon: logout, onButtonClick: () => {} },
+    {
+        title: 'Change Password',
+        icon: changePassword,
+        path: ROUTES.CHANGE_PASSWORD,
+    },
+    { title: 'Logout', icon: logout, path: ROUTES.LOGOUT },
 ]
-
-const actions: ProfileActionsType[] = PROFILE_ACTIONS
 
 const ProfilePage = ({}) => {
     return (
@@ -71,14 +78,16 @@ const ProfilePage = ({}) => {
                     <span>{DEFAULT_USER.phoneNumber}</span>{' '}
                 </StyledUserPhoneNumber>
             </StyledProfileInfo>
-            {PROFILE_ACTIONS.map(action => (
-                <ProfileActionSticker
-                    icon={action.icon}
-                    title={action.title}
-                    onButtonClick={action.onButtonClick}
-                    key={action.title}
-                />
-            ))}
+            <StyledProfileActions>
+                {PROFILE_ACTIONS.map(action => (
+                    <ProfileActionSticker
+                        path={action.path}
+                        icon={action.icon}
+                        title={action.title}
+                        key={action.title}
+                    />
+                ))}
+            </StyledProfileActions>
         </StyledProfilePage>
     )
 }

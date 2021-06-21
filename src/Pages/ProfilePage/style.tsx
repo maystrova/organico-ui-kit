@@ -34,10 +34,17 @@ const StyledUserPhoneNumber = styled.div`
     align-items: center;
 `
 
+const StyledProfileActions = styled.div`
+    display: grid;
+    grid-row-gap: 15px;
+    margin-bottom: 100px;
+`
+
 export {
     StyledProfilePage,
     StyledProfileInfo,
     StyledUserAvatar,
     StyledUserName,
     StyledUserPhoneNumber,
+    StyledProfileActions,
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Icon, ICON_SIZE } from 'Components/Icon'
+import { Link } from 'react-router-dom'
 
 import {
     StyledProfileActionIcon,
@@ -13,26 +14,22 @@ import further from 'Components/ProfileActionSticker/pics/further.svg'
 export interface ProfileActionsType {
     icon: string
     title: string
-    onButtonClick: () => void
+    path: string
 }
 
-const ProfileActionSticker = ({
-    icon,
-    title,
-    onButtonClick,
-}: ProfileActionsType) => {
+const ProfileActionSticker = ({ icon, title, path }: ProfileActionsType) => {
     return (
-        <StyledProfileActionSticker>
-            <StyledProfileActionInfo>
-                <StyledProfileActionIcon>
-                    <Icon size={ICON_SIZE.X_SMALL} src={icon} />
-                </StyledProfileActionIcon>
-                <span>{title}</span>
-            </StyledProfileActionInfo>
-            <button onClick={onButtonClick}>
+        <Link style={{ textDecoration: 'none', color: 'black' }} to={path}>
+            <StyledProfileActionSticker>
+                <StyledProfileActionInfo>
+                    <StyledProfileActionIcon>
+                        <Icon size={ICON_SIZE.MEDIUM} src={icon} />
+                    </StyledProfileActionIcon>
+                    <span>{title}</span>
+                </StyledProfileActionInfo>
                 <Icon size={ICON_SIZE.X_SMALL} src={further} />
-            </button>
-        </StyledProfileActionSticker>
+            </StyledProfileActionSticker>
+        </Link>
     )
 }
 

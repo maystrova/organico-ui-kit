@@ -11,7 +11,7 @@ import {
     StyledCardsList,
     StyledTitledHeader,
     StyledWishlistPage,
-    StyledEmptyWishlist,
+    StyledEmptySpace,
 } from './style'
 
 interface WishlistPageProps {
@@ -86,9 +86,7 @@ const WishlistPage = ({ onBackButtonClick }: WishlistPageProps) => {
                     })}
                 </StyledCardsList>
             ) : (
-                <StyledEmptyWishlist>
-                    Your wishlist is empty :(
-                </StyledEmptyWishlist>
+                <StyledEmptySpace>Your wishlist is empty :(</StyledEmptySpace>
             )}
         </StyledWishlistPage>
     )

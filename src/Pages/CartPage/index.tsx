@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 
-import { broccoli } from 'services/products/products'
 import { OrganicContext } from 'context/storeContext'
 
 import { ProductSticker } from 'Components/ProductSticker'
@@ -19,6 +18,7 @@ import {
     StyledCartPageInfo,
     StyledCartPageTotal,
 } from './style'
+import { StyledEmptySpace } from '../WishlistPage/style'
 
 interface CartPageProps {}
 
@@ -43,18 +43,23 @@ const CartPage = ({}: CartPageProps) => {
                     <StyledCardPageShopIcon>
                         <Icon size={ICON_SIZE.LARGE} src={shopIcon} />
                     </StyledCardPageShopIcon>
-
-                    <h3>{broccoli.shop}</h3>
+                    {store.cart.map(product => (
+                        <h3 key={product.id}>{product.shop}</h3>
+                    ))}
                 </StyledCardPageShop>
 
-                {store.products.map(product => (
-                    <ProductSticker
-                        image={product.image}
-                        title={product.title}
-                        price={product.price}
-                        key={product.id}
-                    />
-                ))}
+                {store.cart.length ? (
+                    store.cart.map(product => (
+                        <ProductSticker
+                            image={product.image}
+                            title={product.title}
+                            price={product.price}
+                            key={product.id}
+                        />
+                    ))
+                ) : (
+                    <StyledEmptySpace>Your cart is empty :(</StyledEmptySpace>
+                )}
             </StyledCartPageInfo>
             <StyledCartPageFooter>
                 <StyledCartPageTotal>

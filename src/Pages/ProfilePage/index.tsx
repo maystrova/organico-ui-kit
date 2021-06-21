@@ -26,7 +26,7 @@ import paymentMethod from 'Components/ProfileActionSticker/pics/payment-method.s
 import customerService from 'Components/ProfileActionSticker/pics/customer-service.svg'
 import changePassword from 'Components/ProfileActionSticker/pics/change-password.svg'
 import logout from 'Components/ProfileActionSticker/pics/logout.svg'
-import { ROUTES } from '../../services/route'
+import { ROUTES } from 'services/route'
 
 export const DEFAULT_USER: UserType = {
     name: 'Vasya',

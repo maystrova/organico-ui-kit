@@ -57,9 +57,9 @@ const WishlistPage = ({ onBackButtonClick }: WishlistPageProps) => {
                 <BackToPreviousPage onClick={onBackButtonClick} />
                 <span>My Wishlist</span>
             </StyledTitledHeader>
-            <StyledCardsList>
-                {store.wishList.length ? (
-                    store.wishList.map(product => {
+            {store.wishList.length ? (
+                <StyledCardsList>
+                    {store.wishList.map(product => {
                         return (
                             <ProductCard
                                 onAddToCartClick={productId => {
@@ -83,13 +83,13 @@ const WishlistPage = ({ onBackButtonClick }: WishlistPageProps) => {
                                 }}
                             />
                         )
-                    })
-                ) : (
-                    <StyledEmptyWishlist>
-                        Your wishlist is empty
-                    </StyledEmptyWishlist>
-                )}
-            </StyledCardsList>
+                    })}
+                </StyledCardsList>
+            ) : (
+                <StyledEmptyWishlist>
+                    Your wishlist is empty :(
+                </StyledEmptyWishlist>
+            )}
         </StyledWishlistPage>
     )
 }

@@ -1,19 +1,23 @@
 import React, { createContext, useReducer, ReactChild, Dispatch } from 'react'
 import { products } from 'services/products/products'
-import { ProductType } from '../Pages/ProductPage/types'
+import { ProductType } from 'Pages/ProductPage/types'
 import { reducer } from './reducer'
 import { ACTION } from './actions'
+import { UserType } from 'services/user'
+import { DEFAULT_USER } from 'services/user'
 
 export interface StoreType {
     products: ProductType[]
     wishList: ProductType[]
     cart: ProductType[]
+    profile: UserType
 }
 
 const INITIAL_STORE: StoreType = {
     products: products,
     cart: [],
     wishList: [],
+    profile: DEFAULT_USER,
 }
 
 export const OrganicContext = createContext<{

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Icon, ICON_SIZE } from 'Components/Icon'
 import {
     ProfileActionSticker,
@@ -15,9 +15,10 @@ import {
 } from './style'
 import { StyledHeader } from 'Pages/ProductPage/style'
 
+import { ROUTES } from 'services/route'
+import { OrganicContext } from 'context/storeContext'
+
 import notification from 'Pages/ProfilePage/pics/Notification.svg'
-import Vasya from 'Pages/ProfilePage/pics/Vasya-avatar.jpg'
-import { UserType } from './user'
 import editProfile from 'Components/ProfileActionSticker/pics/edit-profile.svg'
 import myOrders from 'Components/ProfileActionSticker/pics/my-orders.svg'
 import myWishlist from 'Components/ProfileActionSticker/pics/my-wishlist.svg'
@@ -26,14 +27,6 @@ import paymentMethod from 'Components/ProfileActionSticker/pics/payment-method.s
 import customerService from 'Components/ProfileActionSticker/pics/customer-service.svg'
 import changePassword from 'Components/ProfileActionSticker/pics/change-password.svg'
 import logout from 'Components/ProfileActionSticker/pics/logout.svg'
-import { ROUTES } from 'services/route'
-
-export const DEFAULT_USER: UserType = {
-    name: 'Vasya',
-    surname: 'Cat',
-    phoneNumber: 92341352,
-    avatar: Vasya,
-}
 
 const PROFILE_ACTIONS: ProfileActionsType[] = [
     { title: 'Edit Profile', icon: editProfile, path: ROUTES.EDIT_PROFILE },
@@ -59,6 +52,8 @@ const PROFILE_ACTIONS: ProfileActionsType[] = [
 ]
 
 const ProfilePage = ({}) => {
+    const { store } = useContext(OrganicContext)
+
     return (
         <StyledProfilePage>
             <StyledHeader>
@@ -67,15 +62,15 @@ const ProfilePage = ({}) => {
             </StyledHeader>
             <StyledProfileInfo>
                 <StyledUserAvatar>
-                    <img src={DEFAULT_USER.avatar} alt='Avatar' />
+                    <img src={store.profile.avatar} alt='Avatar' />
                 </StyledUserAvatar>
                 <StyledUserName>
                     <span>
-                        {DEFAULT_USER.name} {DEFAULT_USER.surname}
+                        {store.profile.name} {store.profile.surname}
                     </span>
                 </StyledUserName>
                 <StyledUserPhoneNumber>
-                    <span>{DEFAULT_USER.phoneNumber}</span>{' '}
+                    <span>{store.profile.phoneNumber}</span>
                 </StyledUserPhoneNumber>
             </StyledProfileInfo>
             <StyledProfileActions>

@@ -44,7 +44,7 @@ const CartPage = ({}: CartPageProps) => {
                         <Icon size={ICON_SIZE.LARGE} src={shopIcon} />
                     </StyledCardPageShopIcon>
                     {store.cart.map(product => (
-                        <h3 key={product.id}>{product.shop}</h3>
+                        <h3 key={product.id}>{product.shop} </h3>
                     ))}
                 </StyledCardPageShop>
 

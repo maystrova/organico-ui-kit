@@ -48,10 +48,6 @@ const ProductPage = ({
         product => product.alias === params.alias,
     )
 
-    console.log(params)
-    console.log(product)
-    console.log(store.products)
-
     return (
         <StyledProductPage>
             {product && (

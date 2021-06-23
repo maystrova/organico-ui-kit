@@ -15,11 +15,13 @@ import plus from './pics/plus.svg'
 export enum COUNTING_SIZE {
     PRODUCT_PAGE = 40,
     PRODUCT_CARD = 32,
+    CART = 30,
 }
 
 export enum COUNT_FONTSIZE {
     PRODUCT_PAGE = 24,
     PRODUCT_CARD = 18,
+    CART = 15,
 }
 
 interface CountProps {
@@ -60,7 +62,10 @@ const Count = ({ width, height, fontSize }: CountProps) => {
             </StyledCountNumber>
             <StyledCountButtonArea>
                 <StyledCountButton
-                    style={{ width: width, height: height }}
+                    style={{
+                        width: width,
+                        height: height,
+                    }}
                     onClick={addProduct}
                 >
                     <Icon size={ICON_SIZE.MEDIUM} src={plus} />

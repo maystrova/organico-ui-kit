@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { ProductType } from 'Pages/ProductPage/types'
@@ -13,6 +13,7 @@ interface CategoryPageProps {}
 
 const CategoryPage = ({}: CategoryPageProps) => {
     const { store, dispatch } = useContext(OrganicContext)
+    const [isAddedToCart, setIsAddedToCart] = useState(false)
 
     let params = useParams<{ category: string }>()
 
@@ -34,6 +35,7 @@ const CategoryPage = ({}: CategoryPageProps) => {
                                 action: ACTION.ADD_TO_CART,
                                 data: productId,
                             })
+                            setIsAddedToCart(!isAddedToCart)
                         }}
                         isAdded={isAddedToWishlist}
                         type={getBackgroundColorForProduct(product.title)}

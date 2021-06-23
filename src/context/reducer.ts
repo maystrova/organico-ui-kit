@@ -1,6 +1,6 @@
 import { StoreType } from './storeContext'
 import { ACTION } from './actions'
-import { ProductType } from '../Pages/ProductPage/types'
+import { ProductType } from 'Pages/ProductPage/types'
 
 const addToWishList = (currentState: StoreType, productId: string) => {
     const foundProduct: ProductType | undefined = currentState.products.find(

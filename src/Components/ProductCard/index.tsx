@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Icon, ICON_SIZE } from 'Components/Icon'
 import { AddToWishlist } from 'Components/AddToWishlist'
 import { Link } from 'react-router-dom'
 
 import { ProductType } from 'Pages/ProductPage/types'
-import { COUNTING_SIZE } from 'Components/Count'
+import { Count, COUNT_FONTSIZE, COUNTING_SIZE } from 'Components/Count'
 import { PRODUCT_TYPE } from 'services/products/products'
 
 import { StyledProductShop, StyledProductTitles } from 'Pages/ProductPage/style'
@@ -14,11 +14,12 @@ import {
     StyledCardAction,
     StyledProductCard,
     StyledProductCardHeader,
+    StyledAddToCart,
 } from './style'
 
 import plus from 'Components/Count/pics/plus.svg'
 
-interface ProductCardProps {
+export interface ProductCardProps {
     product: ProductType
     type: PRODUCT_TYPE
     isShowAction: boolean
@@ -35,6 +36,8 @@ const ProductCard = ({
     isAdded,
     onAddToCartClick,
 }: ProductCardProps) => {
+    const [isAddedToCart, setIsAddedToCart] = useState(false)
+
     return (
         <StyledProductCard type={type}>
             <StyledProductCardHeader>
@@ -64,15 +67,28 @@ const ProductCard = ({
                         <h3>{product.price} /Kg</h3>
                     </Link>
 
-                    <StyledCountButton
-                        onClick={() => onAddToCartClick(product.id)}
-                        style={{
-                            width: COUNTING_SIZE.PRODUCT_PAGE,
-                            height: COUNTING_SIZE.PRODUCT_PAGE,
-                        }}
-                    >
-                        <Icon size={ICON_SIZE.MEDIUM} src={plus} />
-                    </StyledCountButton>
+                    {isAddedToCart ? (
+                        <Count
+                            width={COUNTING_SIZE.CART}
+                            height={COUNTING_SIZE.CART}
+                            fontSize={COUNT_FONTSIZE.CART}
+                        />
+                    ) : (
+                        <StyledAddToCart>
+                            <StyledCountButton
+                                onClick={() => {
+                                    onAddToCartClick(product.id)
+                                    setIsAddedToCart(true)
+                                }}
+                                style={{
+                                    width: COUNTING_SIZE.PRODUCT_PAGE,
+                                    height: COUNTING_SIZE.PRODUCT_PAGE,
+                                }}
+                            >
+                                <Icon size={ICON_SIZE.MEDIUM} src={plus} />
+                            </StyledCountButton>
+                        </StyledAddToCart>
+                    )}
                 </StyledCardAction>
             )}
         </StyledProductCard>

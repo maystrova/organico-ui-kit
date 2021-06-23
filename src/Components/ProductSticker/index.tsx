@@ -9,14 +9,23 @@ import {
     StyledProductStickerInfo,
 } from './style'
 import { getBackgroundColorForProduct } from 'Pages/WishlistPage'
+import { ProductType } from 'Pages/ProductPage/types'
 
 interface ProductStickerProps {
     image: string
     title: string
     price: number
+    onAddToCartClick: (productId: string) => void
+    product: ProductType
 }
 
-const ProductSticker = ({ image, price, title }: ProductStickerProps) => {
+const ProductSticker = ({
+    image,
+    price,
+    title,
+    onAddToCartClick,
+    product,
+}: ProductStickerProps) => {
     return (
         <StyledProductSticker type={getBackgroundColorForProduct(title)}>
             <StyledProductStickerIcon>
@@ -30,6 +39,8 @@ const ProductSticker = ({ image, price, title }: ProductStickerProps) => {
                 <h4>${price}</h4>
             </StyledProductStickerInfo>
             <Count
+                product={product}
+                onAddToCartClick={() => onAddToCartClick(product.id)}
                 fontSize={COUNT_FONTSIZE.PRODUCT_CARD}
                 width={COUNTING_SIZE.PRODUCT_CARD}
                 height={COUNTING_SIZE.PRODUCT_CARD}

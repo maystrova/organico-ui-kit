@@ -69,6 +69,10 @@ const ProductCard = ({
 
                     {isAddedToCart ? (
                         <Count
+                            onAddToCartClick={() =>
+                                onAddToCartClick(product.id)
+                            }
+                            product={product}
                             width={COUNTING_SIZE.CART}
                             height={COUNTING_SIZE.CART}
                             fontSize={COUNT_FONTSIZE.CART}

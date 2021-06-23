@@ -5,12 +5,13 @@ import { Icon, ICON_SIZE } from 'Components/Icon'
 import {
     StyledCount,
     StyledCountButton,
-    StyledCountNumber,
     StyledCountButtonArea,
+    StyledCountNumber,
 } from './style'
 
 import minus from './pics/minus.svg'
 import plus from './pics/plus.svg'
+import { ProductType } from '../../Pages/ProductPage/types'
 
 export enum COUNTING_SIZE {
     PRODUCT_PAGE = 40,
@@ -28,9 +29,17 @@ interface CountProps {
     width: COUNTING_SIZE
     height: COUNTING_SIZE
     fontSize: COUNT_FONTSIZE
+    onAddToCartClick: (productId: string) => void
+    product: ProductType
 }
 
-const Count = ({ width, height, fontSize }: CountProps) => {
+const Count = ({
+    width,
+    height,
+    fontSize,
+    onAddToCartClick,
+    product,
+}: CountProps) => {
     const [amount, setAmount] = useState<number>(1)
 
     const addProduct = () => {
@@ -66,7 +75,10 @@ const Count = ({ width, height, fontSize }: CountProps) => {
                         width: width,
                         height: height,
                     }}
-                    onClick={addProduct}
+                    onClick={() => {
+                        onAddToCartClick(product.id)
+                        addProduct()
+                    }}
                 >
                     <Icon size={ICON_SIZE.MEDIUM} src={plus} />
                 </StyledCountButton>

@@ -27,6 +27,7 @@ import {
 import time from './pics/time-icon.svg'
 import categoryIcon from './pics/category-icon.svg'
 import chat from 'Components/Layout/pics/chat.svg'
+import { ACTION } from '../../context/actions'
 
 interface ProductPageProps {
     backButton: () => void
@@ -40,7 +41,7 @@ const ProductPage = ({
     onAddToWishlistClicked,
 }: ProductPageProps) => {
     const [isAddedToWishList, setAddToWishList] = useState<boolean>(false)
-    const { store } = useContext(OrganicContext)
+    const { store, dispatch } = useContext(OrganicContext)
 
     let params = useParams<{ alias: string }>()
 
@@ -77,6 +78,13 @@ const ProductPage = ({
                             </StyledProductTitles>
                             <div>
                                 <Count
+                                    product={product}
+                                    onAddToCartClick={productId =>
+                                        dispatch({
+                                            action: ACTION.ADD_TO_CART,
+                                            data: productId,
+                                        })
+                                    }
                                     fontSize={COUNT_FONTSIZE.PRODUCT_PAGE}
                                     width={COUNTING_SIZE.PRODUCT_PAGE}
                                     height={COUNTING_SIZE.PRODUCT_PAGE}

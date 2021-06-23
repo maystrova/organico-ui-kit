@@ -19,6 +19,7 @@ import {
     StyledCartPageTotal,
 } from './style'
 import { StyledEmptySpace } from 'Pages/WishlistPage/style'
+import { ACTION } from '../../context/actions'
 
 interface CartPageProps {}
 
@@ -51,6 +52,13 @@ const CartPage = ({}: CartPageProps) => {
                 {store.cart.length ? (
                     store.cart.map(product => (
                         <ProductSticker
+                            onAddToCartClick={productId =>
+                                dispatch({
+                                    action: ACTION.ADD_TO_CART,
+                                    data: productId,
+                                })
+                            }
+                            product={product}
                             image={product.image}
                             title={product.title}
                             price={product.price}

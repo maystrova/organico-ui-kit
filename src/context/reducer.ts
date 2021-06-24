@@ -1,6 +1,6 @@
 import { StoreType } from './storeContext'
 import { ACTION } from './actions'
-import { ProductType } from '../Pages/ProductPage/types'
+import { ProductType } from 'Pages/ProductPage/types'
 
 const addToWishList = (currentState: StoreType, productId: string) => {
     const foundProduct: ProductType | undefined = currentState.products.find(
@@ -21,8 +21,6 @@ const deleteFromWishList = (currentState: StoreType, productId: string) => {
     const filteredWishlist = currentState.wishList.filter(
         product => product.id !== productId,
     )
-    console.log('filteredWishlist', filteredWishlist)
-    console.log('currentState', currentState)
     const newWishlist = {
         ...currentState,
         wishList: filteredWishlist,
@@ -30,19 +28,41 @@ const deleteFromWishList = (currentState: StoreType, productId: string) => {
     return newWishlist
 }
 
-const addToCart = (currentState: StoreType, productId: string) => {
-    const foundProduct: ProductType | undefined = currentState.products.find(
-        product => product.id === productId,
-    )
-    if (foundProduct) {
-        const newCart = [foundProduct, ...currentState.cart]
-
-        return {
-            ...currentState,
-            cart: newCart,
+const addToCart = (
+    currentState: StoreType,
+    product: ProductType,
+): StoreType => {
+    const newProducts = currentState.products.map(storeProduct => {
+        if (storeProduct.id === product.id) {
+            return {
+                ...storeProduct,
+                quantity: product.quantity,
+            }
         }
+        return storeProduct
+    })
+
+    const cartProduct: ProductType | undefined = currentState.cart.find(
+        cartProduct => cartProduct.id === product.id,
+    )
+
+    let newCart: ProductType[] = []
+
+    if (cartProduct) {
+        newCart = currentState.cart.map(cartProduct => {
+            if (cartProduct.id === product.id) {
+                return {
+                    ...cartProduct,
+                    quantity: product.quantity,
+                }
+            }
+            return cartProduct
+        })
+    } else {
+        newCart.push(product)
     }
-    return currentState
+
+    return { ...currentState, products: newProducts, cart: newCart }
 }
 
 export const reducer = (

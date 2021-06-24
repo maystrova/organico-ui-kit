@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Count, COUNT_FONTSIZE, COUNTING_SIZE } from 'Components/Count'
 import { Icon, ICON_SIZE } from 'Components/Icon'
 
@@ -9,14 +9,25 @@ import {
     StyledProductStickerInfo,
 } from './style'
 import { getBackgroundColorForProduct } from 'Pages/WishlistPage'
+import { ProductType } from 'Pages/ProductPage/types'
+import { ACTION } from 'context/actions'
+import { OrganicContext } from 'context/storeContext'
 
 interface ProductStickerProps {
     image: string
     title: string
     price: number
+    product: ProductType
 }
 
-const ProductSticker = ({ image, price, title }: ProductStickerProps) => {
+const ProductSticker = ({
+    image,
+    price,
+    title,
+    product,
+}: ProductStickerProps) => {
+    const { dispatch } = useContext(OrganicContext)
+
     return (
         <StyledProductSticker type={getBackgroundColorForProduct(title)}>
             <StyledProductStickerIcon>
@@ -30,6 +41,16 @@ const ProductSticker = ({ image, price, title }: ProductStickerProps) => {
                 <h4>${price}</h4>
             </StyledProductStickerInfo>
             <Count
+                currentCount={product.quantity}
+                onCountChanged={newCount => {
+                    dispatch({
+                        action: ACTION.ADD_TO_CART,
+                        data: {
+                            ...product,
+                            quantity: newCount,
+                        },
+                    })
+                }}
                 fontSize={COUNT_FONTSIZE.PRODUCT_CARD}
                 width={COUNTING_SIZE.PRODUCT_CARD}
                 height={COUNTING_SIZE.PRODUCT_CARD}

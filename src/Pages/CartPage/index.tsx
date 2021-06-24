@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 
-import { broccoli } from 'services/products/products'
 import { OrganicContext } from 'context/storeContext'
 
 import { ProductSticker } from 'Components/ProductSticker'
@@ -19,13 +18,14 @@ import {
     StyledCartPageInfo,
     StyledCartPageTotal,
 } from './style'
+import { StyledEmptySpace } from 'Pages/WishlistPage/style'
 
 interface CartPageProps {}
 
-const getTotalPrice = (products: ProductType[]): number => {
+const getTotalPrice = (cart: ProductType[]): number => {
     let totalPrice: number = 0
 
-    for (const product of products) {
+    for (const product of cart) {
         totalPrice = totalPrice + product.price
     }
 
@@ -33,7 +33,7 @@ const getTotalPrice = (products: ProductType[]): number => {
 }
 
 const CartPage = ({}: CartPageProps) => {
-    const { store, dispatch } = useContext(OrganicContext)
+    const { store } = useContext(OrganicContext)
 
     return (
         <StyledCartPage>
@@ -43,23 +43,29 @@ const CartPage = ({}: CartPageProps) => {
                     <StyledCardPageShopIcon>
                         <Icon size={ICON_SIZE.LARGE} src={shopIcon} />
                     </StyledCardPageShopIcon>
-
-                    <h3>{broccoli.shop}</h3>
+                    {store.cart.map(product => (
+                        <h3 key={product.id}>{product.shop} </h3>
+                    ))}
                 </StyledCardPageShop>
 
-                {store.products.map(product => (
-                    <ProductSticker
-                        image={product.image}
-                        title={product.title}
-                        price={product.price}
-                        key={product.id}
-                    />
-                ))}
+                {store.cart.length ? (
+                    store.cart.map(product => (
+                        <ProductSticker
+                            product={product}
+                            image={product.image}
+                            title={product.title}
+                            price={product.price}
+                            key={product.id}
+                        />
+                    ))
+                ) : (
+                    <StyledEmptySpace>Your cart is empty :(</StyledEmptySpace>
+                )}
             </StyledCartPageInfo>
             <StyledCartPageFooter>
                 <StyledCartPageTotal>
                     <span>Total</span>
-                    <h2>${getTotalPrice(store.products)}</h2>
+                    <h2>${store.cart.length && getTotalPrice(store.cart)}</h2>
                 </StyledCartPageTotal>
                 <Button
                     type={BUTTON_TYPE.PRIMARY}

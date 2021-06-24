@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { PRODUCT_TYPE } from '../../services/products/products'
+import { PRODUCT_TYPE } from 'services/products/products'
 
 export interface StyledProductCardProps {
     type: PRODUCT_TYPE
@@ -56,8 +56,14 @@ const StyledProductCard = styled.div`
 `
 
 const StyledCardAction = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+`
+
+const StyledAddToCart = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
 `
 
@@ -67,4 +73,9 @@ const StyledProductCardHeader = styled.div`
     height: 80px;
 `
 
-export { StyledCardAction, StyledProductCard, StyledProductCardHeader }
+export {
+    StyledCardAction,
+    StyledProductCard,
+    StyledProductCardHeader,
+    StyledAddToCart,
+}

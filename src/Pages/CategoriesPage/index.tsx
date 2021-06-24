@@ -14,9 +14,7 @@ import vegetables from 'services/products/pics/broccoli.png'
 import fruits from 'services/products/pics/banana.png'
 import meats from 'services/products/pics/meat.png'
 
-interface CategoriesPageProps {
-    onBackToPreviousPageClicked: () => void
-}
+interface CategoriesPageProps {}
 
 const categories: CategoryType[] = [
     {
@@ -39,13 +37,11 @@ const categories: CategoryType[] = [
     },
 ]
 
-const CategoriesPage = ({
-    onBackToPreviousPageClicked,
-}: CategoriesPageProps) => {
+const CategoriesPage = ({}: CategoriesPageProps) => {
     return (
         <StyledCategoriesPage>
             <StyledTitledHeader>
-                <BackToPreviousPage onClick={onBackToPreviousPageClicked} />
+                <BackToPreviousPage />
                 <span>Categories</span>
             </StyledTitledHeader>
             <StyledCardsList>

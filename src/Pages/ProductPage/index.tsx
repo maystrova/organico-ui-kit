@@ -27,20 +27,19 @@ import {
 import time from './pics/time-icon.svg'
 import categoryIcon from './pics/category-icon.svg'
 import chat from 'Components/Layout/pics/chat.svg'
+import { ACTION } from 'context/actions'
 
 interface ProductPageProps {
-    backButton: () => void
     onAddToCartClick: (productId: string) => void
     onAddToWishlistClicked: (productId: string) => void
 }
 
 const ProductPage = ({
-    backButton,
     onAddToCartClick,
     onAddToWishlistClicked,
 }: ProductPageProps) => {
     const [isAddedToWishList, setAddToWishList] = useState<boolean>(false)
-    const { store } = useContext(OrganicContext)
+    const { store, dispatch } = useContext(OrganicContext)
 
     let params = useParams<{ alias: string }>()
 
@@ -48,16 +47,12 @@ const ProductPage = ({
         product => product.alias === params.alias,
     )
 
-    console.log(params)
-    console.log(product)
-    console.log(store.products)
-
     return (
         <StyledProductPage>
             {product && (
                 <>
                     <StyledHeader>
-                        <BackToPreviousPage onClick={backButton} />
+                        <BackToPreviousPage />
                         <AddToWishlist
                             product={product}
                             isAdded={isAddedToWishList}
@@ -81,6 +76,16 @@ const ProductPage = ({
                             </StyledProductTitles>
                             <div>
                                 <Count
+                                    currentCount={product.quantity}
+                                    onCountChanged={newCount => {
+                                        dispatch({
+                                            action: ACTION.ADD_TO_CART,
+                                            data: {
+                                                ...product,
+                                                quantity: newCount,
+                                            },
+                                        })
+                                    }}
                                     fontSize={COUNT_FONTSIZE.PRODUCT_PAGE}
                                     width={COUNTING_SIZE.PRODUCT_PAGE}
                                     height={COUNTING_SIZE.PRODUCT_PAGE}

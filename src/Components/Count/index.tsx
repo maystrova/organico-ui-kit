@@ -12,6 +12,7 @@ import {
 import minus from './pics/minus.svg'
 import plus from './pics/plus.svg'
 import { ProductType } from '../../Pages/ProductPage/types'
+import { ACTION } from '../../context/actions'
 
 export enum COUNTING_SIZE {
     PRODUCT_PAGE = 40,
@@ -45,6 +46,7 @@ const Count = ({
     const addProduct = () => {
         let productAmount = amount
         setAmount(++productAmount)
+        product.quantity = productAmount
     }
 
     const removeProduct = () => {

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { OrganicContext } from 'context/storeContext'
 import { ACTION } from 'context/actions'
@@ -30,7 +30,6 @@ const Layout = () => {
                                     data: productId,
                                 })
                             }}
-                            backButton={() => {}}
                             onAddToCartClick={productId => {
                                 dispatch({
                                     action: ACTION.ADD_TO_CART,
@@ -43,12 +42,10 @@ const Layout = () => {
                         <CartPage />
                     </Route>
                     <Route path={ROUTES.MY_WISHLIST} exact>
-                        <WishlistPage onBackButtonClick={() => {}} />
+                        <WishlistPage />
                     </Route>
                     <Route path={[ROUTES.CATEGORIES, '/']} exact>
-                        <CategoriesPage
-                            onBackToPreviousPageClicked={() => {}}
-                        />
+                        <CategoriesPage />
                     </Route>
 
                     <Route path={ROUTES.CATEGORY} exact>

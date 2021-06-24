@@ -14,9 +14,7 @@ import {
     StyledEmptySpace,
 } from './style'
 
-interface WishlistPageProps {
-    onBackButtonClick: () => void
-}
+interface WishlistPageProps {}
 
 export const getBackgroundColorForProduct = (title: string): PRODUCT_TYPE => {
     switch (title) {
@@ -48,13 +46,13 @@ export const getBackgroundColorForProduct = (title: string): PRODUCT_TYPE => {
     }
 }
 
-const WishlistPage = ({ onBackButtonClick }: WishlistPageProps) => {
+const WishlistPage = ({}: WishlistPageProps) => {
     const { store, dispatch } = useContext(OrganicContext)
 
     return (
         <StyledWishlistPage>
             <StyledTitledHeader>
-                <BackToPreviousPage onClick={onBackButtonClick} />
+                <BackToPreviousPage />
                 <span>My Wishlist</span>
             </StyledTitledHeader>
             {store.wishList.length ? (

@@ -30,13 +30,11 @@ import chat from 'Components/Layout/pics/chat.svg'
 import { ACTION } from '../../context/actions'
 
 interface ProductPageProps {
-    backButton: () => void
     onAddToCartClick: (productId: string) => void
     onAddToWishlistClicked: (productId: string) => void
 }
 
 const ProductPage = ({
-    backButton,
     onAddToCartClick,
     onAddToWishlistClicked,
 }: ProductPageProps) => {
@@ -54,7 +52,7 @@ const ProductPage = ({
             {product && (
                 <>
                     <StyledHeader>
-                        <BackToPreviousPage onClick={backButton} />
+                        <BackToPreviousPage />
                         <AddToWishlist
                             product={product}
                             isAdded={isAddedToWishList}

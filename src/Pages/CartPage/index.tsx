@@ -19,7 +19,7 @@ import {
     StyledCartPageTotal,
 } from './style'
 import { StyledEmptySpace } from 'Pages/WishlistPage/style'
-import { ACTION } from '../../context/actions'
+import { ACTION } from 'context/actions'
 
 interface CartPageProps {}
 

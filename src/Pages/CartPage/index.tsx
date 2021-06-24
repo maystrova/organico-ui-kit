@@ -19,7 +19,6 @@ import {
     StyledCartPageTotal,
 } from './style'
 import { StyledEmptySpace } from 'Pages/WishlistPage/style'
-import { ACTION } from 'context/actions'
 
 interface CartPageProps {}
 
@@ -34,7 +33,7 @@ const getTotalPrice = (cart: ProductType[]): number => {
 }
 
 const CartPage = ({}: CartPageProps) => {
-    const { store, dispatch } = useContext(OrganicContext)
+    const { store } = useContext(OrganicContext)
 
     return (
         <StyledCartPage>

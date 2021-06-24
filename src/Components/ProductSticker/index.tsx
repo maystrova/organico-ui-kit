@@ -10,8 +10,8 @@ import {
 } from './style'
 import { getBackgroundColorForProduct } from 'Pages/WishlistPage'
 import { ProductType } from 'Pages/ProductPage/types'
-import { ACTION } from '../../context/actions'
-import { OrganicContext } from '../../context/storeContext'
+import { ACTION } from 'context/actions'
+import { OrganicContext } from 'context/storeContext'
 
 interface ProductStickerProps {
     image: string
@@ -27,8 +27,6 @@ const ProductSticker = ({
     product,
 }: ProductStickerProps) => {
     const { dispatch } = useContext(OrganicContext)
-
-    console.log('ProductSticker', product)
 
     return (
         <StyledProductSticker type={getBackgroundColorForProduct(title)}>

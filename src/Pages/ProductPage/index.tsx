@@ -27,7 +27,7 @@ import {
 import time from './pics/time-icon.svg'
 import categoryIcon from './pics/category-icon.svg'
 import chat from 'Components/Layout/pics/chat.svg'
-import { ACTION } from '../../context/actions'
+import { ACTION } from 'context/actions'
 
 interface ProductPageProps {
     onAddToCartClick: (productId: string) => void

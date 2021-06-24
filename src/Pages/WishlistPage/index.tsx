@@ -60,12 +60,6 @@ const WishlistPage = ({}: WishlistPageProps) => {
                     {store.wishList.map(product => {
                         return (
                             <ProductCard
-                                onAddToCartClick={productId => {
-                                    dispatch({
-                                        action: ACTION.ADD_TO_CART,
-                                        data: productId,
-                                    })
-                                }}
                                 isAdded={true}
                                 key={product.id}
                                 product={product}

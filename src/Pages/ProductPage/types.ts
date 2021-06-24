@@ -13,5 +13,5 @@ export type ProductType = {
     category: PRODUCTS_CATEGORY
     id: string
     alias: string
-    quantity?: number
+    quantity: number
 }

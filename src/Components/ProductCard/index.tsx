@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 import { Icon, ICON_SIZE } from 'Components/Icon'
 import { AddToWishlist } from 'Components/AddToWishlist'
@@ -18,6 +18,8 @@ import {
 } from './style'
 
 import plus from 'Components/Count/pics/plus.svg'
+import { ACTION } from '../../context/actions'
+import { OrganicContext } from '../../context/storeContext'
 
 export interface ProductCardProps {
     product: ProductType
@@ -25,7 +27,6 @@ export interface ProductCardProps {
     isShowAction: boolean
     onWishClick: (productId: string) => void
     isAdded: boolean
-    onAddToCartClick: (productId: string) => void
 }
 
 const ProductCard = ({
@@ -34,9 +35,9 @@ const ProductCard = ({
     isShowAction,
     onWishClick,
     isAdded,
-    onAddToCartClick,
 }: ProductCardProps) => {
     const [isAddedToCart, setIsAddedToCart] = useState(false)
+    const { dispatch } = useContext(OrganicContext)
 
     return (
         <StyledProductCard type={type}>
@@ -69,10 +70,16 @@ const ProductCard = ({
 
                     {isAddedToCart ? (
                         <Count
-                            onAddToCartClick={() =>
-                                onAddToCartClick(product.id)
-                            }
-                            product={product}
+                            currentCount={product.quantity}
+                            onCountChanged={newCount => {
+                                dispatch({
+                                    action: ACTION.ADD_TO_CART,
+                                    data: {
+                                        ...product,
+                                        quantity: newCount,
+                                    },
+                                })
+                            }}
                             width={COUNTING_SIZE.CART}
                             height={COUNTING_SIZE.CART}
                             fontSize={COUNT_FONTSIZE.CART}
@@ -81,7 +88,13 @@ const ProductCard = ({
                         <StyledAddToCart>
                             <StyledCountButton
                                 onClick={() => {
-                                    onAddToCartClick(product.id)
+                                    dispatch({
+                                        action: ACTION.ADD_TO_CART,
+                                        data: {
+                                            ...product,
+                                            quantity: 1,
+                                        },
+                                    })
                                     setIsAddedToCart(true)
                                 }}
                                 style={{

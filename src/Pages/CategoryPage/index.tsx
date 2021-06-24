@@ -30,13 +30,6 @@ const CategoryPage = ({}: CategoryPageProps) => {
 
                 return (
                     <ProductCard
-                        onAddToCartClick={productId => {
-                            dispatch({
-                                action: ACTION.ADD_TO_CART,
-                                data: productId,
-                            })
-                            setIsAddedToCart(!isAddedToCart)
-                        }}
                         isAdded={isAddedToWishlist}
                         type={getBackgroundColorForProduct(product.title)}
                         product={product}

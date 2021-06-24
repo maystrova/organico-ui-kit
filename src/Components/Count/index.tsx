@@ -11,8 +11,6 @@ import {
 
 import minus from './pics/minus.svg'
 import plus from './pics/plus.svg'
-import { ProductType } from '../../Pages/ProductPage/types'
-import { ACTION } from '../../context/actions'
 
 export enum COUNTING_SIZE {
     PRODUCT_PAGE = 40,
@@ -30,46 +28,30 @@ interface CountProps {
     width: COUNTING_SIZE
     height: COUNTING_SIZE
     fontSize: COUNT_FONTSIZE
-    onAddToCartClick: (productId: string) => void
-    product: ProductType
+    onCountChanged: (currentCount: number) => void
+    currentCount: number
 }
 
 const Count = ({
     width,
     height,
     fontSize,
-    onAddToCartClick,
-    product,
+    currentCount,
+    onCountChanged,
 }: CountProps) => {
-    const [amount, setAmount] = useState<number>(1)
-
-    const addProduct = () => {
-        let productAmount = amount
-        setAmount(++productAmount)
-        product.quantity = productAmount
-    }
-
-    const removeProduct = () => {
-        let productAmount = amount
-
-        if (amount > 1) {
-            setAmount(--productAmount)
-        }
-    }
-
     return (
         <StyledCount>
             <StyledCountButtonArea>
                 <StyledCountButton
                     style={{ width: width, height: height }}
-                    onClick={removeProduct}
+                    onClick={() => onCountChanged(currentCount - 1)}
                 >
                     <Icon size={ICON_SIZE.MEDIUM} src={minus} />
                 </StyledCountButton>
             </StyledCountButtonArea>
 
             <StyledCountNumber style={{ fontSize: fontSize }}>
-                {amount}
+                {currentCount}
             </StyledCountNumber>
             <StyledCountButtonArea>
                 <StyledCountButton
@@ -78,8 +60,7 @@ const Count = ({
                         height: height,
                     }}
                     onClick={() => {
-                        onAddToCartClick(product.id)
-                        addProduct()
+                        onCountChanged(currentCount + 1)
                     }}
                 >
                     <Icon size={ICON_SIZE.MEDIUM} src={plus} />

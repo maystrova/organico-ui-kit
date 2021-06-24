@@ -47,6 +47,7 @@ const products: ProductType[] = [
         category: PRODUCTS_CATEGORY.VEGETABLES,
         id: `${Math.random()}`,
         alias: 'paprika',
+        quantity: 0,
     },
     {
         title: 'Apple',
@@ -57,6 +58,7 @@ const products: ProductType[] = [
         category: PRODUCTS_CATEGORY.FRUITS,
         id: `${Math.random()}`,
         alias: 'apple',
+        quantity: 0,
     },
     {
         title: 'Orange',
@@ -67,6 +69,7 @@ const products: ProductType[] = [
         price: 2.44,
         image: orangePic,
         alias: 'orange',
+        quantity: 0,
     },
 
     {
@@ -78,6 +81,7 @@ const products: ProductType[] = [
         price: 5.44,
         image: pineapplePic,
         alias: 'pineapple',
+        quantity: 0,
     },
     {
         title: 'Kiwi',
@@ -88,6 +92,7 @@ const products: ProductType[] = [
         price: 4.11,
         image: kiwiPic,
         alias: 'kiwi',
+        quantity: 0,
     },
     {
         title: 'Broccoli',
@@ -99,6 +104,7 @@ const products: ProductType[] = [
         shop: 'Popey shop',
         id: `${Math.random()}`,
         alias: 'broccoli',
+        quantity: 0,
     },
     {
         title: 'Potato',
@@ -108,7 +114,7 @@ const products: ProductType[] = [
         category: PRODUCTS_CATEGORY.VEGETABLES,
         id: `${Math.random()}`,
         alias: 'potato',
-
+        quantity: 0,
         details:
             'The potato is a root vegetable native to the Americas, a starchy tuber of the plant Solanum tuberosum, and the plant itself is a perennial in the nightshade family, Solanaceae.',
     },
@@ -120,7 +126,7 @@ const products: ProductType[] = [
         price: 3.4,
         id: `${Math.random()}`,
         alias: 'lettuce',
-
+        quantity: 0,
         details:
             'Lettuce (Lactuca sativa) is an annual plant of the daisy family, Asteraceae. It is most often grown as a leaf vegetable, but sometimes for its stem and seeds. Lettuce is most often used for salads, although it is also seen in other kinds of food, such as soups, sandwiches and wraps; it can also be grilled.',
     },
@@ -130,7 +136,7 @@ const products: ProductType[] = [
         shop: 'Popey shop',
         category: PRODUCTS_CATEGORY.VEGETABLES,
         alias: 'carrot',
-
+        quantity: 0,
         id: `${Math.random()}`,
         details:
             'The carrot (Daucus carota subsp. sativus) is a root vegetable, usually orange in color, though purple, black, red, white, and yellow cultivars exist.[2][3][4] They are a domesticated form of the wild carrot, Daucus carota, native to Europe and Southwestern Asia. The plant probably originated in Persia and was originally cultivated for its leaves and seeds. The most commonly eaten part of the plant is the taproot, although the stems and leaves are also eaten. The domestic carrot has been selectively bred for its greatly enlarged, more palatable, less woody-textured taproot.',
@@ -142,7 +148,7 @@ const products: ProductType[] = [
         price: 4.3,
         category: PRODUCTS_CATEGORY.VEGETABLES,
         alias: 'red-onion',
-
+        quantity: 0,
         id: `${Math.random()}`,
 
         details:
@@ -154,7 +160,7 @@ const products: ProductType[] = [
         shop: 'Fruitmarket',
         price: 4.68,
         category: PRODUCTS_CATEGORY.FRUITS,
-
+        quantity: 0,
         id: `${Math.random()}`,
         alias: 'banana',
 
@@ -172,6 +178,7 @@ const products: ProductType[] = [
         details:
             'Chicken is the most common type of poultry in the world. Owing to the relative ease and low cost of raising them in comparison to animals such as cattle or hogs, chickens have become prevalent in numerous cuisines.Chicken can be prepared in a vast range of ways, including baking, grilling, barbecuing, frying, and boiling. Since the latter half of the 20th century, prepared chicken has become a staple of fast food. Chicken is sometimes cited as being more healthful than red meat, with lower concentrations of cholesterol and saturated fat.',
         image: chickenPic,
+        quantity: 0,
     },
     {
         title: 'Beef',
@@ -182,6 +189,7 @@ const products: ProductType[] = [
         id: `${Math.random()}`,
         details: '',
         image: beefPic,
+        quantity: 0,
     },
     {
         title: 'Veal',
@@ -192,6 +200,7 @@ const products: ProductType[] = [
         id: `${Math.random()}`,
         details: '',
         image: vealPic,
+        quantity: 0,
     },
     {
         title: 'Pork',
@@ -202,6 +211,7 @@ const products: ProductType[] = [
         id: `${Math.random()}`,
         details: '',
         image: porkpic,
+        quantity: 0,
     },
 ]
 

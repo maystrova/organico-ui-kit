@@ -76,13 +76,16 @@ const ProductPage = ({
                             </StyledProductTitles>
                             <div>
                                 <Count
-                                    product={product}
-                                    onAddToCartClick={productId =>
+                                    currentCount={product.quantity}
+                                    onCountChanged={newCount => {
                                         dispatch({
                                             action: ACTION.ADD_TO_CART,
-                                            data: productId,
+                                            data: {
+                                                ...product,
+                                                quantity: newCount,
+                                            },
                                         })
-                                    }
+                                    }}
                                     fontSize={COUNT_FONTSIZE.PRODUCT_PAGE}
                                     width={COUNTING_SIZE.PRODUCT_PAGE}
                                     height={COUNTING_SIZE.PRODUCT_PAGE}

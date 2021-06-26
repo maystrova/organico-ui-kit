@@ -46,7 +46,7 @@ const addToCart = (
         cartProduct => cartProduct.id === product.id,
     )
 
-    let newCart: ProductType[] = []
+    let newCart: ProductType[] = currentState.cart
 
     if (cartProduct) {
         newCart = currentState.cart.map(cartProduct => {

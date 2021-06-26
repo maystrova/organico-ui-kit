@@ -13,6 +13,7 @@ import { WishlistPage } from 'Pages/WishlistPage'
 
 import { ROUTES } from 'services/route'
 import { GlobalStyle, StyledLayout } from './style'
+import { EditProfilePage } from '../../Pages/EditProfilePage'
 
 const Layout = () => {
     const { store, dispatch } = useContext(OrganicContext)
@@ -53,6 +54,9 @@ const Layout = () => {
                     </Route>
                     <Route path={ROUTES.PROFILE}>
                         <ProfilePage />
+                    </Route>
+                    <Route path={ROUTES.EDIT_PROFILE}>
+                        <EditProfilePage />
                     </Route>
                 </Switch>
                 <Menu />

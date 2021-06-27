@@ -1,9 +1,15 @@
 import React, { useContext } from 'react'
 import { StyledHeader } from 'Pages/ProductPage/style'
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
-import { StyledTitledHeader } from '../WishlistPage/style'
-import { StyledProfileInfo, StyledUserAvatar } from '../ProfilePage/style'
-import { OrganicContext } from '../../context/storeContext'
+import { StyledTitledHeader } from 'Pages/WishlistPage/style'
+import {
+    StyledEditProfile,
+    StyledEditProfileTitle,
+    StyledEditProfileFooter,
+} from './style'
+import { StyledProfileInfo, StyledUserAvatar } from 'Pages/ProfilePage/style'
+import { OrganicContext } from 'context/storeContext'
+import { Button, BUTTON_TYPE } from 'Components/Button'
 
 interface EditProfilePageProps {}
 
@@ -21,6 +27,22 @@ const EditProfilePage = ({}: EditProfilePageProps) => {
                 <StyledUserAvatar>
                     <img src={store.profile.avatar} alt='avatar' />
                 </StyledUserAvatar>
+                <StyledEditProfile>
+                    <StyledEditProfileTitle>Name</StyledEditProfileTitle>
+                    <input type='text' value={store.profile.name} />
+                    <StyledEditProfileTitle>Phone</StyledEditProfileTitle>
+                    <input type='text' value={store.profile.phoneNumber} />
+                    <StyledEditProfileTitle>Address</StyledEditProfileTitle>
+                    <textarea value={store.profile.name} />
+                </StyledEditProfile>
+                <StyledEditProfileFooter>
+                    <Button
+                        width={'100%'}
+                        title={'Save'}
+                        type={BUTTON_TYPE.PRIMARY}
+                        onClick={() => {}}
+                    />
+                </StyledEditProfileFooter>
             </StyledProfileInfo>
         </div>
     )

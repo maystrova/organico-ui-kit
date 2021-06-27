@@ -5,6 +5,7 @@ export type UserType = {
     name: string
     surname: string
     phoneNumber: number
+    address: string
 }
 
 export const DEFAULT_USER: UserType = {
@@ -12,4 +13,5 @@ export const DEFAULT_USER: UserType = {
     surname: 'Cat',
     phoneNumber: 92341352,
     avatar: Vasya,
+    address: 'Aprelskaya St. 4, Saint-Petersburg',
 }

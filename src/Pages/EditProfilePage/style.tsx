@@ -12,6 +12,7 @@ const StyledEditProfile = styled.div`
         border-radius: 100px;
         outline: none;
         padding: 13px;
+        font-size: 16px;
     }
 
     & textarea {
@@ -21,6 +22,7 @@ const StyledEditProfile = styled.div`
         border-radius: 16px;
         padding: 10px 16px;
         resize: none;
+        font-size: 16px;
     }
 `
 

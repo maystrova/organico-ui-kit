@@ -33,7 +33,7 @@ const EditProfilePage = ({}: EditProfilePageProps) => {
                     <StyledEditProfileTitle>Phone</StyledEditProfileTitle>
                     <input type='text' value={store.profile.phoneNumber} />
                     <StyledEditProfileTitle>Address</StyledEditProfileTitle>
-                    <textarea value={store.profile.name} />
+                    <textarea value={store.profile.address} />
                 </StyledEditProfile>
                 <StyledEditProfileFooter>
                     <Button

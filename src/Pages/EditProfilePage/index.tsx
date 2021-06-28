@@ -2,6 +2,9 @@ import React, { useContext, useState } from 'react'
 
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
 import { Button, BUTTON_TYPE } from 'Components/Button'
+import { UploadAvatar } from 'Components/UploadAvatar'
+import { Icon, ICON_SIZE } from 'Components/Icon'
+
 import { ACTION } from 'context/actions'
 import { UserType } from 'services/user'
 import { OrganicContext } from 'context/storeContext'
@@ -9,21 +12,21 @@ import { OrganicContext } from 'context/storeContext'
 import { StyledTitledHeader } from 'Pages/WishlistPage/style'
 import { StyledHeader } from 'Pages/ProductPage/style'
 import {
+    StyledEditAvatar,
     StyledEditProfile,
+    StyledEditProfileAvatar,
     StyledEditProfileFooter,
     StyledEditProfileTitle,
-    StyledEditAvatar,
     StyledEditUserAvatar,
-    StyledEditProfileAvatar,
 } from './style'
 import { StyledProfileInfo } from 'Pages/ProfilePage/style'
-import { Icon, ICON_SIZE } from 'Components/Icon'
 
 import editAvatar from 'Pages/EditProfilePage/pics/edit-avatar.svg'
 
 const EditProfilePage = ({}) => {
     const { store, dispatch } = useContext(OrganicContext)
     const [editProfile, setEditProfile] = useState<UserType>(store.profile)
+    const [isShowUploadAvatar, setShowUploadAvatar] = useState<boolean>(false)
 
     return (
         <div>
@@ -39,7 +42,7 @@ const EditProfilePage = ({}) => {
                         src={store.profile.avatar}
                         alt='avatar'
                     />
-                    <StyledEditAvatar>
+                    <StyledEditAvatar onClick={() => setShowUploadAvatar(true)}>
                         <Icon size={ICON_SIZE.MEDIUM} src={editAvatar} />
                     </StyledEditAvatar>
                 </StyledEditUserAvatar>
@@ -91,6 +94,16 @@ const EditProfilePage = ({}) => {
                     />
                 </StyledEditProfileFooter>
             </StyledProfileInfo>
+            <UploadAvatar
+                onUploadClick={event =>
+                    dispatch({
+                        action: ACTION.USER_UPDATE,
+                        data: event.target.file,
+                    })
+                }
+                isOpen={isShowUploadAvatar}
+                onCancel={() => setShowUploadAvatar(false)}
+            />
         </div>
     )
 }

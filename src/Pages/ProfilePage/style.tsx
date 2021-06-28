@@ -13,12 +13,12 @@ const StyledUserAvatar = styled.div`
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
+`
 
-    & img {
-        width: 170px;
-        height: 170px;
-        border-radius: 50%;
-    }
+const StyledAvatar = styled.img`
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
 `
 
 const StyledUserName = styled.div`
@@ -47,4 +47,5 @@ export {
     StyledUserName,
     StyledUserPhoneNumber,
     StyledProfileActions,
+    StyledAvatar,
 }

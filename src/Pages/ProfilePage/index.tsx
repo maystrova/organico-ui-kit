@@ -15,6 +15,7 @@ import {
     StyledUserPhoneNumber,
     StyledUserName,
     StyledProfileActions,
+    StyledAvatar,
 } from './style'
 
 import { StyledHeader } from 'Pages/ProductPage/style'
@@ -63,7 +64,7 @@ const ProfilePage = ({}) => {
             </StyledHeader>
             <StyledProfileInfo>
                 <StyledUserAvatar>
-                    <img src={store.profile.avatar} alt='Avatar' />
+                    <StyledAvatar src={store.profile.avatar} alt='Avatar' />
                 </StyledUserAvatar>
                 <StyledUserName>
                     <span>{store.profile.name}</span>

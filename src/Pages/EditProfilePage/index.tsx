@@ -12,8 +12,14 @@ import {
     StyledEditProfile,
     StyledEditProfileFooter,
     StyledEditProfileTitle,
+    StyledEditAvatar,
+    StyledEditUserAvatar,
+    StyledEditProfileAvatar,
 } from './style'
-import { StyledProfileInfo, StyledUserAvatar } from 'Pages/ProfilePage/style'
+import { StyledProfileInfo } from 'Pages/ProfilePage/style'
+import { Icon, ICON_SIZE } from 'Components/Icon'
+
+import editAvatar from 'Pages/EditProfilePage/pics/edit-avatar.svg'
 
 const EditProfilePage = ({}) => {
     const { store, dispatch } = useContext(OrganicContext)
@@ -28,9 +34,15 @@ const EditProfilePage = ({}) => {
                 </StyledTitledHeader>
             </StyledHeader>
             <StyledProfileInfo>
-                <StyledUserAvatar>
-                    <img src={store.profile.avatar} alt='avatar' />
-                </StyledUserAvatar>
+                <StyledEditUserAvatar>
+                    <StyledEditProfileAvatar
+                        src={store.profile.avatar}
+                        alt='avatar'
+                    />
+                    <StyledEditAvatar>
+                        <Icon size={ICON_SIZE.MEDIUM} src={editAvatar} />
+                    </StyledEditAvatar>
+                </StyledEditUserAvatar>
                 <StyledEditProfile>
                     <StyledEditProfileTitle>Name</StyledEditProfileTitle>
                     <input

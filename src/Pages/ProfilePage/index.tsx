@@ -5,6 +5,9 @@ import {
     ProfileActionsType,
 } from 'Components/ProfileActionSticker'
 
+import { ROUTES } from 'services/route'
+import { OrganicContext } from 'context/storeContext'
+
 import {
     StyledProfileInfo,
     StyledProfilePage,
@@ -13,10 +16,8 @@ import {
     StyledUserName,
     StyledProfileActions,
 } from './style'
-import { StyledHeader } from 'Pages/ProductPage/style'
 
-import { ROUTES } from 'services/route'
-import { OrganicContext } from 'context/storeContext'
+import { StyledHeader } from 'Pages/ProductPage/style'
 
 import notification from 'Pages/ProfilePage/pics/Notification.svg'
 import editProfile from 'Components/ProfileActionSticker/pics/edit-profile.svg'
@@ -65,9 +66,7 @@ const ProfilePage = ({}) => {
                     <img src={store.profile.avatar} alt='Avatar' />
                 </StyledUserAvatar>
                 <StyledUserName>
-                    <span>
-                        {store.profile.name} {store.profile.surname}
-                    </span>
+                    <span>{store.profile.name}</span>
                 </StyledUserName>
                 <StyledUserPhoneNumber>
                     <span>{store.profile.phoneNumber}</span>

@@ -1,40 +1,23 @@
 import React, { useContext, useState } from 'react'
-import { StyledHeader } from 'Pages/ProductPage/style'
+
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
+import { Button, BUTTON_TYPE } from 'Components/Button'
+import { ACTION } from 'context/actions'
+import { UserType } from 'services/user'
+import { OrganicContext } from 'context/storeContext'
+
 import { StyledTitledHeader } from 'Pages/WishlistPage/style'
+import { StyledHeader } from 'Pages/ProductPage/style'
 import {
     StyledEditProfile,
-    StyledEditProfileTitle,
     StyledEditProfileFooter,
+    StyledEditProfileTitle,
 } from './style'
 import { StyledProfileInfo, StyledUserAvatar } from 'Pages/ProfilePage/style'
-import { OrganicContext, StoreType } from 'context/storeContext'
-import { Button, BUTTON_TYPE } from 'Components/Button'
-import { DEFAULT_USER, UserType } from 'services/user'
-
-export interface EditProfilePageType {
-    profileName: string
-    profilePhone: number
-    profileAddress: string
-}
-
-const onProfileEdit = (profile: EditProfilePageType) => {
-    const newProfile: UserType = {
-        ...DEFAULT_USER,
-        name: profile.profileName,
-        phoneNumber: Number(profile.profileName),
-        address: profile.profileAddress,
-    }
-    return newProfile
-}
 
 const EditProfilePage = ({}) => {
-    const { store } = useContext(OrganicContext)
-    const [editProfile, setEditProfile] = useState<EditProfilePageType>({
-        profileName: `${store.profile.name} ${store.profile.surname}`,
-        profilePhone: store.profile.phoneNumber,
-        profileAddress: store.profile.address,
-    })
+    const { store, dispatch } = useContext(OrganicContext)
+    const [editProfile, setEditProfile] = useState<UserType>(store.profile)
 
     return (
         <div>
@@ -52,35 +35,32 @@ const EditProfilePage = ({}) => {
                     <StyledEditProfileTitle>Name</StyledEditProfileTitle>
                     <input
                         type='text'
-                        value={editProfile.profileName}
+                        value={`${editProfile.name}`}
                         onChange={event =>
                             setEditProfile({
-                                profileName: event.target.value,
-                                profilePhone: store.profile.phoneNumber,
-                                profileAddress: store.profile.address,
+                                ...editProfile,
+                                name: event.target.value,
                             })
                         }
                     />
                     <StyledEditProfileTitle>Phone</StyledEditProfileTitle>
                     <input
                         type='text'
-                        value={editProfile.profilePhone}
+                        value={editProfile.phoneNumber}
                         onChange={event =>
                             setEditProfile({
-                                profileName: `${store.profile.name} ${store.profile.surname}`,
-                                profilePhone: Number(event.target.value),
-                                profileAddress: store.profile.address,
+                                ...editProfile,
+                                phoneNumber: Number(event.target.value),
                             })
                         }
                     />
                     <StyledEditProfileTitle>Address</StyledEditProfileTitle>
                     <textarea
-                        value={editProfile.profileAddress}
+                        value={editProfile.address}
                         onChange={event =>
                             setEditProfile({
-                                profileName: `${store.profile.name} ${store.profile.surname}`,
-                                profilePhone: store.profile.phoneNumber,
-                                profileAddress: event.target.value,
+                                ...editProfile,
+                                address: event.target.value,
                             })
                         }
                     />
@@ -90,7 +70,12 @@ const EditProfilePage = ({}) => {
                         width={'100%'}
                         title={'Save'}
                         type={BUTTON_TYPE.PRIMARY}
-                        onClick={() => {}}
+                        onClick={() =>
+                            dispatch({
+                                action: ACTION.USER_UPDATE,
+                                data: editProfile,
+                            })
+                        }
                     />
                 </StyledEditProfileFooter>
             </StyledProfileInfo>

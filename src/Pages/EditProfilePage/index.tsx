@@ -27,6 +27,7 @@ const EditProfilePage = ({}) => {
     const { store, dispatch } = useContext(OrganicContext)
     const [editProfile, setEditProfile] = useState<UserType>(store.profile)
     const [isShowUploadAvatar, setShowUploadAvatar] = useState<boolean>(false)
+    const [saveButton, setSaveButton] = useState<string>('Save')
 
     return (
         <div>
@@ -83,14 +84,15 @@ const EditProfilePage = ({}) => {
                 <StyledEditProfileFooter>
                     <Button
                         width={'100%'}
-                        title={'Save'}
+                        title={saveButton}
                         type={BUTTON_TYPE.PRIMARY}
-                        onClick={() =>
+                        onClick={() => {
                             dispatch({
                                 action: ACTION.USER_UPDATE,
                                 data: editProfile,
                             })
-                        }
+                            setSaveButton('Successfully saved!')
+                        }}
                     />
                 </StyledEditProfileFooter>
             </StyledProfileInfo>

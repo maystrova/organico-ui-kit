@@ -97,12 +97,8 @@ const EditProfilePage = ({}) => {
                 </StyledEditProfileFooter>
             </StyledProfileInfo>
             <UploadAvatar
-                onUploadClick={event =>
-                    dispatch({
-                        action: ACTION.USER_UPDATE,
-                        data: event.target.file,
-                    })
-                }
+                onClick={() => {}}
+                onAvatarUpload={() => {}}
                 isOpen={isShowUploadAvatar}
                 onCancel={() => setShowUploadAvatar(false)}
             />

@@ -1,31 +1,31 @@
 import React from 'react'
 import {
     StyledUploadAvatar,
+    StyledUploadAvatarBody,
     StyledUploadAvatarHeader,
     StyledUploadAvatarOverlay,
-    StyledUploadAvatarWindow,
     StyledUploadAvatarTitle,
-    StyledUploadAvatarBody,
+    StyledUploadAvatarWindow,
 } from './style'
 
 interface UploadAvatarProps {
     isOpen: boolean
     onCancel: () => void
-    onUploadClick: (event: any) => void
+    onAvatarUpload: () => void
+    onClick: () => void
 }
 
 const UploadAvatar = ({
     isOpen,
     onCancel,
-    onUploadClick,
+    onAvatarUpload,
+    onClick,
 }: UploadAvatarProps) => {
     if (!isOpen) return null
 
     return (
         <StyledUploadAvatar>
-            <StyledUploadAvatarOverlay
-                onClick={onCancel}
-            ></StyledUploadAvatarOverlay>
+            <StyledUploadAvatarOverlay onClick={onCancel} />
             <StyledUploadAvatarWindow>
                 <StyledUploadAvatarHeader>
                     <StyledUploadAvatarTitle>
@@ -33,8 +33,14 @@ const UploadAvatar = ({
                     </StyledUploadAvatarTitle>
                 </StyledUploadAvatarHeader>
                 <StyledUploadAvatarBody>
-                    <input type='file' onChange={onUploadClick} />
+                    <input
+                        type='file'
+                        onChange={event => {
+                            onAvatarUpload()
+                        }}
+                    />
                 </StyledUploadAvatarBody>
+                <button onClick={onClick}>Upload</button>
             </StyledUploadAvatarWindow>
         </StyledUploadAvatar>
     )

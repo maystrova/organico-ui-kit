@@ -9,6 +9,7 @@ const editUser = (currentState: StoreType, profile: UserType) => {
         name: profile.name,
         address: profile.address,
         phoneNumber: profile.phoneNumber,
+        avatar: profile.avatar,
     }
     return {
         ...currentState,

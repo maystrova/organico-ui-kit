@@ -11,5 +11,5 @@ export let DEFAULT_USER: UserType = {
     name: 'Vasya Cat',
     phoneNumber: 92341352,
     avatar: Vasya,
-    address: 'Aprelskaya St. 4, Saint-Petersburg',
+    address: 'Nevskiy Prospect 1, Saint-Petersburg',
 }

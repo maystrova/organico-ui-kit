@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 import { Icon, ICON_SIZE } from 'Components/Icon'
 
@@ -10,12 +10,12 @@ import back from 'Components/Button/pics/back.svg'
 interface BackToPreviousPageProps {}
 
 const BackToPreviousPage = ({}: BackToPreviousPageProps) => {
+    const history = useHistory()
+
     return (
-        // <Link to={''}>
-        <StyledBackToPreviousPage onClick={() => {}}>
+        <StyledBackToPreviousPage onClick={() => history.goBack()}>
             <Icon size={ICON_SIZE.X_SMALL} src={back} />
         </StyledBackToPreviousPage>
-        // </Link>
     )
 }
 

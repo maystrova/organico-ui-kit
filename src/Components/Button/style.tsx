@@ -1,7 +1,5 @@
 import styled, { css } from 'styled-components'
 import { BUTTON_TYPE } from './index'
-import back from './pics/back.svg'
-import wish from './pics/wishlist.svg'
 
 export interface StyledButtonProps {
     selfType: BUTTON_TYPE
@@ -16,12 +14,6 @@ const StyledButton = styled.button`
     &:hover {
         opacity: 80%;
     }
-
-    ${(props: StyledButtonProps) =>
-        props.selfType === BUTTON_TYPE.ADD_ITEM && css``}
-
-    ${(props: StyledButtonProps) =>
-        props.selfType === BUTTON_TYPE.REMOVE_ITEM && css``}
 
     ${(props: StyledButtonProps) =>
         props.selfType === BUTTON_TYPE.PRIMARY &&

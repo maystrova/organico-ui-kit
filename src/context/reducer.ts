@@ -1,6 +1,21 @@
 import { StoreType } from './storeContext'
 import { ACTION } from './actions'
 import { ProductType } from 'Pages/ProductPage/types'
+import { UserType } from '../services/user'
+
+const editUser = (currentState: StoreType, profile: UserType) => {
+    const newProfile: UserType = {
+        ...profile,
+        name: profile.name,
+        address: profile.address,
+        phoneNumber: profile.phoneNumber,
+        avatar: profile.avatar,
+    }
+    return {
+        ...currentState,
+        profile: newProfile,
+    }
+}
 
 const addToWishList = (currentState: StoreType, productId: string) => {
     const foundProduct: ProductType | undefined = currentState.products.find(
@@ -76,6 +91,8 @@ export const reducer = (
             return addToCart(currentState, payload.data)
         case ACTION.DELETE_FROM_WISHLIST:
             return deleteFromWishList(currentState, payload.data)
+        case ACTION.USER_UPDATE:
+            return editUser(currentState, payload.data)
         default:
             return currentState
     }

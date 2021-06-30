@@ -36,7 +36,8 @@ const ProductSticker = ({
             <StyledProductStickerInfo>
                 <h4>{title}</h4>
                 <StyledProductStickerCount>
-                    1 Kilogram
+                    {product.quantity}{' '}
+                    {product.quantity === 1 ? `Kilogram` : 'Kilos'}
                 </StyledProductStickerCount>
                 <h4>${price}</h4>
             </StyledProductStickerInfo>

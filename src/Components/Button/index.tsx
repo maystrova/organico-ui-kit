@@ -4,19 +4,22 @@ import { StyledButton } from './style'
 
 export enum BUTTON_TYPE {
     PRIMARY = 'Primary',
-    ADD_ITEM = 'addItem',
-    REMOVE_ITEM = 'removeItem',
 }
 
 interface ButtonProps {
     type: BUTTON_TYPE
     onClick: () => void
     title?: string
+    width?: string
 }
 
-const Button = ({ onClick, title, type }: ButtonProps) => {
+const Button = ({ onClick, title, type, width }: ButtonProps) => {
     return (
-        <StyledButton selfType={type} onClick={onClick}>
+        <StyledButton
+            style={{ width: width }}
+            selfType={type}
+            onClick={onClick}
+        >
             {title}
         </StyledButton>
     )

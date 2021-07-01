@@ -5,18 +5,21 @@ import { reducer } from './reducer'
 import { ACTION } from './actions'
 import { UserType } from 'services/user'
 import { DEFAULT_USER } from 'services/user'
+import { cart } from '../services/cart'
 
 export interface StoreType {
     products: ProductType[]
     wishList: ProductType[]
     cart: ProductType[]
     profile: UserType
+    bag: ProductType[]
 }
 
 const INITIAL_STORE: StoreType = {
     products: products,
     cart: [],
     wishList: [],
+    bag: [],
     profile: DEFAULT_USER,
 }
 

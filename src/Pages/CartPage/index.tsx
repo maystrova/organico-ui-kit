@@ -6,21 +6,20 @@ import { ProductSticker } from 'Components/ProductSticker'
 import { Icon, ICON_SIZE } from 'Components/Icon'
 import { Button, BUTTON_TYPE } from 'Components/Button'
 import { ProductType } from 'Pages/ProductPage/types'
-
-import shopIcon from './pics/shop-icon.svg'
+import { BackToPreviousPage } from 'Components/BackToPreviousPage'
 
 import {
     StyledCardPageShop,
     StyledCardPageShopIcon,
     StyledCartPage,
     StyledCartPageFooter,
-    StyledCartPageHeader,
     StyledCartPageInfo,
     StyledCartPageTotal,
 } from './style'
-import { StyledEmptySpace } from 'Pages/WishlistPage/style'
+import { StyledEmptySpace, StyledTitledHeader } from 'Pages/WishlistPage/style'
+import { StyledHeader } from 'Pages/ProductPage/style'
 
-interface CartPageProps {}
+import shopIcon from 'Pages/CartPage/pics/shop-icon.svg'
 
 const getTotalPrice = (cart: ProductType[]): number => {
     let totalPrice: number = 0
@@ -32,12 +31,17 @@ const getTotalPrice = (cart: ProductType[]): number => {
     return totalPrice
 }
 
-const CartPage = ({}: CartPageProps) => {
+const CartPage = () => {
     const { store } = useContext(OrganicContext)
 
     return (
         <StyledCartPage>
-            <StyledCartPageHeader>My Cart</StyledCartPageHeader>
+            <StyledHeader>
+                <StyledTitledHeader>
+                    <BackToPreviousPage />
+                    <span>My Cart</span>
+                </StyledTitledHeader>
+            </StyledHeader>
             <StyledCartPageInfo>
                 <StyledCardPageShop>
                     <StyledCardPageShopIcon>
@@ -62,25 +66,21 @@ const CartPage = ({}: CartPageProps) => {
                     <StyledEmptySpace>Your cart is empty :(</StyledEmptySpace>
                 )}
             </StyledCartPageInfo>
-            <StyledCartPageFooter>
-                {store.cart.length > 0 && (
-                    <div>
-                        {' '}
-                        <StyledCartPageTotal>
-                            <span>Total</span>
-                            <h2>
-                                $
-                                {store.cart.length && getTotalPrice(store.cart)}
-                            </h2>
-                        </StyledCartPageTotal>
-                        <Button
-                            type={BUTTON_TYPE.PRIMARY}
-                            title={'Add to bag'}
-                            onClick={() => {}}
-                        />
-                    </div>
-                )}
-            </StyledCartPageFooter>
+            {store.cart.length > 0 && (
+                <StyledCartPageFooter>
+                    <StyledCartPageTotal>
+                        <span>Total</span>
+                        <h2>
+                            ${store.cart.length && getTotalPrice(store.cart)}
+                        </h2>
+                    </StyledCartPageTotal>
+                    <Button
+                        type={BUTTON_TYPE.PRIMARY}
+                        title={'Add to bag'}
+                        onClick={() => {}}
+                    />
+                </StyledCartPageFooter>
+            )}
         </StyledCartPage>
     )
 }

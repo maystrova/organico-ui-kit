@@ -45,7 +45,10 @@ const ProductSticker = ({
                 currentCount={product.quantity}
                 onCountChanged={newCount => {
                     dispatch({
-                        action: ACTION.ADD_TO_CART,
+                        action:
+                            product.quantity >= 1
+                                ? ACTION.ADD_TO_CART
+                                : ACTION.DELETE_FROM_CART,
                         data: {
                             ...product,
                             quantity: newCount,

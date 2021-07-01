@@ -30,6 +30,7 @@ const StyledCartPageFooter = styled.div`
     grid-template-columns: max-content 1fr;
     grid-gap: 40px;
     height: 150px;
+    align-items: center;
 `
 
 const StyledCartPageTotal = styled.div`

@@ -63,15 +63,23 @@ const CartPage = ({}: CartPageProps) => {
                 )}
             </StyledCartPageInfo>
             <StyledCartPageFooter>
-                <StyledCartPageTotal>
-                    <span>Total</span>
-                    <h2>${store.cart.length && getTotalPrice(store.cart)}</h2>
-                </StyledCartPageTotal>
-                <Button
-                    type={BUTTON_TYPE.PRIMARY}
-                    title={'Add to bag'}
-                    onClick={() => {}}
-                />
+                {store.cart.length > 0 && (
+                    <div>
+                        {' '}
+                        <StyledCartPageTotal>
+                            <span>Total</span>
+                            <h2>
+                                $
+                                {store.cart.length && getTotalPrice(store.cart)}
+                            </h2>
+                        </StyledCartPageTotal>
+                        <Button
+                            type={BUTTON_TYPE.PRIMARY}
+                            title={'Add to bag'}
+                            onClick={() => {}}
+                        />
+                    </div>
+                )}
             </StyledCartPageFooter>
         </StyledCartPage>
     )

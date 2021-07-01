@@ -55,9 +55,7 @@ const BagPage = ({}: BagPageProps) => {
                 <Link to={ROUTES.CATEGORIES}>
                     <StyledBagAction>
                         <span>
-                            {store.bag.length
-                                ? 'Add more'
-                                : 'Add something to bag'}{' '}
+                            {store.bag.length ? 'Add more' : 'Add something'}{' '}
                         </span>
                         <Icon size={ICON_SIZE.XX_SMALL} src={addMore} />
                     </StyledBagAction>

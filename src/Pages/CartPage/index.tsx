@@ -52,7 +52,8 @@ const CartPage = () => {
                     ))}
                 </StyledCardPageShop>
 
-                {store.cart.length ? (
+                {store.cart.length &&
+                store.cart.filter(product => product.quantity > 0) ? (
                     store.cart.map(product => (
                         <ProductSticker
                             product={product}

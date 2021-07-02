@@ -80,6 +80,17 @@ const addToCart = (
     return { ...currentState, products: newProducts, cart: newCart }
 }
 
+const deleteFromCart = (
+    currentState: StoreType,
+    currentProduct: ProductType,
+): StoreType => {
+    const filteredCart = currentState.cart.filter(
+        product => product !== currentProduct,
+    )
+
+    return { ...currentState, cart: filteredCart }
+}
+
 export const reducer = (
     currentState: StoreType,
     payload: { action: ACTION; data: any },
@@ -91,6 +102,8 @@ export const reducer = (
             return addToCart(currentState, payload.data)
         case ACTION.DELETE_FROM_WISHLIST:
             return deleteFromWishList(currentState, payload.data)
+        case ACTION.DELETE_FROM_CART:
+            return deleteFromCart(currentState, payload.data)
         case ACTION.USER_UPDATE:
             return editUser(currentState, payload.data)
         default:

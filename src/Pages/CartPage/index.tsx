@@ -25,7 +25,7 @@ const getTotalPrice = (cart: ProductType[]): number => {
     let totalPrice: number = 0
 
     for (const product of cart) {
-        totalPrice = totalPrice + product.price * product.quantity
+        totalPrice += product.price * product.quantity
     }
 
     return totalPrice

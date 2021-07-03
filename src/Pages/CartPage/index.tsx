@@ -20,6 +20,7 @@ import { StyledEmptySpace, StyledTitledHeader } from 'Pages/WishlistPage/style'
 import { StyledHeader } from 'Pages/ProductPage/style'
 
 import shopIcon from 'Pages/CartPage/pics/shop-icon.svg'
+import { ACTION } from '../../context/actions'
 
 const getTotalPrice = (cart: ProductType[]): number => {
     let totalPrice: number = 0
@@ -32,7 +33,7 @@ const getTotalPrice = (cart: ProductType[]): number => {
 }
 
 const CartPage = () => {
-    const { store } = useContext(OrganicContext)
+    const { store, dispatch } = useContext(OrganicContext)
 
     return (
         <StyledCartPage>
@@ -78,7 +79,12 @@ const CartPage = () => {
                     <Button
                         type={BUTTON_TYPE.PRIMARY}
                         title={'Add to bag'}
-                        onClick={() => {}}
+                        onClick={() =>
+                            dispatch({
+                                action: ACTION.ADD_TO_BAG,
+                                data: store.cart,
+                            })
+                        }
                     />
                 </StyledCartPageFooter>
             )}

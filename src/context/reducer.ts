@@ -80,6 +80,10 @@ const addToCart = (
     return { ...currentState, products: newProducts, cart: newCart }
 }
 
+const addToBag = (currentState: StoreType): StoreType => {
+    return { ...currentState, bag: currentState.cart }
+}
+
 const deleteFromCart = (
     currentState: StoreType,
     currentProduct: ProductType,
@@ -106,6 +110,8 @@ export const reducer = (
             return deleteFromCart(currentState, payload.data)
         case ACTION.USER_UPDATE:
             return editUser(currentState, payload.data)
+        case ACTION.ADD_TO_BAG:
+            return addToBag(currentState)
         default:
             return currentState
     }

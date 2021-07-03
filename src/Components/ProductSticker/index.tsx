@@ -44,19 +44,11 @@ const ProductSticker = ({
             </StyledProductStickerInfo>
             <Count
                 currentCount={product.quantity}
-                onCountChanged={
-                    newCount =>
-                        dispatch({
-                            action: ACTION.ADD_TO_CART,
-                            data: { ...product, quantity: newCount },
-                        })
-                    // dispatch({
-                    //     action: ACTION.ADD_TO_CART,
-                    //     data: {
-                    //         ...product,
-                    //         quantity: newCount,
-                    //     },
-                    // })
+                onCountChanged={newCount =>
+                    dispatch({
+                        action: ACTION.ADD_TO_CART,
+                        data: { ...product, quantity: newCount },
+                    })
                 }
                 fontSize={COUNT_FONTSIZE.PRODUCT_CARD}
                 width={COUNTING_SIZE.PRODUCT_CARD}

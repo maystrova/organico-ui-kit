@@ -18,7 +18,7 @@ const StyledBagAction = styled.div`
     height: 52px;
     border-radius: 100px;
     color: rgba(46, 204, 113, 1);
-    margin-right: 14px;
+    margin: 10px 0;
     font-size: 16px;
     cursor: pointer;
     & span {
@@ -26,4 +26,11 @@ const StyledBagAction = styled.div`
     }
 `
 
-export { StyledBagPage, StyledBagAction }
+const StyledBag = styled.div`
+    display: grid;
+    grid-gap: 20px;
+`
+
+const StyledBagPageUserInfo = styled.div``
+
+export { StyledBagPage, StyledBagAction, StyledBag, StyledBagPageUserInfo }

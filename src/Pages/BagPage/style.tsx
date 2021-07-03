@@ -29,8 +29,68 @@ const StyledBagAction = styled.div`
 const StyledBag = styled.div`
     display: grid;
     grid-gap: 20px;
+    margin-bottom: 20px;
 `
 
-const StyledBagPageUserInfo = styled.div``
+const StyledBagPageUserInfo = styled.div`
+    display: grid;
+    grid-gap: 20px;
+    margin-bottom: 100px;
+`
 
-export { StyledBagPage, StyledBagAction, StyledBag, StyledBagPageUserInfo }
+const StyledBagPageInfoWrapper = styled.div`
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(234, 234, 234, 1);
+`
+
+const StyledBagPageAddress = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 1.5;
+    & span {
+        font-size: 14px;
+        color: rgba(146, 146, 157, 1);
+    }
+`
+
+const StyledBagPageNote = styled.textarea`
+    resize: none;
+    border-radius: 12px;
+    border: 1px solid rgba(234, 234, 234, 1);
+    padding: 10px;
+    height: 100px;
+    outline: none;
+`
+
+const StyledBagPageFooter = styled.footer``
+
+const StyledBagPageFooterPrice = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+`
+
+const StyledBagPageTotal = styled.div`
+    color: rgba(146, 146, 157, 1);
+    line-height: 2.5;
+    margin-bottom: 20px;
+    & :last-child {
+        color: black;
+    }
+`
+
+export {
+    StyledBagPage,
+    StyledBagAction,
+    StyledBag,
+    StyledBagPageUserInfo,
+    StyledBagPageInfoWrapper,
+    StyledBagPageAddress,
+    StyledBagPageNote,
+    StyledBagPageFooter,
+    StyledBagPageFooterPrice,
+    StyledBagPageTotal,
+}

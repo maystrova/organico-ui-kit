@@ -92,4 +92,4 @@ const CartPage = () => {
     )
 }
 
-export { CartPage }
+export { CartPage, getTotalPrice }

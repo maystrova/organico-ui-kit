@@ -9,6 +9,7 @@ import { ProductSticker } from 'Components/ProductSticker'
 import { Icon, ICON_SIZE } from 'Components/Icon'
 import { ProfileActionSticker } from 'Components/ProfileActionSticker'
 import { Button, BUTTON_TYPE } from 'Components/Button'
+import { getTotalPrice } from 'Pages/CartPage'
 
 import { StyledHeader } from 'Pages/ProductPage/style'
 import { StyledTitledHeader } from 'Pages/WishlistPage/style'
@@ -21,12 +22,13 @@ import {
     StyledBagAction,
     StyledBagPage,
     StyledBagPageAddress,
-    StyledBagPageInfoWrapper,
-    StyledBagPageNote,
-    StyledBagPageUserInfo,
     StyledBagPageFooter,
     StyledBagPageFooterPrice,
+    StyledBagPageInfoWrapper,
+    StyledBagPageNote,
     StyledBagPageTotal,
+    StyledBagPageUserInfo,
+    StyledEditAddress,
 } from './style'
 
 import shopIcon from 'Pages/CartPage/pics/shop-icon.svg'
@@ -34,7 +36,6 @@ import addMore from 'Pages/BagPage/pics/add-more.svg'
 import edit from 'Pages/BagPage/pics/edit-address.svg'
 import coupon from 'Pages/BagPage/pics/coupon.svg'
 import paymentMethod from 'Components/ProfileActionSticker/pics/payment-method.svg'
-import { getTotalPrice } from 'Pages/CartPage'
 
 interface BagPageFooter {
     title: string
@@ -42,7 +43,7 @@ interface BagPageFooter {
 }
 
 const BagPage = () => {
-    const { store } = useContext(OrganicContext)
+    const { store, dispatch } = useContext(OrganicContext)
     const [editAddress, setEditAddress] = useState<string>(
         store.profile.address,
     )
@@ -95,7 +96,11 @@ const BagPage = () => {
                 </Link>
             </StyledBag>
             {store.bag.length > 0 && (
-                <StyledBagPageUserInfo>
+                <StyledBagPageUserInfo
+                    onClick={() => {
+                        if (showEdit) setShowEdit(false)
+                    }}
+                >
                     <h4>Address</h4>
                     <StyledBagPageInfoWrapper>
                         <StyledBagPageAddress>
@@ -103,15 +108,30 @@ const BagPage = () => {
                                 {' '}
                                 <h4>Home</h4>
                                 {showEdit ? (
-                                    <textarea
-                                        placeholder={editAddress}
-                                        value={editAddress}
-                                        onChange={event =>
-                                            setEditAddress(event.target.value)
-                                        }
-                                    />
+                                    <StyledEditAddress>
+                                        {' '}
+                                        <textarea
+                                            placeholder={editAddress}
+                                            value={editAddress}
+                                            onChange={event =>
+                                                setEditAddress(
+                                                    event.target.value,
+                                                )
+                                            }
+                                        />
+                                        <button
+                                            onClick={() => {
+                                                setEditAddress(editAddress)
+                                                setShowEdit(false)
+                                            }}
+                                        >
+                                            Save
+                                        </button>
+                                    </StyledEditAddress>
                                 ) : (
-                                    <span>{editAddress}</span>
+                                    <span onClick={() => setShowEdit(true)}>
+                                        {editAddress}
+                                    </span>
                                 )}
                             </div>
                             <button onClick={() => setShowEdit(true)}>

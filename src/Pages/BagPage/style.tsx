@@ -59,13 +59,6 @@ const StyledBagPageAddress = styled.div`
         border: none;
         background: transparent;
     }
-
-    & textarea {
-        border: none;
-        resize: none;
-        width: 100%;
-        outline: none;
-    }
 `
 
 const StyledBagPageNote = styled.textarea`
@@ -95,6 +88,27 @@ const StyledBagPageTotal = styled.div`
     }
 `
 
+const StyledEditAddress = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & textarea {
+        border: 1px solid rgba(234, 234, 234, 1);
+        border-radius: 10px;
+        resize: none;
+        outline: none;
+        margin-right: 10px;
+    }
+    & button {
+        //width: 20px;
+        height: 30px;
+        background: rgba(46, 204, 113, 1);
+        color: white;
+        border-radius: 5px;
+    }
+`
+
 export {
     StyledBagPage,
     StyledBagAction,
@@ -106,4 +120,5 @@ export {
     StyledBagPageFooter,
     StyledBagPageFooterPrice,
     StyledBagPageTotal,
+    StyledEditAddress,
 }

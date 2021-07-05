@@ -51,10 +51,10 @@ const BagPage = () => {
     const [showEdit, setShowEdit] = useState<boolean>(false)
 
     const BAG_PAGE_FOOTER: BagPageFooter[] = [
-        { title: 'Subtotal', amount: `$${getTotalPrice(store.cart)}` },
+        { title: 'Subtotal', amount: `$${getTotalPrice(store.bag)}` },
         { title: 'Delivery Charge', amount: '$1' },
         { title: 'Coupon', amount: '-$1' },
-        { title: 'Total', amount: `$${getTotalPrice(store.cart)}` },
+        { title: 'Total', amount: `$${getTotalPrice(store.bag)}` },
     ]
 
     return (
@@ -104,9 +104,9 @@ const BagPage = () => {
             </StyledBag>
             {store.bag.length > 0 && (
                 <StyledBagPageUserInfo
-                    onClick={() => {
-                        if (showEdit) setShowEdit(false)
-                    }}
+                // onClick={() => {
+                //     if (showEdit) setShowEdit(false)
+                // }}
                 >
                     <h4>Address</h4>
                     <StyledBagPageInfoWrapper>

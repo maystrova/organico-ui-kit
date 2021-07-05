@@ -1,7 +1,7 @@
 import { StoreType } from './storeContext'
 import { ACTION } from './actions'
 import { ProductType } from 'Pages/ProductPage/types'
-import { UserType } from '../services/user'
+import { UserType } from 'services/user'
 
 const editUser = (currentState: StoreType, profile: UserType) => {
     const newProfile: UserType = {

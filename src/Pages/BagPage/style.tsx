@@ -83,7 +83,7 @@ const StyledBagPageTotal = styled.div`
     line-height: 2.5;
     margin-bottom: 20px;
 
-    & :last-child {
+    & > *:last-child {
         color: black;
     }
 `

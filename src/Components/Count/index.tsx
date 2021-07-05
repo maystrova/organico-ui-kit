@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { Icon, ICON_SIZE } from 'Components/Icon'
 

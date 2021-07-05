@@ -84,6 +84,30 @@ const addToBag = (currentState: StoreType): StoreType => {
     return { ...currentState, bag: currentState.cart }
 }
 
+const updateCountInBag = (
+    currentState: StoreType,
+    product: ProductType,
+): StoreType => {
+    const bagProduct: ProductType | undefined = currentState.bag.find(
+        bagProduct => bagProduct.id === product.id,
+    )
+
+    let newBag: ProductType[] = currentState.bag
+    if (bagProduct) {
+        newBag = currentState.bag.map(bagProduct => {
+            if (bagProduct.id === product.id) {
+                return {
+                    ...bagProduct,
+                    quantity: product.quantity,
+                }
+            }
+            return bagProduct
+        })
+    }
+
+    return { ...currentState, bag: newBag }
+}
+
 const deleteFromCart = (
     currentState: StoreType,
     currentProduct: ProductType,
@@ -112,6 +136,8 @@ export const reducer = (
             return editUser(currentState, payload.data)
         case ACTION.ADD_TO_BAG:
             return addToBag(currentState)
+        case ACTION.UPDATE_COUNT_IN_BAG:
+            return updateCountInBag(currentState, payload.data)
         default:
             return currentState
     }

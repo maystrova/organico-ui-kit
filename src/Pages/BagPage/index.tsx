@@ -36,6 +36,7 @@ import addMore from 'Pages/BagPage/pics/add-more.svg'
 import edit from 'Pages/BagPage/pics/edit-address.svg'
 import coupon from 'Pages/BagPage/pics/coupon.svg'
 import paymentMethod from 'Components/ProfileActionSticker/pics/payment-method.svg'
+import { ACTION } from '../../context/actions'
 
 interface BagPageFooter {
     title: string
@@ -79,6 +80,12 @@ const BagPage = () => {
                 </StyledCardPageShop>
                 {store.bag.map(product => (
                     <ProductSticker
+                        onCountChanged={newCount =>
+                            dispatch({
+                                action: ACTION.UPDATE_COUNT_IN_BAG,
+                                data: { ...product, quantity: newCount },
+                            })
+                        }
                         product={product}
                         image={product.image}
                         title={product.title}

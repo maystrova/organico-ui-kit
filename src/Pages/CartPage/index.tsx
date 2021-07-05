@@ -58,6 +58,12 @@ const CartPage = () => {
                 store.cart.filter(product => product.quantity > 0) ? (
                     store.cart.map(product => (
                         <ProductSticker
+                            onCountChanged={newCount =>
+                                dispatch({
+                                    action: ACTION.ADD_TO_CART,
+                                    data: { ...product, quantity: newCount },
+                                })
+                            }
                             product={product}
                             image={product.image}
                             title={product.title}

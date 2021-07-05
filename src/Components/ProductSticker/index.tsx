@@ -19,6 +19,7 @@ interface ProductStickerProps {
     title: string
     price: number
     product: ProductType
+    onCountChanged: (currentCount: number) => void
 }
 
 const ProductSticker = ({
@@ -26,6 +27,7 @@ const ProductSticker = ({
     price,
     title,
     product,
+    onCountChanged,
 }: ProductStickerProps) => {
     const { dispatch } = useContext(OrganicContext)
 
@@ -44,11 +46,13 @@ const ProductSticker = ({
             </StyledProductStickerInfo>
             <Count
                 currentCount={product.quantity}
-                onCountChanged={newCount =>
-                    dispatch({
-                        action: ACTION.ADD_TO_CART,
-                        data: { ...product, quantity: newCount },
-                    })
+                onCountChanged={
+                    onCountChanged
+                    // newCount =>
+                    // dispatch({
+                    //     action: ACTION.ADD_TO_CART,
+                    //     data: { ...product, quantity: newCount },
+                    // })
                 }
                 fontSize={COUNT_FONTSIZE.PRODUCT_CARD}
                 width={COUNTING_SIZE.PRODUCT_CARD}

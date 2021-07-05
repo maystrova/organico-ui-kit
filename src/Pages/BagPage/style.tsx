@@ -53,6 +53,19 @@ const StyledBagPageAddress = styled.div`
         font-size: 14px;
         color: rgba(146, 146, 157, 1);
     }
+    & button {
+        cursor: pointer;
+        outline: none;
+        border: none;
+        background: transparent;
+    }
+
+    & textarea {
+        border: none;
+        resize: none;
+        width: 100%;
+        outline: none;
+    }
 `
 
 const StyledBagPageNote = styled.textarea`
@@ -70,13 +83,13 @@ const StyledBagPageFooterPrice = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
 `
 
 const StyledBagPageTotal = styled.div`
     color: rgba(146, 146, 157, 1);
     line-height: 2.5;
     margin-bottom: 20px;
+
     & :last-child {
         color: black;
     }

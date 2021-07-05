@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { OrganicContext } from 'context/storeContext'
@@ -31,9 +31,10 @@ import {
 
 import shopIcon from 'Pages/CartPage/pics/shop-icon.svg'
 import addMore from 'Pages/BagPage/pics/add-more.svg'
-import editAddress from 'Pages/BagPage/pics/edit-address.svg'
+import edit from 'Pages/BagPage/pics/edit-address.svg'
 import coupon from 'Pages/BagPage/pics/coupon.svg'
 import paymentMethod from 'Components/ProfileActionSticker/pics/payment-method.svg'
+import { getTotalPrice } from 'Pages/CartPage'
 
 interface BagPageFooter {
     title: string
@@ -42,12 +43,16 @@ interface BagPageFooter {
 
 const BagPage = () => {
     const { store } = useContext(OrganicContext)
+    const [editAddress, setEditAddress] = useState<string>(
+        store.profile.address,
+    )
+    const [showEdit, setShowEdit] = useState<boolean>(false)
 
     const BAG_PAGE_FOOTER: BagPageFooter[] = [
-        { title: 'Subtotal', amount: `$9.98` },
+        { title: 'Subtotal', amount: `$${getTotalPrice(store.cart)}` },
         { title: 'Delivery Charge', amount: '$1' },
         { title: 'Coupon', amount: '-$1' },
-        { title: 'Total', amount: '$9.98' },
+        { title: 'Total', amount: `$${getTotalPrice(store.cart)}` },
     ]
 
     return (
@@ -97,9 +102,21 @@ const BagPage = () => {
                             <div>
                                 {' '}
                                 <h4>Home</h4>
-                                <span>{store.profile.address}</span>
+                                {showEdit ? (
+                                    <textarea
+                                        placeholder={editAddress}
+                                        value={editAddress}
+                                        onChange={event =>
+                                            setEditAddress(event.target.value)
+                                        }
+                                    />
+                                ) : (
+                                    <span>{editAddress}</span>
+                                )}
                             </div>
-                            <Icon size={ICON_SIZE.SMALL} src={editAddress} />
+                            <button onClick={() => setShowEdit(true)}>
+                                <Icon size={ICON_SIZE.SMALL} src={edit} />
+                            </button>
                         </StyledBagPageAddress>
                     </StyledBagPageInfoWrapper>
                     <h4>Note</h4>
@@ -129,8 +146,8 @@ const BagPage = () => {
                             {BAG_PAGE_FOOTER.map(s => {
                                 return (
                                     <StyledBagPageFooterPrice>
-                                        {s.title}
-                                        {s.amount}
+                                        <span>{s.title}</span>
+                                        <span>{s.amount}</span>
                                     </StyledBagPageFooterPrice>
                                 )
                             })}

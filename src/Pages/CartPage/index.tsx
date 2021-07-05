@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 
 import { OrganicContext } from 'context/storeContext'
 
@@ -20,7 +20,7 @@ import { StyledEmptySpace, StyledTitledHeader } from 'Pages/WishlistPage/style'
 import { StyledHeader } from 'Pages/ProductPage/style'
 
 import shopIcon from 'Pages/CartPage/pics/shop-icon.svg'
-import { ACTION } from '../../context/actions'
+import { ACTION } from 'context/actions'
 
 const getTotalPrice = (cart: ProductType[]): number => {
     let totalPrice: number = 0
@@ -34,6 +34,7 @@ const getTotalPrice = (cart: ProductType[]): number => {
 
 const CartPage = () => {
     const { store, dispatch } = useContext(OrganicContext)
+    const [addToBagButton, setAddToBagButton] = useState<string>('Add to bag')
 
     return (
         <StyledCartPage>
@@ -78,13 +79,14 @@ const CartPage = () => {
                     </StyledCartPageTotal>
                     <Button
                         type={BUTTON_TYPE.PRIMARY}
-                        title={'Add to bag'}
-                        onClick={() =>
+                        title={addToBagButton}
+                        onClick={() => {
                             dispatch({
                                 action: ACTION.ADD_TO_BAG,
                                 data: store.cart,
                             })
-                        }
+                            setAddToBagButton('Successfully added to bag!')
+                        }}
                     />
                 </StyledCartPageFooter>
             )}

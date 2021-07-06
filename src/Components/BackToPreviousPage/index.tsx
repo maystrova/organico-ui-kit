@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 
 import { Icon, ICON_SIZE } from 'Components/Icon'
 
-import { StyledBackToPreviousPage } from './style'
+import { StyledBackToPreviousPage, StyledBack } from './style'
 
 import back from 'Components/Button/pics/back.svg'
 
@@ -13,9 +13,11 @@ const BackToPreviousPage = ({}: BackToPreviousPageProps) => {
     const history = useHistory()
 
     return (
-        <StyledBackToPreviousPage onClick={() => history.goBack()}>
-            <Icon size={ICON_SIZE.X_SMALL} src={back} />
-        </StyledBackToPreviousPage>
+        <StyledBack>
+            <StyledBackToPreviousPage onClick={() => history.goBack()}>
+                <Icon size={ICON_SIZE.X_SMALL} src={back} />
+            </StyledBackToPreviousPage>
+        </StyledBack>
     )
 }
 

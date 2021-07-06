@@ -12,4 +12,10 @@ const StyledBackToPreviousPage = styled.button`
     align-items: center;
 `
 
-export { StyledBackToPreviousPage }
+const StyledBack = styled.div`
+    & svg {
+        fill: ${props => props.theme.color};
+    }
+`
+
+export { StyledBackToPreviousPage, StyledBack }

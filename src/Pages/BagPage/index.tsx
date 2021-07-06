@@ -104,9 +104,6 @@ const BagPage = () => {
             </StyledBag>
             {store.bag.length > 0 && (
                 <StyledBagPageUserInfo
-                // onClick={() => {
-                //     if (showEdit) setShowEdit(false)
-                // }}
                 >
                     <h4>Address</h4>
                     <StyledBagPageInfoWrapper>

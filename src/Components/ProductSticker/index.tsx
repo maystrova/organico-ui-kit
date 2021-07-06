@@ -2,22 +2,24 @@ import React, { useContext } from 'react'
 import { Count, COUNT_FONTSIZE, COUNTING_SIZE } from 'Components/Count'
 import { Icon, ICON_SIZE } from 'Components/Icon'
 
+import { getBackgroundColorForProduct } from 'Pages/WishlistPage'
+import { ProductType } from 'Pages/ProductPage/types'
+import { ACTION } from 'context/actions'
+import { OrganicContext } from 'context/storeContext'
+
 import {
     StyledProductSticker,
     StyledProductStickerCount,
     StyledProductStickerIcon,
     StyledProductStickerInfo,
 } from './style'
-import { getBackgroundColorForProduct } from 'Pages/WishlistPage'
-import { ProductType } from 'Pages/ProductPage/types'
-import { ACTION } from 'context/actions'
-import { OrganicContext } from 'context/storeContext'
 
 interface ProductStickerProps {
     image: string
     title: string
     price: number
     product: ProductType
+    onCountChanged: (currentCount: number) => void
 }
 
 const ProductSticker = ({
@@ -25,6 +27,7 @@ const ProductSticker = ({
     price,
     title,
     product,
+    onCountChanged,
 }: ProductStickerProps) => {
     const { dispatch } = useContext(OrganicContext)
 
@@ -43,15 +46,14 @@ const ProductSticker = ({
             </StyledProductStickerInfo>
             <Count
                 currentCount={product.quantity}
-                onCountChanged={newCount => {
-                    dispatch({
-                        action: ACTION.ADD_TO_CART,
-                        data: {
-                            ...product,
-                            quantity: newCount,
-                        },
-                    })
-                }}
+                onCountChanged={
+                    onCountChanged
+                    // newCount =>
+                    // dispatch({
+                    //     action: ACTION.ADD_TO_CART,
+                    //     data: { ...product, quantity: newCount },
+                    // })
+                }
                 fontSize={COUNT_FONTSIZE.PRODUCT_CARD}
                 width={COUNTING_SIZE.PRODUCT_CARD}
                 height={COUNTING_SIZE.PRODUCT_CARD}

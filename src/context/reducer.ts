@@ -1,7 +1,7 @@
 import { StoreType } from './storeContext'
 import { ACTION } from './actions'
 import { ProductType } from 'Pages/ProductPage/types'
-import { UserType } from '../services/user'
+import { UserType } from 'services/user'
 
 const editUser = (currentState: StoreType, profile: UserType) => {
     const newProfile: UserType = {
@@ -80,6 +80,45 @@ const addToCart = (
     return { ...currentState, products: newProducts, cart: newCart }
 }
 
+const addToBag = (currentState: StoreType): StoreType => {
+    return { ...currentState, bag: currentState.cart }
+}
+
+const updateCountInBag = (
+    currentState: StoreType,
+    product: ProductType,
+): StoreType => {
+    const bagProduct: ProductType | undefined = currentState.bag.find(
+        bagProduct => bagProduct.id === product.id,
+    )
+
+    let newBag: ProductType[] = currentState.bag
+    if (bagProduct) {
+        newBag = currentState.bag.map(bagProduct => {
+            if (bagProduct.id === product.id) {
+                return {
+                    ...bagProduct,
+                    quantity: product.quantity,
+                }
+            }
+            return bagProduct
+        })
+    }
+
+    return { ...currentState, bag: newBag }
+}
+
+const deleteFromCart = (
+    currentState: StoreType,
+    currentProduct: ProductType,
+): StoreType => {
+    const filteredCart = currentState.cart.filter(
+        product => product !== currentProduct,
+    )
+
+    return { ...currentState, cart: filteredCart }
+}
+
 export const reducer = (
     currentState: StoreType,
     payload: { action: ACTION; data: any },
@@ -91,8 +130,14 @@ export const reducer = (
             return addToCart(currentState, payload.data)
         case ACTION.DELETE_FROM_WISHLIST:
             return deleteFromWishList(currentState, payload.data)
+        case ACTION.DELETE_FROM_CART:
+            return deleteFromCart(currentState, payload.data)
         case ACTION.USER_UPDATE:
             return editUser(currentState, payload.data)
+        case ACTION.ADD_TO_BAG:
+            return addToBag(currentState)
+        case ACTION.UPDATE_COUNT_IN_BAG:
+            return updateCountInBag(currentState, payload.data)
         default:
             return currentState
     }

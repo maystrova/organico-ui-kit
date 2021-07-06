@@ -2,12 +2,6 @@ import styled from 'styled-components'
 
 const StyledCartPage = styled.div``
 
-const StyledCartPageHeader = styled.header`
-    height: 65px;
-    font-size: 18px;
-    font-weight: 700;
-`
-
 const StyledCartPageInfo = styled.div`
     border: 1px solid rgba(234, 234, 234, 1);
     border-radius: 12px;
@@ -30,6 +24,7 @@ const StyledCartPageFooter = styled.div`
     grid-template-columns: max-content 1fr;
     grid-gap: 40px;
     height: 150px;
+    align-items: center;
 `
 
 const StyledCartPageTotal = styled.div`
@@ -41,7 +36,6 @@ const StyledCartPageTotal = styled.div`
 
 export {
     StyledCartPage,
-    StyledCartPageHeader,
     StyledCartPageInfo,
     StyledCardPageShop,
     StyledCardPageShopIcon,

@@ -14,6 +14,7 @@ import { WishlistPage } from 'Pages/WishlistPage'
 import { ROUTES } from 'services/route'
 import { GlobalStyle, StyledLayout } from './style'
 import { EditProfilePage } from '../../Pages/EditProfilePage'
+import { BagPage } from '../../Pages/BagPage'
 
 const Layout = () => {
     const { store, dispatch } = useContext(OrganicContext)
@@ -57,6 +58,9 @@ const Layout = () => {
                     </Route>
                     <Route path={ROUTES.EDIT_PROFILE}>
                         <EditProfilePage />
+                    </Route>
+                    <Route path={[ROUTES.MY_BAG, ROUTES.HOME_SCREEN]}>
+                        <BagPage />
                     </Route>
                 </Switch>
                 <Menu />

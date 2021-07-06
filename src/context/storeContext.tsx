@@ -11,12 +11,14 @@ export interface StoreType {
     wishList: ProductType[]
     cart: ProductType[]
     profile: UserType
+    bag: ProductType[]
 }
 
 const INITIAL_STORE: StoreType = {
     products: products,
     cart: [],
     wishList: [],
+    bag: [],
     profile: DEFAULT_USER,
 }
 

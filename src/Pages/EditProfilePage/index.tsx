@@ -66,7 +66,7 @@ const EditProfilePage = ({}) => {
                         onChange={event =>
                             setEditProfile({
                                 ...editProfile,
-                                phoneNumber: Number(event.target.value),
+                                phoneNumber: +event.target.value,
                             })
                         }
                     />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { Icon, ICON_SIZE } from 'Components/Icon'
 
@@ -44,7 +44,7 @@ const Count = ({
             <StyledCountButtonArea>
                 <StyledCountButton
                     style={{ width: width, height: height }}
-                    onClick={() => onCountChanged(currentCount - 1)}
+                    onClick={() => onCountChanged(--currentCount)}
                 >
                     <Icon size={ICON_SIZE.MEDIUM} src={minus} />
                 </StyledCountButton>

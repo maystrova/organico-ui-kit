@@ -36,7 +36,7 @@ import addMore from 'Pages/BagPage/pics/add-more.svg'
 import edit from 'Pages/BagPage/pics/edit-address.svg'
 import coupon from 'Pages/BagPage/pics/coupon.svg'
 import paymentMethod from 'Components/ProfileActionSticker/pics/payment-method.svg'
-import { ACTION } from '../../context/actions'
+import { ACTION } from 'context/actions'
 
 interface BagPageFooter {
     title: string

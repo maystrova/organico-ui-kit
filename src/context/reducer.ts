@@ -2,6 +2,7 @@ import { StoreType } from './storeContext'
 import { ACTION } from './actions'
 import { ProductType } from 'Pages/ProductPage/types'
 import { UserType } from 'services/user'
+import { ThemeType } from '../configs/theme'
 
 const editUser = (currentState: StoreType, profile: UserType) => {
     const newProfile: UserType = {
@@ -119,6 +120,13 @@ const deleteFromCart = (
     return { ...currentState, cart: filteredCart }
 }
 
+const switchTheme = (currentState: StoreType, theme: ThemeType): StoreType => {
+    return {
+        ...currentState,
+        theme,
+    }
+}
+
 export const reducer = (
     currentState: StoreType,
     payload: { action: ACTION; data: any },
@@ -138,6 +146,8 @@ export const reducer = (
             return addToBag(currentState)
         case ACTION.UPDATE_COUNT_IN_BAG:
             return updateCountInBag(currentState, payload.data)
+        case ACTION.SWITCH_THEME:
+            return switchTheme(currentState, payload.data)
         default:
             return currentState
     }

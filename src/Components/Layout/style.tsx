@@ -3,7 +3,6 @@ import styled, { createGlobalStyle } from 'styled-components'
 const GlobalStyle = createGlobalStyle`
 body {
     margin: 0;
-    background-color: #fff;
     letter-spacing: 0.1px;
 }
 
@@ -18,6 +17,7 @@ body {
 
 const StyledLayout = styled.div`
     padding: 20px;
+    background-color: ${props => props.theme.appBackground};
 `
 
 export { StyledLayout, GlobalStyle }

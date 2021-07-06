@@ -12,6 +12,7 @@ const StyledProductCard = styled.div`
     display: grid;
     grid-row-gap: 20px;
     letter-spacing: 0.1px;
+    color: ${props => props.theme.color};
 
     ${(props: StyledProductCardProps) =>
         props.type === PRODUCT_TYPE.BROCCOLI &&

@@ -16,7 +16,7 @@ const StyledMenu = styled.div`
     border-top: 1px solid transparent;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
     border-radius: 15px;
-    background-color: white;
+    background: ${props => props.theme.menuBackground};
 
     a {
         text-decoration: none;

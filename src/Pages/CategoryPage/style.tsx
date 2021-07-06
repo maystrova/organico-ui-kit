@@ -10,7 +10,7 @@ const StyledCategoryPage = styled.div`
     a {
         text-decoration: none;
         cursor: pointer;
-        color: black;
+        color: ${props => props.theme.color};
     }
 `
 

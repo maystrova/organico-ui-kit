@@ -3,8 +3,8 @@ import React, { Component, useContext } from 'react'
 import { ReactComponent as WishLogo } from './wishlist.svg'
 
 import { StyledAddToWishlist } from './style'
-import { ProductType } from '../../Pages/ProductPage/types'
-import { OrganicContext } from '../../context/storeContext'
+import { ProductType } from 'Pages/ProductPage/types'
+import { OrganicContext } from 'context/storeContext'
 
 interface AddToWishlistProps {
     product: ProductType

@@ -19,11 +19,7 @@ const StyledLayout = styled.div`
     padding: 20px;
     background-color: ${props => props.theme.appBackground};
     color: ${props => props.theme.color};
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
+    min-height: 800px;
 `
 
 const StyledSwitchMode = styled.button`
@@ -31,8 +27,6 @@ const StyledSwitchMode = styled.button`
     border: none;
     background: transparent;
     outline: none;
-    position: absolute;
-    right: 50px;
 `
 
 export { StyledLayout, GlobalStyle, StyledSwitchMode }

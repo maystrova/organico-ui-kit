@@ -7,6 +7,7 @@ import {
     StyledProfileActionIcon,
     StyledProfileActionInfo,
     StyledProfileActionSticker,
+    StyledProfileAction,
 } from './style'
 
 import further from 'Components/ProfileActionSticker/pics/further.svg'
@@ -19,17 +20,19 @@ export interface ProfileActionsType {
 
 const ProfileActionSticker = ({ icon, title, path }: ProfileActionsType) => {
     return (
-        <Link style={{ textDecoration: 'none', color: 'black' }} to={path}>
-            <StyledProfileActionSticker>
-                <StyledProfileActionInfo>
-                    <StyledProfileActionIcon>
-                        <Icon size={ICON_SIZE.MEDIUM} src={icon} />
-                    </StyledProfileActionIcon>
-                    <span>{title}</span>
-                </StyledProfileActionInfo>
-                <Icon size={ICON_SIZE.X_SMALL} src={further} />
-            </StyledProfileActionSticker>
-        </Link>
+        <StyledProfileAction>
+            <Link to={path}>
+                <StyledProfileActionSticker>
+                    <StyledProfileActionInfo>
+                        <StyledProfileActionIcon>
+                            <Icon size={ICON_SIZE.MEDIUM} src={icon} />
+                        </StyledProfileActionIcon>
+                        <span>{title}</span>
+                    </StyledProfileActionInfo>
+                    <Icon size={ICON_SIZE.X_SMALL} src={further} />
+                </StyledProfileActionSticker>
+            </Link>
+        </StyledProfileAction>
     )
 }
 

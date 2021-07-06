@@ -18,8 +18,8 @@ import {
 } from './style'
 
 import plus from 'Components/Count/pics/plus.svg'
-import { ACTION } from '../../context/actions'
-import { OrganicContext } from '../../context/storeContext'
+import { ACTION } from 'context/actions'
+import { OrganicContext } from 'context/storeContext'
 
 export interface ProductCardProps {
     product: ProductType

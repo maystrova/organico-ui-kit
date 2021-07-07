@@ -1,5 +1,12 @@
 import styled from 'styled-components'
 
+const StyledProfileAction = styled.div`
+    & a {
+        text-decoration: none;
+        color: ${props => props.theme.color};
+    }
+`
+
 const StyledProfileActionSticker = styled.div`
     display: flex;
     justify-content: space-between;
@@ -27,4 +34,5 @@ export {
     StyledProfileActionSticker,
     StyledProfileActionIcon,
     StyledProfileActionInfo,
+    StyledProfileAction,
 }

@@ -3,7 +3,6 @@ import styled, { createGlobalStyle } from 'styled-components'
 const GlobalStyle = createGlobalStyle`
 body {
     margin: 0;
-    background-color: #fff;
     letter-spacing: 0.1px;
 }
 
@@ -18,6 +17,16 @@ body {
 
 const StyledLayout = styled.div`
     padding: 20px;
+    background-color: ${props => props.theme.appBackground};
+    color: ${props => props.theme.color};
+    min-height: 800px;
 `
 
-export { StyledLayout, GlobalStyle }
+const StyledSwitchMode = styled.button`
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    outline: none;
+`
+
+export { StyledLayout, GlobalStyle, StyledSwitchMode }

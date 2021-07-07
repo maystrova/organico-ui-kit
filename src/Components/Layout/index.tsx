@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { OrganicContext } from 'context/storeContext'
 import { ACTION } from 'context/actions'
@@ -12,17 +12,41 @@ import { ProfilePage } from 'Pages/ProfilePage'
 import { WishlistPage } from 'Pages/WishlistPage'
 
 import { ROUTES } from 'services/route'
-import { GlobalStyle, StyledLayout } from './style'
-import { EditProfilePage } from '../../Pages/EditProfilePage'
-import { BagPage } from '../../Pages/BagPage'
+import { GlobalStyle, StyledLayout, StyledSwitchMode } from './style'
+import { EditProfilePage } from 'Pages/EditProfilePage'
+import { BagPage } from 'Pages/BagPage'
+import { DARK, LIGHT } from 'configs/theme'
+import light from 'Components/Layout/pics/light-mode.svg'
+import dark from 'Components/Layout/pics/dark-mode.png'
+import { Icon, ICON_SIZE } from '../Icon'
 
 const Layout = () => {
     const { store, dispatch } = useContext(OrganicContext)
+    const [theme, setTheme] = useState<'light' | 'dark'>('light')
+
+    useEffect(() => {
+        if (theme === 'light') {
+            dispatch({ action: ACTION.SWITCH_THEME, data: DARK })
+        } else {
+            dispatch({ action: ACTION.SWITCH_THEME, data: LIGHT })
+        }
+    }, [theme])
 
     return (
         <BrowserRouter>
             <StyledLayout>
                 <GlobalStyle />
+                <StyledSwitchMode
+                    onClick={() =>
+                        setTheme(theme === 'light' ? 'dark' : 'light')
+                    }
+                >
+                    <Icon
+                        alt={'Switch mode'}
+                        size={ICON_SIZE.X_MEDIUM}
+                        src={theme === 'light' ? light : dark}
+                    />
+                </StyledSwitchMode>
                 <Switch>
                     <Route path={ROUTES.PRODUCT} exact>
                         <ProductPage

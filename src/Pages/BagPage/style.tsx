@@ -84,7 +84,7 @@ const StyledBagPageTotal = styled.div`
     margin-bottom: 20px;
 
     & > *:last-child {
-        color: black;
+        color: ${props => props.theme.color};
     }
 `
 
@@ -101,7 +101,6 @@ const StyledEditAddress = styled.div`
         margin-right: 10px;
     }
     & button {
-        //width: 20px;
         height: 30px;
         background: rgba(46, 204, 113, 1);
         color: white;

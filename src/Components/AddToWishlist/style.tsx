@@ -11,6 +11,14 @@ const StyledAddToWishlist = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    & svg {
+        fill: ${props => props.theme.appBackground} !important;
+        stroke: ${props => props.theme.color} !important;
+        & path {
+            fill: ${props => props.theme.appBackground} !important;
+        }
+    }
 `
 
 export { StyledAddToWishlist }

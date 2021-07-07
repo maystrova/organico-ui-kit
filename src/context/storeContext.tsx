@@ -5,6 +5,8 @@ import { reducer } from './reducer'
 import { ACTION } from './actions'
 import { UserType } from 'services/user'
 import { DEFAULT_USER } from 'services/user'
+import { LIGHT, ThemeType } from 'configs/theme'
+import { ThemeProvider } from 'styled-components'
 
 export interface StoreType {
     products: ProductType[]
@@ -12,6 +14,7 @@ export interface StoreType {
     cart: ProductType[]
     profile: UserType
     bag: ProductType[]
+    theme: ThemeType
 }
 
 const INITIAL_STORE: StoreType = {
@@ -20,6 +23,7 @@ const INITIAL_STORE: StoreType = {
     wishList: [],
     bag: [],
     profile: DEFAULT_USER,
+    theme: LIGHT,
 }
 
 export const OrganicContext = createContext<{
@@ -42,8 +46,10 @@ export const OrganicProvider = ({ children }: OrganicProviderProps) => {
     const [store, dispatch] = useReducer(reducer, INITIAL_STORE)
 
     return (
-        <OrganicContext.Provider value={{ store, dispatch }}>
-            {children}
-        </OrganicContext.Provider>
+        <ThemeProvider theme={store.theme}>
+            <OrganicContext.Provider value={{ store, dispatch }}>
+                {children}
+            </OrganicContext.Provider>
+        </ThemeProvider>
     )
 }

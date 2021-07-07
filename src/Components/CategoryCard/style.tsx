@@ -22,6 +22,7 @@ const StyledCategoryCardTitle = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    color: ${props => props.theme.color};
 `
 
 export { StyledCategoryCard, StyledCategoryCardImage, StyledCategoryCardTitle }

@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
 import { CategoryCard } from 'Components/CategoryCard'
+import { Search } from 'Components/Search'
 
 import { CategoryType } from 'Components/CategoryCard/types'
 import { PRODUCTS_CATEGORY } from 'Pages/ProductPage/types'
@@ -13,6 +14,7 @@ import { StyledCategoriesPage } from './style'
 import vegetables from 'services/products/pics/broccoli.png'
 import fruits from 'services/products/pics/banana.png'
 import meats from 'services/products/pics/meat.png'
+import { OrganicContext } from '../../context/storeContext'
 
 interface CategoriesPageProps {}
 
@@ -38,12 +40,21 @@ const categories: CategoryType[] = [
 ]
 
 const CategoriesPage = ({}: CategoriesPageProps) => {
+    const { store } = useContext(OrganicContext)
+    const [searchValue, setSearchValue] = useState<string>('')
+
+    const filteredProducts = store.products.filter(product => {
+        return product.title.toLowerCase().includes(searchValue.toLowerCase())
+    })
+
     return (
         <StyledCategoriesPage>
             <StyledTitledHeader>
                 <BackToPreviousPage />
                 <span>Categories</span>
             </StyledTitledHeader>
+            <Search />
+
             <StyledCardsList>
                 {categories.map(category => (
                     <Link

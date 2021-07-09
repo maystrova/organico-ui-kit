@@ -6,11 +6,10 @@ const StyledSearch = styled.label`
     grid-gap: 20px;
     border-radius: 100px;
     background-color: ${props => props.theme.searchBackground};
-
     width: 100%;
     padding: 13px;
     height: 48px;
-    margin-bottom: 30px;
+    margin: 20px 0 30px;
 
     & input {
         background-color: ${props => props.theme.searchBackground};

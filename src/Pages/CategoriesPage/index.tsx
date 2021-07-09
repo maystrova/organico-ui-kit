@@ -44,12 +44,7 @@ const categories: CategoryType[] = [
 ]
 
 const CategoriesPage = ({}: CategoriesPageProps) => {
-    const { store } = useContext(OrganicContext)
     const [searchValue, setSearchValue] = useState<string>('')
-
-    const filteredProducts = store.products.filter(product => {
-        return product.title.toLowerCase().includes(searchValue.toLowerCase())
-    })
 
     const filteredCategories = categories.filter(category => {
         return category.title.toLowerCase().includes(searchValue.toLowerCase())

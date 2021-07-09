@@ -6,14 +6,15 @@ import { ProductCard } from 'Components/ProductCard'
 import { getBackgroundColorForProduct } from 'Pages/WishlistPage'
 import { OrganicContext } from 'context/storeContext'
 
-import { StyledCategoryPage } from './style'
 import { ACTION } from 'context/actions'
 
-interface CategoryPageProps {}
+import { StyledCategoryPage } from './style'
+import { Search } from '../../Components/Search'
+import { StyledEmptySpace } from '../WishlistPage/style'
 
-const CategoryPage = ({}: CategoryPageProps) => {
+const CategoryPage = () => {
     const { store, dispatch } = useContext(OrganicContext)
-    const [isAddedToCart, setIsAddedToCart] = useState(false)
+    const [searchValue, setSearchValue] = useState<string>('')
 
     let params = useParams<{ category: string }>()
 
@@ -21,35 +22,53 @@ const CategoryPage = ({}: CategoryPageProps) => {
         product => product.category === params.category,
     )
 
-    return (
-        <StyledCategoryPage>
-            {goods.map(product => {
-                const isAddedToWishlist: boolean = store.wishList.some(
-                    wishlistProduct => wishlistProduct.id === product.id,
-                )
+    const filteredProducts = goods.filter(product => {
+        return product.title.toLowerCase().includes(searchValue.toLowerCase())
+    })
 
-                return (
-                    <ProductCard
-                        isAdded={isAddedToWishlist}
-                        type={getBackgroundColorForProduct(product.title)}
-                        product={product}
-                        key={product.id}
-                        isShowAction={true}
-                        onWishClick={productId => {
-                            dispatch({
-                                action: ACTION.ADD_TO_WISHLIST,
-                                data: productId,
-                            })
-                            isAddedToWishlist &&
-                                dispatch({
-                                    action: ACTION.DELETE_FROM_WISHLIST,
-                                    data: productId,
-                                })
-                        }}
-                    />
-                )
-            })}
-        </StyledCategoryPage>
+    // const filteredProducts = store.products.filter(product => {
+    //     return product.title.toLowerCase().includes(searchValue.toLowerCase())
+    // })
+
+    return (
+        <div>
+            <Search onValueTape={event => setSearchValue(event.target.value)} />
+            <StyledCategoryPage>
+                {filteredProducts.length > 0 ? (
+                    filteredProducts.map(product => {
+                        const isAddedToWishlist: boolean = store.wishList.some(
+                            wishlistProduct =>
+                                wishlistProduct.id === product.id,
+                        )
+
+                        return (
+                            <ProductCard
+                                isAdded={isAddedToWishlist}
+                                type={getBackgroundColorForProduct(
+                                    product.title,
+                                )}
+                                product={product}
+                                key={product.id}
+                                isShowAction={true}
+                                onWishClick={productId => {
+                                    dispatch({
+                                        action: ACTION.ADD_TO_WISHLIST,
+                                        data: productId,
+                                    })
+                                    isAddedToWishlist &&
+                                        dispatch({
+                                            action: ACTION.DELETE_FROM_WISHLIST,
+                                            data: productId,
+                                        })
+                                }}
+                            />
+                        )
+                    })
+                ) : (
+                    <StyledEmptySpace>Nothing Found :(</StyledEmptySpace>
+                )}
+            </StyledCategoryPage>
+        </div>
     )
 }
 

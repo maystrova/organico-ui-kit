@@ -8,7 +8,11 @@ import { Search } from 'Components/Search'
 import { CategoryType } from 'Components/CategoryCard/types'
 import { PRODUCTS_CATEGORY } from 'Pages/ProductPage/types'
 
-import { StyledCardsList, StyledTitledHeader } from 'Pages/WishlistPage/style'
+import {
+    StyledCardsList,
+    StyledEmptySpace,
+    StyledTitledHeader,
+} from 'Pages/WishlistPage/style'
 import { StyledCategoriesPage } from './style'
 
 import vegetables from 'services/products/pics/broccoli.png'
@@ -60,18 +64,23 @@ const CategoriesPage = ({}: CategoriesPageProps) => {
             <Search onValueTape={event => setSearchValue(event.target.value)} />
 
             <StyledCardsList>
-                {filteredCategories.map(category => (
-                    <Link
-                        to={`/categories/${category.path}`}
-                        key={category.title}
-                    >
-                        <CategoryCard
-                            title={category.title}
-                            icon={category.icon}
-                            backgroundColor={category.backgroundColor}
-                        />
-                    </Link>
-                ))}
+                {filteredCategories.length > 0 ? (
+                    filteredCategories.map(category => (
+                        <Link
+                            to={`/categories/${category.path}`}
+                            key={category.title}
+                        >
+                            <CategoryCard
+                                title={category.title}
+                                icon={category.icon}
+                                backgroundColor={category.backgroundColor}
+                            />
+                        </Link>
+                    ))
+                ) : (
+                    <StyledEmptySpace>Nothing Found :(</StyledEmptySpace>
+                )}
+                {}
             </StyledCardsList>
         </StyledCategoriesPage>
     )

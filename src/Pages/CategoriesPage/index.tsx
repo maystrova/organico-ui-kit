@@ -47,16 +47,20 @@ const CategoriesPage = ({}: CategoriesPageProps) => {
         return product.title.toLowerCase().includes(searchValue.toLowerCase())
     })
 
+    const filteredCategories = categories.filter(category => {
+        return category.title.toLowerCase().includes(searchValue.toLowerCase())
+    })
+
     return (
         <StyledCategoriesPage>
             <StyledTitledHeader>
                 <BackToPreviousPage />
                 <span>Categories</span>
             </StyledTitledHeader>
-            <Search />
+            <Search onValueTape={event => setSearchValue(event.target.value)} />
 
             <StyledCardsList>
-                {categories.map(category => (
+                {filteredCategories.map(category => (
                     <Link
                         to={`/categories/${category.path}`}
                         key={category.title}

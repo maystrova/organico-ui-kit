@@ -5,14 +5,15 @@ const StyledSearch = styled.label`
     grid-template-columns: 1fr 100%;
     grid-gap: 20px;
     border-radius: 100px;
-    background-color: rgba(241, 241, 245, 1);
+    background-color: ${props => props.theme.searchBackground};
+
     width: 100%;
     padding: 13px;
     height: 48px;
     margin-bottom: 30px;
 
     & input {
-        background-color: rgba(241, 241, 245, 1);
+        background-color: ${props => props.theme.searchBackground};
         border: none;
         font-size: 16px;
         color: gray;

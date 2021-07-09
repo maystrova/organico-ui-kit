@@ -1,7 +1,9 @@
 import React from 'react'
 
-import { StyledSearch } from './style'
 import { Icon, ICON_SIZE } from 'Components/Icon'
+
+import { StyledSearch } from './style'
+
 import search from 'Components/Search/pics/search.svg'
 
 interface SearchProps {

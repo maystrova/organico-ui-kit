@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
@@ -18,9 +18,6 @@ import { StyledCategoriesPage } from './style'
 import vegetables from 'services/products/pics/broccoli.png'
 import fruits from 'services/products/pics/banana.png'
 import meats from 'services/products/pics/meat.png'
-import { OrganicContext } from 'context/storeContext'
-
-interface CategoriesPageProps {}
 
 const categories: CategoryType[] = [
     {
@@ -43,7 +40,7 @@ const categories: CategoryType[] = [
     },
 ]
 
-const CategoriesPage = ({}: CategoriesPageProps) => {
+const CategoriesPage = () => {
     const [searchValue, setSearchValue] = useState<string>('')
 
     const filteredCategories = categories.filter(category => {
@@ -56,7 +53,9 @@ const CategoriesPage = ({}: CategoriesPageProps) => {
                 <BackToPreviousPage />
                 <span>Categories</span>
             </StyledTitledHeader>
-            <Search onValueTape={event => setSearchValue(event.target.value)} />
+            <Search
+                onValueTaped={event => setSearchValue(event.target.value)}
+            />
 
             <StyledCardsList>
                 {filteredCategories.length > 0 ? (

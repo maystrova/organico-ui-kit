@@ -18,7 +18,7 @@ import { StyledCategoriesPage } from './style'
 import vegetables from 'services/products/pics/broccoli.png'
 import fruits from 'services/products/pics/banana.png'
 import meats from 'services/products/pics/meat.png'
-import { OrganicContext } from '../../context/storeContext'
+import { OrganicContext } from 'context/storeContext'
 
 interface CategoriesPageProps {}
 

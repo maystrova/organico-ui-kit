@@ -17,7 +17,7 @@ const Search = ({ onValueTape }: SearchProps) => {
             <input
                 type='text'
                 placeholder={`Search anything here`}
-                onChange={event => onValueTape(event)}
+                onChange={onValueTape}
             />
         </StyledSearch>
     )

@@ -30,7 +30,7 @@ const StyledButton = styled.button`
         css`
             color: #171725;
             border: 1px solid #92929d;
-            background-color: rgba(46, 204, 113, 1);
+            background-color: #fff;
         `}
 `
 

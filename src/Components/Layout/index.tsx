@@ -19,6 +19,7 @@ import { DARK, LIGHT } from 'configs/theme'
 import light from 'Components/Layout/pics/light-mode.svg'
 import dark from 'Components/Layout/pics/dark-mode.png'
 import { Icon, ICON_SIZE } from '../Icon'
+import { NewRegistrationPage } from '../../Pages/NewRegistrationPage'
 
 const Layout = () => {
     const { store, dispatch } = useContext(OrganicContext)
@@ -83,8 +84,11 @@ const Layout = () => {
                     <Route path={ROUTES.EDIT_PROFILE}>
                         <EditProfilePage />
                     </Route>
-                    <Route path={[ROUTES.MY_BAG, ROUTES.HOME_SCREEN]}>
+                    <Route path={ROUTES.MY_BAG}>
                         <BagPage />
+                    </Route>
+                    <Route path={[ROUTES.NEW_REGISTRATION, ROUTES.HOME_SCREEN]}>
+                        <NewRegistrationPage />
                     </Route>
                 </Switch>
                 <Menu />

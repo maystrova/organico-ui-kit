@@ -22,7 +22,7 @@ import { Icon, ICON_SIZE } from '../Icon'
 
 const Layout = () => {
     const { store, dispatch } = useContext(OrganicContext)
-    const [theme, setTheme] = useState<'light' | 'dark'>('light')
+    const [theme, setTheme] = useState<'light' | 'dark'>('dark')
 
     useEffect(() => {
         if (theme === 'light') {

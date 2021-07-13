@@ -1,11 +1,12 @@
 import { StoreType } from './storeContext'
 import { ACTION } from './actions'
 import { ProductType } from 'Pages/ProductPage/types'
-import { UserType } from 'services/user'
-import { ThemeType } from '../configs/theme'
+import { User } from 'services/user'
+import { ThemeType } from 'configs/theme'
+import { firebase } from 'services/firebase'
 
-const editUser = (currentState: StoreType, profile: UserType) => {
-    const newProfile: UserType = {
+const editUser = (currentState: StoreType, profile: User) => {
+    const newProfile: User = {
         ...profile,
         name: profile.name,
         address: profile.address,
@@ -148,6 +149,7 @@ export const reducer = (
             return updateCountInBag(currentState, payload.data)
         case ACTION.SWITCH_THEME:
             return switchTheme(currentState, payload.data)
+
         default:
             return currentState
     }

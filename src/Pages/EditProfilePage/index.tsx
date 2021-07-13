@@ -6,7 +6,7 @@ import { UploadAvatar } from 'Components/UploadAvatar'
 import { Icon, ICON_SIZE } from 'Components/Icon'
 
 import { ACTION } from 'context/actions'
-import { UserType } from 'services/user'
+import { User } from 'services/user'
 import { OrganicContext } from 'context/storeContext'
 
 import { StyledTitledHeader } from 'Pages/WishlistPage/style'
@@ -25,7 +25,7 @@ import editAvatar from 'Pages/EditProfilePage/pics/edit-avatar.svg'
 
 const EditProfilePage = ({}) => {
     const { store, dispatch } = useContext(OrganicContext)
-    const [editProfile, setEditProfile] = useState<UserType>(store.profile)
+    const [editProfile, setEditProfile] = useState<User>(store.profile)
     const [isShowUploadAvatar, setShowUploadAvatar] = useState<boolean>(false)
     const [saveButton, setSaveButton] = useState<string>('Save')
 

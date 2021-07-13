@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { OrganicContext } from 'context/storeContext'
 import { ACTION } from 'context/actions'
+import { firebase } from 'services/firebase'
+import { DEFAULT_USER, getUser } from 'services/user'
 
 import { ProductPage } from 'Pages/ProductPage'
 import { CategoriesPage } from 'Pages/CategoriesPage'
@@ -17,15 +19,18 @@ import { BagPage } from 'Pages/BagPage'
 import { DARK, LIGHT } from 'configs/theme'
 import { Icon, ICON_SIZE } from 'Components/Icon'
 import { NewRegistrationPage } from 'Pages/NewRegistrationPage'
+import { User } from 'services/user'
 
 import { GlobalStyle, StyledLayout, StyledSwitchMode } from './style'
 
 import light from 'Components/Layout/pics/light-mode.svg'
 import dark from 'Components/Layout/pics/dark-mode.png'
+import { LogOutPage } from '../../Pages/LogOutPage'
 
 const Layout = () => {
     const { store, dispatch } = useContext(OrganicContext)
     const [theme, setTheme] = useState<'light' | 'dark'>('dark')
+    const [user, setUser] = useState<User | null>(store.profile)
 
     useEffect(() => {
         if (theme === 'light') {
@@ -34,6 +39,54 @@ const Layout = () => {
             dispatch({ action: ACTION.SWITCH_THEME, data: LIGHT })
         }
     }, [theme])
+
+    const authorization = async () => {
+        const authProvider = new firebase.auth.GoogleAuthProvider()
+
+        await firebase
+            .auth()
+            .signInWithPopup(authProvider)
+            .then(result => {
+                /** @type {firebase.auth.OAuthCredential} */
+                var user = result.user
+                const preparedUser: User = {
+                    name: user?.displayName ? user.displayName : 'User',
+                    avatar: user?.photoURL ? user.photoURL : '',
+                    phoneNumber: Number(user?.phoneNumber)
+                        ? Number(user?.phoneNumber)
+                        : 12345,
+                    id: user?.uid ? user?.uid : 'empty_id',
+                    address: '',
+                }
+
+                window.localStorage.setItem(
+                    'user',
+                    JSON.stringify(preparedUser),
+                )
+                setUser(preparedUser)
+
+                // ...
+            })
+            .catch(() => {})
+    }
+
+    const getStateUser = async (): Promise<void> => {
+        const storageUser = await getUser()
+
+        if (storageUser) {
+            setUser(storageUser)
+        }
+    }
+
+    const logOut = async (): Promise<void> => {
+        await window.localStorage.removeItem('user')
+
+        setUser(null)
+    }
+
+    useEffect(() => {
+        getStateUser()
+    }, [])
 
     return (
         <BrowserRouter>
@@ -81,7 +134,7 @@ const Layout = () => {
                         <CategoryPage />
                     </Route>
                     <Route path={ROUTES.PROFILE}>
-                        <ProfilePage />
+                        <ProfilePage user={user} />
                     </Route>
                     <Route path={ROUTES.EDIT_PROFILE}>
                         <EditProfilePage />
@@ -90,7 +143,12 @@ const Layout = () => {
                         <BagPage />
                     </Route>
                     <Route path={[ROUTES.NEW_REGISTRATION, ROUTES.HOME_SCREEN]}>
-                        <NewRegistrationPage />
+                        <NewRegistrationPage
+                            signUpWithGoogle={() => authorization()}
+                        />
+                    </Route>
+                    <Route path={ROUTES.LOGOUT}>
+                        <LogOutPage logout={() => logOut()} />
                     </Route>
                 </Switch>
                 <Menu />

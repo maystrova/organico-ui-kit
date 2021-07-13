@@ -19,7 +19,9 @@ import {
 import showPassword from 'Pages/NewRegistrationPage/pics/password-icon.svg'
 import hidePassword from 'Pages/NewRegistrationPage/pics/hide-password.svg'
 
-interface NewRegistrationPageProps {}
+interface NewRegistrationPageProps {
+    signUpWithGoogle: () => void
+}
 
 interface RegistrationType {
     title: string
@@ -28,7 +30,9 @@ interface RegistrationType {
     inputType: string
 }
 
-const NewRegistrationPage = ({}: NewRegistrationPageProps) => {
+const NewRegistrationPage = ({
+    signUpWithGoogle,
+}: NewRegistrationPageProps) => {
     const [isShowPassword, setShowPassword] = useState<'text' | 'password'>(
         'password',
     )
@@ -64,7 +68,7 @@ const NewRegistrationPage = ({}: NewRegistrationPageProps) => {
                 </p>
                 {NEW_REGISTRATION.map(field => {
                     return (
-                        <StyledRegistrationFields>
+                        <StyledRegistrationFields key={field.title}>
                             <StyledRegistrationTitle>
                                 {field.title}
                             </StyledRegistrationTitle>
@@ -116,7 +120,7 @@ const NewRegistrationPage = ({}: NewRegistrationPageProps) => {
                 <Button
                     title={'Sign Up with Google'}
                     type={BUTTON_TYPE.WHITE}
-                    onClick={() => {}}
+                    onClick={signUpWithGoogle}
                 />
             </StyledRegistrationActions>
         </div>

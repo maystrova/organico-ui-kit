@@ -12,14 +12,16 @@ import { ProfilePage } from 'Pages/ProfilePage'
 import { WishlistPage } from 'Pages/WishlistPage'
 
 import { ROUTES } from 'services/route'
-import { GlobalStyle, StyledLayout, StyledSwitchMode } from './style'
 import { EditProfilePage } from 'Pages/EditProfilePage'
 import { BagPage } from 'Pages/BagPage'
 import { DARK, LIGHT } from 'configs/theme'
+import { Icon, ICON_SIZE } from 'Components/Icon'
+import { NewRegistrationPage } from 'Pages/NewRegistrationPage'
+
+import { GlobalStyle, StyledLayout, StyledSwitchMode } from './style'
+
 import light from 'Components/Layout/pics/light-mode.svg'
 import dark from 'Components/Layout/pics/dark-mode.png'
-import { Icon, ICON_SIZE } from '../Icon'
-import { NewRegistrationPage } from '../../Pages/NewRegistrationPage'
 
 const Layout = () => {
     const { store, dispatch } = useContext(OrganicContext)

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
 import { Icon, ICON_SIZE } from 'Components/Icon'
@@ -17,6 +17,7 @@ import {
 } from './style'
 
 import showPassword from 'Pages/NewRegistrationPage/pics/password-icon.svg'
+import hidePassword from 'Pages/NewRegistrationPage/pics/hide-password.svg'
 
 interface NewRegistrationPageProps {}
 
@@ -24,19 +25,30 @@ interface RegistrationType {
     title: string
     placeholder: string
     icon?: string
+    inputType: string
 }
 
-const NEW_REGISTRATION: RegistrationType[] = [
-    { title: 'Full Name', placeholder: 'Full Name' },
-    { title: 'Password', placeholder: 'Password', icon: showPassword },
-    {
-        title: 'Password Confirmation',
-        placeholder: 'Password Confirmation',
-        icon: showPassword,
-    },
-]
-
 const NewRegistrationPage = ({}: NewRegistrationPageProps) => {
+    const [isShowPassword, setShowPassword] = useState<'text' | 'password'>(
+        'password',
+    )
+
+    const NEW_REGISTRATION: RegistrationType[] = [
+        { title: 'Full Name', placeholder: 'Full Name', inputType: 'text' },
+        {
+            title: 'Password',
+            placeholder: 'Password',
+            icon: showPassword,
+            inputType: isShowPassword,
+        },
+        {
+            title: 'Password Confirmation',
+            placeholder: 'Password Confirmation',
+            icon: showPassword,
+            inputType: isShowPassword,
+        },
+    ]
+
     return (
         <div>
             <StyledHeader>
@@ -58,14 +70,26 @@ const NewRegistrationPage = ({}: NewRegistrationPageProps) => {
                             </StyledRegistrationTitle>
                             <StyledRegistrationField>
                                 <input
-                                    type='text'
+                                    type={field.inputType}
                                     placeholder={field.placeholder}
                                 />
                                 {field.icon && (
-                                    <button>
+                                    <button
+                                        onClick={() =>
+                                            setShowPassword(
+                                                isShowPassword === 'password'
+                                                    ? 'text'
+                                                    : 'password',
+                                            )
+                                        }
+                                    >
                                         <Icon
                                             size={ICON_SIZE.SMALL}
-                                            src={showPassword}
+                                            src={
+                                                isShowPassword === 'password'
+                                                    ? showPassword
+                                                    : hidePassword
+                                            }
                                         />
                                     </button>
                                 )}
@@ -99,4 +123,4 @@ const NewRegistrationPage = ({}: NewRegistrationPageProps) => {
     )
 }
 
-export { NewRegistrationPage, NEW_REGISTRATION }
+export { NewRegistrationPage }

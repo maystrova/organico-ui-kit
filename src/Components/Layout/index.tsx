@@ -19,13 +19,14 @@ import { BagPage } from 'Pages/BagPage'
 import { DARK, LIGHT } from 'configs/theme'
 import { Icon, ICON_SIZE } from 'Components/Icon'
 import { NewRegistrationPage } from 'Pages/NewRegistrationPage'
+import { LogOutPage } from 'Pages/LogOutPage'
+
 import { User } from 'services/user'
 
 import { GlobalStyle, StyledLayout, StyledSwitchMode } from './style'
 
 import light from 'Components/Layout/pics/light-mode.svg'
 import dark from 'Components/Layout/pics/dark-mode.png'
-import { LogOutPage } from '../../Pages/LogOutPage'
 
 const Layout = () => {
     const { store, dispatch } = useContext(OrganicContext)
@@ -63,7 +64,8 @@ const Layout = () => {
                     'user',
                     JSON.stringify(preparedUser),
                 )
-                setUser(preparedUser)
+                // setUser(preparedUser)
+                store.profile = preparedUser
 
                 // ...
             })
@@ -137,7 +139,7 @@ const Layout = () => {
                         <ProfilePage user={user} />
                     </Route>
                     <Route path={ROUTES.EDIT_PROFILE}>
-                        <EditProfilePage />
+                        <EditProfilePage user={user || DEFAULT_USER} />
                     </Route>
                     <Route path={ROUTES.MY_BAG}>
                         <BagPage />
@@ -148,7 +150,12 @@ const Layout = () => {
                         />
                     </Route>
                     <Route path={ROUTES.LOGOUT}>
-                        <LogOutPage logout={() => logOut()} />
+                        <LogOutPage
+                            logout={() => {
+                                logOut()
+                                setUser(DEFAULT_USER)
+                            }}
+                        />
                     </Route>
                 </Switch>
                 <Menu />

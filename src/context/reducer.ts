@@ -3,7 +3,7 @@ import { ACTION } from './actions'
 import { ProductType } from 'Pages/ProductPage/types'
 import { User } from 'services/user'
 import { ThemeType } from 'configs/theme'
-import { firebase } from 'services/firebase'
+import { firebase } from '../services/firebase'
 
 const editUser = (currentState: StoreType, profile: User) => {
     const newProfile: User = {

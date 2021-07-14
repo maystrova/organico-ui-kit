@@ -23,9 +23,13 @@ import { StyledProfileInfo } from 'Pages/ProfilePage/style'
 
 import editAvatar from 'Pages/EditProfilePage/pics/edit-avatar.svg'
 
-const EditProfilePage = ({}) => {
+interface EditProfilePageProps {
+    user: User
+}
+
+const EditProfilePage = ({ user }: EditProfilePageProps) => {
     const { store, dispatch } = useContext(OrganicContext)
-    const [editProfile, setEditProfile] = useState<User>(store.profile)
+    const [editProfile, setEditProfile] = useState<User>(user)
     const [isShowUploadAvatar, setShowUploadAvatar] = useState<boolean>(false)
     const [saveButton, setSaveButton] = useState<string>('Save')
 
@@ -39,10 +43,7 @@ const EditProfilePage = ({}) => {
             </StyledHeader>
             <StyledProfileInfo>
                 <StyledEditUserAvatar>
-                    <StyledEditProfileAvatar
-                        src={store.profile.avatar}
-                        alt='avatar'
-                    />
+                    <StyledEditProfileAvatar src={user?.avatar} alt='avatar' />
                     <StyledEditAvatar onClick={() => setShowUploadAvatar(true)}>
                         <Icon size={ICON_SIZE.MEDIUM} src={editAvatar} />
                     </StyledEditAvatar>
@@ -51,7 +52,7 @@ const EditProfilePage = ({}) => {
                     <StyledEditProfileTitle>Name</StyledEditProfileTitle>
                     <input
                         type='text'
-                        value={`${editProfile.name}`}
+                        value={`${editProfile?.name}`}
                         onChange={event =>
                             setEditProfile({
                                 ...editProfile,
@@ -62,7 +63,7 @@ const EditProfilePage = ({}) => {
                     <StyledEditProfileTitle>Phone</StyledEditProfileTitle>
                     <input
                         type='text'
-                        value={editProfile.phoneNumber}
+                        value={editProfile?.phoneNumber}
                         onChange={event =>
                             setEditProfile({
                                 ...editProfile,
@@ -72,7 +73,7 @@ const EditProfilePage = ({}) => {
                     />
                     <StyledEditProfileTitle>Address</StyledEditProfileTitle>
                     <textarea
-                        value={editProfile.address}
+                        value={editProfile?.address}
                         onChange={event =>
                             setEditProfile({
                                 ...editProfile,

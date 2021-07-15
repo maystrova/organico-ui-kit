@@ -5,6 +5,14 @@ import { User } from 'services/user'
 import { ThemeType } from 'configs/theme'
 import { firebase } from '../services/firebase'
 
+const createUser = (currentState: StoreType, profile: User): StoreType => {
+    firebase.database().ref(`users/`).push(profile)
+    return {
+        ...currentState,
+        profile: profile,
+    }
+}
+
 const editUser = (currentState: StoreType, profile: User) => {
     const newProfile: User = {
         ...profile,
@@ -149,6 +157,8 @@ export const reducer = (
             return updateCountInBag(currentState, payload.data)
         case ACTION.SWITCH_THEME:
             return switchTheme(currentState, payload.data)
+        case ACTION.SIGN_UP:
+            return createUser(currentState, payload.data)
 
         default:
             return currentState

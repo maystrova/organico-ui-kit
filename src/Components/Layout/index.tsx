@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { OrganicContext } from 'context/storeContext'
 import { ACTION } from 'context/actions'
 import { firebase } from 'services/firebase'
-import { DEFAULT_USER, getUser } from 'services/user'
+import { DEFAULT_USER, getUser, User } from 'services/user'
 
 import { ProductPage } from 'Pages/ProductPage'
 import { CategoriesPage } from 'Pages/CategoriesPage'
@@ -21,8 +21,6 @@ import { Icon, ICON_SIZE } from 'Components/Icon'
 import { NewRegistrationPage } from 'Pages/NewRegistrationPage'
 import { LogOutPage } from 'Pages/LogOutPage'
 
-import { User } from 'services/user'
-
 import { GlobalStyle, StyledLayout, StyledSwitchMode } from './style'
 
 import light from 'Components/Layout/pics/light-mode.svg'
@@ -31,7 +29,8 @@ import dark from 'Components/Layout/pics/dark-mode.png'
 const Layout = () => {
     const { store, dispatch } = useContext(OrganicContext)
     const [theme, setTheme] = useState<'light' | 'dark'>('dark')
-    const [user, setUser] = useState<User | null>(store.profile)
+
+    console.log('store', store)
 
     useEffect(() => {
         if (theme === 'light') {
@@ -41,7 +40,7 @@ const Layout = () => {
         }
     }, [theme])
 
-    const authorization = async () => {
+    const onGoogleAuthorization = async () => {
         const authProvider = new firebase.auth.GoogleAuthProvider()
 
         await firebase
@@ -64,8 +63,10 @@ const Layout = () => {
                     'user',
                     JSON.stringify(preparedUser),
                 )
-                // setUser(preparedUser)
-                store.profile = preparedUser
+                dispatch({
+                    action: ACTION.USER_UPDATE,
+                    data: preparedUser,
+                })
 
                 // ...
             })
@@ -76,14 +77,16 @@ const Layout = () => {
         const storageUser = await getUser()
 
         if (storageUser) {
-            setUser(storageUser)
+            dispatch({
+                action: ACTION.USER_UPDATE,
+                data: storageUser,
+            })
         }
     }
 
     const logOut = async (): Promise<void> => {
         await window.localStorage.removeItem('user')
-
-        setUser(null)
+        dispatch({ action: ACTION.USER_UPDATE, data: DEFAULT_USER })
     }
 
     useEffect(() => {
@@ -136,24 +139,23 @@ const Layout = () => {
                         <CategoryPage />
                     </Route>
                     <Route path={ROUTES.PROFILE}>
-                        <ProfilePage user={user} />
+                        <ProfilePage user={store.profile} />
                     </Route>
                     <Route path={ROUTES.EDIT_PROFILE}>
-                        <EditProfilePage user={user || DEFAULT_USER} />
+                        <EditProfilePage user={store.profile} />
                     </Route>
                     <Route path={ROUTES.MY_BAG}>
                         <BagPage />
                     </Route>
                     <Route path={[ROUTES.NEW_REGISTRATION, ROUTES.HOME_SCREEN]}>
                         <NewRegistrationPage
-                            signUpWithGoogle={() => authorization()}
+                            signUpWithGoogle={() => onGoogleAuthorization()}
                         />
                     </Route>
                     <Route path={ROUTES.LOGOUT}>
                         <LogOutPage
                             logout={() => {
                                 logOut()
-                                setUser(DEFAULT_USER)
                             }}
                         />
                     </Route>

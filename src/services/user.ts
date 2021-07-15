@@ -1,11 +1,13 @@
 import Vasya from 'Pages/ProfilePage/pics/Vasya-avatar.jpg'
 
 export type User = {
-    avatar: string
+    avatar?: string
     name: string
-    phoneNumber: number
+    phoneNumber?: number
     address: string
     id: string
+    email?: string
+    password?: string
 }
 
 export let DEFAULT_USER: User = {

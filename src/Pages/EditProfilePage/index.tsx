@@ -53,12 +53,12 @@ const EditProfilePage = ({ user }: EditProfilePageProps) => {
                     <input
                         type='text'
                         value={`${editProfile?.name}`}
-                        onChange={event =>
+                        onChange={event => {
                             setEditProfile({
                                 ...editProfile,
                                 name: event.target.value,
                             })
-                        }
+                        }}
                     />
                     <StyledEditProfileTitle>Phone</StyledEditProfileTitle>
                     <input

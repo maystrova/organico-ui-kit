@@ -47,6 +47,10 @@ const authorization = async (email: string, password: string) => {
         .then(userCredential => {
             // Signed in
             var user = userCredential.user
+            console.log('user', user)
+            // const preparedUser: User = {
+            //     email: user?.email.
+            // }
 
             // ...
         })

@@ -64,12 +64,12 @@ const EditProfilePage = ({ user }: EditProfilePageProps) => {
                     <input
                         type='text'
                         value={editProfile?.phoneNumber}
-                        onChange={event =>
+                        onChange={event => {
                             setEditProfile({
                                 ...editProfile,
                                 phoneNumber: event.target.value,
                             })
-                        }
+                        }}
                     />
                     <StyledEditProfileTitle>Address</StyledEditProfileTitle>
                     <textarea

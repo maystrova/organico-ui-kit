@@ -29,7 +29,7 @@ import paymentMethod from 'Components/ProfileActionSticker/pics/payment-method.s
 import customerService from 'Components/ProfileActionSticker/pics/customer-service.svg'
 import changePassword from 'Components/ProfileActionSticker/pics/change-password.svg'
 import logout from 'Components/ProfileActionSticker/pics/logout.svg'
-import { User } from '../../services/user'
+import { User } from 'services/user'
 
 interface ProfilePageProps {
     user: User | null
@@ -74,9 +74,11 @@ const ProfilePage = ({ user }: ProfilePageProps) => {
                 <StyledUserName>
                     <span>{user?.name}</span>
                 </StyledUserName>
-                <StyledUserPhoneNumber>
-                    <span>{user?.phoneNumber}</span>
-                </StyledUserPhoneNumber>
+                {user?.email?.length && (
+                    <StyledUserPhoneNumber>
+                        <span>{user?.email}</span>
+                    </StyledUserPhoneNumber>
+                )}
             </StyledProfileInfo>
             <StyledProfileActions>
                 {PROFILE_ACTIONS.map(action => (

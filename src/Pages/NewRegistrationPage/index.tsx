@@ -21,6 +21,7 @@ import hidePassword from 'Pages/NewRegistrationPage/pics/hide-password.svg'
 import { OrganicContext } from 'context/storeContext'
 import { firebase } from 'services/firebase'
 import { User } from '../../services/user'
+import { ACTION } from '../../context/actions'
 
 interface NewRegistrationPageProps {
     signUpWithGoogle: () => void
@@ -38,27 +39,6 @@ interface RegistrationUser {
     email: string
     password: string
     confirmationPassword: string
-}
-
-const authorization = async (email: string, password: string) => {
-    await firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(userCredential => {
-            // Signed in
-            var user = userCredential.user
-            console.log('user', user)
-            // const preparedUser: User = {
-            //     email: user?.email.
-            // }
-
-            // ...
-        })
-        .catch(error => {
-            var errorCode = error.code
-            var errorMessage = error.message
-            // ..
-        })
 }
 
 const NewRegistrationPage = ({
@@ -93,6 +73,42 @@ const NewRegistrationPage = ({
             inputType: isShowPassword,
         },
     ]
+
+    const authorization = async (email: string, password: string) => {
+        await firebase
+            .auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then(userCredential => {
+                // Signed in
+                const user = userCredential.user
+                const preparedUser: User = {
+                    name: '',
+                    email: user?.email ? user.email : '',
+                    id: user?.uid ? user.uid : Math.random().toString(),
+                }
+                dispatch({ action: ACTION.USER_UPDATE, data: preparedUser })
+
+                // ...
+            })
+            .catch(error => {
+                var errorCode = error.code
+                var errorMessage = error.message
+                // ..
+            })
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                console.log('user', user)
+
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/firebase.User
+                var uid = user.uid
+                // ...
+            } else {
+                // User is signed out
+                // ...
+            }
+        })
+    }
 
     return (
         <div>

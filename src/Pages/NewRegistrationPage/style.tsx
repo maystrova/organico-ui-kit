@@ -21,6 +21,11 @@ const StyledRegistrationTitle = styled.div`
     color: #696974;
 `
 
+const StyledRegistrationPasswordInfo = styled.span`
+    color: red;
+    font-size: 10px;
+`
+
 const StyledRegistrationField = styled.label`
     border: 1.5px solid #eaeaea;
     border-radius: 100px;
@@ -83,4 +88,5 @@ export {
     StyledRegistrationActions,
     StyledAcceptTerms,
     StyledCheckbox,
+    StyledRegistrationPasswordInfo,
 }

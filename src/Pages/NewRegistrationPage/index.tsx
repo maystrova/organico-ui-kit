@@ -1,11 +1,14 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
 import { Icon, ICON_SIZE } from 'Components/Icon'
 import { Button, BUTTON_TYPE } from 'Components/Button'
 
-import { StyledHeader } from 'Pages/ProductPage/style'
-import { StyledTitledHeader } from 'Pages/WishlistPage/style'
+import { OrganicContext } from 'context/storeContext'
+import { firebase } from 'services/firebase'
+import { User } from 'services/user'
+import { ACTION } from 'context/actions'
+
 import {
     StyledAcceptTerms,
     StyledCheckbox,
@@ -14,14 +17,16 @@ import {
     StyledRegistrationField,
     StyledRegistrationFields,
     StyledRegistrationTitle,
+    StyledRegistrationPasswordInfo,
 } from './style'
+
+import { StyledHeader } from 'Pages/ProductPage/style'
+import { StyledTitledHeader } from 'Pages/WishlistPage/style'
 
 import showPassword from 'Pages/NewRegistrationPage/pics/password-icon.svg'
 import hidePassword from 'Pages/NewRegistrationPage/pics/hide-password.svg'
-import { OrganicContext } from 'context/storeContext'
-import { firebase } from 'services/firebase'
-import { User } from '../../services/user'
-import { ACTION } from '../../context/actions'
+import anonAvatar from 'Pages/NewRegistrationPage/pics/avatar-anon.png'
+import { isNumber } from 'util'
 
 interface NewRegistrationPageProps {
     signUpWithGoogle: () => void
@@ -41,6 +46,9 @@ interface RegistrationUser {
     confirmationPassword: string
 }
 
+const passwordError =
+    'The password must contain at least three character categories among the following: Uppercase characters (A-Z) Lowercase characters (a-z) Digits (0-9)'
+
 const NewRegistrationPage = ({
     signUpWithGoogle,
 }: NewRegistrationPageProps) => {
@@ -55,7 +63,7 @@ const NewRegistrationPage = ({
         password: '',
         confirmationPassword: '',
     })
-    // const [signUpFill, setSignUpFill] = useState<string>('')
+    const [passwordInfo, setPasswordInfo] = useState<string>(passwordError)
 
     const NEW_REGISTRATION: RegistrationType[] = [
         { title: 'Full Name', placeholder: 'Full Name', inputType: 'text' },
@@ -82,9 +90,10 @@ const NewRegistrationPage = ({
                 // Signed in
                 const user = userCredential.user
                 const preparedUser: User = {
-                    name: '',
+                    name: signUp.fullName,
                     email: user?.email ? user.email : '',
                     id: user?.uid ? user.uid : Math.random().toString(),
+                    avatar: anonAvatar,
                 }
                 dispatch({ action: ACTION.USER_UPDATE, data: preparedUser })
 
@@ -109,6 +118,21 @@ const NewRegistrationPage = ({
             }
         })
     }
+
+    const onPasswordCheck = () => {}
+
+    useEffect(() => {
+        if (
+            /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/.test(
+                signUp.password,
+            ) &&
+            signUp.password === signUp.confirmationPassword
+        ) {
+            setPasswordInfo('Yes')
+        } else {
+            setPasswordInfo(passwordError)
+        }
+    }, [signUp.password, signUp.confirmationPassword])
 
     return (
         <div>
@@ -185,6 +209,9 @@ const NewRegistrationPage = ({
                         </StyledRegistrationFields>
                     )
                 })}
+                <StyledRegistrationPasswordInfo>
+                    {passwordInfo}
+                </StyledRegistrationPasswordInfo>
                 <StyledAcceptTerms>
                     <StyledCheckbox
                         type='checkbox'

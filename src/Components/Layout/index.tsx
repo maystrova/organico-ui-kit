@@ -49,14 +49,13 @@ const Layout = () => {
             .then(result => {
                 /** @type {firebase.auth.OAuthCredential} */
                 var user = result.user
+                console.log('user', user)
                 const preparedUser: User = {
                     name: user?.displayName ? user.displayName : 'User',
                     avatar: user?.photoURL ? user.photoURL : '',
-                    phoneNumber: Number(user?.phoneNumber)
-                        ? Number(user?.phoneNumber)
-                        : 12345,
+                    phoneNumber: user?.phoneNumber ? user?.phoneNumber : '',
                     id: user?.uid ? user?.uid : 'empty_id',
-                    address: '',
+                    email: user?.email ? user.email : '',
                 }
 
                 window.localStorage.setItem(

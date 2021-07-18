@@ -45,7 +45,7 @@ interface BagPageFooter {
 
 const BagPage = () => {
     const { store, dispatch } = useContext(OrganicContext)
-    const [editAddress, setEditAddress] = useState<string>(
+    const [editAddress, setEditAddress] = useState<string | undefined>(
         store.profile.address,
     )
     const [showEdit, setShowEdit] = useState<boolean>(false)
@@ -103,8 +103,7 @@ const BagPage = () => {
                 </Link>
             </StyledBag>
             {store.bag.length > 0 && (
-                <StyledBagPageUserInfo
-                >
+                <StyledBagPageUserInfo>
                     <h4>Address</h4>
                     <StyledBagPageInfoWrapper>
                         <StyledBagPageAddress>

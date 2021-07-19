@@ -23,7 +23,7 @@ const StyledRegistrationTitle = styled.div`
 
 const StyledRegistrationPasswordInfo = styled.span`
     color: red;
-    font-size: 10px;
+    font-size: 12px;
 `
 
 const StyledRegistrationField = styled.label`

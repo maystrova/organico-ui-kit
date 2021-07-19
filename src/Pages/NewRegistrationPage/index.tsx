@@ -16,8 +16,8 @@ import {
     StyledRegistrationActions,
     StyledRegistrationField,
     StyledRegistrationFields,
-    StyledRegistrationTitle,
     StyledRegistrationPasswordInfo,
+    StyledRegistrationTitle,
 } from './style'
 
 import { StyledHeader } from 'Pages/ProductPage/style'
@@ -26,7 +26,8 @@ import { StyledTitledHeader } from 'Pages/WishlistPage/style'
 import showPassword from 'Pages/NewRegistrationPage/pics/password-icon.svg'
 import hidePassword from 'Pages/NewRegistrationPage/pics/hide-password.svg'
 import anonAvatar from 'Pages/NewRegistrationPage/pics/avatar-anon.png'
-import { isNumber } from 'util'
+import passwordMatch from 'Pages/NewRegistrationPage/pics/check.svg'
+import passwordNotMatch from 'Pages/NewRegistrationPage/pics/close.svg'
 
 interface NewRegistrationPageProps {
     signUpWithGoogle: () => void
@@ -37,6 +38,7 @@ interface RegistrationType {
     placeholder: string
     icon?: string
     inputType: string
+    confirmationIcon?: string
 }
 
 interface RegistrationUser {
@@ -44,6 +46,11 @@ interface RegistrationUser {
     email: string
     password: string
     confirmationPassword: string
+}
+
+interface PasswordInfo {
+    text: string
+    color: string
 }
 
 const passwordError =
@@ -63,7 +70,10 @@ const NewRegistrationPage = ({
         password: '',
         confirmationPassword: '',
     })
-    const [passwordInfo, setPasswordInfo] = useState<string>(passwordError)
+    const [passwordInfo, setPasswordInfo] = useState<PasswordInfo>({
+        text: passwordError,
+        color: 'red',
+    })
 
     const NEW_REGISTRATION: RegistrationType[] = [
         { title: 'Full Name', placeholder: 'Full Name', inputType: 'text' },
@@ -79,6 +89,7 @@ const NewRegistrationPage = ({
             placeholder: 'Password Confirmation',
             icon: showPassword,
             inputType: isShowPassword,
+            confirmationIcon: passwordMatch,
         },
     ]
 
@@ -119,18 +130,21 @@ const NewRegistrationPage = ({
         })
     }
 
-    const onPasswordCheck = () => {}
-
     useEffect(() => {
         if (
             /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/.test(
                 signUp.password,
-            ) &&
-            signUp.password === signUp.confirmationPassword
+            )
         ) {
-            setPasswordInfo('Yes')
+            setPasswordInfo({
+                text: 'Great Password!',
+                color: 'rgba(46, 204, 113, 1)',
+            })
         } else {
-            setPasswordInfo(passwordError)
+            setPasswordInfo({
+                text: passwordError,
+                color: 'red',
+            })
         }
     }, [signUp.password, signUp.confirmationPassword])
 
@@ -185,6 +199,31 @@ const NewRegistrationPage = ({
                                         }
                                     }}
                                 />
+
+                                {field.confirmationIcon &&
+                                signUp.confirmationPassword &&
+                                signUp.confirmationPassword ===
+                                    signUp.password ? (
+                                    <Icon
+                                        size={ICON_SIZE.XX_SMALL}
+                                        src={passwordMatch}
+                                    />
+                                ) : (
+                                    <div></div>
+                                )}
+
+                                {field.confirmationIcon &&
+                                signUp.confirmationPassword &&
+                                signUp.confirmationPassword !==
+                                    signUp.password ? (
+                                    <Icon
+                                        size={ICON_SIZE.SMALL}
+                                        src={passwordNotMatch}
+                                    />
+                                ) : (
+                                    <div></div>
+                                )}
+
                                 {field.icon && (
                                     <button
                                         onClick={() =>
@@ -209,8 +248,10 @@ const NewRegistrationPage = ({
                         </StyledRegistrationFields>
                     )
                 })}
-                <StyledRegistrationPasswordInfo>
-                    {passwordInfo}
+                <StyledRegistrationPasswordInfo
+                    style={{ color: passwordInfo.color }}
+                >
+                    {passwordInfo.text}
                 </StyledRegistrationPasswordInfo>
                 <StyledAcceptTerms>
                     <StyledCheckbox

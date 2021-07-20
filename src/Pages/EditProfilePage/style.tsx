@@ -13,6 +13,8 @@ const StyledEditProfile = styled.div`
         outline: none;
         padding: 13px;
         font-size: 16px;
+        background-color: ${props => props.theme.appBackground};
+        color: ${props => props.theme.color};
     }
 
     & textarea {
@@ -23,6 +25,8 @@ const StyledEditProfile = styled.div`
         padding: 10px 16px;
         resize: none;
         font-size: 16px;
+        background-color: ${props => props.theme.appBackground};
+        color: ${props => props.theme.color};
     }
 `
 

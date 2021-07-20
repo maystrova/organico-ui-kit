@@ -74,7 +74,7 @@ const ProfilePage = ({ user }: ProfilePageProps) => {
                 <StyledUserName>
                     <span>{user?.name}</span>
                 </StyledUserName>
-                {user?.email?.length && (
+                {user?.email && (
                     <StyledUserPhoneNumber>
                         <span>{user?.email}</span>
                     </StyledUserPhoneNumber>

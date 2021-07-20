@@ -39,6 +39,8 @@ const StyledRegistrationField = styled.label`
         border: none;
         outline: none;
         width: 100%;
+        background-color: ${props => props.theme.appBackground};
+        color: ${props => props.theme.color};
     }
 
     & button {

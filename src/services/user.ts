@@ -1,7 +1,7 @@
 import Vasya from 'Pages/ProfilePage/pics/Vasya-avatar.jpg'
 
 export type User = {
-    avatar?: string
+    avatar: string
     name: string
     phoneNumber?: string
     address?: string
@@ -15,7 +15,7 @@ export let DEFAULT_USER: User = {
     avatar: Vasya,
     address: 'Nevskiy Prospect 1, Saint-Petersburg',
     id: Math.random().toString(),
-    email: '',
+    email: 'vasya@meow.com',
 }
 
 const getUser = async (): Promise<User | undefined> => {

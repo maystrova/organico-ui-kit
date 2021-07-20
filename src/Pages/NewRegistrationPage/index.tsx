@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
 import { Icon, ICON_SIZE } from 'Components/Icon'
 import { Button, BUTTON_TYPE } from 'Components/Button'
+import { Link } from 'react-router-dom'
 
 import { OrganicContext } from 'context/storeContext'
 import { firebase } from 'services/firebase'
@@ -28,6 +29,7 @@ import hidePassword from 'Pages/NewRegistrationPage/pics/hide-password.svg'
 import anonAvatar from 'Pages/NewRegistrationPage/pics/avatar-anon.png'
 import passwordMatch from 'Pages/NewRegistrationPage/pics/check.svg'
 import passwordNotMatch from 'Pages/NewRegistrationPage/pics/close.svg'
+import { ROUTES } from 'services/route'
 
 interface NewRegistrationPageProps {
     signUpWithGoogle: () => void
@@ -53,6 +55,10 @@ interface PasswordInfo {
     color: string
 }
 
+const redirectToProfile = () => {
+    setTimeout(ROUTES.PROFILE, 1000)
+}
+
 const passwordError =
     'The password must contain at least three character categories among the following: Uppercase characters (A-Z) Lowercase characters (a-z) Digits (0-9)'
 
@@ -74,6 +80,7 @@ const NewRegistrationPage = ({
         text: passwordError,
         color: 'red',
     })
+    const [signUpButton, setSignUpButton] = useState<string>('Sign Up')
 
     const NEW_REGISTRATION: RegistrationType[] = [
         { title: 'Full Name', placeholder: 'Full Name', inputType: 'text' },
@@ -266,18 +273,24 @@ const NewRegistrationPage = ({
             </StyledRegistration>
 
             <StyledRegistrationActions>
-                <Button
-                    title={'Sign Up'}
-                    type={BUTTON_TYPE.PRIMARY}
-                    onClick={() => {
-                        if (
-                            signUp.password === signUp.confirmationPassword &&
-                            isChecked
-                        ) {
-                            authorization(signUp.email, signUp.password)
-                        }
-                    }}
-                />
+                <Link to={ROUTES.PROFILE}>
+                    <Button
+                        width={'100%'}
+                        title={signUpButton}
+                        type={BUTTON_TYPE.PRIMARY}
+                        onClick={() => {
+                            if (
+                                signUp.password ===
+                                    signUp.confirmationPassword &&
+                                isChecked
+                            ) {
+                                authorization(signUp.email, signUp.password)
+                                setSignUpButton('Successful!')
+                            }
+                        }}
+                    />
+                </Link>
+
                 <span>or use</span>
                 <Button
                     title={'Sign Up with Google'}

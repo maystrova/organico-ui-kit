@@ -22,8 +22,6 @@ import {
 import { StyledProfileInfo } from 'Pages/ProfilePage/style'
 
 import editAvatar from 'Pages/EditProfilePage/pics/edit-avatar.svg'
-import firebase from 'firebase'
-import { storage } from 'services/firebase'
 
 interface EditProfilePageProps {
     user: User
@@ -35,21 +33,14 @@ const EditProfilePage = ({ user }: EditProfilePageProps) => {
     const [isShowUploadAvatar, setShowUploadAvatar] = useState<boolean>(false)
     const [saveButton, setSaveButton] = useState<string>('Save')
 
-    const uploadAvatar = async (photoUrl: string) => {
-        await firebase
-        const snapshot = await storage
-        // .ref()
-        // .child(`/user/${user.avatar}`)
-        // .put(photoUrl)
-
-        const fileUrl = await snapshot.ref().getDownloadURL()
-        const { protocol, host, pathname } = new URL(fileUrl)
-        const preparedUser: User = {
-            ...user,
-            avatar: `${protocol}//${host}${pathname}?alt=media`,
+    const uploadAvatar = (user: User, fileIds: string[]) => {
+        for (let fileId of fileIds) {
+            const newUser: User = {
+                ...user,
+                avatar: fileId,
+            }
+            dispatch({ action: ACTION.USER_UPDATE, data: newUser })
         }
-        console.log('user', user.avatar)
-        dispatch({ action: ACTION.USER_UPDATE, data: preparedUser })
     }
 
     return (
@@ -117,8 +108,8 @@ const EditProfilePage = ({ user }: EditProfilePageProps) => {
                 </StyledEditProfileFooter>
             </StyledProfileInfo>
             <UploadAvatar
-                onClick={() => uploadAvatar(user.avatar)}
-                onAvatarUpload={() => {}}
+                user={store.profile}
+                // onSubmit={fileIds => uploadAvatar(user, fileIds)}
                 isOpen={isShowUploadAvatar}
                 onCancel={() => setShowUploadAvatar(false)}
             />

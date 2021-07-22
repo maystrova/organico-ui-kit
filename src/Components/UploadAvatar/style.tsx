@@ -29,6 +29,8 @@ const StyledUploadAvatarWindow = styled.div`
     z-index: 1;
     position: relative;
     padding: 20px;
+    display: grid;
+    grid-row-gap: 30px;
 `
 const StyledUploadAvatarHeader = styled.header`
     display: flex;
@@ -40,7 +42,13 @@ const StyledUploadAvatarTitle = styled.div`
 `
 
 const StyledUploadAvatarBody = styled.div`
-    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+`
+
+const StyledUploadFile = styled.label``
+
+const StyledUploadAvatarFooter = styled.footer`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -53,4 +61,6 @@ export {
     StyledUploadAvatarHeader,
     StyledUploadAvatarTitle,
     StyledUploadAvatarBody,
+    StyledUploadAvatarFooter,
+    StyledUploadFile,
 }

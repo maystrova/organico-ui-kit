@@ -1,7 +1,7 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 
 import { User } from 'services/user'
-import { firebase, storage } from 'services/firebase'
+import { storage } from 'services/firebase'
 import { OrganicContext } from 'context/storeContext'
 import { ACTION } from 'context/actions'
 
@@ -12,7 +12,10 @@ import {
     StyledUploadAvatarOverlay,
     StyledUploadAvatarTitle,
     StyledUploadAvatarWindow,
+    StyledUploadAvatarFooter,
+    StyledUploadFile,
 } from './style'
+import { Button, BUTTON_TYPE } from '../Button'
 
 interface UploadAvatarProps {
     isOpen: boolean
@@ -66,9 +69,18 @@ const UploadAvatar = ({ isOpen, onCancel, user }: UploadAvatarProps) => {
                     </StyledUploadAvatarTitle>
                 </StyledUploadAvatarHeader>
                 <StyledUploadAvatarBody>
-                    <input type='file' onChange={onUploadClick} />
+                    <StyledUploadFile>
+                        <input type='file' onChange={onUploadClick} />
+                    </StyledUploadFile>
                 </StyledUploadAvatarBody>
-                <button onClick={() => uploadFiles}>Upload</button>
+                <StyledUploadAvatarFooter>
+                    <Button
+                        title={'Upload avatar'}
+                        type={BUTTON_TYPE.PRIMARY}
+                        onClick={() => uploadFiles}
+                        width={'50%'}
+                    />
+                </StyledUploadAvatarFooter>
             </StyledUploadAvatarWindow>
         </StyledUploadAvatar>
     )

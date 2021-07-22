@@ -1,4 +1,10 @@
 import React, { useContext, useState } from 'react'
+
+import { User } from 'services/user'
+import { firebase, storage } from 'services/firebase'
+import { OrganicContext } from 'context/storeContext'
+import { ACTION } from 'context/actions'
+
 import {
     StyledUploadAvatar,
     StyledUploadAvatarBody,
@@ -7,36 +13,17 @@ import {
     StyledUploadAvatarTitle,
     StyledUploadAvatarWindow,
 } from './style'
-import { User } from 'services/user'
-import { firebase, storage } from '../../services/firebase'
-import { OrganicContext } from '../../context/storeContext'
-import { ACTION } from '../../context/actions'
 
 interface UploadAvatarProps {
     isOpen: boolean
     onCancel: () => void
-    onSubmit?: (fileIds: string[]) => void
     user: User
 }
 
-const UploadAvatar = ({
-    isOpen,
-    onCancel,
-    onSubmit,
-    user,
-}: UploadAvatarProps) => {
+const UploadAvatar = ({ isOpen, onCancel, user }: UploadAvatarProps) => {
     const { dispatch } = useContext(OrganicContext)
-    const [fileIds, setFileIds] = useState<string[]>([])
-    const [files, setFiles] = useState<string[]>([])
 
     if (!isOpen) return null
-
-    const writeFile = async (
-        file: string,
-        user: User,
-    ): Promise<string | null> => {
-        return firebase.database().ref(`users/${user.id}/files`).push(file).key
-    }
 
     const uploadFiles = async (files: any) => {
         let filesData: string[] = []
@@ -54,49 +41,14 @@ const UploadAvatar = ({
                 avatar: fileUrl,
             }
             dispatch({ action: ACTION.USER_UPDATE, data: newUser })
-
-            // const { protocol, host, pathname } = new URL(fileUrl)
-            // console.log('file', fileUrl)
-            //
-            // const preparedFile: string = `${protocol}//${host}${pathname}?alt=media`
-            // filesData.push(preparedFile)
+            onCancel()
         }
-        // for (const avatar of filesData) {
-        //     const newUser: User = {
-        //         ...user,
-        //         avatar: avatar,
-        //     }
-        //     dispatch({ action: ACTION.USER_UPDATE, data: newUser })
-        // }
+
         return filesData
     }
 
-    // const writeFilesToFireStore = async (
-    //     files: string[],
-    //     user: User,
-    // ): Promise<string[]> => {
-    //     let fileIds = []
-    //
-    //     for (const file of files) {
-    //         try {
-    //             const fileId = await writeFile(file, user)
-    //
-    //             if (fileId) {
-    //                 fileIds.push(fileId)
-    //             }
-    //         } catch (error) {
-    //             console.error(error)
-    //         }
-    //     }
-    //
-    //     return fileIds
-    // }
-
     const uploadFilesHandler = async (files: any) => {
-        const filesData = await uploadFiles(files)
-
-        setFiles(filesData)
-        setFileIds(filesData)
+        await uploadFiles(files)
     }
 
     const onUploadClick = async (e: any): Promise<void> => {

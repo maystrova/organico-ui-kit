@@ -3,7 +3,7 @@ import { ACTION } from './actions'
 import { ProductType } from 'Pages/ProductPage/types'
 import { User } from 'services/user'
 import { ThemeType } from 'configs/theme'
-import { firebase } from '../services/firebase'
+import { firebase } from 'services/firebase'
 
 const createUser = (currentState: StoreType, profile: User): StoreType => {
     firebase.database().ref(`users/`).push(profile)
@@ -20,19 +20,27 @@ const editUser = (currentState: StoreType, profile: User) => {
         address: profile.address,
         phoneNumber: profile.phoneNumber,
         avatar: profile.avatar,
+        email: profile.email,
+        password: profile.password,
     }
+    firebase.database().ref(`users/${profile.id}`).set(newProfile)
     return {
         ...currentState,
         profile: newProfile,
     }
 }
 
-const addToWishList = (currentState: StoreType, productId: string) => {
+const addToWishList = (
+    currentState: StoreType,
+    productId: string,
+    user: User,
+) => {
     const foundProduct: ProductType | undefined = currentState.products.find(
         product => product.id === productId,
     )
     if (foundProduct) {
         const newWishList = [foundProduct, ...currentState.wishList]
+        firebase.database().ref(`users/${user.id}/wishlist`).push(newWishList)
 
         return {
             ...currentState,
@@ -42,7 +50,11 @@ const addToWishList = (currentState: StoreType, productId: string) => {
     return currentState
 }
 
-const deleteFromWishList = (currentState: StoreType, productId: string) => {
+const deleteFromWishList = (
+    currentState: StoreType,
+    productId: string,
+    user: User,
+) => {
     const filteredWishlist = currentState.wishList.filter(
         product => product.id !== productId,
     )
@@ -50,12 +62,15 @@ const deleteFromWishList = (currentState: StoreType, productId: string) => {
         ...currentState,
         wishList: filteredWishlist,
     }
+    firebase.database().ref(`users/${user.id}/wishlist`).set(newWishlist)
+
     return newWishlist
 }
 
 const addToCart = (
     currentState: StoreType,
     product: ProductType,
+    user: User,
 ): StoreType => {
     const newProducts = currentState.products.map(storeProduct => {
         if (storeProduct.id === product.id) {
@@ -81,6 +96,8 @@ const addToCart = (
                     quantity: product.quantity,
                 }
             }
+            firebase.database().ref(`users/${user.id}/cart`).push(newCart)
+
             return cartProduct
         })
     } else {
@@ -97,6 +114,7 @@ const addToBag = (currentState: StoreType): StoreType => {
 const updateCountInBag = (
     currentState: StoreType,
     product: ProductType,
+    user: User,
 ): StoreType => {
     const bagProduct: ProductType | undefined = currentState.bag.find(
         bagProduct => bagProduct.id === product.id,
@@ -111,6 +129,7 @@ const updateCountInBag = (
                     quantity: product.quantity,
                 }
             }
+            firebase.database().ref(`users/${user.id}/bag`).set(newBag)
             return bagProduct
         })
     }
@@ -121,10 +140,13 @@ const updateCountInBag = (
 const deleteFromCart = (
     currentState: StoreType,
     currentProduct: ProductType,
+    user: User,
 ): StoreType => {
     const filteredCart = currentState.cart.filter(
         product => product !== currentProduct,
     )
+
+    firebase.database().ref(`users/${user.id}/cart`).set(filteredCart)
 
     return { ...currentState, cart: filteredCart }
 }
@@ -142,19 +164,19 @@ export const reducer = (
 ): StoreType => {
     switch (payload.action) {
         case ACTION.ADD_TO_WISHLIST:
-            return addToWishList(currentState, payload.data)
+            return addToWishList(currentState, payload.data, payload.data)
         case ACTION.ADD_TO_CART:
-            return addToCart(currentState, payload.data)
+            return addToCart(currentState, payload.data, payload.data)
         case ACTION.DELETE_FROM_WISHLIST:
-            return deleteFromWishList(currentState, payload.data)
+            return deleteFromWishList(currentState, payload.data, payload.data)
         case ACTION.DELETE_FROM_CART:
-            return deleteFromCart(currentState, payload.data)
+            return deleteFromCart(currentState, payload.data, payload.data)
         case ACTION.USER_UPDATE:
             return editUser(currentState, payload.data)
         case ACTION.ADD_TO_BAG:
             return addToBag(currentState)
         case ACTION.UPDATE_COUNT_IN_BAG:
-            return updateCountInBag(currentState, payload.data)
+            return updateCountInBag(currentState, payload.data, payload.data)
         case ACTION.SWITCH_THEME:
             return switchTheme(currentState, payload.data)
         case ACTION.SIGN_UP:

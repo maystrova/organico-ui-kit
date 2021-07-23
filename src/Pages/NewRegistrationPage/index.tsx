@@ -112,6 +112,7 @@ const NewRegistrationPage = ({
                     email: user?.email ? user.email : '',
                     id: user?.uid ? user.uid : Math.random().toString(),
                     avatar: anonAvatar,
+                    password: password,
                 }
                 dispatch({ action: ACTION.USER_UPDATE, data: preparedUser })
 

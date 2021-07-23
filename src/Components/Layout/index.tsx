@@ -20,17 +20,25 @@ import { DARK, LIGHT } from 'configs/theme'
 import { Icon, ICON_SIZE } from 'Components/Icon'
 import { NewRegistrationPage } from 'Pages/NewRegistrationPage'
 import { LogOutPage } from 'Pages/LogOutPage'
+import { LoginPage } from 'Pages/LoginPage'
 
 import { GlobalStyle, StyledLayout, StyledSwitchMode } from './style'
 
 import light from 'Components/Layout/pics/light-mode.svg'
 import dark from 'Components/Layout/pics/dark-mode.png'
 
+interface UserData {
+    email: string
+    password: string
+}
+
 const Layout = () => {
     const { store, dispatch } = useContext(OrganicContext)
     const [theme, setTheme] = useState<'light' | 'dark'>('dark')
-
-    console.log('store', store)
+    const [newUser, setNewUser] = useState<UserData>({
+        email: '',
+        password: '',
+    })
 
     useEffect(() => {
         if (theme === 'light') {
@@ -49,7 +57,6 @@ const Layout = () => {
             .then(result => {
                 /** @type {firebase.auth.OAuthCredential} */
                 var user = result.user
-                console.log('user', user)
                 const preparedUser: User = {
                     name: user?.displayName ? user.displayName : 'User',
                     avatar: user?.photoURL ? user.photoURL : '',
@@ -95,12 +102,27 @@ const Layout = () => {
             .then(userCredential => {
                 // Signed in
                 var user = userCredential.user
+                dispatch({ action: ACTION.USER_UPDATE, data: user })
+
                 // ...
             })
             .catch(error => {
                 var errorCode = error.code
                 var errorMessage = error.message
             })
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/firebase.User
+                var uid = user.uid
+                dispatch({ action: ACTION.USER_UPDATE, data: user })
+
+                // ...
+            } else {
+                // User is signed out
+                // ...
+            }
+        })
     }
 
     useEffect(() => {
@@ -158,7 +180,7 @@ const Layout = () => {
                     <Route path={ROUTES.EDIT_PROFILE}>
                         <EditProfilePage user={store.profile} />
                     </Route>
-                    <Route path={[ROUTES.MY_BAG, ROUTES.HOME_SCREEN]}>
+                    <Route path={[ROUTES.MY_BAG]}>
                         <BagPage />
                     </Route>
                     <Route path={ROUTES.NEW_REGISTRATION}>
@@ -174,6 +196,9 @@ const Layout = () => {
                                 logOut()
                             }}
                         />
+                    </Route>
+                    <Route path={[ROUTES.HOME_SCREEN, ROUTES.SIGN_IN]}>
+                        <LoginPage login={() => signIn} />
                     </Route>
                 </Switch>
                 <Menu />

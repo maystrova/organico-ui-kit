@@ -88,6 +88,21 @@ const Layout = () => {
         dispatch({ action: ACTION.USER_UPDATE, data: DEFAULT_USER })
     }
 
+    const signIn = (email: string, password: string) => {
+        firebase
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then(userCredential => {
+                // Signed in
+                var user = userCredential.user
+                // ...
+            })
+            .catch(error => {
+                var errorCode = error.code
+                var errorMessage = error.message
+            })
+    }
+
     useEffect(() => {
         getStateUser()
     }, [])
@@ -143,12 +158,14 @@ const Layout = () => {
                     <Route path={ROUTES.EDIT_PROFILE}>
                         <EditProfilePage user={store.profile} />
                     </Route>
-                    <Route path={ROUTES.MY_BAG}>
+                    <Route path={[ROUTES.MY_BAG, ROUTES.HOME_SCREEN]}>
                         <BagPage />
                     </Route>
-                    <Route path={[ROUTES.NEW_REGISTRATION, ROUTES.HOME_SCREEN]}>
+                    <Route path={ROUTES.NEW_REGISTRATION}>
                         <NewRegistrationPage
-                            signUpWithGoogle={() => onGoogleAuthorization()}
+                            signUpWithGoogle={() => {
+                                onGoogleAuthorization()
+                            }}
                         />
                     </Route>
                     <Route path={ROUTES.LOGOUT}>

@@ -4,6 +4,7 @@ import { User } from 'services/user'
 import { storage } from 'services/firebase'
 import { OrganicContext } from 'context/storeContext'
 import { ACTION } from 'context/actions'
+import { Button, BUTTON_TYPE } from 'Components/Button'
 
 import {
     StyledUploadAvatar,
@@ -15,7 +16,6 @@ import {
     StyledUploadAvatarFooter,
     StyledUploadFile,
 } from './style'
-import { Button, BUTTON_TYPE } from '../Button'
 
 interface UploadAvatarProps {
     isOpen: boolean
@@ -38,7 +38,6 @@ const UploadAvatar = ({ isOpen, onCancel, user }: UploadAvatarProps) => {
                 .put(file)
 
             const fileUrl = await snapshot.ref.getDownloadURL()
-            console.log('avatar', fileUrl)
             const newUser: User = {
                 ...user,
                 avatar: fileUrl,

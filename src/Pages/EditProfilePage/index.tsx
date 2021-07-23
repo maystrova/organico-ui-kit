@@ -33,16 +33,6 @@ const EditProfilePage = ({ user }: EditProfilePageProps) => {
     const [isShowUploadAvatar, setShowUploadAvatar] = useState<boolean>(false)
     const [saveButton, setSaveButton] = useState<string>('Save')
 
-    const uploadAvatar = (user: User, fileIds: string[]) => {
-        for (let fileId of fileIds) {
-            const newUser: User = {
-                ...user,
-                avatar: fileId,
-            }
-            dispatch({ action: ACTION.USER_UPDATE, data: newUser })
-        }
-    }
-
     return (
         <div>
             <StyledHeader>
@@ -109,7 +99,6 @@ const EditProfilePage = ({ user }: EditProfilePageProps) => {
             </StyledProfileInfo>
             <UploadAvatar
                 user={store.profile}
-                // onSubmit={fileIds => uploadAvatar(user, fileIds)}
                 isOpen={isShowUploadAvatar}
                 onCancel={() => setShowUploadAvatar(false)}
             />

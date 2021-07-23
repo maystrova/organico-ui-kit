@@ -292,11 +292,13 @@ const NewRegistrationPage = ({
                 </Link>
 
                 <span>or use</span>
-                <Button
-                    title={'Sign Up with Google'}
-                    type={BUTTON_TYPE.WHITE}
-                    onClick={signUpWithGoogle}
-                />
+                <Link to={ROUTES.PROFILE}>
+                    <Button
+                        title={'Sign Up with Google'}
+                        type={BUTTON_TYPE.WHITE}
+                        onClick={signUpWithGoogle}
+                    />
+                </Link>
             </StyledRegistrationActions>
         </div>
     )

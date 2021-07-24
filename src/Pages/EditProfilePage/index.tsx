@@ -5,10 +5,11 @@ import { Button, BUTTON_TYPE } from 'Components/Button'
 import { UploadAvatar } from 'Components/UploadAvatar'
 import { Icon, ICON_SIZE } from 'Components/Icon'
 
+import { storage } from 'services/firebase'
 import { ACTION } from 'context/actions'
 import { User } from 'services/user'
-import { OrganicContext } from 'context/storeContext'
 
+import { OrganicContext } from 'context/storeContext'
 import { StyledTitledHeader } from 'Pages/WishlistPage/style'
 import { StyledHeader } from 'Pages/ProductPage/style'
 import {
@@ -19,10 +20,9 @@ import {
     StyledEditProfileTitle,
     StyledEditUserAvatar,
 } from './style'
-import { StyledProfileInfo } from 'Pages/ProfilePage/style'
 
+import { StyledProfileInfo } from 'Pages/ProfilePage/style'
 import editAvatar from 'Pages/EditProfilePage/pics/edit-avatar.svg'
-import { storage } from '../../services/firebase'
 
 interface EditProfilePageProps {
     user: User
@@ -44,11 +44,17 @@ const EditProfilePage = ({ user }: EditProfilePageProps) => {
                 .put(file)
 
             const fileUrl = await snapshot.ref.getDownloadURL()
+
             const newUser: User = {
                 ...user,
                 avatar: fileUrl,
             }
             dispatch({ action: ACTION.USER_UPDATE, data: newUser })
+            setEditProfile({
+                ...editProfile,
+                avatar: fileUrl,
+            })
+
             setShowUploadAvatar(false)
         }
 
@@ -131,7 +137,6 @@ const EditProfilePage = ({ user }: EditProfilePageProps) => {
             <UploadAvatar
                 uploadFiles={() => uploadFiles}
                 onUploadClick={event => onUploadClick(event)}
-                user={editProfile}
                 isOpen={isShowUploadAvatar}
                 onCancel={() => setShowUploadAvatar(false)}
             />

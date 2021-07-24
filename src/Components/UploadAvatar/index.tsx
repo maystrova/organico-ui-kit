@@ -21,42 +21,50 @@ interface UploadAvatarProps {
     isOpen: boolean
     onCancel: () => void
     user: User
+    onUploadClick: (event: any) => void
+    uploadFiles: () => void
 }
 
-const UploadAvatar = ({ isOpen, onCancel, user }: UploadAvatarProps) => {
+const UploadAvatar = ({
+    isOpen,
+    onCancel,
+    user,
+    onUploadClick,
+    uploadFiles,
+}: UploadAvatarProps) => {
     const { dispatch } = useContext(OrganicContext)
 
     if (!isOpen) return null
 
-    const uploadFiles = async (files: any) => {
-        let filesData: string[] = []
-
-        for (const file of files) {
-            const snapshot = await storage
-                .ref()
-                .child(`/user/${user.avatar}`)
-                .put(file)
-
-            const fileUrl = await snapshot.ref.getDownloadURL()
-            const newUser: User = {
-                ...user,
-                avatar: fileUrl,
-            }
-            dispatch({ action: ACTION.USER_UPDATE, data: newUser })
-            onCancel()
-        }
-
-        return filesData
-    }
-
-    const uploadFilesHandler = async (files: any) => {
-        await uploadFiles(files)
-    }
-
-    const onUploadClick = async (e: any): Promise<void> => {
-        let files = e.target.files
-        await uploadFilesHandler(files)
-    }
+    // const uploadFiles = async (files: any) => {
+    //     let filesData: string[] = []
+    //
+    //     for (const file of files) {
+    //         const snapshot = await storage
+    //             .ref()
+    //             .child(`/user/${user.avatar}`)
+    //             .put(file)
+    //
+    //         const fileUrl = await snapshot.ref.getDownloadURL()
+    //         const newUser: User = {
+    //             ...user,
+    //             avatar: fileUrl,
+    //         }
+    //         dispatch({ action: ACTION.USER_UPDATE, data: newUser })
+    //         onCancel()
+    //     }
+    //
+    //     return filesData
+    // }
+    //
+    // const uploadFilesHandler = async (files: any) => {
+    //     await uploadFiles(files)
+    // }
+    //
+    // const onUploadClick = async (e: any): Promise<void> => {
+    //     let files = e.target.files
+    //     await uploadFilesHandler(files)
+    // }
 
     return (
         <StyledUploadAvatar>
@@ -69,14 +77,17 @@ const UploadAvatar = ({ isOpen, onCancel, user }: UploadAvatarProps) => {
                 </StyledUploadAvatarHeader>
                 <StyledUploadAvatarBody>
                     <StyledUploadFile>
-                        <input type='file' onChange={onUploadClick} />
+                        <input
+                            type='file'
+                            onChange={event => onUploadClick(event)}
+                        />
                     </StyledUploadFile>
                 </StyledUploadAvatarBody>
                 <StyledUploadAvatarFooter>
                     <Button
                         title={'Upload avatar'}
                         type={BUTTON_TYPE.PRIMARY}
-                        onClick={() => uploadFiles}
+                        onClick={uploadFiles}
                         width={'50%'}
                     />
                 </StyledUploadAvatarFooter>

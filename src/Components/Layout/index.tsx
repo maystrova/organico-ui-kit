@@ -36,7 +36,7 @@ interface UserData {
 const Layout = () => {
     const { store, dispatch } = useContext(OrganicContext)
     const [theme, setTheme] = useState<'light' | 'dark'>('dark')
-    const [newUser, setNewUser] = useState<UserData>({
+    const [signInUser, setSignInUser] = useState<UserData>({
         email: '',
         password: '',
     })
@@ -98,10 +98,10 @@ const Layout = () => {
         dispatch({ action: ACTION.USER_UPDATE, data: DEFAULT_USER })
     }
 
-    const signIn = (email: string, password: string) => {
+    const signIn = (user: UserData) => {
         firebase
             .auth()
-            .signInWithEmailAndPassword(email, password)
+            .signInWithEmailAndPassword(user.email, user.password)
             .then(userCredential => {
                 // Signed in
                 var user = userCredential.user
@@ -202,7 +202,25 @@ const Layout = () => {
                         />
                     </Route>
                     <Route path={[ROUTES.HOME_SCREEN, ROUTES.SIGN_IN]}>
-                        <LoginPage login={() => signIn} />
+                        <LoginPage
+                            onEmailEntered={event =>
+                                setSignInUser({
+                                    ...signInUser,
+                                    email: event.target.value,
+                                })
+                            }
+                            onPasswordEntered={event =>
+                                setSignInUser({
+                                    ...signInUser,
+                                    password: event.target.value,
+                                })
+                            }
+                            login={() => {
+                                signIn(signInUser)
+                                console.log('user', signInUser)
+                                console.log('user', store.profile)
+                            }}
+                        />
                     </Route>
                 </Switch>
                 <Menu />

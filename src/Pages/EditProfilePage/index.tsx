@@ -29,7 +29,7 @@ interface EditProfilePageProps {
 }
 
 const EditProfilePage = ({ user }: EditProfilePageProps) => {
-    const { store, dispatch } = useContext(OrganicContext)
+    const { dispatch } = useContext(OrganicContext)
     const [editProfile, setEditProfile] = useState<User>(user)
     const [isShowUploadAvatar, setShowUploadAvatar] = useState<boolean>(false)
     const [saveButton, setSaveButton] = useState<string>('Save')

@@ -4,6 +4,7 @@ import { OrganicContext } from 'context/storeContext'
 import { ACTION } from 'context/actions'
 import { firebase } from 'services/firebase'
 import { DEFAULT_USER, getUser, User } from 'services/user'
+import { useHistory } from 'react-router-dom'
 
 import { ProductPage } from 'Pages/ProductPage'
 import { CategoriesPage } from 'Pages/CategoriesPage'
@@ -39,6 +40,8 @@ const Layout = () => {
         email: '',
         password: '',
     })
+
+    const history = useHistory()
 
     useEffect(() => {
         if (theme === 'light') {
@@ -102,6 +105,9 @@ const Layout = () => {
             .then(userCredential => {
                 // Signed in
                 var user = userCredential.user
+                if (user) {
+                    history.push(ROUTES.PROFILE)
+                }
 
                 // ...
             })

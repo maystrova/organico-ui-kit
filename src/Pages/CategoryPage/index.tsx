@@ -4,13 +4,12 @@ import { useParams } from 'react-router-dom'
 import { ProductType } from 'Pages/ProductPage/types'
 import { ProductCard } from 'Components/ProductCard'
 import { getBackgroundColorForProduct } from 'Pages/WishlistPage'
-import { OrganicContext } from 'context/storeContext'
-
+import { Search } from 'Components/Search'
 import { ACTION } from 'context/actions'
 
+import { OrganicContext } from 'context/storeContext'
 import { StyledCategoryPage } from './style'
-import { Search } from '../../Components/Search'
-import { StyledEmptySpace } from '../WishlistPage/style'
+import { StyledEmptySpace } from 'Pages/WishlistPage/style'
 
 const CategoryPage = () => {
     const { store, dispatch } = useContext(OrganicContext)
@@ -26,13 +25,11 @@ const CategoryPage = () => {
         return product.title.toLowerCase().includes(searchValue.toLowerCase())
     })
 
-    // const filteredProducts = store.products.filter(product => {
-    //     return product.title.toLowerCase().includes(searchValue.toLowerCase())
-    // })
-
     return (
         <div>
-            <Search onValueTape={event => setSearchValue(event.target.value)} />
+            <Search
+                onValueTaped={event => setSearchValue(event.target.value)}
+            />
             <StyledCategoryPage>
                 {filteredProducts.length > 0 ? (
                     filteredProducts.map(product => {

@@ -1,16 +1,33 @@
 import { StoreType } from './storeContext'
 import { ACTION } from './actions'
 import { ProductType } from 'Pages/ProductPage/types'
-import { UserType } from 'services/user'
-import { ThemeType } from '../configs/theme'
+import { User } from 'services/user'
+import { ThemeType } from 'configs/theme'
+import { firebase } from 'services/firebase'
 
-const editUser = (currentState: StoreType, profile: UserType) => {
-    const newProfile: UserType = {
+const createUser = (currentState: StoreType, profile: User): StoreType => {
+    firebase.database().ref(`users/`).push(profile)
+    return {
+        ...currentState,
+        profile: profile,
+    }
+}
+
+const getUser = (currentState: StoreType, user: User): StoreType => {
+    return {
+        ...currentState,
+        profile: user,
+    }
+}
+
+const editUser = (currentState: StoreType, profile: User) => {
+    const newProfile: User = {
         ...profile,
         name: profile.name,
         address: profile.address,
         phoneNumber: profile.phoneNumber,
         avatar: profile.avatar,
+        email: profile.email,
     }
     return {
         ...currentState,
@@ -24,6 +41,7 @@ const addToWishList = (currentState: StoreType, productId: string) => {
     )
     if (foundProduct) {
         const newWishList = [foundProduct, ...currentState.wishList]
+        // firebase.database().ref(`users/${user.id}/wishlist`).push(newWishList)
 
         return {
             ...currentState,
@@ -41,6 +59,8 @@ const deleteFromWishList = (currentState: StoreType, productId: string) => {
         ...currentState,
         wishList: filteredWishlist,
     }
+    // firebase.database().ref(`users/${user.id}/wishlist`).set(newWishlist)
+
     return newWishlist
 }
 
@@ -72,6 +92,8 @@ const addToCart = (
                     quantity: product.quantity,
                 }
             }
+            // firebase.database().ref(`users/${user.id}/cart`).push(newCart)
+
             return cartProduct
         })
     } else {
@@ -102,6 +124,7 @@ const updateCountInBag = (
                     quantity: product.quantity,
                 }
             }
+            // firebase.database().ref(`users/${user.id}/bag`).set(newBag)
             return bagProduct
         })
     }
@@ -116,6 +139,8 @@ const deleteFromCart = (
     const filteredCart = currentState.cart.filter(
         product => product !== currentProduct,
     )
+
+    // firebase.database().ref(`users/${user.id}/cart`).set(filteredCart)
 
     return { ...currentState, cart: filteredCart }
 }
@@ -148,6 +173,11 @@ export const reducer = (
             return updateCountInBag(currentState, payload.data)
         case ACTION.SWITCH_THEME:
             return switchTheme(currentState, payload.data)
+        case ACTION.CREATE_USER:
+            return createUser(currentState, payload.data)
+        case ACTION.GET_USER:
+            return getUser(currentState, payload.data)
+
         default:
             return currentState
     }

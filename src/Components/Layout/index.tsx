@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { OrganicContext } from 'context/storeContext'
 import { ACTION } from 'context/actions'
+import { getUser, User } from 'services/user'
 
 import { ProductPage } from 'Pages/ProductPage'
 import { CategoriesPage } from 'Pages/CategoriesPage'
@@ -12,17 +13,23 @@ import { ProfilePage } from 'Pages/ProfilePage'
 import { WishlistPage } from 'Pages/WishlistPage'
 
 import { ROUTES } from 'services/route'
-import { GlobalStyle, StyledLayout, StyledSwitchMode } from './style'
 import { EditProfilePage } from 'Pages/EditProfilePage'
 import { BagPage } from 'Pages/BagPage'
 import { DARK, LIGHT } from 'configs/theme'
+import { Icon, ICON_SIZE } from 'Components/Icon'
+import { NewRegistrationPage } from 'Pages/NewRegistrationPage'
+import { LogOutPage } from 'Pages/LogOutPage'
+import { LoginPage } from 'Pages/LoginPage'
+
+import { GlobalStyle, StyledLayout, StyledSwitchMode } from './style'
+
 import light from 'Components/Layout/pics/light-mode.svg'
 import dark from 'Components/Layout/pics/dark-mode.png'
-import { Icon, ICON_SIZE } from '../Icon'
 
 const Layout = () => {
     const { store, dispatch } = useContext(OrganicContext)
     const [theme, setTheme] = useState<'light' | 'dark'>('dark')
+    const [user, setUser] = useState<User | null>(null)
 
     useEffect(() => {
         if (theme === 'light') {
@@ -31,6 +38,22 @@ const Layout = () => {
             dispatch({ action: ACTION.SWITCH_THEME, data: LIGHT })
         }
     }, [theme])
+
+    const getStateUser = async (): Promise<void> => {
+        const storageUser = await getUser()
+
+        if (storageUser) {
+            dispatch({
+                action: ACTION.USER_UPDATE,
+                data: storageUser,
+            })
+            setUser(storageUser)
+        }
+    }
+
+    useEffect(() => {
+        getStateUser()
+    }, [])
 
     return (
         <BrowserRouter>
@@ -78,13 +101,29 @@ const Layout = () => {
                         <CategoryPage />
                     </Route>
                     <Route path={ROUTES.PROFILE}>
-                        <ProfilePage />
+                        <ProfilePage user={store.profile} />
                     </Route>
                     <Route path={ROUTES.EDIT_PROFILE}>
-                        <EditProfilePage />
+                        <EditProfilePage user={store.profile} />
                     </Route>
-                    <Route path={[ROUTES.MY_BAG, ROUTES.HOME_SCREEN]}>
+                    <Route
+                        path={[ROUTES.MY_BAG, `${user && ROUTES.HOME_SCREEN}`]}
+                    >
                         <BagPage />
+                    </Route>
+                    <Route path={ROUTES.NEW_REGISTRATION}>
+                        <NewRegistrationPage />
+                    </Route>
+                    <Route path={ROUTES.LOGOUT}>
+                        <LogOutPage />
+                    </Route>
+                    <Route
+                        path={[
+                            ROUTES.SIGN_IN,
+                            `${!user && ROUTES.HOME_SCREEN}`,
+                        ]}
+                    >
+                        <LoginPage />
                     </Route>
                 </Switch>
                 <Menu />

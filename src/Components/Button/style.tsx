@@ -8,8 +8,10 @@ export interface StyledButtonProps {
 const StyledButton = styled.button`
     cursor: pointer;
     outline: none;
-    border: none;
-    color: #ffffff;
+    border-radius: 100px;
+    font-size: 16px;
+    height: 52px;
+    font-weight: 700;
 
     &:hover {
         opacity: 80%;
@@ -18,12 +20,17 @@ const StyledButton = styled.button`
     ${(props: StyledButtonProps) =>
         props.selfType === BUTTON_TYPE.PRIMARY &&
         css`
-            color: white;
-            height: 52px;
-            font-size: 16px;
-            font-weight: 700;
-            border-radius: 100px;
+            color: #ffffff;
+            border: none;
             background-color: rgba(46, 204, 113, 1);
+        `}
+
+    ${(props: StyledButtonProps) =>
+        props.selfType === BUTTON_TYPE.WHITE &&
+        css`
+            color: #171725;
+            border: 1px solid #92929d;
+            background-color: #fff;
         `}
 `
 

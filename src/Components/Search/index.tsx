@@ -7,17 +7,17 @@ import { StyledSearch } from './style'
 import search from 'Components/Search/pics/search.svg'
 
 interface SearchProps {
-    onValueTape: (event: any) => void
+    onValueTaped: (event: any) => void
 }
 
-const Search = ({ onValueTape }: SearchProps) => {
+const Search = ({ onValueTaped }: SearchProps) => {
     return (
         <StyledSearch>
             <Icon size={ICON_SIZE.MEDIUM} src={search} />
             <input
                 type='text'
                 placeholder={`Search anything here`}
-                onChange={onValueTape}
+                onChange={onValueTaped}
             />
         </StyledSearch>
     )

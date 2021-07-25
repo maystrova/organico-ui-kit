@@ -3,7 +3,7 @@ import { products } from 'services/products/products'
 import { ProductType } from 'Pages/ProductPage/types'
 import { reducer } from './reducer'
 import { ACTION } from './actions'
-import { UserType } from 'services/user'
+import { User } from 'services/user'
 import { DEFAULT_USER } from 'services/user'
 import { LIGHT, ThemeType } from 'configs/theme'
 import { ThemeProvider } from 'styled-components'
@@ -12,7 +12,7 @@ export interface StoreType {
     products: ProductType[]
     wishList: ProductType[]
     cart: ProductType[]
-    profile: UserType
+    profile: User
     bag: ProductType[]
     theme: ThemeType
 }

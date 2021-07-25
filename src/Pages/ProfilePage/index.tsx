@@ -29,6 +29,11 @@ import paymentMethod from 'Components/ProfileActionSticker/pics/payment-method.s
 import customerService from 'Components/ProfileActionSticker/pics/customer-service.svg'
 import changePassword from 'Components/ProfileActionSticker/pics/change-password.svg'
 import logout from 'Components/ProfileActionSticker/pics/logout.svg'
+import { User } from 'services/user'
+
+interface ProfilePageProps {
+    user: User | null
+}
 
 const PROFILE_ACTIONS: ProfileActionsType[] = [
     { title: 'Edit Profile', icon: editProfile, path: ROUTES.EDIT_PROFILE },
@@ -53,7 +58,7 @@ const PROFILE_ACTIONS: ProfileActionsType[] = [
     { title: 'Logout', icon: logout, path: ROUTES.LOGOUT },
 ]
 
-const ProfilePage = ({}) => {
+const ProfilePage = ({ user }: ProfilePageProps) => {
     const { store } = useContext(OrganicContext)
 
     return (
@@ -64,14 +69,16 @@ const ProfilePage = ({}) => {
             </StyledHeader>
             <StyledProfileInfo>
                 <StyledUserAvatar>
-                    <StyledAvatar src={store.profile.avatar} alt='Avatar' />
+                    <StyledAvatar src={user?.avatar} alt='Avatar' />
                 </StyledUserAvatar>
                 <StyledUserName>
-                    <span>{store.profile.name}</span>
+                    <span>{user?.name}</span>
                 </StyledUserName>
-                <StyledUserPhoneNumber>
-                    <span>{store.profile.phoneNumber}</span>
-                </StyledUserPhoneNumber>
+                {user?.email && (
+                    <StyledUserPhoneNumber>
+                        <span>{user?.email}</span>
+                    </StyledUserPhoneNumber>
+                )}
             </StyledProfileInfo>
             <StyledProfileActions>
                 {PROFILE_ACTIONS.map(action => (

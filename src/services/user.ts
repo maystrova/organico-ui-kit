@@ -7,7 +7,6 @@ export type User = {
     address?: string
     id: string
     email: string
-    password?: string | undefined
 }
 
 export let DEFAULT_USER: User = {

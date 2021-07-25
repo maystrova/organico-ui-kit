@@ -13,6 +13,13 @@ const createUser = (currentState: StoreType, profile: User): StoreType => {
     }
 }
 
+const getUser = (currentState: StoreType, user: User): StoreType => {
+    return {
+        ...currentState,
+        profile: user,
+    }
+}
+
 const editUser = (currentState: StoreType, profile: User) => {
     const newProfile: User = {
         ...profile,
@@ -21,7 +28,6 @@ const editUser = (currentState: StoreType, profile: User) => {
         phoneNumber: profile.phoneNumber,
         avatar: profile.avatar,
         email: profile.email,
-        password: profile.password,
     }
     return {
         ...currentState,
@@ -167,8 +173,10 @@ export const reducer = (
             return updateCountInBag(currentState, payload.data)
         case ACTION.SWITCH_THEME:
             return switchTheme(currentState, payload.data)
-        case ACTION.SIGN_UP:
+        case ACTION.CREATE_USER:
             return createUser(currentState, payload.data)
+        case ACTION.GET_USER:
+            return getUser(currentState, payload.data)
 
         default:
             return currentState

@@ -1,17 +1,19 @@
 import React, { useContext, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
 import { Button, BUTTON_TYPE } from 'Components/Button'
 import { UploadAvatar } from 'Components/UploadAvatar'
+
 import { Icon, ICON_SIZE } from 'Components/Icon'
-
-import { storage } from 'services/firebase'
+import { firebase, storage } from 'services/firebase'
 import { ACTION } from 'context/actions'
-import { User } from 'services/user'
 
+import { User } from 'services/user'
 import { OrganicContext } from 'context/storeContext'
 import { StyledTitledHeader } from 'Pages/WishlistPage/style'
 import { StyledHeader } from 'Pages/ProductPage/style'
+
 import {
     StyledEditAvatar,
     StyledEditProfile,
@@ -23,6 +25,7 @@ import {
 
 import { StyledProfileInfo } from 'Pages/ProfilePage/style'
 import editAvatar from 'Pages/EditProfilePage/pics/edit-avatar.svg'
+import { ROUTES } from 'services/route'
 
 interface EditProfilePageProps {
     user: User
@@ -33,6 +36,8 @@ const EditProfilePage = ({ user }: EditProfilePageProps) => {
     const [editProfile, setEditProfile] = useState<User>(user)
     const [isShowUploadAvatar, setShowUploadAvatar] = useState<boolean>(false)
     const [saveButton, setSaveButton] = useState<string>('Save')
+
+    const history = useHistory()
 
     const uploadFiles = async (files: any) => {
         let filesData: string[] = []
@@ -68,6 +73,18 @@ const EditProfilePage = ({ user }: EditProfilePageProps) => {
     const onUploadClick = async (e: any): Promise<void> => {
         let files = e.target.files
         await uploadFilesHandler(files)
+    }
+
+    const onUserInfoSave = async () => {
+        dispatch({
+            action: ACTION.USER_UPDATE,
+            data: editProfile,
+        })
+        setSaveButton('Successfully saved!')
+        await firebase.database().ref(`users/${user.id}`).set(editProfile)
+        await window.localStorage.setItem('user', JSON.stringify(editProfile))
+
+        history.push(ROUTES.PROFILE)
     }
 
     return (
@@ -124,13 +141,7 @@ const EditProfilePage = ({ user }: EditProfilePageProps) => {
                         width={'100%'}
                         title={saveButton}
                         type={BUTTON_TYPE.PRIMARY}
-                        onClick={() => {
-                            dispatch({
-                                action: ACTION.USER_UPDATE,
-                                data: editProfile,
-                            })
-                            setSaveButton('Successfully saved!')
-                        }}
+                        onClick={() => onUserInfoSave()}
                     />
                 </StyledEditProfileFooter>
             </StyledProfileInfo>

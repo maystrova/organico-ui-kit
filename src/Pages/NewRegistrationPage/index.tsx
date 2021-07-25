@@ -3,12 +3,13 @@ import React, { useContext, useEffect, useState } from 'react'
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
 import { Icon, ICON_SIZE } from 'Components/Icon'
 import { Button, BUTTON_TYPE } from 'Components/Button'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 import { OrganicContext } from 'context/storeContext'
 import { firebase } from 'services/firebase'
 import { User } from 'services/user'
 import { ACTION } from 'context/actions'
+import { ROUTES } from 'services/route'
 
 import {
     StyledAcceptTerms,
@@ -29,11 +30,8 @@ import hidePassword from 'Pages/NewRegistrationPage/pics/hide-password.svg'
 import anonAvatar from 'Pages/NewRegistrationPage/pics/avatar-anon.png'
 import passwordMatch from 'Pages/NewRegistrationPage/pics/check.svg'
 import passwordNotMatch from 'Pages/NewRegistrationPage/pics/close.svg'
-import { ROUTES } from 'services/route'
 
-interface NewRegistrationPageProps {
-    signUpWithGoogle: () => void
-}
+interface NewRegistrationPageProps {}
 
 interface RegistrationType {
     title: string
@@ -55,16 +53,10 @@ interface PasswordInfo {
     color: string
 }
 
-const redirectToProfile = () => {
-    setTimeout(ROUTES.PROFILE, 1000)
-}
-
 const passwordError =
     'The password must contain at least three character categories among the following: Uppercase characters (A-Z) Lowercase characters (a-z) Digits (0-9)'
 
-const NewRegistrationPage = ({
-    signUpWithGoogle,
-}: NewRegistrationPageProps) => {
+const NewRegistrationPage = ({}: NewRegistrationPageProps) => {
     const { store, dispatch } = useContext(OrganicContext)
     const [isShowPassword, setShowPassword] = useState<'text' | 'password'>(
         'password',
@@ -81,6 +73,8 @@ const NewRegistrationPage = ({
         color: 'red',
     })
     const [signUpButton, setSignUpButton] = useState<string>('Sign Up')
+
+    const history = useHistory()
 
     const NEW_REGISTRATION: RegistrationType[] = [
         { title: 'Full Name', placeholder: 'Full Name', inputType: 'text' },
@@ -100,8 +94,8 @@ const NewRegistrationPage = ({
         },
     ]
 
-    const authorization = async (email: string, password: string) => {
-        await firebase
+    const authorization = (email: string, password: string) => {
+        firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)
             .then(userCredential => {
@@ -112,18 +106,22 @@ const NewRegistrationPage = ({
                     email: user?.email ? user.email : '',
                     id: user?.uid ? user.uid : Math.random().toString(),
                     avatar: anonAvatar,
-                    password: password,
                 }
-                dispatch({ action: ACTION.USER_UPDATE, data: preparedUser })
-                dispatch({ action: ACTION.SIGN_UP, data: preparedUser })
+                window.localStorage.setItem(
+                    'user',
+                    JSON.stringify(preparedUser),
+                )
 
-                // ...
+                dispatch({ action: ACTION.USER_UPDATE, data: preparedUser })
+
+                history.push(ROUTES.PROFILE)
             })
             .catch(error => {
                 var errorCode = error.code
                 var errorMessage = error.message
                 // ..
             })
+
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 // User is signed in, see docs for a list of available properties
@@ -135,6 +133,40 @@ const NewRegistrationPage = ({
                 // ...
             }
         })
+    }
+
+    const onGoogleAuthorization = async () => {
+        const authProvider = new firebase.auth.GoogleAuthProvider()
+
+        await firebase
+            .auth()
+            .signInWithPopup(authProvider)
+            .then(result => {
+                /** @type {firebase.auth.OAuthCredential} */
+                var user = result.user
+                const preparedUser: User = {
+                    name: user?.displayName ? user.displayName : 'User',
+                    avatar: user?.photoURL ? user.photoURL : '',
+                    phoneNumber: user?.phoneNumber ? user?.phoneNumber : '',
+                    id: user?.uid ? user?.uid : 'empty_id',
+                    email: user?.email ? user.email : '',
+                }
+
+                window.localStorage.setItem(
+                    'user',
+                    JSON.stringify(preparedUser),
+                )
+                dispatch({
+                    action: ACTION.USER_UPDATE,
+                    data: preparedUser,
+                })
+                if (user) {
+                    history.push(ROUTES.PROFILE)
+                }
+
+                // ...
+            })
+            .catch(() => {})
     }
 
     useEffect(() => {
@@ -273,32 +305,28 @@ const NewRegistrationPage = ({
             </StyledRegistration>
 
             <StyledRegistrationActions>
-                <Link to={ROUTES.PROFILE}>
-                    <Button
-                        width={'100%'}
-                        title={signUpButton}
-                        type={BUTTON_TYPE.PRIMARY}
-                        onClick={() => {
-                            if (
-                                signUp.password ===
-                                    signUp.confirmationPassword &&
-                                isChecked
-                            ) {
-                                authorization(signUp.email, signUp.password)
-                                setSignUpButton('Successful!')
-                            }
-                        }}
-                    />
-                </Link>
+                <Button
+                    width={'100%'}
+                    title={signUpButton}
+                    type={BUTTON_TYPE.PRIMARY}
+                    onClick={() => {
+                        if (
+                            signUp.password === signUp.confirmationPassword &&
+                            isChecked
+                        ) {
+                            authorization(signUp.email, signUp.password)
+                            setSignUpButton('Successful!')
+                        }
+                    }}
+                />
 
                 <span>or use</span>
-                <Link to={ROUTES.PROFILE}>
-                    <Button
-                        title={'Sign Up with Google'}
-                        type={BUTTON_TYPE.WHITE}
-                        onClick={signUpWithGoogle}
-                    />
-                </Link>
+                <Button
+                    title={'Sign Up with Google'}
+                    type={BUTTON_TYPE.WHITE}
+                    onClick={() => onGoogleAuthorization()}
+                    width={'100%'}
+                />
             </StyledRegistrationActions>
         </div>
     )

@@ -2,9 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { OrganicContext } from 'context/storeContext'
 import { ACTION } from 'context/actions'
-import { firebase } from 'services/firebase'
-import { DEFAULT_USER, getUser, User } from 'services/user'
-import { useHistory } from 'react-router-dom'
+import { getUser, User } from 'services/user'
 
 import { ProductPage } from 'Pages/ProductPage'
 import { CategoriesPage } from 'Pages/CategoriesPage'
@@ -28,20 +26,10 @@ import { GlobalStyle, StyledLayout, StyledSwitchMode } from './style'
 import light from 'Components/Layout/pics/light-mode.svg'
 import dark from 'Components/Layout/pics/dark-mode.png'
 
-interface UserData {
-    email: string
-    password: string
-}
-
 const Layout = () => {
     const { store, dispatch } = useContext(OrganicContext)
     const [theme, setTheme] = useState<'light' | 'dark'>('dark')
-    const [signInUser, setSignInUser] = useState<UserData>({
-        email: '',
-        password: '',
-    })
-
-    const history = useHistory()
+    const [user, setUser] = useState<User | null>(null)
 
     useEffect(() => {
         if (theme === 'light') {
@@ -51,37 +39,6 @@ const Layout = () => {
         }
     }, [theme])
 
-    const onGoogleAuthorization = async () => {
-        const authProvider = new firebase.auth.GoogleAuthProvider()
-
-        await firebase
-            .auth()
-            .signInWithPopup(authProvider)
-            .then(result => {
-                /** @type {firebase.auth.OAuthCredential} */
-                var user = result.user
-                const preparedUser: User = {
-                    name: user?.displayName ? user.displayName : 'User',
-                    avatar: user?.photoURL ? user.photoURL : '',
-                    phoneNumber: user?.phoneNumber ? user?.phoneNumber : '',
-                    id: user?.uid ? user?.uid : 'empty_id',
-                    email: user?.email ? user.email : '',
-                }
-
-                window.localStorage.setItem(
-                    'user',
-                    JSON.stringify(preparedUser),
-                )
-                dispatch({
-                    action: ACTION.USER_UPDATE,
-                    data: preparedUser,
-                })
-
-                // ...
-            })
-            .catch(() => {})
-    }
-
     const getStateUser = async (): Promise<void> => {
         const storageUser = await getUser()
 
@@ -90,43 +47,8 @@ const Layout = () => {
                 action: ACTION.USER_UPDATE,
                 data: storageUser,
             })
+            setUser(storageUser)
         }
-    }
-
-    const logOut = async (): Promise<void> => {
-        await window.localStorage.removeItem('user')
-        dispatch({ action: ACTION.USER_UPDATE, data: DEFAULT_USER })
-    }
-
-    const signIn = (user: UserData) => {
-        firebase
-            .auth()
-            .signInWithEmailAndPassword(user.email, user.password)
-            .then(userCredential => {
-                // Signed in
-                var user = userCredential.user
-                if (user) {
-                    history.push(ROUTES.PROFILE)
-                }
-
-                // ...
-            })
-            .catch(error => {
-                var errorCode = error.code
-                var errorMessage = error.message
-            })
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                // User is signed in, see docs for a list of available properties
-                // https://firebase.google.com/docs/reference/js/firebase.User
-                var uid = user.uid
-
-                // ...
-            } else {
-                // User is signed out
-                // ...
-            }
-        })
     }
 
     useEffect(() => {
@@ -184,43 +106,24 @@ const Layout = () => {
                     <Route path={ROUTES.EDIT_PROFILE}>
                         <EditProfilePage user={store.profile} />
                     </Route>
-                    <Route path={[ROUTES.MY_BAG]}>
+                    <Route
+                        path={[ROUTES.MY_BAG, `${user && ROUTES.HOME_SCREEN}`]}
+                    >
                         <BagPage />
                     </Route>
                     <Route path={ROUTES.NEW_REGISTRATION}>
-                        <NewRegistrationPage
-                            signUpWithGoogle={() => {
-                                onGoogleAuthorization()
-                            }}
-                        />
+                        <NewRegistrationPage />
                     </Route>
                     <Route path={ROUTES.LOGOUT}>
-                        <LogOutPage
-                            logout={() => {
-                                logOut()
-                            }}
-                        />
+                        <LogOutPage />
                     </Route>
-                    <Route path={[ROUTES.HOME_SCREEN, ROUTES.SIGN_IN]}>
-                        <LoginPage
-                            onEmailEntered={event =>
-                                setSignInUser({
-                                    ...signInUser,
-                                    email: event.target.value,
-                                })
-                            }
-                            onPasswordEntered={event =>
-                                setSignInUser({
-                                    ...signInUser,
-                                    password: event.target.value,
-                                })
-                            }
-                            login={() => {
-                                signIn(signInUser)
-                                console.log('user', signInUser)
-                                console.log('user', store.profile)
-                            }}
-                        />
+                    <Route
+                        path={[
+                            ROUTES.SIGN_IN,
+                            `${!user && ROUTES.HOME_SCREEN}`,
+                        ]}
+                    >
+                        <LoginPage />
                     </Route>
                 </Switch>
                 <Menu />

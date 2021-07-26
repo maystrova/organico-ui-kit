@@ -14,8 +14,6 @@ import {
     StyledEmptySpace,
 } from './style'
 
-interface WishlistPageProps {}
-
 export const getBackgroundColorForProduct = (title: string): PRODUCT_TYPE => {
     switch (title) {
         case 'Banana':
@@ -46,7 +44,7 @@ export const getBackgroundColorForProduct = (title: string): PRODUCT_TYPE => {
     }
 }
 
-const WishlistPage = ({}: WishlistPageProps) => {
+const WishlistPage = () => {
     const { store, dispatch } = useContext(OrganicContext)
 
     return (

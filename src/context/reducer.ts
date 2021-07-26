@@ -41,13 +41,15 @@ const addToWishList = (currentState: StoreType, productId: string) => {
     )
     if (foundProduct) {
         const newWishList = [foundProduct, ...currentState.wishList]
-        // firebase.database().ref(`users/${user.id}/wishlist`).push(newWishList)
+        // firebase.database().ref(`users/user/wishlist`).push(newWishList)
+        window.localStorage.setItem('wishlist', JSON.stringify(newWishList))
 
         return {
             ...currentState,
             wishList: newWishList,
         }
     }
+
     return currentState
 }
 
@@ -59,6 +61,7 @@ const deleteFromWishList = (currentState: StoreType, productId: string) => {
         ...currentState,
         wishList: filteredWishlist,
     }
+    window.localStorage.setItem('wishlist', JSON.stringify(newWishlist))
     // firebase.database().ref(`users/${user.id}/wishlist`).set(newWishlist)
 
     return newWishlist
@@ -99,6 +102,7 @@ const addToCart = (
     } else {
         newCart.push(product)
     }
+    window.localStorage.setItem('cart', JSON.stringify(newCart))
 
     return { ...currentState, products: newProducts, cart: newCart }
 }
@@ -139,6 +143,7 @@ const deleteFromCart = (
     const filteredCart = currentState.cart.filter(
         product => product !== currentProduct,
     )
+    window.localStorage.setItem('cart', JSON.stringify(filteredCart))
 
     // firebase.database().ref(`users/${user.id}/cart`).set(filteredCart)
 

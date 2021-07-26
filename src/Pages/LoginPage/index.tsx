@@ -55,7 +55,6 @@ const LoginPage = () => {
                 .get()
 
             const userFromDb = firebaseUserRef.val()
-            console.log('userFromDb', userFromDb)
 
             const preparedUser: User = {
                 name: userFromDb?.name ? userFromDb.name : 'Anon',
@@ -67,8 +66,6 @@ const LoginPage = () => {
                 email: userFromDb?.email ? userFromDb.email : '',
                 address: userFromDb?.email ? userFromDb?.email : '',
             }
-
-            console.log('preparedUser', preparedUser)
 
             window.localStorage.setItem('user', JSON.stringify(preparedUser))
 

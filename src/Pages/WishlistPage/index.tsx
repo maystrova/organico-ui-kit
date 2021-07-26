@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
 import { ProductCard } from 'Components/ProductCard'
@@ -13,6 +13,9 @@ import {
     StyledWishlistPage,
     StyledEmptySpace,
 } from './style'
+import { ProductType } from '../ProductPage/types'
+import { User } from '../../services/user'
+import { getWishlistFromFirebase } from '../../services/wishlist'
 
 export const getBackgroundColorForProduct = (title: string): PRODUCT_TYPE => {
     switch (title) {
@@ -46,6 +49,12 @@ export const getBackgroundColorForProduct = (title: string): PRODUCT_TYPE => {
 
 const WishlistPage = () => {
     const { store, dispatch } = useContext(OrganicContext)
+    const [wishlist, setWishlist] = useState<ProductType[]>(store.wishList)
+
+    const setUserWishlist = async (user: User): Promise<void> => {
+        const userWishlist = await getWishlistFromFirebase(user)
+        setWishlist(userWishlist)
+    }
 
     return (
         <StyledWishlistPage>

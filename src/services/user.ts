@@ -1,4 +1,5 @@
 import Vasya from 'Pages/ProfilePage/pics/Vasya-avatar.jpg'
+import { ProductType } from '../Pages/ProductPage/types'
 
 export type User = {
     avatar: string
@@ -27,4 +28,13 @@ const getUser = async (): Promise<User | undefined> => {
     return undefined
 }
 
-export { getUser }
+const getUserCart = async (): Promise<ProductType[]> => {
+    const storageCart = await window.localStorage.getItem('cart')
+
+    if (storageCart) {
+        return JSON.parse(storageCart)
+    }
+    return []
+}
+
+export { getUser, getUserCart }

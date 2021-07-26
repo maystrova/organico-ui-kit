@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { OrganicContext } from 'context/storeContext'
 import { ACTION } from 'context/actions'
-import { getUser, User } from 'services/user'
+import { getUser, getUserCart, User } from 'services/user'
 
 import { ProductPage } from 'Pages/ProductPage'
 import { CategoriesPage } from 'Pages/CategoriesPage'
@@ -25,11 +25,13 @@ import { GlobalStyle, StyledLayout, StyledSwitchMode } from './style'
 
 import light from 'Components/Layout/pics/light-mode.svg'
 import dark from 'Components/Layout/pics/dark-mode.png'
+import { ProductType } from 'Pages/ProductPage/types'
 
 const Layout = () => {
     const { store, dispatch } = useContext(OrganicContext)
     const [theme, setTheme] = useState<'light' | 'dark'>('dark')
     const [user, setUser] = useState<User | null>(null)
+    const [cart, setCart] = useState<ProductType[]>(store.cart)
 
     useEffect(() => {
         if (theme === 'light') {
@@ -49,7 +51,20 @@ const Layout = () => {
             })
             setUser(storageUser)
         }
+
+        const storageCart = await getUserCart()
+        setCart(storageCart)
     }
+
+    // const getStateCart = async (): Promise<ProductType[]> => {
+    //     const storageCart: ProductType[] = await getStateCart()
+    //
+    //     if (storageCart) {
+    //         dispatch({ action: ACTION.USER_UPDATE, data: storageCart })
+    //     }
+    //     setCart(storageCart)
+    //     return storageCart
+    // }
 
     useEffect(() => {
         getStateUser()

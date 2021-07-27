@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
 import { ProductCard } from 'Components/ProductCard'

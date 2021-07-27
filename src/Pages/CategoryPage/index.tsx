@@ -10,6 +10,7 @@ import { ACTION } from 'context/actions'
 import { OrganicContext } from 'context/storeContext'
 import { StyledCategoryPage } from './style'
 import { StyledEmptySpace } from 'Pages/WishlistPage/style'
+import { createWishlist } from '../../services/wishlist'
 
 const CategoryPage = () => {
     const { store, dispatch } = useContext(OrganicContext)

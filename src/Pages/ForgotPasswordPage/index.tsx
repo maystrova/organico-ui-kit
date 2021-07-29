@@ -14,10 +14,14 @@ import {
 
 import forgotPassword from 'Pages/ForgotPasswordPage/pics/forgot-password.png'
 import { StyledRegistrationField } from '../NewRegistrationPage/style'
+import { useHistory } from 'react-router-dom'
+import { ROUTES } from '../../services/route'
 
 interface ForgotPasswordPageProps {}
 
 const ForgotPasswordPage = ({}: ForgotPasswordPageProps) => {
+    const history = useHistory()
+
     return (
         <div>
             <StyledHeader>
@@ -44,9 +48,10 @@ const ForgotPasswordPage = ({}: ForgotPasswordPageProps) => {
                     </StyledRegistrationField>
                 </StyledForgotPasswordInfo>
                 <Button
+                    width={'100%'}
                     title={'Next'}
                     type={BUTTON_TYPE.PRIMARY}
-                    onClick={() => {}}
+                    onClick={() => history.push(ROUTES.AUTHORIZATION_CODE)}
                 />
             </StyledForgotPasswordPageContainer>
         </div>

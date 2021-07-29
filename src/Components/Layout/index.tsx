@@ -28,6 +28,7 @@ import dark from 'Components/Layout/pics/dark-mode.png'
 import { ProductType } from 'Pages/ProductPage/types'
 import { getWishlistFromFirebase } from 'services/wishlist'
 import { ForgotPasswordPage } from '../../Pages/ForgotPasswordPage'
+import { AuthorizationCodePage } from '../../Pages/AuthorizationCodePage'
 
 const Layout = () => {
     const { store, dispatch } = useContext(OrganicContext)
@@ -156,6 +157,9 @@ const Layout = () => {
                     </Route>
                     <Route path={ROUTES.FORGOT_PASSWORD}>
                         <ForgotPasswordPage />
+                    </Route>
+                    <Route path={ROUTES.AUTHORIZATION_CODE}>
+                        <AuthorizationCodePage />
                     </Route>
                 </Switch>
                 <Menu />

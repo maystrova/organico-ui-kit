@@ -9,6 +9,7 @@ const ROUTES = {
     PAYMENT_METHOD: 'Payment Method',
     HOME_SCREEN: '/home-screen',
     MY_WISHLIST: '/wishlist',
+    FORGOT_PASSWORD: '/forgot-password',
     CUSTOMER_SERVICE: 'Customer Service',
     CHANGE_PASSWORD: 'Change Password',
     CATEGORIES: '/categories',

@@ -6,4 +6,17 @@ const StyledLogin = styled.div`
     grid-gap: 50px;
 `
 
-export { StyledLogin }
+const StyledWrongPassword = styled.div`
+    font-size: 12px;
+    color: red;
+`
+
+const StyledPasswordActions = styled.div`
+    & a {
+        text-decoration: none;
+        outline: none;
+        font-size: 14px;
+    }
+`
+
+export { StyledLogin, StyledWrongPassword, StyledPasswordActions }

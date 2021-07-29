@@ -7,9 +7,14 @@ import { Button, BUTTON_TYPE } from 'Components/Button'
 import { ACTION } from 'context/actions'
 import { User } from 'services/user'
 import { Icon, ICON_SIZE } from 'Components/Icon'
+import { Link } from 'react-router-dom'
 
 import { OrganicContext } from 'context/storeContext'
-import { StyledLogin } from './style'
+import {
+    StyledLogin,
+    StyledPasswordActions,
+    StyledWrongPassword,
+} from './style'
 
 import {
     StyledRegistrationActions,
@@ -35,6 +40,11 @@ const LoginPage = () => {
     const [signInUser, setSignInUser] = useState<UserData>({
         email: '',
         password: '',
+    })
+    const [wrongPassword, setWrongPassword] = useState<string>('')
+    const [newUser, setNewUser] = useState<UserData>({
+        password: '',
+        email: '',
     })
 
     const history = useHistory()
@@ -73,7 +83,7 @@ const LoginPage = () => {
 
             if (user) {
                 history.push(ROUTES.PROFILE)
-            }
+            } else setWrongPassword('Wrong password!')
         }
 
         firebase.auth().onAuthStateChanged(user => {
@@ -138,6 +148,13 @@ const LoginPage = () => {
                         />
                     </button>
                 </StyledRegistrationField>
+                <StyledPasswordActions>
+                    <StyledWrongPassword>{wrongPassword}</StyledWrongPassword>
+
+                    <Link to={ROUTES.CHANGE_PASSWORD}>
+                        <span>Forgot password?</span>
+                    </Link>
+                </StyledPasswordActions>
             </StyledRegistrationFields>
             <StyledRegistrationActions>
                 {' '}

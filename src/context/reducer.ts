@@ -4,7 +4,11 @@ import { ProductType } from 'Pages/ProductPage/types'
 import { User } from 'services/user'
 import { ThemeType } from 'configs/theme'
 import { firebase } from 'services/firebase'
-import { createWishlist } from '../services/wishlist'
+import {
+    createWishlist,
+    deleteFromServerWishlist,
+    updateWishlist,
+} from 'services/wishlist'
 
 const createUser = (currentState: StoreType, profile: User): StoreType => {
     firebase.database().ref(`users/`).push(profile)
@@ -42,7 +46,6 @@ const addToWishList = (currentState: StoreType, productId: string) => {
     )
     if (foundProduct) {
         const newWishList = [foundProduct, ...currentState.wishList]
-        // firebase.database().ref(`users/user/wishlist`).push(newWishList)
         window.localStorage.setItem('wishlist', JSON.stringify(newWishList))
         createWishlist(newWishList, currentState.profile)
 
@@ -64,6 +67,7 @@ const deleteFromWishList = (currentState: StoreType, productId: string) => {
         wishList: filteredWishlist,
     }
     window.localStorage.setItem('wishlist', JSON.stringify(newWishlist))
+    updateWishlist(filteredWishlist, currentState.profile)
     // firebase.database().ref(`users/${user.id}/wishlist`).set(newWishlist)
 
     return newWishlist

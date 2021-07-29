@@ -26,12 +26,15 @@ import { GlobalStyle, StyledLayout, StyledSwitchMode } from './style'
 import light from 'Components/Layout/pics/light-mode.svg'
 import dark from 'Components/Layout/pics/dark-mode.png'
 import { ProductType } from 'Pages/ProductPage/types'
+import { getWishlistFromFirebase } from 'services/wishlist'
+import { ForgotPasswordPage } from '../../Pages/ForgotPasswordPage'
 
 const Layout = () => {
     const { store, dispatch } = useContext(OrganicContext)
     const [theme, setTheme] = useState<'light' | 'dark'>('dark')
     const [user, setUser] = useState<User | null>(null)
     const [cart, setCart] = useState<ProductType[]>(store.cart)
+    const [wishlist, setWishlist] = useState<ProductType[]>(store.wishList)
 
     useEffect(() => {
         if (theme === 'light') {
@@ -56,6 +59,13 @@ const Layout = () => {
         setCart(storageCart)
     }
 
+    const getStateWishlist = async (): Promise<void> => {
+        const storageWishlist = await getWishlistFromFirebase(
+            user ? user : store.profile,
+        )
+        setWishlist(storageWishlist)
+    }
+
     // const getStateCart = async (): Promise<ProductType[]> => {
     //     const storageCart: ProductType[] = await getStateCart()
     //
@@ -69,6 +79,10 @@ const Layout = () => {
     useEffect(() => {
         getStateUser()
     }, [])
+
+    // useEffect(() => {
+    //     getStateWishlist()
+    // }, [])
 
     return (
         <BrowserRouter>
@@ -139,6 +153,9 @@ const Layout = () => {
                         ]}
                     >
                         <LoginPage />
+                    </Route>
+                    <Route path={ROUTES.FORGOT_PASSWORD}>
+                        <ForgotPasswordPage />
                     </Route>
                 </Switch>
                 <Menu />

@@ -29,6 +29,7 @@ import { ProductType } from 'Pages/ProductPage/types'
 import { getWishlistFromFirebase } from 'services/wishlist'
 import { ForgotPasswordPage } from '../../Pages/ForgotPasswordPage'
 import { AuthorizationCodePage } from '../../Pages/AuthorizationCodePage'
+import { ResetPasswordPage } from '../../Pages/ResetPasswordPage'
 
 const Layout = () => {
     const { store, dispatch } = useContext(OrganicContext)
@@ -160,6 +161,9 @@ const Layout = () => {
                     </Route>
                     <Route path={ROUTES.AUTHORIZATION_CODE}>
                         <AuthorizationCodePage />
+                    </Route>
+                    <Route path={ROUTES.RESET_PASSWORD}>
+                        <ResetPasswordPage />
                     </Route>
                 </Switch>
                 <Menu />

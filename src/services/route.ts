@@ -14,6 +14,7 @@ const ROUTES = {
     FORGOT_PASSWORD: '/forgot-password',
     CUSTOMER_SERVICE: 'Customer Service',
     CHANGE_PASSWORD: 'change-password',
+    CHANGE_NUMBER: 'change-number',
     CATEGORIES: '/categories',
     ADDRESS: '/address',
     CATEGORY: '/categories/:category',

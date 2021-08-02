@@ -9,6 +9,7 @@ import { StyledHeader } from 'Pages/ProductPage/style'
 import { StyledTitledHeader } from 'Pages/WishlistPage/style'
 import {
     StyledAuthorizationCode,
+    StyledAuthorizationCodePage,
     StyledResendCode,
 } from 'Pages/AuthorizationCodePage/style'
 
@@ -16,7 +17,7 @@ interface ChangeNumberPageProps {}
 
 const ChangeNumberPage = ({}: ChangeNumberPageProps) => {
     return (
-        <div>
+        <StyledAuthorizationCodePage>
             <StyledHeader>
                 <StyledTitledHeader>
                     <BackToPreviousPage />
@@ -42,7 +43,7 @@ const ChangeNumberPage = ({}: ChangeNumberPageProps) => {
                 type={BUTTON_TYPE.PRIMARY}
                 onClick={() => {}}
             />
-        </div>
+        </StyledAuthorizationCodePage>
     )
 }
 

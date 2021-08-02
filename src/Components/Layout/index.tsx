@@ -27,9 +27,9 @@ import light from 'Components/Layout/pics/light-mode.svg'
 import dark from 'Components/Layout/pics/dark-mode.png'
 import { ProductType } from 'Pages/ProductPage/types'
 import { getWishlistFromFirebase } from 'services/wishlist'
-import { ForgotPasswordPage } from '../../Pages/ForgotPasswordPage'
-import { AuthorizationCodePage } from '../../Pages/AuthorizationCodePage'
-import { ResetPasswordPage } from '../../Pages/ResetPasswordPage'
+import { ForgotPasswordPage } from 'Pages/ForgotPasswordPage'
+import { AuthorizationCodePage } from 'Pages/AuthorizationCodePage'
+import { ResetPasswordPage } from 'Pages/ResetPasswordPage'
 import { ChangeNumberPage } from '../../Pages/ChangeNumberPage'
 
 const Layout = () => {
@@ -125,6 +125,7 @@ const Layout = () => {
                     <Route path={ROUTES.MY_WISHLIST} exact>
                         <WishlistPage />
                     </Route>
+
                     <Route path={[ROUTES.CATEGORIES, '/']} exact>
                         <CategoriesPage />
                     </Route>

@@ -31,6 +31,7 @@ import { ForgotPasswordPage } from 'Pages/ForgotPasswordPage'
 import { AuthorizationCodePage } from 'Pages/AuthorizationCodePage'
 import { ResetPasswordPage } from 'Pages/ResetPasswordPage'
 import { ChangeNumberPage } from '../../Pages/ChangeNumberPage'
+import { ChangePasswordPage } from '../../Pages/ChangePasswordPage'
 
 const Layout = () => {
     const { store, dispatch } = useContext(OrganicContext)
@@ -169,6 +170,9 @@ const Layout = () => {
                     </Route>
                     <Route path={ROUTES.CHANGE_NUMBER}>
                         <ChangeNumberPage />
+                    </Route>
+                    <Route path={ROUTES.CHANGE_PASSWORD}>
+                        <ChangePasswordPage />
                     </Route>
                 </Switch>
                 <Menu />

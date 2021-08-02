@@ -94,6 +94,16 @@ const NewRegistrationPage = ({}: NewRegistrationPageProps) => {
         },
     ]
 
+    const verification = () => {
+        firebase
+            .auth()
+            .currentUser?.sendEmailVerification()
+            .then(() => {
+                // Email verification sent!
+                // ...
+            })
+    }
+
     const authorization = (email: string, password: string) => {
         firebase
             .auth()
@@ -107,6 +117,7 @@ const NewRegistrationPage = ({}: NewRegistrationPageProps) => {
                     id: user?.uid ? user.uid : Math.random().toString(),
                     avatar: anonAvatar,
                 }
+                user?.sendEmailVerification()
                 window.localStorage.setItem(
                     'user',
                     JSON.stringify(preparedUser),
@@ -315,6 +326,7 @@ const NewRegistrationPage = ({}: NewRegistrationPageProps) => {
                             isChecked
                         ) {
                             authorization(signUp.email, signUp.password)
+                            verification()
                             setSignUpButton('Successful!')
                         }
                     }}

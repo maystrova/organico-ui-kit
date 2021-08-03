@@ -1,4 +1,4 @@
-import { ProductType } from '../Pages/ProductPage/types'
+import { ProductType } from 'Pages/ProductPage/types'
 import { User } from './user'
 import { firebase } from './firebase'
 

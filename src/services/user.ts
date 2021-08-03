@@ -40,6 +40,15 @@ const getUser = async (): Promise<User | undefined> => {
     return undefined
 }
 
+const getUserWishlist = async (): Promise<ProductType[]> => {
+    const storageWishlist = await window.localStorage.getItem('wishlist')
+
+    if (storageWishlist) {
+        return JSON.parse(storageWishlist)
+    }
+    return []
+}
+
 const getUserCart = async (): Promise<ProductType[]> => {
     const storageCart = await window.localStorage.getItem('cart')
 
@@ -49,4 +58,4 @@ const getUserCart = async (): Promise<ProductType[]> => {
     return []
 }
 
-export { getUser, getUserCart }
+export { getUser, getUserCart, getUserWishlist }

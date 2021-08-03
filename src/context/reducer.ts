@@ -4,11 +4,7 @@ import { ProductType } from 'Pages/ProductPage/types'
 import { User } from 'services/user'
 import { ThemeType } from 'configs/theme'
 import { firebase } from 'services/firebase'
-import {
-    createWishlist,
-    deleteFromServerWishlist,
-    updateWishlist,
-} from 'services/wishlist'
+import { createWishlist, updateWishlist } from 'services/wishlist'
 
 const createUser = (currentState: StoreType, profile: User): StoreType => {
     firebase.database().ref(`users/`).push(profile)
@@ -37,6 +33,14 @@ const editUser = (currentState: StoreType, profile: User) => {
     return {
         ...currentState,
         profile: newProfile,
+    }
+}
+
+const editWishlist = (currentState: StoreType, wishlist: ProductType[]) => {
+    const newWishlist: ProductType[] = wishlist
+    return {
+        ...currentState,
+        wishlist: newWishlist,
     }
 }
 
@@ -178,6 +182,8 @@ export const reducer = (
             return deleteFromCart(currentState, payload.data)
         case ACTION.USER_UPDATE:
             return editUser(currentState, payload.data)
+        case ACTION.WISHLIST_UPDATE:
+            return editWishlist(currentState, payload.data)
         case ACTION.ADD_TO_BAG:
             return addToBag(currentState)
         case ACTION.UPDATE_COUNT_IN_BAG:

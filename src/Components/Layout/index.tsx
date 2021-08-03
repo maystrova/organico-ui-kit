@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { OrganicContext } from 'context/storeContext'
 import { ACTION } from 'context/actions'
-import { getUser, getUserCart, User } from 'services/user'
+import { getUser, getUserCart, getUserWishlist, User } from 'services/user'
 
 import { ProductPage } from 'Pages/ProductPage'
 import { CategoriesPage } from 'Pages/CategoriesPage'
@@ -50,43 +50,23 @@ const Layout = () => {
 
     const getStateUser = async (): Promise<void> => {
         const storageUser = await getUser()
+        const storageWishlist = await getUserWishlist()
 
         if (storageUser) {
             dispatch({
                 action: ACTION.USER_UPDATE,
                 data: storageUser,
             })
+            dispatch({ action: ACTION.WISHLIST_UPDATE, data: storageWishlist })
+
             setUser(storageUser)
+            setWishlist(storageWishlist)
         }
-
-        const storageCart = await getUserCart()
-        setCart(storageCart)
     }
-
-    const getStateWishlist = async (): Promise<void> => {
-        const storageWishlist = await getWishlistFromFirebase(
-            user ? user : store.profile,
-        )
-        setWishlist(storageWishlist)
-    }
-
-    // const getStateCart = async (): Promise<ProductType[]> => {
-    //     const storageCart: ProductType[] = await getStateCart()
-    //
-    //     if (storageCart) {
-    //         dispatch({ action: ACTION.USER_UPDATE, data: storageCart })
-    //     }
-    //     setCart(storageCart)
-    //     return storageCart
-    // }
 
     useEffect(() => {
         getStateUser()
     }, [])
-
-    // useEffect(() => {
-    //     getStateWishlist()
-    // }, [])
 
     return (
         <BrowserRouter>
@@ -124,7 +104,7 @@ const Layout = () => {
                         <CartPage />
                     </Route>
                     <Route path={ROUTES.MY_WISHLIST} exact>
-                        <WishlistPage />
+                        <WishlistPage wishlist={wishlist} />
                     </Route>
 
                     <Route path={[ROUTES.CATEGORIES, '/']} exact>

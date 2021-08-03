@@ -1,5 +1,6 @@
 import Vasya from 'Pages/ProfilePage/pics/Vasya-avatar.jpg'
-import { ProductType } from '../Pages/ProductPage/types'
+import { ProductType } from 'Pages/ProductPage/types'
+import firebase from 'firebase/app'
 
 export type User = {
     avatar: string
@@ -17,6 +18,17 @@ export let DEFAULT_USER: User = {
     address: 'Nevskiy Prospect 1, Saint-Petersburg',
     id: Math.random().toString(),
     email: 'vasya@meow.com',
+}
+
+export const getUserFromFirebase = async (user: User) => {
+    const userRef = await firebase
+        .database()
+        .ref()
+        .child(`users/${user.id}`)
+        .get()
+
+    const serverUser = userRef.val()
+    return serverUser
 }
 
 const getUser = async (): Promise<User | undefined> => {

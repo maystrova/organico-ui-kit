@@ -21,17 +21,18 @@ import { NewRegistrationPage } from 'Pages/NewRegistrationPage'
 import { LogOutPage } from 'Pages/LogOutPage'
 import { LoginPage } from 'Pages/LoginPage'
 
-import { GlobalStyle, StyledLayout, StyledSwitchMode } from './style'
-
-import light from 'Components/Layout/pics/light-mode.svg'
-import dark from 'Components/Layout/pics/dark-mode.png'
 import { ProductType } from 'Pages/ProductPage/types'
 import { ForgotPasswordPage } from 'Pages/ForgotPasswordPage'
 import { AuthorizationCodePage } from 'Pages/AuthorizationCodePage'
 import { ResetPasswordPage } from 'Pages/ResetPasswordPage'
 import { ChangeNumberPage } from 'Pages/ChangeNumberPage'
 import { ChangePasswordPage } from 'Pages/ChangePasswordPage'
-import { WelcomePage } from '../../Pages/WelcomePage'
+import { WelcomePage } from 'Pages/WelcomePage'
+
+import { GlobalStyle, StyledLayout, StyledSwitchMode } from './style'
+
+import light from 'Components/Layout/pics/light-mode.svg'
+import dark from 'Components/Layout/pics/dark-mode.png'
 
 const Layout = () => {
     const { store, dispatch } = useContext(OrganicContext)

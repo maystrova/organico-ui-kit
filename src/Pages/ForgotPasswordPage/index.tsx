@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Button, BUTTON_TYPE } from 'Components/Button'
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
@@ -13,13 +13,16 @@ import {
 } from './style'
 
 import forgotPassword from 'Pages/ForgotPasswordPage/pics/forgot-password.png'
-import { StyledRegistrationField } from '../NewRegistrationPage/style'
+import { StyledRegistrationField } from 'Pages/NewRegistrationPage/style'
 import { useHistory } from 'react-router-dom'
-import { ROUTES } from '../../services/route'
+import { ROUTES } from 'services/route'
+import PhoneInput from 'react-phone-number-input'
 
 interface ForgotPasswordPageProps {}
 
 const ForgotPasswordPage = ({}: ForgotPasswordPageProps) => {
+    const [phoneNumber, setPhoneNumber] = useState<string>('')
+
     const history = useHistory()
 
     return (
@@ -44,7 +47,11 @@ const ForgotPasswordPage = ({}: ForgotPasswordPageProps) => {
                         authorization code.{' '}
                     </StyledVerifyPasswordInfo>
                     <StyledRegistrationField>
-                        <input type='text' />
+                        <PhoneInput
+                            defaultCountry={'US'}
+                            onChange={setPhoneNumber}
+                            value={phoneNumber}
+                        />
                     </StyledRegistrationField>
                 </StyledForgotPasswordInfo>
                 <Button

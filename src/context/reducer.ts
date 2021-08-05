@@ -113,8 +113,6 @@ const addToCart = (
                     quantity: product.quantity,
                 }
             }
-            // firebase.database().ref(`users/${user.id}/cart`).push(newCart)
-
             return cartProduct
         })
     } else {
@@ -146,7 +144,6 @@ const updateCountInBag = (
                     quantity: product.quantity,
                 }
             }
-            // firebase.database().ref(`users/${user.id}/bag`).set(newBag)
             return bagProduct
         })
     }

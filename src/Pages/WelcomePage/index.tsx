@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
+
 import { useHistory } from 'react-router-dom'
 
 import { ROUTES } from 'services/route'
@@ -27,6 +30,7 @@ interface WelcomePageProps {}
 
 const WelcomePage = ({}: WelcomePageProps) => {
     const [isShowPassword, setIsShowPassword] = useState<boolean>(false)
+    const [phoneNumber, setPhoneNumber] = useState<string>('')
 
     const history = useHistory()
 
@@ -47,7 +51,12 @@ const WelcomePage = ({}: WelcomePageProps) => {
             </StyledWelcomePageInfo>
             <StyledRegistrationFields>
                 <StyledRegistrationField>
-                    <input type='text' placeholder={'Your Phone Number'} />
+                    <PhoneInput
+                        placeholder={'Your Phone Number'}
+                        value={phoneNumber}
+                        onChange={setPhoneNumber}
+                        defaultCountry={'US'}
+                    />
                 </StyledRegistrationField>
                 <StyledRegistrationField>
                     <StyledPasswordIcon>

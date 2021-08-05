@@ -10,6 +10,7 @@ const ROUTES = {
     HOME_SCREEN: '/home-screen',
     AUTHORIZATION_CODE: '/authorization-code',
     MY_WISHLIST: '/wishlist',
+    WELCOME_PAGE: '/welcome-page',
     RESET_PASSWORD: '/reset-password',
     FORGOT_PASSWORD: '/forgot-password',
     CUSTOMER_SERVICE: 'Customer Service',

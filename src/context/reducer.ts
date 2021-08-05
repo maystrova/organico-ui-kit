@@ -44,6 +44,14 @@ const editWishlist = (currentState: StoreType, wishlist: ProductType[]) => {
     }
 }
 
+const editCart = (currentState: StoreType, cart: ProductType[]) => {
+    const newCart: ProductType[] = cart
+    return {
+        ...currentState,
+        cart: newCart,
+    }
+}
+
 const addToWishList = (currentState: StoreType, productId: string) => {
     const foundProduct: ProductType | undefined = currentState.products.find(
         product => product.id === productId,
@@ -155,8 +163,6 @@ const deleteFromCart = (
     )
     window.localStorage.setItem('cart', JSON.stringify(filteredCart))
 
-    // firebase.database().ref(`users/${user.id}/cart`).set(filteredCart)
-
     return { ...currentState, cart: filteredCart }
 }
 
@@ -184,6 +190,8 @@ export const reducer = (
             return editUser(currentState, payload.data)
         case ACTION.WISHLIST_UPDATE:
             return editWishlist(currentState, payload.data)
+        case ACTION.CART_UPDATE:
+            return editCart(currentState, payload.data)
         case ACTION.ADD_TO_BAG:
             return addToBag(currentState)
         case ACTION.UPDATE_COUNT_IN_BAG:

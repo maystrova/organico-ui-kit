@@ -26,12 +26,12 @@ import { GlobalStyle, StyledLayout, StyledSwitchMode } from './style'
 import light from 'Components/Layout/pics/light-mode.svg'
 import dark from 'Components/Layout/pics/dark-mode.png'
 import { ProductType } from 'Pages/ProductPage/types'
-import { getWishlistFromFirebase } from 'services/wishlist'
 import { ForgotPasswordPage } from 'Pages/ForgotPasswordPage'
 import { AuthorizationCodePage } from 'Pages/AuthorizationCodePage'
 import { ResetPasswordPage } from 'Pages/ResetPasswordPage'
 import { ChangeNumberPage } from 'Pages/ChangeNumberPage'
 import { ChangePasswordPage } from 'Pages/ChangePasswordPage'
+import { WelcomePage } from '../../Pages/WelcomePage'
 
 const Layout = () => {
     const { store, dispatch } = useContext(OrganicContext)
@@ -51,6 +51,7 @@ const Layout = () => {
     const getStateUser = async (): Promise<void> => {
         const storageUser = await getUser()
         const storageWishlist = await getUserWishlist()
+        const storageCart = await getUserCart()
 
         if (storageUser) {
             dispatch({
@@ -58,9 +59,11 @@ const Layout = () => {
                 data: storageUser,
             })
             dispatch({ action: ACTION.WISHLIST_UPDATE, data: storageWishlist })
+            dispatch({ action: ACTION.CART_UPDATE, data: storageCart })
 
             setUser(storageUser)
             setWishlist(storageWishlist)
+            setCart(storageCart)
         }
     }
 
@@ -101,7 +104,7 @@ const Layout = () => {
                         />
                     </Route>
                     <Route path={ROUTES.MY_CART} exact>
-                        <CartPage />
+                        <CartPage cart={cart} />
                     </Route>
                     <Route path={ROUTES.MY_WISHLIST} exact>
                         <WishlistPage wishlist={wishlist} />
@@ -153,6 +156,9 @@ const Layout = () => {
                     </Route>
                     <Route path={ROUTES.CHANGE_PASSWORD}>
                         <ChangePasswordPage />
+                    </Route>
+                    <Route path={ROUTES.WELCOME_PAGE}>
+                        <WelcomePage />
                     </Route>
                 </Switch>
                 <Menu />

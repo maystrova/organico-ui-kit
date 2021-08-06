@@ -2,7 +2,13 @@ import React, { useContext, useEffect, useState } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { OrganicContext } from 'context/storeContext'
 import { ACTION } from 'context/actions'
-import { getUser, getUserCart, getUserWishlist, User } from 'services/user'
+import {
+    getUser,
+    getUserBag,
+    getUserCart,
+    getUserWishlist,
+    User,
+} from 'services/user'
 
 import { ProductPage } from 'Pages/ProductPage'
 import { CategoriesPage } from 'Pages/CategoriesPage'
@@ -40,6 +46,7 @@ const Layout = () => {
     const [user, setUser] = useState<User | null>(null)
     const [cart, setCart] = useState<ProductType[]>(store.cart)
     const [wishlist, setWishlist] = useState<ProductType[]>(store.wishList)
+    const [bag, setBag] = useState<ProductType[]>(store.bag)
 
     useEffect(() => {
         if (theme === 'light') {
@@ -53,6 +60,7 @@ const Layout = () => {
         const storageUser = await getUser()
         const storageWishlist = await getUserWishlist()
         const storageCart = await getUserCart()
+        const storageBag = await getUserBag()
 
         if (storageUser) {
             dispatch({
@@ -65,6 +73,7 @@ const Layout = () => {
             setUser(storageUser)
             setWishlist(storageWishlist)
             setCart(storageCart)
+            setBag(storageBag)
         }
     }
 

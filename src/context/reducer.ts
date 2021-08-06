@@ -124,6 +124,8 @@ const addToCart = (
 }
 
 const addToBag = (currentState: StoreType): StoreType => {
+    window.localStorage.setItem('bag', JSON.stringify(currentState.cart))
+
     return { ...currentState, bag: currentState.cart }
 }
 

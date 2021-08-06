@@ -58,4 +58,13 @@ const getUserCart = async (): Promise<ProductType[]> => {
     return []
 }
 
-export { getUser, getUserCart, getUserWishlist }
+const getUserBag = async (): Promise<ProductType[]> => {
+    const storageBag = await window.localStorage.getItem('bag')
+
+    if (storageBag) {
+        return JSON.parse(storageBag)
+    }
+    return []
+}
+
+export { getUser, getUserCart, getUserWishlist, getUserBag }

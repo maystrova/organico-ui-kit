@@ -45,7 +45,6 @@ const Layout = () => {
     const [theme, setTheme] = useState<'light' | 'dark'>('dark')
     const [user, setUser] = useState<User | null>(null)
     const [cart, setCart] = useState<ProductType[]>(store.cart)
-    const [wishlist, setWishlist] = useState<ProductType[]>(store.wishList)
     const [bag, setBag] = useState<ProductType[]>(store.bag)
 
     useEffect(() => {
@@ -61,7 +60,6 @@ const Layout = () => {
         const storageWishlist = await getUserWishlist()
         const storageCart = await getUserCart()
         const storageBag = await getUserBag()
-
         if (storageUser) {
             dispatch({
                 action: ACTION.USER_UPDATE,
@@ -71,7 +69,6 @@ const Layout = () => {
             dispatch({ action: ACTION.CART_UPDATE, data: storageCart })
 
             setUser(storageUser)
-            setWishlist(storageWishlist)
             setCart(storageCart)
             setBag(storageBag)
         }
@@ -117,7 +114,7 @@ const Layout = () => {
                         <CartPage cart={cart} />
                     </Route>
                     <Route path={ROUTES.MY_WISHLIST} exact>
-                        <WishlistPage wishlist={wishlist} />
+                        <WishlistPage wishlist={store.wishList} />
                     </Route>
 
                     <Route path={[ROUTES.CATEGORIES, '/']} exact>

@@ -4,7 +4,7 @@ import { ProductType } from 'Pages/ProductPage/types'
 import { User } from 'services/user'
 import { ThemeType } from 'configs/theme'
 import { firebase } from 'services/firebase'
-import { createWishlist, updateWishlist } from 'services/wishlist'
+import { updateWishlist } from 'services/wishlist'
 
 const createUser = (currentState: StoreType, profile: User): StoreType => {
     firebase.database().ref(`users/`).push(profile)
@@ -21,7 +21,7 @@ const getUser = (currentState: StoreType, user: User): StoreType => {
     }
 }
 
-const editUser = (currentState: StoreType, profile: User) => {
+const editUser = (currentState: StoreType, profile: User): StoreType => {
     const newProfile: User = {
         ...profile,
         name: profile.name,
@@ -36,30 +36,35 @@ const editUser = (currentState: StoreType, profile: User) => {
     }
 }
 
-const editWishlist = (currentState: StoreType, wishlist: ProductType[]) => {
-    const newWishlist: ProductType[] = wishlist
+const editWishlist = (
+    currentState: StoreType,
+    wishlist: ProductType[],
+): StoreType => {
     return {
         ...currentState,
-        wishlist: newWishlist,
+        wishList: wishlist,
     }
 }
 
-const editCart = (currentState: StoreType, cart: ProductType[]) => {
-    const newCart: ProductType[] = cart
+const editCart = (currentState: StoreType, cart: ProductType[]): StoreType => {
     return {
         ...currentState,
-        cart: newCart,
+        cart: cart,
     }
 }
 
-const addToWishList = (currentState: StoreType, productId: string) => {
+const addToWishList = (
+    currentState: StoreType,
+    productId: string,
+): StoreType => {
     const foundProduct: ProductType | undefined = currentState.products.find(
         product => product.id === productId,
     )
+
     if (foundProduct) {
         const newWishList = [foundProduct, ...currentState.wishList]
         window.localStorage.setItem('wishlist', JSON.stringify(newWishList))
-        createWishlist(newWishList, currentState.profile)
+        // createWishlist(newWishList, currentState.profile)
 
         return {
             ...currentState,
@@ -70,19 +75,24 @@ const addToWishList = (currentState: StoreType, productId: string) => {
     return currentState
 }
 
-const deleteFromWishList = (currentState: StoreType, productId: string) => {
+const deleteFromWishList = (
+    currentState: StoreType,
+    productId: string,
+): StoreType => {
     const filteredWishlist = currentState.wishList.filter(
         product => product.id !== productId,
     )
-    const newWishlist = {
+
+    const newStore = {
         ...currentState,
         wishList: filteredWishlist,
     }
-    window.localStorage.setItem('wishlist', JSON.stringify(newWishlist))
+
+    window.localStorage.setItem('wishlist', JSON.stringify(filteredWishlist))
     updateWishlist(filteredWishlist, currentState.profile)
     // firebase.database().ref(`users/${user.id}/wishlist`).set(newWishlist)
 
-    return newWishlist
+    return newStore
 }
 
 const addToCart = (

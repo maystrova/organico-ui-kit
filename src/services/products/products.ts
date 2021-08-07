@@ -45,7 +45,7 @@ const products: ProductType[] = [
             'Paprika is a fruit-producing plant that tastes sweet and slightly spicy from the eggplant or Solanaceae tribe. \n' +
             '    Its green, yellow, red, or purple fruit',
         category: PRODUCTS_CATEGORY.VEGETABLES,
-        id: `${Math.random()}`,
+        id: '1',
         alias: 'paprika',
         quantity: 0,
     },
@@ -56,13 +56,13 @@ const products: ProductType[] = [
         image: applePic,
         details: '',
         category: PRODUCTS_CATEGORY.FRUITS,
-        id: `${Math.random()}`,
+        id: '2',
         alias: 'apple',
         quantity: 0,
     },
     {
         title: 'Orange',
-        id: `${Math.random()}`,
+        id: '3',
         details: '',
         category: PRODUCTS_CATEGORY.FRUITS,
         shop: 'FruitShop',
@@ -74,7 +74,7 @@ const products: ProductType[] = [
 
     {
         title: 'Pineapple',
-        id: `${Math.random()}`,
+        id: '4',
         details: '',
         category: PRODUCTS_CATEGORY.FRUITS,
         shop: 'FruitShop',
@@ -85,7 +85,7 @@ const products: ProductType[] = [
     },
     {
         title: 'Kiwi',
-        id: `${Math.random()}`,
+        id: '5',
         details: '',
         category: PRODUCTS_CATEGORY.FRUITS,
         shop: 'VegShop',
@@ -102,7 +102,7 @@ const products: ProductType[] = [
         image: broccoliPic,
         price: 4.99,
         shop: 'Popey shop',
-        id: `${Math.random()}`,
+        id: '6',
         alias: 'broccoli',
         quantity: 0,
     },
@@ -112,7 +112,7 @@ const products: ProductType[] = [
         price: 4.21,
         image: potatoPic,
         category: PRODUCTS_CATEGORY.VEGETABLES,
-        id: `${Math.random()}`,
+        id: '7',
         alias: 'potato',
         quantity: 0,
         details:
@@ -124,7 +124,7 @@ const products: ProductType[] = [
         category: PRODUCTS_CATEGORY.VEGETABLES,
         image: lettucePic,
         price: 3.4,
-        id: `${Math.random()}`,
+        id: '8',
         alias: 'lettuce',
         quantity: 0,
         details:
@@ -137,7 +137,7 @@ const products: ProductType[] = [
         category: PRODUCTS_CATEGORY.VEGETABLES,
         alias: 'carrot',
         quantity: 0,
-        id: `${Math.random()}`,
+        id: '9',
         details:
             'The carrot (Daucus carota subsp. sativus) is a root vegetable, usually orange in color, though purple, black, red, white, and yellow cultivars exist.[2][3][4] They are a domesticated form of the wild carrot, Daucus carota, native to Europe and Southwestern Asia. The plant probably originated in Persia and was originally cultivated for its leaves and seeds. The most commonly eaten part of the plant is the taproot, although the stems and leaves are also eaten. The domestic carrot has been selectively bred for its greatly enlarged, more palatable, less woody-textured taproot.',
         image: carrotPic,
@@ -149,7 +149,7 @@ const products: ProductType[] = [
         category: PRODUCTS_CATEGORY.VEGETABLES,
         alias: 'red-onion',
         quantity: 0,
-        id: `${Math.random()}`,
+        id: '10',
 
         details:
             'Red onions (also known as purple onions in some European countries) are cultivars of the onion (Allium cepa), and have purplish-red skin and white flesh tinged with red. They are most commonly used in the culinary arts, but the skin of the red onion has also been used as a dye.',
@@ -161,7 +161,7 @@ const products: ProductType[] = [
         price: 4.68,
         category: PRODUCTS_CATEGORY.FRUITS,
         quantity: 0,
-        id: `${Math.random()}`,
+        id: '11',
         alias: 'banana',
 
         details:
@@ -174,7 +174,7 @@ const products: ProductType[] = [
         price: 5.34,
         category: PRODUCTS_CATEGORY.MEATS,
         alias: 'chicken',
-        id: `${Math.random()}`,
+        id: '12',
         details:
             'Chicken is the most common type of poultry in the world. Owing to the relative ease and low cost of raising them in comparison to animals such as cattle or hogs, chickens have become prevalent in numerous cuisines.Chicken can be prepared in a vast range of ways, including baking, grilling, barbecuing, frying, and boiling. Since the latter half of the 20th century, prepared chicken has become a staple of fast food. Chicken is sometimes cited as being more healthful than red meat, with lower concentrations of cholesterol and saturated fat.',
         image: chickenPic,
@@ -186,7 +186,7 @@ const products: ProductType[] = [
         price: 6.32,
         category: PRODUCTS_CATEGORY.MEATS,
         alias: 'beef',
-        id: `${Math.random()}`,
+        id: '13',
         details: '',
         image: beefPic,
         quantity: 0,
@@ -197,7 +197,7 @@ const products: ProductType[] = [
         price: 10.23,
         category: PRODUCTS_CATEGORY.MEATS,
         alias: 'veal',
-        id: `${Math.random()}`,
+        id: '14',
         details: '',
         image: vealPic,
         quantity: 0,
@@ -208,7 +208,7 @@ const products: ProductType[] = [
         price: 7.41,
         category: PRODUCTS_CATEGORY.MEATS,
         alias: 'pork',
-        id: `${Math.random()}`,
+        id: '15',
         details: '',
         image: porkpic,
         quantity: 0,
@@ -222,10 +222,6 @@ let lettuce = products[3]
 let carrot = products[4]
 let redOnion = products[5]
 let banana = products[6]
-
-// for (const product of products) {
-//
-// }
 
 export {
     products,

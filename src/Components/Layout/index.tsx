@@ -27,7 +27,6 @@ import { NewRegistrationPage } from 'Pages/NewRegistrationPage'
 import { LogOutPage } from 'Pages/LogOutPage'
 import { LoginPage } from 'Pages/LoginPage'
 
-import { ProductType } from 'Pages/ProductPage/types'
 import { ForgotPasswordPage } from 'Pages/ForgotPasswordPage'
 import { AuthorizationCodePage } from 'Pages/AuthorizationCodePage'
 import { ResetPasswordPage } from 'Pages/ResetPasswordPage'
@@ -44,8 +43,6 @@ const Layout = () => {
     const { store, dispatch } = useContext(OrganicContext)
     const [theme, setTheme] = useState<'light' | 'dark'>('dark')
     const [user, setUser] = useState<User | null>(null)
-    const [cart, setCart] = useState<ProductType[]>(store.cart)
-    const [bag, setBag] = useState<ProductType[]>(store.bag)
 
     useEffect(() => {
         if (theme === 'light') {
@@ -69,8 +66,6 @@ const Layout = () => {
             dispatch({ action: ACTION.CART_UPDATE, data: storageCart })
 
             setUser(storageUser)
-            setCart(storageCart)
-            setBag(storageBag)
         }
     }
 
@@ -111,7 +106,7 @@ const Layout = () => {
                         />
                     </Route>
                     <Route path={ROUTES.MY_CART} exact>
-                        <CartPage cart={cart} />
+                        <CartPage cart={store.cart} />
                     </Route>
                     <Route path={ROUTES.MY_WISHLIST} exact>
                         <WishlistPage wishlist={store.wishList} />

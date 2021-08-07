@@ -26,14 +26,14 @@ interface CartPageProps {
     cart: ProductType[]
 }
 
-const getTotalPrice = (cart: ProductType[]): number => {
+const getTotalPrice = (cart: ProductType[]): string => {
     let totalPrice: number = 0
 
     for (const product of cart) {
         totalPrice += product.price * product.quantity
     }
 
-    return totalPrice
+    return totalPrice.toFixed(2)
 }
 
 const CartPage = ({ cart }: CartPageProps) => {
@@ -61,12 +61,12 @@ const CartPage = ({ cart }: CartPageProps) => {
                 {cart.length && cart.filter(product => product.quantity > 0) ? (
                     cart.map(product => (
                         <ProductSticker
-                            onCountChanged={newCount =>
+                            onCountChanged={newCount => {
                                 dispatch({
                                     action: ACTION.ADD_TO_CART,
                                     data: { ...product, quantity: newCount },
                                 })
-                            }
+                            }}
                             product={product}
                             image={product.image}
                             title={product.title}

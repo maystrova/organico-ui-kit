@@ -49,6 +49,22 @@ const StyledRegistrationField = styled.label`
         outline: none;
         cursor: pointer;
     }
+
+    .PhoneInputCountryIcon {
+        border-radius: 100px;
+        overflow: hidden;
+        margin-right: 5px;
+    }
+
+    .PhoneInputCountry {
+        border-right: 1.5px solid #eaeaea;
+        height: 48px;
+        margin-right: 15px;
+    }
+
+    .PhoneInputCountrySelectArrow {
+        margin-right: 15px;
+    }
 `
 
 const StyledRegistrationActions = styled.footer`

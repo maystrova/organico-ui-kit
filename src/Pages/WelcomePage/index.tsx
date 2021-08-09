@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom'
 
 import { ROUTES } from 'services/route'
 import { Icon, ICON_SIZE } from 'Components/Icon'
-import { Button, BUTTON_TYPE } from 'Components/Button'
+import { Button, BUTTON_TYPE, BUTTON_WIDTH } from 'Components/Button'
 
 import {
     StyledRegistrationField,
@@ -14,11 +14,11 @@ import {
 } from 'Pages/NewRegistrationPage/style'
 import { StyledResendCode } from 'Pages/AuthorizationCodePage/style'
 import {
+    StyledPasswordIcon,
     StyledWelcomeIllustration,
     StyledWelcomePage,
-    StyledWelcomePageInfo,
     StyledWelcomePageAction,
-    StyledPasswordIcon,
+    StyledWelcomePageInfo,
 } from './style'
 
 import welcomeIllustration from 'Pages/WelcomePage/pics/welcome-illustration.png'
@@ -84,7 +84,7 @@ const WelcomePage = ({}: WelcomePageProps) => {
             <StyledWelcomePageAction>
                 <Button
                     type={BUTTON_TYPE.PRIMARY}
-                    width={'100%'}
+                    width={BUTTON_WIDTH.BIG}
                     title={'Sign In'}
                     onClick={() => {}}
                 />

@@ -7,11 +7,16 @@ export enum BUTTON_TYPE {
     WHITE = 'White',
 }
 
+export enum BUTTON_WIDTH {
+    BIG = '100%',
+    MEDIUM = '50%',
+}
+
 interface ButtonProps {
     type: BUTTON_TYPE
     onClick: () => void
-    title?: string
-    width?: string
+    title: string
+    width?: BUTTON_WIDTH
 }
 
 const Button = ({ onClick, title, type, width }: ButtonProps) => {

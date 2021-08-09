@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
 import { Icon, ICON_SIZE } from 'Components/Icon'
-import { Button, BUTTON_TYPE } from 'Components/Button'
+import { Button, BUTTON_TYPE, BUTTON_WIDTH } from 'Components/Button'
 import { useHistory } from 'react-router-dom'
 
 import { OrganicContext } from 'context/storeContext'
@@ -317,7 +317,7 @@ const NewRegistrationPage = ({}: NewRegistrationPageProps) => {
 
             <StyledRegistrationActions>
                 <Button
-                    width={'100%'}
+                    width={BUTTON_WIDTH.BIG}
                     title={signUpButton}
                     type={BUTTON_TYPE.PRIMARY}
                     onClick={() => {
@@ -337,7 +337,7 @@ const NewRegistrationPage = ({}: NewRegistrationPageProps) => {
                     title={'Sign Up with Google'}
                     type={BUTTON_TYPE.WHITE}
                     onClick={() => onGoogleAuthorization()}
-                    width={'100%'}
+                    width={BUTTON_WIDTH.BIG}
                 />
             </StyledRegistrationActions>
         </div>

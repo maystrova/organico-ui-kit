@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
 import { Icon, ICON_SIZE } from 'Components/Icon'
-import { Button, BUTTON_TYPE } from 'Components/Button'
+import { Button, BUTTON_TYPE, BUTTON_WIDTH } from 'Components/Button'
 
 import { StyledAuthorizationCodePage } from 'Pages/AuthorizationCodePage/style'
 import { StyledHeader } from 'Pages/ProductPage/style'
@@ -76,7 +76,7 @@ const ChangePasswordPage = ({}: ChangePasswordPageProps) => {
             </StyledChangePasswordActions>
             <Button
                 title={'Save Password'}
-                width={'100%'}
+                width={BUTTON_WIDTH.BIG}
                 type={BUTTON_TYPE.PRIMARY}
                 onClick={() => {}}
             />

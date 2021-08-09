@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
 import { ProductCard } from 'Components/ProductCard'
@@ -6,9 +6,7 @@ import { ProductCard } from 'Components/ProductCard'
 import { PRODUCT_TYPE } from 'services/products/products'
 import { OrganicContext } from 'context/storeContext'
 import { ACTION } from 'context/actions'
-import { ProductType } from '../ProductPage/types'
-import { User } from 'services/user'
-import { getWishlistFromFirebase } from 'services/wishlist'
+import { ProductType } from 'Pages/ProductPage/types'
 
 import {
     StyledCardsList,
@@ -52,7 +50,7 @@ interface WishlistPageProps {
 }
 
 const WishlistPage = ({ wishlist }: WishlistPageProps) => {
-    const { store, dispatch } = useContext(OrganicContext)
+    const { dispatch } = useContext(OrganicContext)
 
     return (
         <StyledWishlistPage>

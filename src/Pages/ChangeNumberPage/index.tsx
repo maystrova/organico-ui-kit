@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
-import { Button, BUTTON_TYPE } from 'Components/Button'
+import { Button, BUTTON_TYPE, BUTTON_WIDTH } from 'Components/Button'
 
 import { StyledRegistrationField } from 'Pages/NewRegistrationPage/style'
 import { StyledResetPasswordInfo } from 'Pages/ResetPasswordPage/style'
@@ -39,7 +39,7 @@ const ChangeNumberPage = ({}: ChangeNumberPageProps) => {
             </StyledAuthorizationCode>
             <Button
                 title={'Confirm'}
-                width={'100%'}
+                width={BUTTON_WIDTH.BIG}
                 type={BUTTON_TYPE.PRIMARY}
                 onClick={() => {}}
             />

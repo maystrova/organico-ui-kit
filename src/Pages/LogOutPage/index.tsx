@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { ROUTES } from 'services/route'
 import { useHistory } from 'react-router-dom'
 
-import { Button, BUTTON_TYPE } from 'Components/Button'
+import { Button, BUTTON_TYPE, BUTTON_WIDTH } from 'Components/Button'
 
 import { StyledLogOut } from './style'
 import { ACTION } from 'context/actions'
@@ -26,7 +26,7 @@ const LogOutPage = () => {
                 type={BUTTON_TYPE.WHITE}
                 onClick={() => logOut()}
                 title={'Log Out'}
-                width={'100%'}
+                width={BUTTON_WIDTH.BIG}
             />
         </StyledLogOut>
     )

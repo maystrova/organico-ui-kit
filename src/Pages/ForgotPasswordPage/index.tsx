@@ -1,22 +1,24 @@
 import React, { useState } from 'react'
 
-import { Button, BUTTON_TYPE } from 'Components/Button'
+import { useHistory } from 'react-router-dom'
+import { ROUTES } from 'services/route'
+import PhoneInput from 'react-phone-number-input'
+
+import { Button, BUTTON_TYPE, BUTTON_WIDTH } from 'Components/Button'
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
 
 import { StyledHeader } from 'Pages/ProductPage/style'
 import { StyledTitledHeader } from 'Pages/WishlistPage/style'
+
 import {
     StyledForgotPasswordIllustration,
-    StyledForgotPasswordPageContainer,
     StyledForgotPasswordInfo,
+    StyledForgotPasswordPageContainer,
     StyledVerifyPasswordInfo,
 } from './style'
+import { StyledRegistrationField } from 'Pages/NewRegistrationPage/style'
 
 import forgotPassword from 'Pages/ForgotPasswordPage/pics/forgot-password.png'
-import { StyledRegistrationField } from 'Pages/NewRegistrationPage/style'
-import { useHistory } from 'react-router-dom'
-import { ROUTES } from 'services/route'
-import PhoneInput from 'react-phone-number-input'
 
 interface ForgotPasswordPageProps {}
 
@@ -55,7 +57,7 @@ const ForgotPasswordPage = ({}: ForgotPasswordPageProps) => {
                     </StyledRegistrationField>
                 </StyledForgotPasswordInfo>
                 <Button
-                    width={'100%'}
+                    width={BUTTON_WIDTH.BIG}
                     title={'Next'}
                     type={BUTTON_TYPE.PRIMARY}
                     onClick={() => history.push(ROUTES.AUTHORIZATION_CODE)}

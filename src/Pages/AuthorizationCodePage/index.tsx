@@ -4,16 +4,16 @@ import { useHistory } from 'react-router-dom'
 
 import { ROUTES } from 'services/route'
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
-import { Button, BUTTON_TYPE } from 'Components/Button'
+import { Button, BUTTON_TYPE, BUTTON_WIDTH } from 'Components/Button'
 
 import { StyledRegistrationField } from 'Pages/NewRegistrationPage/style'
 import { StyledHeader } from 'Pages/ProductPage/style'
 import { StyledTitledHeader } from 'Pages/WishlistPage/style'
 import {
-    StyledAuthorizationCodePage,
     StyledAuthorizationCode,
-    StyledSentSms,
+    StyledAuthorizationCodePage,
     StyledResendCode,
+    StyledSentSms,
 } from './style'
 
 interface AuthorizationCodePageProps {}
@@ -43,7 +43,7 @@ const AuthorizationCodePage = ({}: AuthorizationCodePageProps) => {
                 </StyledResendCode>
             </StyledAuthorizationCode>{' '}
             <Button
-                width={'100%'}
+                width={BUTTON_WIDTH.BIG}
                 title={'Next'}
                 type={BUTTON_TYPE.PRIMARY}
                 onClick={() => history.push(ROUTES.CHANGE_PASSWORD)}

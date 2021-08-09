@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
 import { Icon, ICON_SIZE } from 'Components/Icon'
-import { Button, BUTTON_TYPE } from 'Components/Button'
+import { Button, BUTTON_TYPE, BUTTON_WIDTH } from 'Components/Button'
 
 import { StyledTitledHeader } from 'Pages/WishlistPage/style'
 import {
@@ -11,9 +11,9 @@ import {
     StyledRegistrationTitle,
 } from 'Pages/NewRegistrationPage/style'
 import {
+    StyledResetPasswordActions,
     StyledResetPasswordInfo,
     StyledResetPasswordPage,
-    StyledResetPasswordActions,
 } from './style'
 
 import showPassword from 'Pages/NewRegistrationPage/pics/password-icon.svg'
@@ -77,7 +77,7 @@ const ResetPasswordPage = ({}: ResetPasswordPageProps) => {
             </StyledResetPasswordActions>
 
             <Button
-                width={'100%'}
+                width={BUTTON_WIDTH.BIG}
                 title={'Reset Password'}
                 type={BUTTON_TYPE.PRIMARY}
                 onClick={() => {}}

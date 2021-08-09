@@ -1,10 +1,9 @@
 import React, { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
 
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
-import { Button, BUTTON_TYPE } from 'Components/Button'
+import { Button, BUTTON_TYPE, BUTTON_WIDTH } from 'Components/Button'
 import { UploadAvatar } from 'Components/UploadAvatar'
 
 import { Icon, ICON_SIZE } from 'Components/Icon'
@@ -144,7 +143,7 @@ const EditProfilePage = ({ user }: EditProfilePageProps) => {
                 </StyledEditProfile>
                 <StyledEditProfileFooter>
                     <Button
-                        width={'100%'}
+                        width={BUTTON_WIDTH.BIG}
                         title={saveButton}
                         type={BUTTON_TYPE.PRIMARY}
                         onClick={() => {

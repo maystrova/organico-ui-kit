@@ -38,6 +38,7 @@ import { GlobalStyle, StyledLayout, StyledSwitchMode } from './style'
 
 import light from 'Components/Layout/pics/light-mode.svg'
 import dark from 'Components/Layout/pics/dark-mode.png'
+import firebase from 'firebase/app'
 
 const Layout = () => {
     const { store, dispatch } = useContext(OrganicContext)
@@ -72,6 +73,33 @@ const Layout = () => {
     useEffect(() => {
         getStateUser()
     }, [])
+
+    const onSignInSubmit = () => {}
+    //
+    //
+    const signInWithPhoneNumber = () => {
+        firebase.auth().languageCode = 'it'
+        firebase.auth().useDeviceLanguage()
+    }
+    //
+    // const verifier = window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sign-in-button')
+    //
+    //         const phoneNumber = getPhoneNumberFromUserInput();
+    //         const appVerifier = window.recaptchaVerifier;
+    //         firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
+    //           .then((confirmationResult) => {
+    //               // SMS sent. Prompt user to type the code from the message, then sign the
+    //               // user in with confirmationResult.confirm(code).
+    //               window.confirmationResult = confirmationResult;
+    //               // ...
+    //           }).catch((error) => {
+    //             // Error; SMS not sent
+    //             // ...
+    //         });
+    //         }
+    //
+    //
+    //     }
 
     return (
         <BrowserRouter>
@@ -160,7 +188,11 @@ const Layout = () => {
                         <ChangePasswordPage />
                     </Route>
                     <Route path={ROUTES.WELCOME_PAGE}>
-                        <WelcomePage />
+                        <WelcomePage
+                            onPhoneNumberConfirm={phoneNumber =>
+                                onSignInSubmit()
+                            }
+                        />
                     </Route>
                 </Switch>
                 <Menu />

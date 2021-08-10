@@ -26,9 +26,11 @@ import lockIcon from 'Pages/WelcomePage/pics/lock-icon.svg'
 import showPassword from 'Pages/NewRegistrationPage/pics/password-icon.svg'
 import hidePassword from 'Pages/NewRegistrationPage/pics/hide-password.svg'
 
-interface WelcomePageProps {}
+interface WelcomePageProps {
+    onPhoneNumberConfirm: (phoneNumber: string) => void
+}
 
-const WelcomePage = ({}: WelcomePageProps) => {
+const WelcomePage = ({ onPhoneNumberConfirm }: WelcomePageProps) => {
     const [isShowPassword, setIsShowPassword] = useState<boolean>(false)
     const [phoneNumber, setPhoneNumber] = useState<string>('')
 
@@ -86,7 +88,7 @@ const WelcomePage = ({}: WelcomePageProps) => {
                     type={BUTTON_TYPE.PRIMARY}
                     width={BUTTON_WIDTH.BIG}
                     title={'Sign In'}
-                    onClick={() => {}}
+                    onClick={() => onPhoneNumberConfirm(phoneNumber)}
                 />
             </StyledWelcomePageAction>
         </StyledWelcomePage>

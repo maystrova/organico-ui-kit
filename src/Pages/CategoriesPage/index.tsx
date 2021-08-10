@@ -1,11 +1,14 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+
+import { OrganicContext } from 'context/storeContext'
+import { ACTION } from 'context/actions'
 
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
 import { CategoryCard } from 'Components/CategoryCard'
 import { Search } from 'Components/Search'
-
 import { CategoryType } from 'Components/CategoryCard/types'
+import { Icon, ICON_SIZE } from 'Components/Icon'
 import { PRODUCTS_CATEGORY } from 'Pages/ProductPage/types'
 
 import {
@@ -13,13 +16,18 @@ import {
     StyledEmptySpace,
     StyledTitledHeader,
 } from 'Pages/WishlistPage/style'
-import { StyledCategoriesPage } from './style'
-
+import {
+    StyledCategoriesPage,
+    StyledSearchHistory,
+    StyledSearchHistoryItem,
+    StyledHistoryIcon,
+    StyledSearchHistoryAction,
+} from './style'
 import vegetables from 'services/products/pics/broccoli.png'
 import fruits from 'services/products/pics/banana.png'
 import meats from 'services/products/pics/meat.png'
-import { OrganicContext } from '../../context/storeContext'
-import { ACTION } from '../../context/actions'
+
+import historyIcon from 'Components/Search/pics/history.svg'
 
 const categories: CategoryType[] = [
     {
@@ -49,10 +57,33 @@ const CategoriesPage = () => {
     const [searchHistory, setSearchHistory] = useState<string[]>(
         store.searchHistory,
     )
+    const [isShowSearchHistory, setIsShowSearchHistory] = useState<boolean>(
+        true,
+    )
 
     const filteredCategories = categories.filter(category => {
         return category.title.toLowerCase().includes(searchValue.toLowerCase())
     })
+
+    const getSearchHistoryList = async (): Promise<string[]> => {
+        const storageSearchHistory = await window.localStorage.getItem(
+            'search-history',
+        )
+        if (storageSearchHistory) {
+            return JSON.parse(storageSearchHistory)
+        }
+
+        return []
+    }
+
+    const getStateSearchHistory = async (): Promise<void> => {
+        const storageHistory = await getSearchHistoryList()
+        setSearchHistory(storageHistory)
+    }
+
+    useEffect(() => {
+        getStateSearchHistory()
+    }, [])
 
     return (
         <StyledCategoriesPage>
@@ -60,22 +91,46 @@ const CategoriesPage = () => {
                 <BackToPreviousPage />
                 <span>Categories</span>
             </StyledTitledHeader>
-            <Search
-                onValueTaped={event => {
-                    setSearchValue(event.target.value)
-                }}
-                onEnterClick={event => {
-                    if (event.key === 'Enter') {
-                        dispatch({
-                            action: ACTION.UPDATE_SEARCH_HISTORY,
-                            data: searchValue,
-                        })
-                    }
-                }}
-                onSearchClick={() =>
-                    window.localStorage.getItem('search-history')
-                }
-            />
+            <StyledSearchHistoryAction>
+                <Search
+                    onValueTaped={event => {
+                        setIsShowSearchHistory(false)
+                        setSearchValue(event.target.value)
+                    }}
+                    onEnterClick={event => {
+                        if (event.key === 'Enter') {
+                            dispatch({
+                                action: ACTION.UPDATE_SEARCH_HISTORY,
+                                data: searchValue,
+                            })
+                        }
+                    }}
+                    onSearchClick={() => setIsShowSearchHistory(true)}
+                    value={searchValue}
+                />
+                {isShowSearchHistory && (
+                    <StyledSearchHistory>
+                        {searchHistory.map(item => {
+                            return (
+                                <StyledSearchHistoryItem
+                                    onClick={() => {
+                                        setSearchValue(item)
+                                        setIsShowSearchHistory(false)
+                                    }}
+                                >
+                                    <StyledHistoryIcon>
+                                        <Icon
+                                            size={ICON_SIZE.SMALL}
+                                            src={historyIcon}
+                                        />
+                                    </StyledHistoryIcon>
+                                    {item}
+                                </StyledSearchHistoryItem>
+                            )
+                        })}
+                    </StyledSearchHistory>
+                )}
+            </StyledSearchHistoryAction>
 
             <StyledCardsList>
                 {filteredCategories.length > 0 ? (

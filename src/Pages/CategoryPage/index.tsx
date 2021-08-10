@@ -29,6 +29,7 @@ const CategoryPage = () => {
         <div>
             <Search
                 onValueTaped={event => setSearchValue(event.target.value)}
+                value={searchValue}
             />
             <StyledCategoryPage>
                 {filteredProducts.length > 0 ? (

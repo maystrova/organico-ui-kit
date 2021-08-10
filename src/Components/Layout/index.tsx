@@ -39,6 +39,7 @@ import { GlobalStyle, StyledLayout, StyledSwitchMode } from './style'
 import light from 'Components/Layout/pics/light-mode.svg'
 import dark from 'Components/Layout/pics/dark-mode.png'
 import firebase from 'firebase/app'
+import { getSearchHistoryList } from '../../services/searchHistory'
 
 const Layout = () => {
     const { store, dispatch } = useContext(OrganicContext)
@@ -57,6 +58,7 @@ const Layout = () => {
         const storageUser = await getUser()
         const storageWishlist = await getUserWishlist()
         const storageCart = await getUserCart()
+        const storageSearchHistory = await getSearchHistoryList()
         const storageBag = await getUserBag()
         if (storageUser) {
             dispatch({
@@ -65,6 +67,10 @@ const Layout = () => {
             })
             dispatch({ action: ACTION.WISHLIST_UPDATE, data: storageWishlist })
             dispatch({ action: ACTION.CART_UPDATE, data: storageCart })
+            dispatch({
+                action: ACTION.UPDATE_SEARCH_HISTORY,
+                data: storageSearchHistory,
+            })
 
             setUser(storageUser)
         }

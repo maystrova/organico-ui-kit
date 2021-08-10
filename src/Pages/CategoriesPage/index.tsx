@@ -54,9 +54,6 @@ const CategoriesPage = () => {
     const { store, dispatch } = useContext(OrganicContext)
 
     const [searchValue, setSearchValue] = useState<string>('')
-    const [searchHistory, setSearchHistory] = useState<string[]>(
-        store.searchHistory,
-    )
     const [isShowSearchHistory, setIsShowSearchHistory] = useState<boolean>(
         true,
     )
@@ -64,26 +61,6 @@ const CategoriesPage = () => {
     const filteredCategories = categories.filter(category => {
         return category.title.toLowerCase().includes(searchValue.toLowerCase())
     })
-
-    const getSearchHistoryList = async (): Promise<string[]> => {
-        const storageSearchHistory = await window.localStorage.getItem(
-            'search-history',
-        )
-        if (storageSearchHistory) {
-            return JSON.parse(storageSearchHistory)
-        }
-
-        return []
-    }
-
-    const getStateSearchHistory = async (): Promise<void> => {
-        const storageHistory = await getSearchHistoryList()
-        setSearchHistory(storageHistory)
-    }
-
-    useEffect(() => {
-        getStateSearchHistory()
-    }, [])
 
     return (
         <StyledCategoriesPage>
@@ -110,11 +87,11 @@ const CategoriesPage = () => {
                 />
                 {isShowSearchHistory && (
                     <StyledSearchHistory>
-                        {searchHistory.map(item => {
+                        {store.searchHistory.map(item => {
                             return (
                                 <StyledSearchHistoryItem
                                     onClick={() => {
-                                        setSearchValue(item)
+                                        setSearchValue(`${item}`)
                                         setIsShowSearchHistory(false)
                                     }}
                                 >

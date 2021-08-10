@@ -186,18 +186,14 @@ const updateSearchHistory = (
     currentState: StoreType,
     searchValue: string,
 ): StoreType => {
-    const newSearchHistory: string[] = [
-        ...currentState.searchHistory,
-        searchValue,
-    ]
     window.localStorage.setItem(
         'search-history',
-        JSON.stringify(newSearchHistory),
+        JSON.stringify(currentState.searchHistory),
     )
 
     return {
         ...currentState,
-        searchHistory: newSearchHistory,
+        searchHistory: [...currentState.searchHistory, searchValue],
     }
 }
 

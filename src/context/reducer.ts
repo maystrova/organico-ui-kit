@@ -64,7 +64,6 @@ const addToWishList = (
     if (foundProduct) {
         const newWishList = [foundProduct, ...currentState.wishList]
         window.localStorage.setItem('wishlist', JSON.stringify(newWishList))
-        // createWishlist(newWishList, currentState.profile)
 
         return {
             ...currentState,
@@ -182,18 +181,42 @@ const switchTheme = (currentState: StoreType, theme: ThemeType): StoreType => {
     }
 }
 
-const updateSearchHistory = (
+const addToSearchHistory = (
     currentState: StoreType,
     searchValue: string,
 ): StoreType => {
+    const newSearchHistory: string[] = [
+        searchValue,
+        ...currentState.searchHistory,
+    ]
     window.localStorage.setItem(
         'search-history',
-        JSON.stringify(currentState.searchHistory),
+        JSON.stringify(newSearchHistory),
     )
 
     return {
         ...currentState,
-        searchHistory: [...currentState.searchHistory, searchValue],
+        searchHistory: newSearchHistory,
+    }
+}
+
+const updateSearchHistory = (
+    currentState: StoreType,
+    searchValue: string,
+): StoreType => {
+    const newSearchHistory: string[] = [
+        searchValue,
+        ...currentState.searchHistory,
+    ]
+
+    window.localStorage.setItem(
+        'search-history',
+        JSON.stringify(newSearchHistory),
+    )
+
+    return {
+        ...currentState,
+        searchHistory: newSearchHistory,
     }
 }
 
@@ -226,6 +249,8 @@ export const reducer = (
             return createUser(currentState, payload.data)
         case ACTION.GET_USER:
             return getUser(currentState, payload.data)
+        case ACTION.CREATE_SEARCH_HISTORY:
+            return addToSearchHistory(currentState, payload.data)
         case ACTION.UPDATE_SEARCH_HISTORY:
             return updateSearchHistory(currentState, payload.data)
 

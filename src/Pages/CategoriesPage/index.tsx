@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { OrganicContext } from 'context/storeContext'
@@ -29,6 +29,10 @@ import meats from 'services/products/pics/meat.png'
 
 import historyIcon from 'Components/Search/pics/history.svg'
 
+interface CategoriesPageProps {
+    searchHistory: string[]
+}
+
 const categories: CategoryType[] = [
     {
         title: 'Vegetables',
@@ -50,12 +54,12 @@ const categories: CategoryType[] = [
     },
 ]
 
-const CategoriesPage = () => {
-    const { store, dispatch } = useContext(OrganicContext)
+const CategoriesPage = ({ searchHistory }: CategoriesPageProps) => {
+    const { dispatch } = useContext(OrganicContext)
 
     const [searchValue, setSearchValue] = useState<string>('')
     const [isShowSearchHistory, setIsShowSearchHistory] = useState<boolean>(
-        true,
+        false,
     )
 
     const filteredCategories = categories.filter(category => {
@@ -77,7 +81,7 @@ const CategoriesPage = () => {
                     onEnterClick={event => {
                         if (event.key === 'Enter') {
                             dispatch({
-                                action: ACTION.UPDATE_SEARCH_HISTORY,
+                                action: ACTION.CREATE_SEARCH_HISTORY,
                                 data: searchValue,
                             })
                         }
@@ -87,7 +91,7 @@ const CategoriesPage = () => {
                 />
                 {isShowSearchHistory && (
                     <StyledSearchHistory>
-                        {store.searchHistory.map(item => {
+                        {searchHistory.map(item => {
                             return (
                                 <StyledSearchHistoryItem
                                     onClick={() => {
@@ -101,6 +105,7 @@ const CategoriesPage = () => {
                                             src={historyIcon}
                                         />
                                     </StyledHistoryIcon>
+
                                     {item}
                                 </StyledSearchHistoryItem>
                             )

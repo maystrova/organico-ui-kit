@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { OrganicContext } from 'context/storeContext'
 import { ACTION } from 'context/actions'
+import firebase from 'firebase/app'
+
 import {
     getUser,
     getUserBag,
@@ -9,15 +11,14 @@ import {
     getUserWishlist,
     User,
 } from 'services/user'
-
 import { ProductPage } from 'Pages/ProductPage'
 import { CategoriesPage } from 'Pages/CategoriesPage'
 import { CategoryPage } from 'Pages/CategoryPage'
 import { Menu } from 'Components/Menu'
 import { CartPage } from 'Pages/CartPage'
 import { ProfilePage } from 'Pages/ProfilePage'
-import { WishlistPage } from 'Pages/WishlistPage'
 
+import { WishlistPage } from 'Pages/WishlistPage'
 import { ROUTES } from 'services/route'
 import { EditProfilePage } from 'Pages/EditProfilePage'
 import { BagPage } from 'Pages/BagPage'
@@ -25,21 +26,20 @@ import { DARK, LIGHT } from 'configs/theme'
 import { Icon, ICON_SIZE } from 'Components/Icon'
 import { NewRegistrationPage } from 'Pages/NewRegistrationPage'
 import { LogOutPage } from 'Pages/LogOutPage'
-import { LoginPage } from 'Pages/LoginPage'
 
+import { LoginPage } from 'Pages/LoginPage'
 import { ForgotPasswordPage } from 'Pages/ForgotPasswordPage'
 import { AuthorizationCodePage } from 'Pages/AuthorizationCodePage'
 import { ResetPasswordPage } from 'Pages/ResetPasswordPage'
 import { ChangeNumberPage } from 'Pages/ChangeNumberPage'
 import { ChangePasswordPage } from 'Pages/ChangePasswordPage'
+import { getSearchHistoryList } from 'services/searchHistory'
+
 import { WelcomePage } from 'Pages/WelcomePage'
 
 import { GlobalStyle, StyledLayout, StyledSwitchMode } from './style'
-
 import light from 'Components/Layout/pics/light-mode.svg'
 import dark from 'Components/Layout/pics/dark-mode.png'
-import firebase from 'firebase/app'
-import { getSearchHistoryList } from '../../services/searchHistory'
 
 const Layout = () => {
     const { store, dispatch } = useContext(OrganicContext)
@@ -147,11 +147,11 @@ const Layout = () => {
                     </Route>
 
                     <Route path={[ROUTES.CATEGORIES, '/']} exact>
-                        <CategoriesPage />
+                        <CategoriesPage searchHistory={store.searchHistory} />
                     </Route>
 
                     <Route path={ROUTES.CATEGORY} exact>
-                        <CategoryPage />
+                        <CategoryPage searchHistory={store.searchHistory} />
                     </Route>
                     <Route path={ROUTES.PROFILE}>
                         <ProfilePage user={store.profile} />

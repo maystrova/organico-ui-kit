@@ -48,7 +48,7 @@ enum THEMES {
 
 const Layout = () => {
     const { store, dispatch } = useContext(OrganicContext)
-    const [theme, setTheme] = useState<THEMES>(THEMES.LIGHT)
+    const [theme, setTheme] = useState<THEMES>(THEMES.DARK)
     const [user, setUser] = useState<User | null>(null)
 
     useEffect(() => {

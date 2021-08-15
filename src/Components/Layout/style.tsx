@@ -1,6 +1,14 @@
 import styled, { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
+  .LIGHT {
+    background-color: white;
+  }
+
+  .DARK {
+    background-color: #171725;
+  }
+  
 body {
     margin: 0;
     letter-spacing: 0.1px;
@@ -19,7 +27,10 @@ const StyledLayout = styled.div`
     padding: 20px;
     background-color: ${props => props.theme.appBackground};
     color: ${props => props.theme.color};
-    min-height: 800px;
+    height: 100vh;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
 `
 
 const StyledSwitchMode = styled.button`

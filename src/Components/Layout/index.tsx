@@ -41,13 +41,18 @@ import { GlobalStyle, StyledLayout, StyledSwitchMode } from './style'
 import light from 'Components/Layout/pics/light-mode.svg'
 import dark from 'Components/Layout/pics/dark-mode.png'
 
+enum THEMES {
+    LIGHT = 'LIGHT',
+    DARK = 'DARK',
+}
+
 const Layout = () => {
     const { store, dispatch } = useContext(OrganicContext)
-    const [theme, setTheme] = useState<'light' | 'dark'>('dark')
+    const [theme, setTheme] = useState<THEMES>(THEMES.LIGHT)
     const [user, setUser] = useState<User | null>(null)
 
     useEffect(() => {
-        if (theme === 'light') {
+        if (theme === THEMES.LIGHT) {
             dispatch({ action: ACTION.SWITCH_THEME, data: DARK })
         } else {
             dispatch({ action: ACTION.SWITCH_THEME, data: LIGHT })
@@ -83,12 +88,16 @@ const Layout = () => {
     }, [])
 
     const onSignInSubmit = () => {}
-    //
-    //
-    const signInWithPhoneNumber = () => {
-        firebase.auth().languageCode = 'it'
-        firebase.auth().useDeviceLanguage()
+
+    const handleSwitchTheme = (): void => {
+        const body = document.getElementsByTagName('body')
+        const newTheme: THEMES =
+            theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT
+
+        body[0].setAttribute('class', theme)
+        setTheme(newTheme)
     }
+
     //
     // const verifier = window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sign-in-button')
     //
@@ -113,15 +122,11 @@ const Layout = () => {
         <BrowserRouter>
             <StyledLayout>
                 <GlobalStyle />
-                <StyledSwitchMode
-                    onClick={() =>
-                        setTheme(theme === 'light' ? 'dark' : 'light')
-                    }
-                >
+                <StyledSwitchMode onClick={handleSwitchTheme}>
                     <Icon
                         alt={'Switch mode'}
                         size={ICON_SIZE.X_MEDIUM}
-                        src={theme === 'light' ? light : dark}
+                        src={theme === THEMES.LIGHT ? light : dark}
                     />
                 </StyledSwitchMode>
                 <Switch>

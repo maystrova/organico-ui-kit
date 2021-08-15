@@ -81,7 +81,7 @@ const CategoriesPage = ({ searchHistory }: CategoriesPageProps) => {
                     onEnterClick={event => {
                         if (event.key === 'Enter') {
                             dispatch({
-                                action: ACTION.CREATE_SEARCH_HISTORY,
+                                action: ACTION.UPDATE_SEARCH_HISTORY,
                                 data: searchValue,
                             })
                         }

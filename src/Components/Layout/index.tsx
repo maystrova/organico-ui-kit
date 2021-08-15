@@ -59,6 +59,12 @@ const Layout = () => {
         const storageWishlist = await getUserWishlist()
         const storageCart = await getUserCart()
         const storageSearchHistory = await getSearchHistoryList()
+
+        dispatch({
+            action: ACTION.GET_SEARCH_HISTORY,
+            data: storageSearchHistory,
+        })
+
         const storageBag = await getUserBag()
         if (storageUser) {
             dispatch({
@@ -67,10 +73,6 @@ const Layout = () => {
             })
             dispatch({ action: ACTION.WISHLIST_UPDATE, data: storageWishlist })
             dispatch({ action: ACTION.CART_UPDATE, data: storageCart })
-            dispatch({
-                action: ACTION.UPDATE_SEARCH_HISTORY,
-                data: storageSearchHistory,
-            })
 
             setUser(storageUser)
         }

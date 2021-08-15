@@ -181,18 +181,14 @@ const switchTheme = (currentState: StoreType, theme: ThemeType): StoreType => {
     }
 }
 
-const addToSearchHistory = (
+const getSearchHistory = (
     currentState: StoreType,
-    searchValue: string,
+    history: string[],
 ): StoreType => {
     const newSearchHistory: string[] = [
-        searchValue,
+        ...history,
         ...currentState.searchHistory,
     ]
-    window.localStorage.setItem(
-        'search-history',
-        JSON.stringify(newSearchHistory),
-    )
 
     return {
         ...currentState,
@@ -204,10 +200,13 @@ const updateSearchHistory = (
     currentState: StoreType,
     searchValue: string,
 ): StoreType => {
+    console.log('searchValue', searchValue)
     const newSearchHistory: string[] = [
         searchValue,
         ...currentState.searchHistory,
     ]
+
+    console.log('newSearchHistory', newSearchHistory)
 
     window.localStorage.setItem(
         'search-history',
@@ -249,8 +248,8 @@ export const reducer = (
             return createUser(currentState, payload.data)
         case ACTION.GET_USER:
             return getUser(currentState, payload.data)
-        case ACTION.CREATE_SEARCH_HISTORY:
-            return addToSearchHistory(currentState, payload.data)
+        case ACTION.GET_SEARCH_HISTORY:
+            return getSearchHistory(currentState, payload.data)
         case ACTION.UPDATE_SEARCH_HISTORY:
             return updateSearchHistory(currentState, payload.data)
 

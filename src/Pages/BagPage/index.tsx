@@ -8,7 +8,7 @@ import { BackToPreviousPage } from 'Components/BackToPreviousPage'
 import { ProductSticker } from 'Components/ProductSticker'
 import { Icon, ICON_SIZE } from 'Components/Icon'
 import { ProfileActionSticker } from 'Components/ProfileActionSticker'
-import { Button, BUTTON_TYPE } from 'Components/Button'
+import { Button, BUTTON_TYPE, BUTTON_WIDTH } from 'Components/Button'
 import { getTotalPrice } from 'Pages/CartPage'
 
 import { StyledHeader } from 'Pages/ProductPage/style'
@@ -179,7 +179,7 @@ const BagPage = () => {
                         <Button
                             type={BUTTON_TYPE.PRIMARY}
                             title={'Order Now'}
-                            width={'100%'}
+                            width={BUTTON_WIDTH.BIG}
                             onClick={() => {}}
                         />
                     </StyledBagPageFooter>

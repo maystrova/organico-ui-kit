@@ -1,15 +1,19 @@
 import React, { useContext, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import { ROUTES } from 'services/route'
 import { firebase } from 'services/firebase'
-import { Button, BUTTON_TYPE } from 'Components/Button'
+import { Button, BUTTON_TYPE, BUTTON_WIDTH } from 'Components/Button'
 import { ACTION } from 'context/actions'
 import { User } from 'services/user'
 import { Icon, ICON_SIZE } from 'Components/Icon'
 
 import { OrganicContext } from 'context/storeContext'
-import { StyledLogin } from './style'
+import {
+    StyledLogin,
+    StyledPasswordActions,
+    StyledWrongPassword,
+} from './style'
 
 import {
     StyledRegistrationActions,
@@ -36,6 +40,11 @@ const LoginPage = () => {
         email: '',
         password: '',
     })
+    const [wrongPassword, setWrongPassword] = useState<string>('')
+    const [newUser, setNewUser] = useState<UserData>({
+        password: '',
+        email: '',
+    })
 
     const history = useHistory()
 
@@ -55,7 +64,6 @@ const LoginPage = () => {
                 .get()
 
             const userFromDb = firebaseUserRef.val()
-            console.log('userFromDb', userFromDb)
 
             const preparedUser: User = {
                 name: userFromDb?.name ? userFromDb.name : 'Anon',
@@ -68,15 +76,13 @@ const LoginPage = () => {
                 address: userFromDb?.email ? userFromDb?.email : '',
             }
 
-            console.log('preparedUser', preparedUser)
-
             window.localStorage.setItem('user', JSON.stringify(preparedUser))
 
             dispatch({ action: ACTION.USER_UPDATE, data: preparedUser })
 
             if (user) {
                 history.push(ROUTES.PROFILE)
-            }
+            } else setWrongPassword('Wrong password!')
         }
 
         firebase.auth().onAuthStateChanged(user => {
@@ -141,11 +147,18 @@ const LoginPage = () => {
                         />
                     </button>
                 </StyledRegistrationField>
+                <StyledPasswordActions>
+                    <StyledWrongPassword>{wrongPassword}</StyledWrongPassword>
+
+                    <Link to={ROUTES.CHANGE_PASSWORD}>
+                        <span>Forgot password?</span>
+                    </Link>
+                </StyledPasswordActions>
             </StyledRegistrationFields>
             <StyledRegistrationActions>
                 {' '}
                 <Button
-                    width={'100%'}
+                    width={BUTTON_WIDTH.BIG}
                     title={'Sign In'}
                     type={BUTTON_TYPE.PRIMARY}
                     onClick={() => signIn(signInUser)}
@@ -153,7 +166,7 @@ const LoginPage = () => {
                 <span>Don't have an account yet?</span>
                 <Button
                     type={BUTTON_TYPE.WHITE}
-                    width={'100%'}
+                    width={BUTTON_WIDTH.BIG}
                     title={'Sign Up'}
                     onClick={() => history.push(ROUTES.NEW_REGISTRATION)}
                 />

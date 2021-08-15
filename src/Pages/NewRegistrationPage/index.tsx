@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
 import { Icon, ICON_SIZE } from 'Components/Icon'
-import { Button, BUTTON_TYPE } from 'Components/Button'
+import { Button, BUTTON_TYPE, BUTTON_WIDTH } from 'Components/Button'
 import { useHistory } from 'react-router-dom'
 
 import { OrganicContext } from 'context/storeContext'
@@ -94,6 +94,16 @@ const NewRegistrationPage = ({}: NewRegistrationPageProps) => {
         },
     ]
 
+    const verification = () => {
+        firebase
+            .auth()
+            .currentUser?.sendEmailVerification()
+            .then(() => {
+                // Email verification sent!
+                // ...
+            })
+    }
+
     const authorization = (email: string, password: string) => {
         firebase
             .auth()
@@ -107,6 +117,7 @@ const NewRegistrationPage = ({}: NewRegistrationPageProps) => {
                     id: user?.uid ? user.uid : Math.random().toString(),
                     avatar: anonAvatar,
                 }
+                user?.sendEmailVerification()
                 window.localStorage.setItem(
                     'user',
                     JSON.stringify(preparedUser),
@@ -306,7 +317,7 @@ const NewRegistrationPage = ({}: NewRegistrationPageProps) => {
 
             <StyledRegistrationActions>
                 <Button
-                    width={'100%'}
+                    width={BUTTON_WIDTH.BIG}
                     title={signUpButton}
                     type={BUTTON_TYPE.PRIMARY}
                     onClick={() => {
@@ -315,6 +326,7 @@ const NewRegistrationPage = ({}: NewRegistrationPageProps) => {
                             isChecked
                         ) {
                             authorization(signUp.email, signUp.password)
+                            verification()
                             setSignUpButton('Successful!')
                         }
                     }}
@@ -325,7 +337,7 @@ const NewRegistrationPage = ({}: NewRegistrationPageProps) => {
                     title={'Sign Up with Google'}
                     type={BUTTON_TYPE.WHITE}
                     onClick={() => onGoogleAuthorization()}
-                    width={'100%'}
+                    width={BUTTON_WIDTH.BIG}
                 />
             </StyledRegistrationActions>
         </div>

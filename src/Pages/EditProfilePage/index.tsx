@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import 'react-phone-number-input/style.css'
 
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
-import { Button, BUTTON_TYPE } from 'Components/Button'
+import { Button, BUTTON_TYPE, BUTTON_WIDTH } from 'Components/Button'
 import { UploadAvatar } from 'Components/UploadAvatar'
 
 import { Icon, ICON_SIZE } from 'Components/Icon'
@@ -36,6 +37,9 @@ const EditProfilePage = ({ user }: EditProfilePageProps) => {
     const [editProfile, setEditProfile] = useState<User>(user)
     const [isShowUploadAvatar, setShowUploadAvatar] = useState<boolean>(false)
     const [saveButton, setSaveButton] = useState<string>('Save')
+    const [isPhoneNumberChanged, setIsPhoneNumberChanged] = useState<boolean>(
+        false,
+    )
 
     const history = useHistory()
 
@@ -123,6 +127,7 @@ const EditProfilePage = ({ user }: EditProfilePageProps) => {
                                 ...editProfile,
                                 phoneNumber: event.target.value,
                             })
+                            setIsPhoneNumberChanged(true)
                         }}
                     />
                     <StyledEditProfileTitle>Address</StyledEditProfileTitle>
@@ -138,10 +143,14 @@ const EditProfilePage = ({ user }: EditProfilePageProps) => {
                 </StyledEditProfile>
                 <StyledEditProfileFooter>
                     <Button
-                        width={'100%'}
+                        width={BUTTON_WIDTH.BIG}
                         title={saveButton}
                         type={BUTTON_TYPE.PRIMARY}
-                        onClick={() => onUserInfoSave()}
+                        onClick={() => {
+                            if (isPhoneNumberChanged) {
+                                history.push(ROUTES.CHANGE_NUMBER)
+                            } else onUserInfoSave()
+                        }}
                     />
                 </StyledEditProfileFooter>
             </StyledProfileInfo>

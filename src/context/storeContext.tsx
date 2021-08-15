@@ -15,6 +15,7 @@ export interface StoreType {
     profile: User
     bag: ProductType[]
     theme: ThemeType
+    searchHistory: string[]
 }
 
 const INITIAL_STORE: StoreType = {
@@ -24,6 +25,7 @@ const INITIAL_STORE: StoreType = {
     bag: [],
     profile: DEFAULT_USER,
     theme: LIGHT,
+    searchHistory: [],
 }
 
 export const OrganicContext = createContext<{

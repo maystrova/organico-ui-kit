@@ -8,6 +8,8 @@ import { BackToPreviousPage } from 'Components/BackToPreviousPage'
 import { AddToWishlist } from 'Components/AddToWishlist'
 import { Count, COUNT_FONTSIZE, COUNTING_SIZE } from 'Components/Count'
 import { ProductType } from './types'
+import { ACTION } from 'context/actions'
+
 import { OrganicContext } from 'context/storeContext'
 
 import {
@@ -23,11 +25,9 @@ import {
     StyledProductShop,
     StyledProductTitles,
 } from './style'
-
 import time from './pics/time-icon.svg'
 import categoryIcon from './pics/category-icon.svg'
 import chat from 'Components/Layout/pics/chat.svg'
-import { ACTION } from 'context/actions'
 
 interface ProductPageProps {
     onAddToCartClick: (productId: string) => void

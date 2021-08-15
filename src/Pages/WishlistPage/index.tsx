@@ -6,6 +6,7 @@ import { ProductCard } from 'Components/ProductCard'
 import { PRODUCT_TYPE } from 'services/products/products'
 import { OrganicContext } from 'context/storeContext'
 import { ACTION } from 'context/actions'
+import { ProductType } from 'Pages/ProductPage/types'
 
 import {
     StyledCardsList,
@@ -13,8 +14,6 @@ import {
     StyledWishlistPage,
     StyledEmptySpace,
 } from './style'
-
-interface WishlistPageProps {}
 
 export const getBackgroundColorForProduct = (title: string): PRODUCT_TYPE => {
     switch (title) {
@@ -46,8 +45,12 @@ export const getBackgroundColorForProduct = (title: string): PRODUCT_TYPE => {
     }
 }
 
-const WishlistPage = ({}: WishlistPageProps) => {
-    const { store, dispatch } = useContext(OrganicContext)
+interface WishlistPageProps {
+    wishlist: ProductType[]
+}
+
+const WishlistPage = ({ wishlist }: WishlistPageProps) => {
+    const { dispatch } = useContext(OrganicContext)
 
     return (
         <StyledWishlistPage>
@@ -55,9 +58,9 @@ const WishlistPage = ({}: WishlistPageProps) => {
                 <BackToPreviousPage />
                 <span>My Wishlist</span>
             </StyledTitledHeader>
-            {store.wishList.length ? (
+            {wishlist.length ? (
                 <StyledCardsList>
-                    {store.wishList.map(product => {
+                    {wishlist.map(product => {
                         return (
                             <ProductCard
                                 isAdded={true}

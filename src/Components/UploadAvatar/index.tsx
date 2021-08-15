@@ -1,15 +1,15 @@
 import React from 'react'
 
-import { Button, BUTTON_TYPE } from 'Components/Button'
+import { Button, BUTTON_TYPE, BUTTON_WIDTH } from 'Components/Button'
 
 import {
     StyledUploadAvatar,
     StyledUploadAvatarBody,
+    StyledUploadAvatarFooter,
     StyledUploadAvatarHeader,
     StyledUploadAvatarOverlay,
     StyledUploadAvatarTitle,
     StyledUploadAvatarWindow,
-    StyledUploadAvatarFooter,
     StyledUploadFile,
 } from './style'
 
@@ -50,7 +50,7 @@ const UploadAvatar = ({
                         title={'Upload avatar'}
                         type={BUTTON_TYPE.PRIMARY}
                         onClick={uploadFiles}
-                        width={'50%'}
+                        width={BUTTON_WIDTH.MEDIUM}
                     />
                 </StyledUploadAvatarFooter>
             </StyledUploadAvatarWindow>

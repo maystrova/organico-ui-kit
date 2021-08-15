@@ -5,15 +5,31 @@ import { ProductType } from 'Pages/ProductPage/types'
 import { ProductCard } from 'Components/ProductCard'
 import { getBackgroundColorForProduct } from 'Pages/WishlistPage'
 import { Search } from 'Components/Search'
+import { Icon, ICON_SIZE } from 'Components/Icon'
 import { ACTION } from 'context/actions'
 
 import { OrganicContext } from 'context/storeContext'
 import { StyledCategoryPage } from './style'
 import { StyledEmptySpace } from 'Pages/WishlistPage/style'
+import {
+    StyledHistoryIcon,
+    StyledSearchHistory,
+    StyledSearchHistoryAction,
+    StyledSearchHistoryItem,
+} from '../CategoriesPage/style'
 
-const CategoryPage = () => {
+import historyIcon from 'Components/Search/pics/history.svg'
+
+interface CategoryPageProps {
+    searchHistory: string[]
+}
+
+const CategoryPage = ({ searchHistory }: CategoryPageProps) => {
     const { store, dispatch } = useContext(OrganicContext)
     const [searchValue, setSearchValue] = useState<string>('')
+    const [isShowSearchHistory, setIsShowSearchHistory] = useState<boolean>(
+        false,
+    )
 
     let params = useParams<{ category: string }>()
 
@@ -27,9 +43,35 @@ const CategoryPage = () => {
 
     return (
         <div>
-            <Search
-                onValueTaped={event => setSearchValue(event.target.value)}
-            />
+            <StyledSearchHistoryAction>
+                <Search
+                    onValueTaped={event => setSearchValue(event.target.value)}
+                    value={searchValue}
+                />
+                {isShowSearchHistory && (
+                    <StyledSearchHistory>
+                        {searchHistory.map(item => {
+                            return (
+                                <StyledSearchHistoryItem
+                                    onClick={() => {
+                                        setSearchValue(`${item}`)
+                                        setIsShowSearchHistory(false)
+                                    }}
+                                >
+                                    <StyledHistoryIcon>
+                                        <Icon
+                                            size={ICON_SIZE.SMALL}
+                                            src={historyIcon}
+                                        />
+                                    </StyledHistoryIcon>
+
+                                    {item}
+                                </StyledSearchHistoryItem>
+                            )
+                        })}
+                    </StyledSearchHistory>
+                )}
+            </StyledSearchHistoryAction>
             <StyledCategoryPage>
                 {filteredProducts.length > 0 ? (
                     filteredProducts.map(product => {
@@ -52,6 +94,7 @@ const CategoryPage = () => {
                                         action: ACTION.ADD_TO_WISHLIST,
                                         data: productId,
                                     })
+
                                     isAddedToWishlist &&
                                         dispatch({
                                             action: ACTION.DELETE_FROM_WISHLIST,

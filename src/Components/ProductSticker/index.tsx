@@ -29,8 +29,6 @@ const ProductSticker = ({
     product,
     onCountChanged,
 }: ProductStickerProps) => {
-    const { dispatch } = useContext(OrganicContext)
-
     return (
         <StyledProductSticker type={getBackgroundColorForProduct(title)}>
             <StyledProductStickerIcon>
@@ -46,14 +44,7 @@ const ProductSticker = ({
             </StyledProductStickerInfo>
             <Count
                 currentCount={product.quantity}
-                onCountChanged={
-                    onCountChanged
-                    // newCount =>
-                    // dispatch({
-                    //     action: ACTION.ADD_TO_CART,
-                    //     data: { ...product, quantity: newCount },
-                    // })
-                }
+                onCountChanged={newCount => onCountChanged(newCount)}
                 fontSize={COUNT_FONTSIZE.PRODUCT_CARD}
                 width={COUNTING_SIZE.PRODUCT_CARD}
                 height={COUNTING_SIZE.PRODUCT_CARD}

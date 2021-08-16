@@ -8,8 +8,8 @@ import search from 'Components/Search/pics/search.svg'
 
 interface SearchProps {
     onValueTaped: (event: any) => void
-    onSearchClick?: () => void
-    onEnterClick?: (event: any) => void
+    onSearchClick: () => void
+    onEnterClick: (event: any) => void
     value: string
 }
 

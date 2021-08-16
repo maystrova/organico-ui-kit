@@ -1,32 +1,32 @@
 import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { OrganicContext } from 'context/storeContext'
-import { ACTION } from 'context/actions'
-
 import { BackToPreviousPage } from 'Components/BackToPreviousPage'
 import { CategoryCard } from 'Components/CategoryCard'
-import { Search } from 'Components/Search'
 import { CategoryType } from 'Components/CategoryCard/types'
-import { Icon, ICON_SIZE } from 'Components/Icon'
 import { PRODUCTS_CATEGORY } from 'Pages/ProductPage/types'
+import { Search } from 'Components/Search'
 
+import { OrganicContext } from 'context/storeContext'
+import { ACTION } from 'context/actions'
+import { Icon, ICON_SIZE } from 'Components/Icon'
 import {
     StyledCardsList,
     StyledEmptySpace,
     StyledTitledHeader,
 } from 'Pages/WishlistPage/style'
+
 import {
     StyledCategoriesPage,
-    StyledSearchHistory,
-    StyledSearchHistoryItem,
     StyledHistoryIcon,
+    StyledSearchHistory,
     StyledSearchHistoryAction,
+    StyledSearchHistoryItem,
 } from './style'
+
 import vegetables from 'services/products/pics/broccoli.png'
 import fruits from 'services/products/pics/banana.png'
 import meats from 'services/products/pics/meat.png'
-
 import historyIcon from 'Components/Search/pics/history.svg'
 
 interface CategoriesPageProps {
@@ -55,23 +55,23 @@ const categories: CategoryType[] = [
 ]
 
 const CategoriesPage = ({ searchHistory }: CategoriesPageProps) => {
-    const { dispatch } = useContext(OrganicContext)
+    const { store, dispatch } = useContext(OrganicContext)
 
-    const [searchValue, setSearchValue] = useState<string>('')
     const [isShowSearchHistory, setIsShowSearchHistory] = useState<boolean>(
         false,
     )
+    const [searchValue, setSearchValue] = useState<string>('')
 
     const filteredCategories = categories.filter(category => {
         return category.title.toLowerCase().includes(searchValue.toLowerCase())
     })
-
     return (
         <StyledCategoriesPage>
             <StyledTitledHeader>
                 <BackToPreviousPage />
                 <span>Categories</span>
             </StyledTitledHeader>
+
             <StyledSearchHistoryAction>
                 <Search
                     onValueTaped={event => {
@@ -86,7 +86,10 @@ const CategoriesPage = ({ searchHistory }: CategoriesPageProps) => {
                             })
                         }
                     }}
-                    onSearchClick={() => setIsShowSearchHistory(true)}
+                    onSearchClick={() => {
+                        store.searchHistory.length &&
+                            setIsShowSearchHistory(!isShowSearchHistory)
+                    }}
                     value={searchValue}
                 />
                 {isShowSearchHistory && (

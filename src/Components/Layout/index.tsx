@@ -153,7 +153,10 @@ const Layout = () => {
                         <WishlistPage wishlist={store.wishList} />
                     </Route>
 
-                    <Route path={[ROUTES.CATEGORIES, '/']} exact>
+                    <Route
+                        path={[ROUTES.CATEGORIES, '/', ROUTES.HOME_SCREEN]}
+                        exact
+                    >
                         <CategoriesPage searchHistory={store.searchHistory} />
                     </Route>
 
@@ -166,9 +169,7 @@ const Layout = () => {
                     <Route path={ROUTES.EDIT_PROFILE}>
                         <EditProfilePage user={store.profile} />
                     </Route>
-                    <Route
-                        path={[ROUTES.MY_BAG, `${user && ROUTES.HOME_SCREEN}`]}
-                    >
+                    <Route path={ROUTES.MY_BAG}>
                         <BagPage />
                     </Route>
                     <Route path={ROUTES.NEW_REGISTRATION}>
@@ -177,12 +178,7 @@ const Layout = () => {
                     <Route path={ROUTES.LOGOUT}>
                         <LogOutPage />
                     </Route>
-                    <Route
-                        path={[
-                            ROUTES.SIGN_IN,
-                            `${!user && ROUTES.HOME_SCREEN}`,
-                        ]}
-                    >
+                    <Route path={ROUTES.SIGN_IN}>
                         <LoginPage />
                     </Route>
                     <Route path={ROUTES.FORGOT_PASSWORD}>

@@ -47,6 +47,18 @@ const CategoryPage = ({ searchHistory }: CategoryPageProps) => {
                 <Search
                     onValueTaped={event => setSearchValue(event.target.value)}
                     value={searchValue}
+                    onEnterClick={event => {
+                        if (event.key === 'Enter') {
+                            dispatch({
+                                action: ACTION.UPDATE_SEARCH_HISTORY,
+                                data: searchValue,
+                            })
+                        }
+                    }}
+                    onSearchClick={() => {
+                        store.searchHistory.length &&
+                            setIsShowSearchHistory(!isShowSearchHistory)
+                    }}
                 />
                 {isShowSearchHistory && (
                     <StyledSearchHistory>

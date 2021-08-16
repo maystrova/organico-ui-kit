@@ -27,7 +27,7 @@ const StyledLayout = styled.div`
     padding: 20px;
     background-color: ${props => props.theme.appBackground};
     color: ${props => props.theme.color};
-    height: 100vh;
+    height: 150vh;
     max-width: 600px;
     margin: 0 auto;
     position: relative;
